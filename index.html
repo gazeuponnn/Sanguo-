@@ -2,30 +2,40 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
+
   <meta name="theme-color" content="#17110d">
-  <title>逆命錄・V3.2</title>
+
+  <title>逆命錄・第四版丙</title>
 
   <style>
     :root {
       color-scheme: dark;
+
       --black: #0d0a08;
       --deep: #17110d;
       --panel: #211812;
       --panel-soft: #2b2018;
+
       --parchment: #decda6;
       --parchment-bright: #f1e4c4;
       --muted: #a99472;
+
       --border: #6c5234;
       --border-bright: #9b784c;
+
       --blood: #8c2924;
       --blood-bright: #bd493d;
+
       --gold: #c69a4b;
       --green: #72885d;
-      --shadow: rgba(0, 0, 0, 0.5);
+      --blue: #718496;
+
+      --shadow: rgba(0, 0, 0, 0.52);
     }
 
     * {
@@ -41,14 +51,21 @@
     body {
       min-height: 100vh;
       margin: 0;
+
       padding:
         env(safe-area-inset-top)
         env(safe-area-inset-right)
         env(safe-area-inset-bottom)
         env(safe-area-inset-left);
+
       color: var(--parchment);
+
       background:
-        radial-gradient(circle at 50% 0%, rgba(122, 84, 46, 0.16), transparent 35rem),
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(122, 84, 46, 0.18),
+          transparent 34rem
+        ),
         repeating-linear-gradient(
           0deg,
           rgba(255, 255, 255, 0.012) 0,
@@ -57,13 +74,15 @@
           transparent 5px
         ),
         var(--black);
+
       font-family:
         "Songti TC",
         "Noto Serif TC",
         "PingFang TC",
         "Microsoft JhengHei",
         serif;
-      line-height: 1.65;
+
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
@@ -78,48 +97,58 @@
     }
 
     #app {
-      width: min(1180px, 100%);
+      width: min(1120px, 100%);
       margin: 0 auto;
-      padding: 14px;
+      padding: 8px;
     }
 
     .masthead {
-      padding: 18px 16px 14px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      padding: 13px 10px;
+
       text-align: center;
+
       border: 1px solid var(--border);
+
       background:
-        linear-gradient(rgba(27, 19, 14, 0.92), rgba(18, 13, 10, 0.96)),
+        linear-gradient(
+          rgba(27, 19, 14, 0.94),
+          rgba(18, 13, 10, 0.97)
+        ),
         var(--panel);
+
       box-shadow: 0 8px 24px var(--shadow);
     }
 
     .masthead h1 {
       margin: 0;
+
       color: var(--parchment-bright);
-      font-size: clamp(1.9rem, 7vw, 3rem);
-      letter-spacing: 0.22em;
-      text-indent: 0.22em;
-      font-weight: 700;
+
+      font-size: clamp(1.8rem, 7vw, 2.8rem);
+      letter-spacing: 0.2em;
+      text-indent: 0.2em;
     }
 
     .masthead p {
-      margin: 4px 0 0;
+      margin: 3px 0 0;
+
       color: var(--muted);
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
+
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
-      gap: 12px;
+      grid-template-columns: minmax(270px, 325px) minmax(0, 1fr);
+      gap: 8px;
       align-items: start;
     }
 
-    .character-panel,
-    .story-panel {
+    .panel {
       border: 1px solid var(--border);
+
       background:
         linear-gradient(
           135deg,
@@ -127,27 +156,30 @@
           transparent 40%
         ),
         var(--panel);
+
       box-shadow: 0 8px 24px var(--shadow);
     }
 
     .character-panel {
       position: sticky;
-      top: 12px;
-      padding: 15px;
+      top: 8px;
+      padding: 13px;
     }
 
-    .story-panel {
-      min-height: 640px;
-      padding: clamp(16px, 4vw, 28px);
+    .main-panel {
+      min-height: 620px;
+      padding: clamp(14px, 4vw, 25px);
     }
 
     .panel-title {
-      margin: 0 0 12px;
-      padding-bottom: 8px;
+      margin: 0 0 10px;
+      padding-bottom: 7px;
+
       color: var(--gold);
       border-bottom: 1px solid var(--border);
-      font-size: 1rem;
-      letter-spacing: 0.13em;
+
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
     }
 
     .identity {
@@ -155,56 +187,81 @@
       justify-content: space-between;
       gap: 10px;
       align-items: baseline;
-      margin-bottom: 12px;
+
+      margin-bottom: 11px;
     }
 
     .identity strong {
       color: var(--parchment-bright);
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       overflow-wrap: anywhere;
     }
 
     .identity span {
       flex: none;
       color: var(--muted);
+      font-size: 0.82rem;
     }
 
-    .hp-header {
+    .meter {
+      margin-bottom: 10px;
+    }
+
+    .meter-header {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      margin-bottom: 5px;
-      font-size: 0.92rem;
+
+      margin-bottom: 4px;
+      font-size: 0.84rem;
     }
 
-    .hp-track {
-      height: 13px;
-      margin-bottom: 13px;
+    .meter-track {
+      height: 11px;
       overflow: hidden;
-      border: 1px solid #67433a;
+
+      border: 1px solid #5d4731;
       background: #100c0a;
     }
 
-    .hp-fill {
+    .meter-fill {
       height: 100%;
-      width: 100%;
-      background: linear-gradient(90deg, #6f1c1a, var(--blood-bright));
-      transition: width 240ms ease;
+      transition: width 120ms ease;
+    }
+
+    .player-posture {
+      background: linear-gradient(90deg, #4e6270, #86a2b3);
+    }
+
+    .player-stamina {
+      background: linear-gradient(90deg, #4c5b3b, #829964);
+    }
+
+    .enemy-posture {
+      background: linear-gradient(90deg, #632a27, #a8463f);
+    }
+
+    .enemy-stamina {
+      background: linear-gradient(90deg, #57462e, #a17c47);
     }
 
     .abilities {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px 12px;
-      margin: 12px 0;
+      gap: 5px 11px;
+
+      margin: 11px 0;
     }
 
     .ability {
       display: flex;
       justify-content: space-between;
       gap: 8px;
-      padding-bottom: 3px;
-      border-bottom: 1px dotted rgba(222, 205, 166, 0.22);
+
+      padding-bottom: 2px;
+
+      border-bottom:
+        1px dotted rgba(222, 205, 166, 0.2);
     }
 
     .ability span:last-child {
@@ -213,17 +270,21 @@
     }
 
     .info-block {
-      margin-top: 13px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(108, 82, 52, 0.7);
+      margin-top: 10px;
+      padding-top: 8px;
+
+      border-top:
+        1px solid rgba(108, 82, 52, 0.66);
     }
 
     .info-label {
       display: block;
       margin-bottom: 3px;
+
       color: var(--muted);
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
+
+      font-size: 0.73rem;
+      letter-spacing: 0.1em;
     }
 
     .info-value {
@@ -231,56 +292,150 @@
       overflow-wrap: anywhere;
     }
 
-    .equipment-detail {
-      display: block;
+    .small-text {
       color: var(--muted);
-      font-size: 0.84rem;
+      font-size: 0.77rem;
     }
 
     .status-box {
-      margin-top: 13px;
-      padding: 10px;
+      margin-top: 11px;
+      padding: 9px 10px;
+
       border-left: 3px solid var(--gold);
-      background: rgba(0, 0, 0, 0.19);
+      background: rgba(0, 0, 0, 0.2);
     }
 
     .story-heading {
-      margin: 0 0 15px;
+      margin: 0 0 13px;
+
       color: var(--parchment-bright);
-      font-size: clamp(1.35rem, 5vw, 2rem);
+
+      font-size: clamp(1.3rem, 5vw, 1.9rem);
       line-height: 1.35;
     }
 
-    #storyText {
-      min-height: 180px;
-    }
-
     #storyText p {
-      margin: 0 0 13px;
+      margin: 0 0 11px;
     }
 
-    #storyText .speech {
+    .speech {
       color: var(--parchment-bright);
       font-weight: 600;
     }
 
-    #storyText .warning {
-      color: #e7b099;
+    .tell-box {
+      margin: 12px 0;
+      padding: 11px 12px;
+
+      border-left: 4px solid var(--blood-bright);
+      background: rgba(87, 25, 21, 0.2);
     }
 
-    #storyText .good {
-      color: #bdc99f;
+    .tell-title {
+      margin-bottom: 4px;
+
+      color: var(--blood-bright);
+
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+    }
+
+    .tell-text {
+      color: var(--parchment-bright);
+    }
+
+    .initiative-box {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+
+      margin: 11px 0;
+      padding: 8px 10px;
+
+      border: 1px solid rgba(155, 120, 76, 0.42);
+      background: rgba(0, 0, 0, 0.18);
+
+      font-size: 0.79rem;
+    }
+
+    .initiative-box span:first-child {
+      text-align: left;
+    }
+
+    .initiative-box span:last-child {
+      text-align: right;
+    }
+
+    .initiative-centre {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .execution-alert {
+      margin: 12px 0;
+      padding: 11px 12px;
+
+      color: #f2c7b7;
+
+      border: 1px solid var(--blood-bright);
+
+      background:
+        linear-gradient(
+          rgba(113, 30, 25, 0.34),
+          rgba(54, 20, 17, 0.45)
+        );
+    }
+
+    .enemy-card {
+      margin: 13px 0;
+      padding: 11px;
+
+      border: 1px solid rgba(140, 41, 36, 0.75);
+      background: rgba(75, 22, 19, 0.16);
+    }
+
+    .enemy-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      margin-bottom: 8px;
+    }
+
+    .enemy-header strong {
+      color: var(--parchment-bright);
+    }
+
+    .wound-list {
+      margin: 7px 0 0;
+      padding-left: 19px;
+    }
+
+    .wound-list li {
+      margin-bottom: 3px;
+      color: #e0b09a;
     }
 
     .roll-box {
-      margin: 15px 0;
-      padding: 10px 12px;
+      margin: 13px 0;
+      padding: 10px 11px;
+
       border: 1px solid rgba(155, 120, 76, 0.62);
-      background: rgba(8, 6, 5, 0.42);
+      background: rgba(8, 6, 5, 0.43);
+
       color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.79rem;
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+
+      font-size: 0.74rem;
       line-height: 1.55;
+
       overflow-wrap: anywhere;
     }
 
@@ -288,30 +443,46 @@
       margin-top: 4px;
     }
 
-    .actions-title {
-      margin: 22px 0 9px;
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
+    .success-line {
+      color: #bdc99f;
     }
 
-    #actions {
+    .failure-line {
+      color: #e0aa97;
+    }
+
+    .actions-title {
+      margin: 19px 0 8px;
+
+      color: var(--gold);
+
+      font-size: 0.87rem;
+      letter-spacing: 0.11em;
+    }
+
+    .actions {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 8px;
     }
 
     .action-button {
       width: 100%;
-      min-height: 54px;
-      padding: 12px 13px;
+      min-height: 57px;
+      padding: 11px 12px;
+
       color: var(--parchment-bright);
+
       border: 1px solid var(--border-bright);
       border-radius: 0;
+
       background:
-        linear-gradient(rgba(71, 51, 36, 0.76), rgba(43, 31, 23, 0.9)),
+        linear-gradient(
+          rgba(71, 51, 36, 0.78),
+          rgba(43, 31, 23, 0.92)
+        ),
         var(--panel-soft);
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.28);
+
       cursor: pointer;
       text-align: left;
       line-height: 1.35;
@@ -324,99 +495,87 @@
 
     .action-button.danger {
       border-color: var(--blood-bright);
-      background: linear-gradient(#602824, #351b18);
+      background: linear-gradient(#692b26, #381b18);
+    }
+
+    .action-button.execution {
+      border-color: #ed715d;
+
+      background:
+        linear-gradient(
+          rgba(144, 38, 30, 0.96),
+          rgba(65, 18, 15, 0.98)
+        );
+
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 177, 143, 0.16),
+        0 0 14px rgba(140, 41, 36, 0.3);
     }
 
     .action-button.safe {
       border-color: var(--green);
     }
 
+    .action-button.info {
+      border-color: var(--blue);
+    }
+
     .action-button:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: default;
     }
 
     .action-button small {
       display: block;
       margin-top: 4px;
+
       color: var(--muted);
-      font-size: 0.75rem;
-      font-weight: normal;
+      font-size: 0.72rem;
     }
 
     .creation-box {
-      padding: 14px;
-      border: 1px solid rgba(155, 120, 76, 0.55);
+      margin: 12px 0;
+      padding: 13px;
+
+      border: 1px solid rgba(155, 120, 76, 0.56);
       background: rgba(0, 0, 0, 0.18);
     }
 
     .creation-box label {
       display: block;
-      margin-bottom: 7px;
+      margin-bottom: 6px;
+
       color: var(--gold);
     }
 
     .creation-box input {
       width: 100%;
-      min-height: 49px;
-      margin-bottom: 15px;
+      min-height: 48px;
       padding: 10px 12px;
+
       color: var(--parchment-bright);
+
       border: 1px solid var(--border-bright);
       border-radius: 0;
       outline: none;
+
       background: #120e0b;
     }
 
     .creation-box input:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 0 2px rgba(198, 154, 75, 0.17);
-    }
-
-    .choice-note {
-      display: block;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: normal;
-    }
-
-    .enemy-card {
-      margin: 13px 0;
-      padding: 11px 12px;
-      border: 1px solid rgba(140, 41, 36, 0.72);
-      background: rgba(75, 22, 19, 0.16);
-    }
-
-    .enemy-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .enemy-track {
-      height: 9px;
-      margin-top: 7px;
-      border: 1px solid #5e3530;
-      background: #100b09;
-    }
-
-    .enemy-fill {
-      height: 100%;
-      background: #8f322b;
     }
 
     .footer {
-      padding: 16px 4px 6px;
+      padding: 14px 4px 5px;
+
       color: #77664f;
+
       text-align: center;
-      font-size: 0.76rem;
+      font-size: 0.72rem;
     }
 
     @media (max-width: 760px) {
-      #app {
-        padding: 8px;
-      }
-
       .layout {
         grid-template-columns: 1fr;
       }
@@ -425,42 +584,41 @@
         position: static;
       }
 
-      .story-panel {
-        min-height: 520px;
+      .main-panel {
+        min-height: 500px;
       }
 
-      .character-panel .compact-mobile {
+      .mobile-summary {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0 12px;
+        gap: 0 11px;
       }
     }
 
-    @media (max-width: 450px) {
+    @media (max-width: 460px) {
+      #app {
+        padding: 6px;
+      }
+
       .masthead {
-        padding: 13px 10px 11px;
+        padding: 11px 8px;
       }
 
-      .masthead h1 {
-        font-size: 1.85rem;
+      .main-panel {
+        padding: 13px 11px;
       }
 
-      .story-panel {
-        padding: 16px 14px;
-      }
-
-      #actions {
+      .actions {
         grid-template-columns: 1fr;
       }
 
       .action-button {
-        min-height: 57px;
+        min-height: 59px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       * {
-        scroll-behavior: auto !important;
         transition: none !important;
       }
     }
@@ -471,594 +629,484 @@
   <main id="app">
     <header class="masthead">
       <h1>逆命錄</h1>
-      <p>亂世生涯試卷・V3.2</p>
+      <p>轉生篇・黑松嶺首戰・第四版丙</p>
     </header>
 
     <div class="layout">
-      <aside class="character-panel" aria-label="人物狀態">
+      <aside class="panel character-panel">
         <h2 class="panel-title">人物命簿</h2>
 
         <div class="identity">
           <strong id="playerName">未題名</strong>
-          <span id="playerAge">初生</span>
+          <span id="playerAge">尚未轉生</span>
         </div>
 
-        <div class="hp-header">
-          <span>氣血</span>
-          <span id="hpText">尚未定命</span>
+        <div class="meter">
+          <div class="meter-header">
+            <span>架勢</span>
+            <span id="postureText">—</span>
+          </div>
+
+          <div class="meter-track">
+            <div
+              id="postureFill"
+              class="meter-fill player-posture"
+            ></div>
+          </div>
         </div>
-        <div class="hp-track" aria-hidden="true">
-          <div id="hpFill" class="hp-fill"></div>
+
+        <div class="meter">
+          <div class="meter-header">
+            <span>體力</span>
+            <span id="staminaText">—</span>
+          </div>
+
+          <div class="meter-track">
+            <div
+              id="staminaFill"
+              class="meter-fill player-stamina"
+            ></div>
+          </div>
         </div>
 
         <div id="abilities" class="abilities"></div>
 
-        <div class="compact-mobile">
+        <div class="mobile-summary">
           <div class="info-block">
-            <span class="info-label">天賦所向</span>
-            <span id="potentialText" class="info-value">尚未選定</span>
+            <span class="info-label">前世經歷</span>
+            <span id="pastLifeText" class="info-value">尚未選定</span>
           </div>
 
           <div class="info-block">
-            <span class="info-label">傷勢</span>
-            <span id="injuryText" class="info-value">無</span>
+            <span class="info-label">今世成長</span>
+            <span id="formativeText" class="info-value">尚未選定</span>
           </div>
 
           <div class="info-block">
             <span class="info-label">兵器</span>
             <span id="weaponText" class="info-value">尚未持兵</span>
-            <span id="weaponDetail" class="equipment-detail"></span>
           </div>
 
           <div class="info-block">
-            <span class="info-label">甲衣</span>
-            <span id="armourText" class="info-value">尋常布衣</span>
-            <span id="armourDetail" class="equipment-detail"></span>
+            <span class="info-label">傷勢</span>
+            <span id="woundText" class="info-value">無</span>
           </div>
         </div>
 
         <div class="status-box">
           <span class="info-label">此刻境況</span>
-          <span id="battleStatus" class="info-value">命書尚未展開</span>
+          <span id="statusText" class="info-value">命書尚未展開</span>
         </div>
       </aside>
 
-      <section class="story-panel" aria-live="polite">
-        <h2 id="storyHeading" class="story-heading">一頁無字之書</h2>
+      <section class="panel main-panel" aria-live="polite">
+        <h2 id="storyHeading" class="story-heading">無字命頁</h2>
+
         <div id="storyText"></div>
+        <div id="tellArea"></div>
+        <div id="initiativeArea"></div>
+        <div id="executionArea"></div>
         <div id="enemyArea"></div>
         <div id="rollArea"></div>
 
         <h3 class="actions-title">你要如何做？</h3>
-        <div id="actions"></div>
+        <div id="actions" class="actions"></div>
       </section>
     </div>
 
     <footer class="footer">
-      本卷止於你的第一場真實戰役。生死皆不受天命偏袒。
+      敵人動作只會留下線索。真正規律，需要由你喺交鋒中判斷。
     </footer>
   </main>
 
   <script>
-  "use strict";
+    "use strict";
 
-  const ABILITY_NAMES = {
-    might: "勁力",
-    agility: "身法",
-    endurance: "體魄",
-    perception: "洞察",
-    intellect: "才智",
-    will: "意志",
-    presence: "氣度"
-  };
+    const ABILITY_NAMES = {
+      might: "勁力",
+      agility: "身法",
+      endurance: "體魄",
+      perception: "洞察",
+      intellect: "才智",
+      will: "意志",
+      presence: "氣度"
+    };
 
-  const SKILL_NAMES = {
-    blade: "刀劍",
-    spear: "槍矛",
-    polearm: "長柄重兵",
-    archery: "弓術",
-    dueling: "單挑",
-    awareness: "臨敵洞察",
-    command: "統率",
-    tactics: "戰術",
-    medicine: "醫術"
-  };
-
-  const PAST_LIVES = {
-    history: {
-      name: "歷史愛好者",
-      description:
-        "你記得漢末大勢、部分人物與重大事件，但細節並不完整。",
-      scores: {
-        might: 45,
-        agility: 47,
-        endurance: 48,
-        perception: 55,
-        intellect: 59,
-        will: 51,
-        presence: 47
-      },
-      skills: {
-        blade: 24,
-        spear: 24,
-        polearm: 18,
-        archery: 20,
-        dueling: 24,
-        awareness: 39,
-        command: 25,
-        tactics: 46,
-        medicine: 20
-      }
-    },
-
-    martial: {
-      name: "現代武術愛好者",
-      description:
-        "你理解距離、步法與訓練原理，但真正持兵殺敵仍然係今世第一次。",
-      scores: {
-        might: 53,
-        agility: 57,
-        endurance: 54,
-        perception: 51,
-        intellect: 47,
-        will: 54,
-        presence: 44
-      },
-      skills: {
-        blade: 42,
-        spear: 38,
-        polearm: 29,
-        archery: 22,
-        dueling: 47,
-        awareness: 35,
-        command: 21,
-        tactics: 28,
-        medicine: 14
-      }
-    },
-
-    medical: {
-      name: "醫科學生",
-      description:
-        "你明白人體、失血、衛生與感染，但漢末嘅藥物同工具非常有限。",
-      scores: {
-        might: 45,
-        agility: 48,
-        endurance: 52,
-        perception: 54,
-        intellect: 58,
-        will: 53,
-        presence: 46
-      },
-      skills: {
-        blade: 22,
-        spear: 22,
-        polearm: 17,
-        archery: 20,
-        dueling: 23,
-        awareness: 35,
-        command: 21,
-        tactics: 28,
-        medicine: 52
-      }
-    },
-
-    management: {
-      name: "管理工作者",
-      description:
-        "你熟悉組織、談判、分工同壓力下決策。",
-      scores: {
-        might: 46,
-        agility: 46,
-        endurance: 49,
-        perception: 50,
-        intellect: 54,
-        will: 55,
-        presence: 58
-      },
-      skills: {
-        blade: 22,
-        spear: 22,
-        polearm: 18,
-        archery: 20,
-        dueling: 24,
-        awareness: 32,
-        command: 46,
-        tactics: 36,
-        medicine: 18
-      }
-    }
-  };
-
-  const WEAPONS = {
-    sword: {
-      key: "sword",
-      name: "百鍊環首刀",
-      attack: 1,
-      sides: 8,
-      ability: "might",
-      skill: "blade",
-      flavour: "刀背厚重，攻守平衡，宜於山道近戰。"
-    },
-
-    spear: {
-      key: "spear",
-      name: "白蠟短矛",
-      attack: 2,
-      sides: 6,
-      ability: "agility",
-      skill: "spear",
-      flavour: "矛身輕巧，較容易搶先刺入對手防線。"
-    },
-
-    axe: {
-      key: "axe",
-      name: "沉背戰斧",
-      attack: 0,
-      sides: 10,
-      ability: "might",
-      skill: "polearm",
-      flavour: "勢大而沉，一擊若中足以造成嚴重傷勢。"
-    },
-
-    straightSword: {
-      key: "straightSword",
-      name: "舊制鐵劍",
-      attack: 1,
-      sides: 8,
-      ability: "agility",
-      skill: "blade",
-      flavour: "久經磨礪，進退靈活，並無明顯短處。"
-    }
-  };
-
-  const ARMOURS = {
-    leather: {
-      name: "綴片皮甲",
-      defence: 2,
-      reduction: 1,
-      flavour: "以皮革綴入小鐵片，尚能護住胸腹。"
-    },
-
-    padded: {
-      name: "厚絮戰衣",
-      defence: 1,
-      reduction: 2,
-      flavour: "行動稍慢，但可以卸去部分沉重衝擊。"
-    },
-
-    light: {
-      name: "輕皮護衣",
-      defence: 2,
-      reduction: 0,
-      flavour: "護身有限，但唔會妨礙轉身與步法。"
-    }
-  };
-
-  const ENEMY_TEMPLATE = {
-    name: "黑石寨頭領・韓魁",
-    maxHp: 32,
-    hp: 32,
-
-    abilities: {
-      might: 63,
-      agility: 54,
-      endurance: 59,
-      perception: 51,
-      intellect: 43,
-      will: 61,
-      presence: 57
-    },
-
-    skills: {
-      blade: 56,
-      spear: 22,
-      polearm: 27,
-      archery: 18,
-      dueling: 51,
-      awareness: 44,
-      command: 42,
-      tactics: 34,
-      medicine: 6
-    },
-
-    weapon: {
-      name: "缺口山刀",
-      attack: 1,
-      sides: 8,
-      ability: "might",
-      skill: "blade",
-      flavour: "刀刃雖缺，分量卻足。"
-    },
-
-    armour: {
-      name: "硬皮坎肩",
-      defence: 2,
-      reduction: 1,
-      flavour: "護住胸腹，四肢仍然暴露。"
-    }
-  };
-
-  const childhoodStages = [
-    {
-      age: 6,
-      heading: "總角之年",
-      intro:
-        "前世記憶仍然模糊。你知道自己曾經活過另一段人生，但呢副幼小身體必須重新成長。",
-      choices: [
-        {
-          label: "跟隨獵戶翻山越嶺",
-          gains: {
-            endurance: 4,
-            perception: 5
-          },
-          skillGains: {
-            awareness: 5,
-            archery: 4
-          },
-          text:
-            "你常在天色未亮時進山。濕土上嘅足印、樹梢驚起嘅飛鳥，同肩上愈來愈沉嘅獵物，都成為今世最早嘅老師。"
+    const PAST_LIVES = {
+      history: {
+        name: "歷史愛好者",
+        description:
+          "你記得漢末大勢與部分人物，但細節並不完整。",
+        abilities: {
+          intellect: 7,
+          perception: 5,
+          will: 2
         },
-
-        {
-          label: "在村塾旁偷聽經史",
-          gains: {
-            intellect: 6,
-            presence: 3
-          },
-          skillGains: {
-            tactics: 4,
-            command: 2
-          },
-          text:
-            "你靠在窗外聽先生說古論今。前世認識嘅名字偶爾從經卷中出現，令你更加肯定自己身處東漢末年。"
-        },
-
-        {
-          label: "與村中少年角力奔走",
-          gains: {
-            might: 4,
-            agility: 5
-          },
-          skillGains: {
-            dueling: 4
-          },
-          text:
-            "田埂成為校場。你摔過、流過血，亦逐漸將前世理解嘅步法同距離，變成今世身體真正掌握到嘅本領。"
+        skills: {
+          awareness: 8,
+          tactics: 10
         }
-      ]
-    },
+      },
 
-    {
-      age: 11,
-      heading: "亂世少年",
-      intro:
-        "徵糧吏卒來過，逃難人群亦來過。你記得更大嘅亂局將至，但一個少年冇能力單靠幾句預言改變天下。",
-      choices: [
-        {
-          label: "替鄉勇搬運兵械並練習刀勢",
-          gains: {
-            might: 6,
-            endurance: 3
-          },
-          skillGains: {
-            blade: 8,
-            dueling: 3
-          },
-          text:
-            "你先搬木樁、磨舊刀，後來先獲准跟住鄉勇劈砍。虎口一次次裂開，再結成硬繭。"
+      martial: {
+        name: "現代武術愛好者",
+        description:
+          "你理解距離、節奏與訓練原理，但從未真正持兵殺敵。",
+        abilities: {
+          agility: 6,
+          endurance: 3,
+          will: 3
         },
-
-        {
-          label: "替商旅帶路，記熟附近山道",
-          gains: {
-            agility: 4,
-            perception: 6
-          },
-          skillGains: {
-            awareness: 7,
-            tactics: 2
-          },
-          text:
-            "你走過雨後棧道，亦曾經喺夜色中辨認遠山輪廓。邊度可以藏人、邊度容易斷路，你逐漸一眼就睇得出。"
-        },
-
-        {
-          label: "幫村老調解糧水爭端",
-          gains: {
-            presence: 6,
-            intellect: 4
-          },
-          skillGains: {
-            command: 6
-          },
-          text:
-            "你學識先聽完怒罵，再搵出每個人真正害怕失去嘅嘢。有時一句話，確實比木棍更能夠止住混亂。"
+        skills: {
+          dueling: 10,
+          blade: 6,
+          spear: 5
         }
-      ]
-    },
+      },
 
-    {
-      age: 15,
-      heading: "冠禮之前",
-      intro:
-        "光和年間，地方徵斂、流民、疫病與秘密集會愈來愈多。你知道黃巾之亂已經唔遠。",
-      choices: [
-        {
-          label: "日日負石揮刀",
-          gains: {
-            might: 8,
-            endurance: 3
-          },
-          skillGains: {
-            blade: 8
-          },
-          text:
-            "晨霧未散，你已經對住枯樁出刀。刀勢由散亂變得沉穩，腰背與雙臂亦逐漸連成一體。"
+      medical: {
+        name: "醫科學生",
+        description:
+          "你明白人體、失血、感染與傷勢處理。",
+        abilities: {
+          intellect: 7,
+          perception: 4,
+          endurance: 3,
+          will: 2
         },
-
-        {
-          label: "練習步法與短兵進退",
-          gains: {
-            agility: 8,
-            perception: 2
-          },
-          skillGains: {
-            dueling: 7
-          },
-          text:
-            "你喺狹窄土牆之間反覆穿行，練習避開想像中嘅矛尖。腳下慢半寸，衣角就會被木刺劃破。"
-        },
-
-        {
-          label: "研讀殘缺兵書，推演山地攻守",
-          gains: {
-            intellect: 8,
-            perception: 3
-          },
-          skillGains: {
-            tactics: 8,
-            awareness: 3
-          },
-          text:
-            "殘卷缺少幾頁，你便用石子喺地上補全陣勢。勝負未必等到刀刃相碰之後先決定。"
-        },
-
-        {
-          label: "隨鄉勇巡夜，學習號令眾人",
-          gains: {
-            presence: 7,
-            will: 4
-          },
-          skillGains: {
-            command: 7,
-            awareness: 2
-          },
-          text:
-            "黑夜會放大每一點遲疑。你學識喺自己都害怕時先企直身體，令身後嘅人聽到清楚命令。"
+        skills: {
+          medicine: 14
         }
-      ]
-    }
-  ];
+      },
 
-  let state;
-  let rngState = 1;
-  let encounterSnapshot = null;
-  let encounterSeed = null;
+      management: {
+        name: "管理工作者",
+        description:
+          "你熟悉組織、分工、談判與壓力下決策。",
+        abilities: {
+          presence: 6,
+          intellect: 5,
+          will: 3
+        },
+        skills: {
+          command: 11,
+          tactics: 6
+        }
+      }
+    };
 
-  const lastTextChoice = {};
+    const FORMATIVE_CHOICES = {
+      hunter: {
+        name: "跟隨獵戶翻山",
+        description:
+          "你熟悉山林聲息、腳印、地形與危險前兆。",
+        abilities: {
+          perception: 7,
+          agility: 4,
+          endurance: 3
+        },
+        skills: {
+          awareness: 8,
+          archery: 9
+        }
+      },
 
-  function deepClone(value) {
-    return JSON.parse(JSON.stringify(value));
-  }
+      militia: {
+        name: "隨鄉勇操練",
+        description:
+          "你練習隊列、刀矛與有節制的實際對抗。",
+        abilities: {
+          might: 6,
+          endurance: 5,
+          will: 3
+        },
+        skills: {
+          blade: 8,
+          spear: 8,
+          awareness: 3
+        }
+      },
 
-  function clamp(number, minimum, maximum) {
-    return Math.max(minimum, Math.min(maximum, number));
-  }
+      scholar: {
+        name: "研讀經史兵書",
+        description:
+          "你學會書寫、推演地形，並整理前世記憶。",
+        abilities: {
+          intellect: 8,
+          perception: 3,
+          will: 3
+        },
+        skills: {
+          tactics: 9,
+          command: 4
+        }
+      },
 
-  function signed(number) {
-    return number >= 0 ? `+${number}` : `${number}`;
-  }
+      mediator: {
+        name: "協助鄉里調解紛爭",
+        description:
+          "你熟悉利益、恐懼與人群在壓力下的反應。",
+        abilities: {
+          presence: 7,
+          will: 5,
+          perception: 2
+        },
+        skills: {
+          command: 7,
+          dueling: 3
+        }
+      }
+    };
 
-  function escapeHtml(value) {
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
+    const WEAPONS = {
+      blade: {
+        key: "blade",
+        name: "舊制環首刀",
+        ability: "might",
+        skill: "blade",
+        accuracy: 1,
+        damageSides: 8,
+        staminaCost: 2,
+        piercing: 0,
+        description:
+          "攻守平衡，適合近身交鋒。"
+      },
 
-  function createSeed() {
-    if (window.crypto && window.crypto.getRandomValues) {
-      const values = new Uint32Array(1);
-      window.crypto.getRandomValues(values);
-      return values[0] || 1;
-    }
+      spear: {
+        key: "spear",
+        name: "白蠟長矛",
+        ability: "agility",
+        skill: "spear",
+        accuracy: 2,
+        damageSides: 8,
+        staminaCost: 2,
+        piercing: 0,
+        description:
+          "出手較穩，擅長保持兵刃距離。"
+      },
 
-    return (
-      (
-        Date.now() ^
-        Math.floor(Math.random() * 4294967295)
-      ) >>> 0
-    ) || 1;
-  }
+      polearm: {
+        key: "polearm",
+        name: "沉背長戟",
+        ability: "might",
+        skill: "polearm",
+        accuracy: 0,
+        damageSides: 10,
+        staminaCost: 3,
+        piercing: 1,
+        description:
+          "衝擊強大，但回收與體力負擔較高。"
+      }
+    };
 
-  function seedRng(seed) {
-    rngState = seed >>> 0 || 1;
-  }
+    const ARMOURS = {
+      player: {
+        name: "綴片皮甲",
+        mitigation: 1,
+        woundProtection: 1
+      },
 
-  function random() {
-    rngState += 0x6D2B79F5;
+      enemy: {
+        name: "硬皮坎肩",
+        mitigation: 1,
+        woundProtection: 0
+      }
+    };
 
-    let value = rngState;
-
-    value = Math.imul(
-      value ^ (value >>> 15),
-      value | 1
-    );
-
-    value ^= value + Math.imul(
-      value ^ (value >>> 7),
-      value | 61
-    );
-
-    return (
-      (value ^ (value >>> 14)) >>> 0
-    ) / 4294967296;
-  }
-
-  function die(sides) {
-    return Math.floor(random() * sides) + 1;
-  }
-
-  function varied(key, choices) {
-    let index = Math.floor(random() * choices.length);
-
-    if (
-      choices.length > 1 &&
-      lastTextChoice[key] === index
-    ) {
-      index = (
-        index +
-        1 +
-        Math.floor(random() * (choices.length - 1))
-      ) % choices.length;
-    }
-
-    lastTextChoice[key] = index;
-    return choices[index];
-  }
-
-  function abilityModifier(score) {
-    return clamp(
-      Math.round((score - 50) / 12.5),
-      -3,
-      5
-    );
-  }
-
-  function skillModifier(score) {
-    return clamp(
-      Math.round((score - 40) / 15),
-      -2,
-      4
-    );
-  }
-
-  function newState() {
-    return {
-      locked: false,
-      phase: "creation",
-      name: "未題名",
-      age: 0,
-
-      maxHp: 30,
-      hp: 30,
-
-      pastLife: null,
+    const ENEMY_DATA = {
+      name: "黑石寨頭領・韓魁",
 
       abilities: {
+        might: 65,
+        agility: 57,
+        endurance: 61,
+        perception: 55,
+        intellect: 45,
+        will: 62,
+        presence: 58
+      },
+
+      skills: {
+        blade: 61,
+        spear: 22,
+        polearm: 25,
+        archery: 18,
+        dueling: 58,
+        awareness: 50,
+        command: 43,
+        tactics: 36,
+        medicine: 5
+      },
+
+      weapon: {
+        key: "blade",
+        name: "缺口山刀",
+        ability: "might",
+        skill: "blade",
+        accuracy: 1,
+        damageSides: 8,
+        staminaCost: 2,
+        piercing: 0
+      },
+
+      armour: ARMOURS.enemy
+    };
+
+    const INTENT_TELLS = {
+      quick: [
+        "韓魁將刀鋒壓低，前腳悄悄向山道中央移了半步。",
+        "韓魁縮短握刀距離，肩膀微微向前。",
+        "韓魁的目光落在你持兵手上，呼吸忽然變短。"
+      ],
+
+      heavy: [
+        "韓魁將重心壓到後腿，山刀緩緩舉過肩頭。",
+        "韓魁雙手收緊刀柄，腰胯像拉開的弓一樣繃住。",
+        "韓魁退開小半步，刀尖隨即向後沉下。"
+      ],
+
+      pressure: [
+        "韓魁沒有急於揮刀，只一步一步迫近，刀鋒始終守住中線。",
+        "韓魁腳步逐漸加快，似乎想逼你不斷後退。",
+        "韓魁以刀背輕敲兵刃，開始壓縮你能夠移動的空間。"
+      ],
+
+      guard: [
+        "韓魁將山刀橫在胸腹之前，雙腳重新站穩。",
+        "韓魁收起先前的狂態，刀鋒不再離開中線。",
+        "韓魁略微側身，只留下甲衣最厚的一面。"
+      ],
+
+      recover: [
+        "韓魁退向山壁，胸口起伏比先前明顯。",
+        "韓魁沒有立即逼近，只重新調整雙手握刀的位置。",
+        "韓魁拉開距離，趁短暫空隙深深吸了一口氣。"
+      ],
+
+      feint: [
+        "韓魁肩膀先動，腳下重心卻沒有跟上。",
+        "韓魁刀鋒忽左忽右，幾次似要出手又突然收回。",
+        "韓魁故意露出肋側，眼神卻一直盯住你的腳步。"
+      ]
+    };
+
+    let state = null;
+
+    let creation = {
+      name: "",
+      pastLife: null,
+      formative: null,
+      weapon: null
+    };
+
+    let rngState = 1;
+    let buttonsLocked = false;
+
+    function clamp(value, minimum, maximum) {
+      return Math.max(
+        minimum,
+        Math.min(maximum, value)
+      );
+    }
+
+    function signed(value) {
+      return value >= 0
+        ? `+${value}`
+        : `${value}`;
+    }
+
+    function clone(value) {
+      return JSON.parse(
+        JSON.stringify(value)
+      );
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function createHiddenSeed() {
+      if (
+        window.crypto &&
+        window.crypto.getRandomValues
+      ) {
+        const values =
+          new Uint32Array(1);
+
+        window.crypto.getRandomValues(values);
+
+        return values[0] || 1;
+      }
+
+      return (
+        (
+          Date.now() ^
+          Math.floor(
+            Math.random() * 4294967295
+          )
+        ) >>> 0
+      ) || 1;
+    }
+
+    function seedRng(seed) {
+      rngState = seed >>> 0 || 1;
+    }
+
+    function random() {
+      rngState += 0x6D2B79F5;
+
+      let value = rngState;
+
+      value = Math.imul(
+        value ^ (value >>> 15),
+        value | 1
+      );
+
+      value ^= value + Math.imul(
+        value ^ (value >>> 7),
+        value | 61
+      );
+
+      return (
+        (value ^ (value >>> 14)) >>> 0
+      ) / 4294967296;
+    }
+
+    function die(sides) {
+      return Math.floor(
+        random() * sides
+      ) + 1;
+    }
+
+    function randomChoice(list) {
+      return list[
+        die(list.length) - 1
+      ];
+    }
+
+    function abilityModifier(score) {
+      return clamp(
+        Math.round((score - 50) / 10),
+        -5,
+        5
+      );
+    }
+
+    function skillModifier(score) {
+      return clamp(
+        Math.round((score - 50) / 10),
+        -5,
+        5
+      );
+    }
+
+    function baseAbilities() {
+      return {
         might: 50,
         agility: 50,
         endurance: 50,
@@ -1066,2894 +1114,3459 @@
         intellect: 50,
         will: 50,
         presence: 50
-      },
+      };
+    }
 
-      skills: {
-        blade: 20,
-        spear: 20,
-        polearm: 15,
-        archery: 15,
-        dueling: 20,
-        awareness: 20,
+    function baseSkills() {
+      return {
+        blade: 31,
+        spear: 31,
+        polearm: 26,
+        archery: 20,
+        dueling: 34,
+        awareness: 29,
         command: 15,
-        tactics: 15,
+        tactics: 20,
         medicine: 10
-      },
+      };
+    }
 
-      weapon: null,
-      armour: null,
-      injury: "無",
-
-      childhoodIndex: 0,
-      status: "命書尚未展開",
-
-      ambushDetected: null,
-      enemyLocated: false,
-      duelActive: false,
-
-      friendlyMorale: 50,
-      enemyMorale: 60,
-      position: 0,
-      formation: 50,
-      enemyAdvantage: 0,
-      danger: 1,
-
-      guarded: false,
-      exposed: false,
-      executionAttempted: false,
-
-      enemy: cloneEnemy()
-    };
-  }
-
-  function cloneEnemy() {
-    return deepClone(ENEMY_TEMPLATE);
-  }
-
-  function applyGrowth(gains, skillGains) {
-    Object.entries(gains || {}).forEach(
-      ([ability, amount]) => {
-        state.abilities[ability] = clamp(
-          state.abilities[ability] + amount,
+    function applyBonuses(target, bonuses) {
+      Object.entries(
+        bonuses || {}
+      ).forEach(([key, amount]) => {
+        target[key] = clamp(
+          (target[key] || 0) + amount,
           0,
           99
         );
-      }
-    );
+      });
+    }
 
-    Object.entries(skillGains || {}).forEach(
-      ([skill, amount]) => {
-        state.skills[skill] = clamp(
-          state.skills[skill] + amount,
+    function makeCombatant(data) {
+      const endurance =
+        abilityModifier(
+          data.abilities.endurance
+        );
+
+      const will =
+        abilityModifier(
+          data.abilities.will
+        );
+
+      const maxPosture =
+        Math.max(
+          15,
+          18 + endurance + will
+        );
+
+      const maxStamina =
+        Math.max(
+          14,
+          17 + endurance * 2
+        );
+
+      return {
+        name: data.name,
+
+        abilities: clone(data.abilities),
+        skills: clone(data.skills),
+
+        weapon: clone(data.weapon),
+        armour: clone(data.armour),
+
+        maxPosture,
+        posture: maxPosture,
+
+        maxStamina,
+        stamina: maxStamina,
+
+        wounds: [],
+
+        guarded: false,
+        focus: 0,
+        opening: false,
+
+        defeated: false,
+        dead: false,
+
+        lastAction: null,
+        repeatCount: 0,
+        recoveries: 0
+      };
+    }
+
+    function buildPlayer() {
+      const abilities = baseAbilities();
+      const skills = baseSkills();
+
+      applyBonuses(
+        abilities,
+        PAST_LIVES[
+          creation.pastLife
+        ].abilities
+      );
+
+      applyBonuses(
+        skills,
+        PAST_LIVES[
+          creation.pastLife
+        ].skills
+      );
+
+      applyBonuses(
+        abilities,
+        FORMATIVE_CHOICES[
+          creation.formative
+        ].abilities
+      );
+
+      applyBonuses(
+        skills,
+        FORMATIVE_CHOICES[
+          creation.formative
+        ].skills
+      );
+
+      const weapon =
+        WEAPONS[creation.weapon];
+
+      skills[weapon.skill] =
+        clamp(
+          skills[weapon.skill] + 11,
           0,
           99
         );
-      }
-    );
-  }
 
-  function updateMaxHp() {
-    const enduranceBonus =
-      abilityModifier(state.abilities.endurance);
-
-    state.maxHp = Math.max(
-      26,
-      31 + enduranceBonus * 2
-    );
-
-    state.hp = state.maxHp;
-  }
-
-  function formatParagraphs(paragraphs) {
-    return paragraphs
-      .filter(Boolean)
-      .map((paragraph) => {
-        const className =
-          paragraph.startsWith("『")
-            ? "speech"
-            : "";
-
-        return (
-          `<p class="${className}">` +
-          `${escapeHtml(paragraph)}` +
-          `</p>`
-        );
-      })
-      .join("");
-  }
-
-  function playerDefence(extra = 0) {
-    const armourDefence =
-      state.armour
-        ? state.armour.defence
-        : 0;
-
-    const agility =
-      abilityModifier(
-        state.abilities.agility
-      );
-
-    const dueling =
-      skillModifier(
-        state.skills.dueling
-      );
-
-    const injuryPenalty =
-      state.injury === "無"
-        ? 0
-        : state.hp <= state.maxHp * 0.3
-          ? 2
-          : 1;
-
-    return (
-      10 +
-      armourDefence +
-      agility +
-      Math.max(0, dueling) +
-      extra -
-      injuryPenalty
-    );
-  }
-
-  function enemyDefence() {
-    const agility =
-      abilityModifier(
-        state.enemy.abilities.agility
-      );
-
-    const dueling =
-      skillModifier(
-        state.enemy.skills.dueling
-      );
-
-    return (
-      10 +
-      state.enemy.armour.defence +
-      agility +
-      Math.max(0, dueling)
-    );
-  }
-
-  function battlefieldModifier(forPlayer = true) {
-    let modifier = 0;
-
-    if (state.friendlyMorale >= 70) {
-      modifier += 1;
+      return makeCombatant({
+        name: creation.name,
+        abilities,
+        skills,
+        weapon,
+        armour: ARMOURS.player
+      });
     }
 
-    if (state.friendlyMorale <= 30) {
-      modifier -= 1;
-    }
-
-    if (state.position >= 2) {
-      modifier += 1;
-    }
-
-    if (state.position <= -2) {
-      modifier -= 1;
-    }
-
-    if (!forPlayer) {
-      modifier = -modifier;
-      modifier += state.enemyAdvantage;
-
-      if (state.enemyMorale >= 75) {
-        modifier += 1;
-      }
-
-      if (state.enemyMorale <= 25) {
-        modifier -= 1;
-      }
-    }
-
-    return clamp(modifier, -3, 4);
-  }
-
-  function rollCheck(
-    ability,
-    dc,
-    extra = 0,
-    skill = null
-  ) {
-    const natural = die(20);
-
-    const abilityMod =
-      abilityModifier(
-        state.abilities[ability]
-      );
-
-    const skillMod =
-      skill
-        ? skillModifier(state.skills[skill])
-        : 0;
-
-    const total =
-      natural +
-      abilityMod +
-      skillMod +
-      extra;
-
-    const success =
-      natural === 20 ||
-      (
-        natural !== 1 &&
-        total >= dc
-      );
-
-    return {
-      natural,
-      abilityMod,
-      skillMod,
-      extra,
-      total,
-      dc,
-      success,
-      critical: natural === 20,
-      disaster: natural === 1
-    };
-  }
-
-  function checkLine(result, label) {
-    return (
-      `${label}：d20 ${result.natural} ` +
-      `${signed(result.abilityMod)} 能力 ` +
-      `${signed(result.skillMod)} 技能 ` +
-      `${signed(result.extra)} 戰況 ` +
-      `= ${result.total}，對抗 ${result.dc}`
-    );
-  }
-
-  function damageRoll(
-    sides,
-    critical,
-    reduction
-  ) {
-    const rolls = [die(sides)];
-
-    if (critical) {
-      rolls.push(die(sides));
-    }
-
-    const raw = rolls.reduce(
-      (sum, value) => sum + value,
-      0
-    );
-
-    const final = Math.max(
-      0,
-      raw - reduction
-    );
-
-    return {
-      rolls,
-      raw,
-      reduction,
-      final
-    };
-  }
-
-  function damageLine(result, weaponName) {
-    return (
-      `${weaponName}：${result.rolls.join(" + ")}，` +
-      `甲衣抵去 ${result.reduction}，` +
-      `造成 ${result.final} 點傷害`
-    );
-  }
-
-  function updateInjuryFromHp(critical = false) {
-    if (state.hp <= 0) {
-      return;
-    }
-
-    const ratio =
-      state.hp / state.maxHp;
-
-    if (
-      critical &&
-      ratio <= 0.45
-    ) {
-      state.injury = varied(
-        "seriousInjury",
-        [
-          "肋側深創",
-          "肩骨重挫",
-          "大腿裂傷"
-        ]
-      );
-    } else if (
-      critical &&
-      state.injury === "無"
-    ) {
-      state.injury = varied(
-        "criticalInjury",
-        [
-          "額角裂傷",
-          "左臂刀創",
-          "胸腹挫傷"
-        ]
-      );
-    } else if (
-      ratio <= 0.3 &&
-      state.injury === "無"
-    ) {
-      state.injury = varied(
-        "lowHpInjury",
-        [
-          "失血眩暈",
-          "多處創傷",
-          "步履不穩"
-        ]
-      );
-    } else if (
-      ratio <= 0.65 &&
-      state.injury === "無"
-    ) {
-      state.injury = varied(
-        "minorInjury",
-        [
-          "皮肉傷",
-          "手臂擦傷",
-          "肩背瘀傷"
-        ]
+    function buildEnemy() {
+      return makeCombatant(
+        ENEMY_DATA
       );
     }
-  }
 
-  function naturalBattleStatus() {
-    if (state.phase === "creation") {
-      return "命書尚未展開";
-    }
+    function woundPenalty(combatant) {
+      let penalty = 0;
 
-    if (state.phase === "childhood") {
-      return "尚在漢末成長";
-    }
-
-    if (state.phase === "equipment") {
-      return "即將第一次披甲";
-    }
-
-    if (state.phase === "road") {
-      return "正隨鄉勇進入山道";
-    }
-
-    if (state.phase === "challenge") {
-      return "賊首攔路叫陣";
-    }
-
-    if (state.phase === "duel") {
-      if (
-        state.hp <=
-        state.maxHp * 0.3
-      ) {
-        return "血染衣甲，生死只在數合";
-      }
-
-      if (
-        state.enemy.hp <=
-        state.enemy.maxHp * 0.35
-      ) {
-        return "賊首腳步已亂";
-      }
-
-      if (state.exposed) {
-        return "韓魁露出空門";
-      }
-
-      return "正與山賊頭領交鋒";
-    }
-
-    if (state.phase === "battlefield") {
-      const pieces = [];
-
-      if (state.friendlyMorale <= 30) {
-        pieces.push("眾人已有潰意");
-      } else if (
-        state.friendlyMorale >= 70
-      ) {
-        pieces.push("鄉勇鬥志正盛");
-      } else {
-        pieces.push("軍心仍在動搖");
-      }
-
-      if (state.formation <= 30) {
-        pieces.push("隊形散亂");
-      } else if (
-        state.formation >= 70
-      ) {
-        pieces.push("陣腳穩固");
-      } else {
-        pieces.push("尚能勉強相護");
-      }
-
-      return pieces.join("，");
-    }
-
-    if (state.phase === "victory") {
-      return "山賊敗退，首戰得勝";
-    }
-
-    if (state.phase === "defeat") {
-      return "首戰失利，僥倖生還";
-    }
-
-    if (state.phase === "death") {
-      return "命絕黑松嶺";
-    }
-
-    return state.status;
-  }
-
-  function renderSidebar() {
-    document.getElementById(
-      "playerName"
-    ).textContent = state.name;
-
-    document.getElementById(
-      "playerAge"
-    ).textContent =
-      state.age === 0
-        ? "初生"
-        : `${state.age} 歲`;
-
-    const safeHp =
-      Math.max(0, state.hp);
-
-    document.getElementById(
-      "hpText"
-    ).textContent =
-      `${safeHp} / ${state.maxHp}`;
-
-    const hpPercent =
-      state.maxHp > 0
-        ? clamp(
-            safeHp / state.maxHp * 100,
-            0,
-            100
-          )
-        : 0;
-
-    document.getElementById(
-      "hpFill"
-    ).style.width =
-      `${hpPercent}%`;
-
-    document.getElementById(
-      "abilities"
-    ).innerHTML =
-      Object.entries(ABILITY_NAMES)
-        .map(([key, label]) => {
-          return `
-            <div class="ability">
-              <span>${escapeHtml(label)}</span>
-              <span>${state.abilities[key]}</span>
-            </div>
-          `;
-        })
-        .join("");
-
-    document.getElementById(
-      "potentialText"
-    ).textContent =
-      state.pastLife
-        ? PAST_LIVES[state.pastLife].name
-        : "尚未選定";
-
-    document.getElementById(
-      "injuryText"
-    ).textContent = state.injury;
-
-    document.getElementById(
-      "weaponText"
-    ).textContent =
-      state.weapon
-        ? state.weapon.name
-        : "尚未持兵";
-
-    document.getElementById(
-      "weaponDetail"
-    ).textContent =
-      state.weapon
-        ? (
-            `${SKILL_NAMES[state.weapon.skill]} ${state.skills[state.weapon.skill]}・` +
-            `命中 ${signed(state.weapon.attack)}・` +
-            `傷害 d${state.weapon.sides}`
-          )
-        : "";
-
-    document.getElementById(
-      "armourText"
-    ).textContent =
-      state.armour
-        ? state.armour.name
-        : "尋常布衣";
-
-    document.getElementById(
-      "armourDetail"
-    ).textContent =
-      state.armour
-        ? (
-            `護勢 ${signed(state.armour.defence)}・` +
-            `減傷 ${state.armour.reduction}`
-          )
-        : "";
-
-    document.getElementById(
-      "battleStatus"
-    ).textContent =
-      naturalBattleStatus();
-  }
-
-  function renderEnemy() {
-    const area =
-      document.getElementById(
-        "enemyArea"
-      );
-
-    if (
-      state.phase !== "duel" ||
-      state.enemy.hp <= 0
-    ) {
-      area.innerHTML = "";
-      return;
-    }
-
-    const safeEnemyHp =
-      Math.max(0, state.enemy.hp);
-
-    const percentage = clamp(
-      safeEnemyHp /
-      state.enemy.maxHp *
-      100,
-      0,
-      100
-    );
-
-    area.innerHTML = `
-      <div class="enemy-card">
-        <div class="enemy-row">
-          <strong>${escapeHtml(state.enemy.name)}</strong>
-          <span>${safeEnemyHp} / ${state.enemy.maxHp}</span>
-        </div>
-
-        <div class="enemy-track">
-          <div
-            class="enemy-fill"
-            style="width:${percentage}%"
-          ></div>
-        </div>
-
-        <span class="equipment-detail">
-          ${escapeHtml(state.enemy.weapon.name)}・
-          ${escapeHtml(state.enemy.armour.name)}
-        </span>
-      </div>
-    `;
-  }
-
-  function setScene(
-    heading,
-    paragraphs,
-    rolls,
-    actions
-  ) {
-    state.locked = false;
-
-    renderSidebar();
-
-    document.getElementById(
-      "storyHeading"
-    ).textContent = heading;
-
-    document.getElementById(
-      "storyText"
-    ).innerHTML =
-      formatParagraphs(paragraphs);
-
-    const rollArea =
-      document.getElementById(
-        "rollArea"
-      );
-
-    if (rolls && rolls.length > 0) {
-      rollArea.innerHTML = `
-        <div class="roll-box" aria-label="判定結果">
-          ${rolls
-            .map(
-              line =>
-                `<div class="roll-line">${escapeHtml(line)}</div>`
-            )
-            .join("")}
-        </div>
-      `;
-    } else {
-      rollArea.innerHTML = "";
-    }
-
-    renderEnemy();
-    setActions(actions || []);
-  }
-
-  function setActions(actions) {
-    const container =
-      document.getElementById(
-        "actions"
-      );
-
-    container.innerHTML = "";
-
-    actions.forEach((action) => {
-      const button =
-        document.createElement(
-          "button"
-        );
-
-      button.type = "button";
-
-      button.className =
-        `action-button` +
-        (
-          action.className
-            ? ` ${action.className}`
-            : ""
-        );
-
-      button.innerHTML =
-        `${escapeHtml(action.label)}` +
-        (
-          action.note
-            ? `<small>${escapeHtml(action.note)}</small>`
-            : ""
-        );
-
-      button.addEventListener(
-        "click",
-        () => {
+      combatant.wounds.forEach(
+        wound => {
           if (
-            state.locked ||
-            (
-              state.hp <= 0 &&
-              state.phase !== "death"
-            )
+            wound.severity === "輕傷"
           ) {
-            return;
+            penalty += 1;
           }
 
-          state.locked = true;
-
-          container
-            .querySelectorAll("button")
-            .forEach((item) => {
-              item.disabled = true;
-            });
-
-          action.handler();
-        },
-        { once: true }
-      );
-
-      container.appendChild(button);
-    });
-  }
-
-  function startCreation() {
-    state = newState();
-    encounterSnapshot = null;
-    encounterSeed = null;
-
-    renderSidebar();
-
-    document.getElementById(
-      "storyHeading"
-    ).textContent = "前世已盡";
-
-    document.getElementById(
-      "enemyArea"
-    ).innerHTML = "";
-
-    document.getElementById(
-      "rollArea"
-    ).innerHTML = "";
-
-    document.getElementById(
-      "actions"
-    ).innerHTML = "";
-
-    document.getElementById(
-      "storyText"
-    ).innerHTML = `
-      <p>你原本生活在另一個時代。</p>
-
-      <p>
-        死亡之後，你沒有迎來虛無。
-        再次睜眼時，屋頂係煙燻發黑嘅木樑，
-        窗外有人談論漢室、徵斂與太平道。
-      </p>
-
-      <p>
-        你帶住前世記憶喺東漢末年重新出生。
-        記憶唔等於力量；今世身體仍然要重新成長，
-        兵刃亦唔會因為你係轉生者而失去鋒利。
-      </p>
-
-      <div class="creation-box">
-        <label for="nameInput">今世姓名</label>
-
-        <input
-          id="nameInput"
-          type="text"
-          maxlength="12"
-          value=""
-          placeholder="例如：沈越"
-          autocomplete="off"
-          enterkeyhint="done"
-        >
-
-        <label>前世最深刻嘅經歷</label>
-
-        <span class="choice-note">
-          前世經歷會影響初始能力，但唔會令你自動成為漢末高手。
-        </span>
-      </div>
-    `;
-
-    const actions =
-      Object.entries(PAST_LIVES)
-        .map(([key, pastLife]) => ({
-          label: pastLife.name,
-          note: pastLife.description,
-          handler: () =>
-            choosePastLife(key)
-        }));
-
-    setActions(actions);
-  }
-
-  function choosePastLife(key) {
-    const input =
-      document.getElementById(
-        "nameInput"
-      );
-
-    const chosenName =
-      input
-        ? input.value.trim()
-        : "";
-
-    if (!chosenName) {
-      state.locked = false;
-
-      document
-        .querySelectorAll(
-          "#actions button"
-        )
-        .forEach((button) => {
-          button.disabled = false;
-        });
-
-      alert("請先寫下今世姓名。");
-
-      if (input) {
-        input.focus();
-      }
-
-      return;
-    }
-
-    state.name =
-      chosenName.slice(0, 12);
-
-    state.pastLife = key;
-
-    state.abilities =
-      deepClone(
-        PAST_LIVES[key].scores
-      );
-
-    state.skills =
-      deepClone(
-        PAST_LIVES[key].skills
-      );
-
-    state.age = 1;
-    state.phase = "childhood";
-
-    updateMaxHp();
-
-    setScene(
-      "生於漢末",
-      [
-        `${state.name}，你嘅名字被寫入一戶尋常人家嘅舊冊。`,
-
-        `前世嘅你係「${PAST_LIVES[key].name}」。某啲記憶仍然清晰，更多內容就好似夢境一樣逐年淡化。`,
-
-        "你知道東漢將亂，卻暫時只係一個連路都未行得穩嘅孩子。"
-      ],
-      [],
-      [
-        {
-          label: "讓歲月向前",
-          handler: showChildhoodStage
-        }
-      ]
-    );
-  }
-
-  function showChildhoodStage() {
-    const stage =
-      childhoodStages[
-        state.childhoodIndex
-      ];
-
-    state.age = stage.age;
-    state.phase = "childhood";
-
-    setScene(
-      stage.heading,
-      [stage.intro],
-      [],
-      stage.choices.map(
-        (choice) => ({
-          label: choice.label,
-          handler: () =>
-            resolveChildhoodChoice(
-              choice
-            )
-        })
-      )
-    );
-  }
-
-  function resolveChildhoodChoice(choice) {
-    const oldAbilities =
-      deepClone(state.abilities);
-
-    const oldSkills =
-      deepClone(state.skills);
-
-    applyGrowth(
-      choice.gains,
-      choice.skillGains
-    );
-
-    updateMaxHp();
-
-    const growthDescriptions = [];
-
-    Object.entries(
-      choice.gains || {}
-    ).forEach(([ability]) => {
-      const actual =
-        state.abilities[ability] -
-        oldAbilities[ability];
-
-      growthDescriptions.push(
-        `${ABILITY_NAMES[ability]}有所精進（${signed(actual)}）`
-      );
-    });
-
-    Object.entries(
-      choice.skillGains || {}
-    ).forEach(([skill]) => {
-      const actual =
-        state.skills[skill] -
-        oldSkills[skill];
-
-      growthDescriptions.push(
-        `${SKILL_NAMES[skill]}有所精進（${signed(actual)}）`
-      );
-    });
-
-    state.childhoodIndex += 1;
-
-    if (
-      state.childhoodIndex <
-      childhoodStages.length
-    ) {
-      setScene(
-        "歲月留痕",
-        [
-          choice.text,
-
-          "呢啲改變唔會立即令你名震天下，但會一點一滴決定你日後能夠走到幾遠。"
-        ],
-        growthDescriptions,
-        [
-          {
-            label: "走向下一段歲月",
-            handler: showChildhoodStage
+          if (
+            wound.severity === "重傷"
+          ) {
+            penalty += 3;
           }
-        ]
-      );
 
-      return;
-    }
-
-    state.age = 18;
-    state.phase = "equipment";
-
-    setScene(
-      "光和六年・大亂前夕",
-      [
-        choice.text,
-
-        "你記得黃巾之亂即將爆發，但準確日子同細節已經模糊。附近村落仍然耕作，官吏仍然催稅，只有愈來愈多流民同秘密集會令人不安。",
-
-        "呢一年，附近數村決定合力押送糧藥穿過黑松嶺。山中盜匪已經劫過兩隊商旅，鄉勇缺少能夠持兵嘅人。",
-
-        "村中拿出僅有嘅幾套兵械，畀你選擇第一次真正上陣所持之物。"
-      ],
-      growthDescriptions,
-      equipmentActions()
-    );
-  }
-
-  function equipmentActions() {
-    return [
-      {
-        label: "取百鍊環首刀與綴片皮甲",
-        note: "刀勢穩健，攻守平衡。",
-        handler: () =>
-          chooseEquipment(
-            "sword",
-            "leather"
-          )
-      },
-
-      {
-        label: "取白蠟短矛與輕皮護衣",
-        note: "較容易命中，護身稍薄。",
-        handler: () =>
-          chooseEquipment(
-            "spear",
-            "light"
-          )
-      },
-
-      {
-        label: "取沉背戰斧與厚絮戰衣",
-        note: "命中較難，但傷害沉重。",
-        handler: () =>
-          chooseEquipment(
-            "axe",
-            "padded"
-          )
-      },
-
-      {
-        label: "取舊制鐵劍與綴片皮甲",
-        note: "依靠身法進退，冇明顯短處。",
-        handler: () =>
-          chooseEquipment(
-            "straightSword",
-            "leather"
-          )
-      }
-    ];
-  }
-
-  function chooseEquipment(
-    weaponKey,
-    armourKey
-  ) {
-    state.weapon =
-      deepClone(
-        WEAPONS[weaponKey]
-      );
-
-    state.armour =
-      deepClone(
-        ARMOURS[armourKey]
-      );
-
-    state.skills[
-      state.weapon.skill
-    ] = clamp(
-      state.skills[state.weapon.skill] + 6,
-      0,
-      99
-    );
-
-    state.phase = "road";
-
-    updateMaxHp();
-
-    encounterSnapshot =
-      deepClone(state);
-
-    encounterSeed =
-      createSeed();
-
-    seedRng(encounterSeed);
-
-    setScene(
-      "第一次披甲",
-      [
-        `你握住${state.weapon.name}，試過分量。${state.weapon.flavour}`,
-
-        `身上嘅${state.armour.name}並唔華美。${state.armour.flavour}`,
-
-        "呢啲都唔係傳說中嘅神兵寶甲，卻足以決定今日邊個可以活住離開山道。"
-      ],
-      [],
-      [
-        {
-          label: "隨隊進入黑松嶺",
-          className: "danger",
-          handler: showRoadApproach
+          if (
+            wound.severity === "致命傷"
+          ) {
+            penalty += 6;
+          }
         }
-      ]
-    );
-  }
-
-  function restartEncounter(
-    useSameSeed
-  ) {
-    state =
-      deepClone(
-        encounterSnapshot
       );
 
-    state.locked = false;
-    state.phase = "road";
-    state.enemy = cloneEnemy();
-
-    if (!useSameSeed) {
-      encounterSeed =
-        createSeed();
-    }
-
-    seedRng(encounterSeed);
-
-    showRoadApproach();
-  }
-
-  function showRoadApproach() {
-    state.phase = "road";
-    state.status =
-      "隊伍正進入狹窄山道";
-
-    setScene(
-      "黑松嶺山道",
-      [
-        "午後霧氣沿山腰沉落。運糧車輪陷入濕泥，十餘名鄉勇前後拉成一條長線。",
-
-        "兩側林木過密，山壁與斜坡遮住更遠處嘅動靜。領隊催促眾人加快腳步。",
-
-        "你決定點樣走過呢段山路？"
-      ],
-      [],
-      [
-        {
-          label: "仔細觀察四周",
-          handler: () =>
-            resolveDetection(
-              "observe"
-            )
-        },
-
-        {
-          label: "靠近糧車，與眾人保持照應",
-          handler: () =>
-            resolveDetection(
-              "formation"
-            )
-        },
-
-        {
-          label: "先行數十步探看前路",
-          handler: () =>
-            resolveDetection(
-              "advance"
-            )
-        }
-      ]
-    );
-  }
-
-  function resolveDetection(approach) {
-    let ability;
-    let skill;
-    let dc;
-    let extra = 0;
-
-    if (approach === "observe") {
-      ability = "perception";
-      skill = "awareness";
-      dc = 13;
-      extra = 1;
-    } else if (
-      approach === "formation"
-    ) {
-      ability = "intellect";
-      skill = "tactics";
-      dc = 13;
-    } else {
-      ability = "agility";
-      skill = "awareness";
-      dc = 14;
-      extra = -1;
-    }
-
-    const result =
-      rollCheck(
-        ability,
-        dc,
-        extra,
-        skill
-      );
-
-    state.ambushDetected =
-      result.success;
-
-    if (result.success) {
-      state.friendlyMorale = 58;
-      state.enemyMorale = 60;
-      state.position = 1;
-      state.formation = 58;
-      state.enemyAdvantage = 0;
-      state.danger = 2;
-
-      showDetectedAmbush(
-        approach,
-        result.critical
-      );
-    } else {
-      state.friendlyMorale =
-        result.disaster
-          ? 30
-          : 38;
-
-      state.enemyMorale =
-        result.disaster
-          ? 78
-          : 72;
-
-      state.position =
-        result.disaster
-          ? -3
-          : -2;
-
-      state.formation =
-        result.disaster
-          ? 18
-          : 27;
-
-      state.enemyAdvantage =
-        result.disaster
-          ? 4
-          : 3;
-
-      state.danger = 4;
-
-      showFailedAmbush(
-        approach,
-        result.disaster
-      );
-    }
-  }
-
-  function showDetectedAmbush(
-    approach,
-    critical
-  ) {
-    state.phase = "challenge";
-
-    const approachText = {
-      observe:
-        "你冇只係望向林間，而係留意路旁泥地。幾枚新落松針被靴底壓入濕土，坡上卻冇樵夫。",
-
-      formation:
-        "糧車轉過彎口時，你發現前後腳步聲唔對。自己人全部喺山道，坡頂卻另有碎石被踩落。",
-
-      advance:
-        "你先行越過突出山石，忽然聽到上方有人壓低聲音喝止同伴。"
-    };
-
-    const extra = critical
-      ? "你喺第一支箭離弦之前高聲示警。鄉勇立即靠向糧車，冇人被首輪箭矢射倒。"
-      : "你猛然喝停隊伍。幾乎同一刻，坡上弓弦輕響；首輪箭矢落喺眾人原本將要踏入嘅位置。";
-
-    setScene(
-      "林上伏兵",
-      [
-        approachText[approach],
-        extra,
-
-        "灌木被人分開。一名滿臉虯髯嘅大漢提住缺口山刀走落山道，身後十餘名賊眾吶喊助威。",
-
-        "『好個眼尖小兒！某乃黑石寨韓魁。爾等若有膽氣，便遣一人與我決生死；若無膽，糧車與甲兵盡數留下！』"
-      ],
-      [
-        "一次隱藏警覺判定已經完成。"
-      ],
-      [
-        {
-          label: "迎戰韓魁",
-          className: "danger",
-          handler: startDuel
-        },
-
-        {
-          label: "拒絕單挑，令眾人守住糧車",
-          className: "safe",
-          handler: refuseDuel
-        }
-      ]
-    );
-  }
-
-  function showFailedAmbush(
-    approach,
-    disaster
-  ) {
-    state.phase = "battlefield";
-
-    const approachText = {
-      observe:
-        "你反覆掃視林間，卻被風吹枝影誤導。真正伏兵藏喺更高處嘅斷坡後。",
-
-      formation:
-        "你靠向糧車時，隊伍已經進入最窄彎口。前車突然停低，後方眾人仍然繼續擁上。",
-
-      advance:
-        "你越過彎口後回頭，自己與隊伍之間已經落下數根滾木。"
-    };
-
-    const disasterText = disaster
-      ? "一支箭擦過你頭側，另一名鄉勇當場倒下。有人高喊逃命，鬆散隊列瞬間斷成數截。"
-      : "坡上突然響起吶喊。碎石與箭矢一同落下，牲口受驚，糧車橫喺路中。";
-
-    setScene(
-      "伏擊驟發",
-      [
-        approachText[approach],
-        disasterText,
-
-        "你冇睇清賊首所在，亦冇人嚟到陣前叫戰。此刻只有混亂、飛矢，同由兩側坡地壓落嚟嘅山賊。",
-
-        "你必須先令身邊嘅人捱過呢輪伏擊。"
-      ],
-      [
-        "一次隱藏警覺判定已經完成。"
-      ],
-      battlefieldActions()
-    );
-  }
-
-  function startDuel() {
-    state.phase = "duel";
-    state.duelActive = true;
-    state.enemy = cloneEnemy();
-    state.exposed = false;
-    state.executionAttempted = false;
-
-    setScene(
-      "山道鬥將",
-      [
-        "你越過糧車，踏入山道中央。左右鄉勇讓開窄路，林上賊眾亦逐漸收聲。",
-
-        `韓魁將${state.enemy.weapon.name}扛上肩頭，咧嘴露出黃牙。`,
-
-        "『亂世敢企出嚟便算半條好漢。另一半，要睇你嘅血係咪熱！』"
-      ],
-      [],
-      duelActions()
-    );
-  }
-
-  function refuseDuel() {
-    state.phase = "battlefield";
-    state.duelActive = false;
-
-    state.friendlyMorale = 52;
-    state.enemyMorale = 68;
-    state.position = 0;
-    state.formation = 57;
-    state.enemyAdvantage = 1;
-    state.danger = 2;
-    state.enemyLocated = true;
-
-    setScene(
-      "不受賊言所激",
-      [
-        "你冇走出隊列，而係將兵刃橫喺糧車旁。",
-
-        "『此行為護鄉民糧藥，唔係成全你一人威風。要取糧車，便嚟撞我哋嘅陣！』",
-
-        "韓魁冷笑揮刀，命群賊壓落山道。敵人聲勢更盛，但你哋嘅隊形尚未散亂。"
-      ],
-      [],
-      battlefieldActions()
-    );
-  }
-
-  function duelActions() {
-    if (
-      state.hp <= 0 ||
-      state.enemy.hp <= 0
-    ) {
-      return [];
-    }
-
-    const actions = [
-      {
-        label:
-          `以${state.weapon.name}進攻`,
-        handler: playerAttack
-      },
-
-      {
-        label: "沉身守勢，伺機反擊",
-        note:
-          "提高本回合防護，並嘗試取得更有利位置。",
-        handler: defendInDuel
-      },
-
-      {
-        label: "厲聲挫其膽氣",
-        note:
-          "嘗試動搖韓魁與旁觀賊眾，但仍可能遭到攻擊。",
-        handler: intimidateInDuel
-      }
-    ];
-
-    const weaponSkill =
-      state.skills[
-        state.weapon.skill
-      ];
-
-    const martialAbility =
-      state.abilities[
-        state.weapon.ability
-      ];
-
-    const executionAvailable =
-      (
-        martialAbility >= 67 ||
-        weaponSkill >= 55
-      ) &&
-      state.enemy.hp <
-        state.enemy.maxHp &&
-      (
-        state.enemy.hp <=
-          state.enemy.maxHp * 0.35 ||
-        state.exposed
-      ) &&
-      !state.executionAttempted;
-
-    if (executionAvailable) {
-      actions.unshift({
-        label:
-          "踏入斬殺線，決死一擊",
-
-        note:
-          "只有此刻能夠出手。成功可以斬殺韓魁；失敗會將自己暴露喺山刀之下。",
-
-        className: "danger",
-        handler: executeEnemy
-      });
-    }
-
-    return actions;
-  }
-
-  function playerAttack() {
-    const natural = die(20);
-
-    const abilityKey =
-      state.weapon.ability;
-
-    const skillKey =
-      state.weapon.skill;
-
-    const abilityMod =
-      abilityModifier(
-        state.abilities[abilityKey]
-      );
-
-    const skillMod =
-      skillModifier(
-        state.skills[skillKey]
-      );
-
-    const fieldMod =
-      battlefieldModifier(true);
-
-    const exposedBonus =
-      state.exposed ? 2 : 0;
-
-    const injuryPenalty =
-      state.injury === "無"
-        ? 0
-        : 1;
-
-    const total =
-      natural +
-      state.weapon.attack +
-      abilityMod +
-      skillMod +
-      fieldMod +
-      exposedBonus -
-      injuryPenalty;
-
-    const defence =
-      enemyDefence();
-
-    const hit =
-      natural === 20 ||
-      (
-        natural !== 1 &&
-        total >= defence
-      );
-
-    const rolls = [
-      (
-        `攻擊：d20 ${natural} ` +
-        `${signed(state.weapon.attack)} 兵器 ` +
-        `${signed(abilityMod)} 能力 ` +
-        `${signed(skillMod)} 武技 ` +
-        `${signed(fieldMod + exposedBonus)} 戰況 ` +
-        `${signed(-injuryPenalty)} 傷勢 ` +
-        `= ${total}，對抗 ${defence}`
-      )
-    ];
-
-    const paragraphs = [];
-
-    if (natural === 1) {
-      state.exposed = false;
-
-      state.position =
-        Math.max(
-          -3,
-          state.position - 1
-        );
-
-      paragraphs.push(
-        varied(
-          "playerNat1",
-          [
-            "你腳下踩中鬆動碎石，刀勢尚未展開就偏向山壁。韓魁立即睇見空門。",
-
-            "你出手過急，兵刃擦過韓魁肩側，反被刀背震得雙臂發麻。",
-
-            "一名山賊突然喺旁高喊。你分神半瞬，韓魁已經欺近。"
-          ]
-        )
-      );
-    } else if (!hit) {
-      state.exposed = false;
-
-      paragraphs.push(
-        varied(
-          "playerMiss",
-          [
-            "韓魁看似粗重，退步卻唔慢。你嘅刃鋒由佢胸前掠過，只割斷半截皮帶。",
-
-            "兵刃相撞，震聲沿山壁迴盪。韓魁將攻勢推向一旁，仍然穩穩企住。",
-
-            "你試圖逼佢靠向糧車，韓魁卻橫刀卡住路線。"
-          ]
-        )
-      );
-    } else {
-      const damage =
-        damageRoll(
-          state.weapon.sides,
-          natural === 20,
-          state.enemy.armour.reduction
-        );
-
-      state.enemy.hp =
-        Math.max(
-          0,
-          state.enemy.hp -
-          damage.final
-        );
-
-      state.exposed = false;
-
-      rolls.push(
-        damageLine(
-          damage,
-          state.weapon.name
-        )
-      );
-
-      if (natural === 20) {
-        state.enemyMorale =
-          clamp(
-            state.enemyMorale - 14,
-            0,
-            100
-          );
-
-        state.friendlyMorale =
-          clamp(
-            state.friendlyMorale + 10,
-            0,
-            100
-          );
-
-        paragraphs.push(
-          varied(
-            "playerCrit",
-            [
-              "你迎住刀光踏入半步，刃鋒由韓魁格擋空隙斬入。血沿甲縫湧出，兩側賊眾嘅叫喊同時一停。",
-
-              "韓魁先啱啱舉刀，你已經轉到佢外側。呢一擊撕開皮甲，將佢劈得撞向山壁。",
-
-              "雙刃交錯一瞬，你突然變勢。韓魁胸前裂開血口，狂笑變成沉重喘息。"
-            ]
-          )
-        );
-      } else if (
-        damage.final === 0
+      if (
+        combatant.stamina <=
+        combatant.maxStamina * 0.25
       ) {
-        paragraphs.push(
-          "兵刃正中韓魁硬皮坎肩，力道卻被厚皮卸開。佢被迫後退，身上冇留下明顯傷口。"
-        );
-      } else {
-        paragraphs.push(
-          varied(
-            "playerHit",
-            [
-              "刀鋒越過韓魁防守，喺佢上臂帶出血線。佢怒吼住退咗半步。",
-
-              "你先壓住山刀，再由下方挑入。韓魁腰側中刃，皮甲迅速染黑。",
-
-              "兵刃撞開嘅剎那，你順勢切入韓魁肩頭。佢腳步已經唔及先前穩健。"
-            ]
-          )
-        );
+        penalty += 2;
+      } else if (
+        combatant.stamina <=
+        combatant.maxStamina * 0.5
+      ) {
+        penalty += 1;
       }
+
+      return penalty;
     }
 
-    if (state.enemy.hp <= 0) {
-      winBattle(
-        paragraphs.concat([
-          "韓魁嘅山刀脫手墜地。佢踉蹌兩步，終於跪倒喺染血山路。",
-
-          "賊眾眼見頭領敗亡，叫喊立即變成驚叫。有人轉身奔入林中，其餘人亦再無戰意。"
-        ]),
-        rolls,
-        "斬將破賊"
-      );
-
-      return;
-    }
-
-    const enemyResult =
-      enemyAttack(
-        natural === 1 ? 2 : 0
-      );
-
-    paragraphs.push(
-      ...enemyResult.paragraphs
-    );
-
-    rolls.push(
-      ...enemyResult.rolls
-    );
-
-    if (state.hp <= 0) {
-      showDeath(
-        paragraphs,
-        rolls
-      );
-
-      return;
-    }
-
-    setScene(
-      "刀光未歇",
-      paragraphs,
-      rolls,
-      duelActions()
-    );
-  }
-
-  function defendInDuel() {
-    const result =
-      rollCheck(
-        "intellect",
-        12,
-        battlefieldModifier(true),
-        "dueling"
-      );
-
-    const paragraphs = [];
-    const rolls = [
-      checkLine(
-        result,
-        "守勢判定"
-      )
-    ];
-
-    state.guarded = true;
-
-    if (result.critical) {
-      state.position =
-        clamp(
-          state.position + 2,
-          -3,
-          3
-        );
-
-      state.exposed = true;
-
-      paragraphs.push(
-        "你故意讓出半步，引韓魁將重刀劈向糧車邊緣。刀刃嵌入木板，你已經轉到佢側後。"
-      );
-    } else if (result.success) {
-      state.position =
-        clamp(
-          state.position + 1,
-          -3,
-          3
-        );
-
-      paragraphs.push(
-        varied(
-          "defendSuccess",
-          [
-            "你冇同重刀硬碰，只以兵刃斜引其勢。韓魁連攻兩次，都被帶向空處。",
-
-            "你壓低重心守住中線。韓魁雖然逼近數步，始終未能斬中要害。",
-
-            "你借糧車遮住一側，迫使韓魁只能由正面出刀。局勢逐漸變得可讀。"
-          ]
-        )
-      );
-    } else {
-      state.position =
-        clamp(
-          state.position - 1,
-          -3,
-          3
-        );
-
-      paragraphs.push(
-        "你想借守勢誘佢深入，韓魁卻冇上當。佢以刀背猛撞兵刃，反而將你逼向山壁。"
-      );
-    }
-
-    const enemyResult =
-      enemyAttack(0);
-
-    paragraphs.push(
-      ...enemyResult.paragraphs
-    );
-
-    rolls.push(
-      ...enemyResult.rolls
-    );
-
-    state.guarded = false;
-
-    if (state.hp <= 0) {
-      showDeath(
-        paragraphs,
-        rolls
-      );
-
-      return;
-    }
-
-    setScene(
-      "守中待變",
-      paragraphs,
-      rolls,
-      duelActions()
-    );
-  }
-
-  function intimidateInDuel() {
-    const dc =
-      14 +
-      Math.max(
-        0,
-        Math.floor(
-          state.enemyMorale / 40
-        )
-      );
-
-    const result =
-      rollCheck(
-        "presence",
-        dc,
-        battlefieldModifier(true),
-        "command"
-      );
-
-    const paragraphs = [];
-
-    const rolls = [
-      checkLine(
-        result,
-        "喝陣判定"
-      )
-    ];
-
-    if (result.critical) {
-      state.enemyMorale =
-        clamp(
-          state.enemyMorale - 22,
-          0,
-          100
-        );
-
-      state.exposed = true;
-
-      paragraphs.push(
-        "你突然踏前，厲聲喝出韓魁方才每一次退步。山壁將聲音層層送回，賊眾竟然以為頭領已敗。韓魁暴怒回首，胸前空門盡露。"
-      );
-    } else if (result.success) {
-      state.enemyMorale =
-        clamp(
-          state.enemyMorale - 12,
-          0,
-          100
-        );
-
-      state.exposed =
-        state.enemy.hp <
-        state.enemy.maxHp * 0.7;
-
-      paragraphs.push(
-        varied(
-          "intimidateSuccess",
-          [
-            "你指出韓魁呼吸已亂，喝令賊眾早作逃命打算。林上果然傳嚟幾聲不安低語。",
-
-            "你以兵刃直指韓魁，聲稱下一合就取佢首級。佢嘴上怒罵，握刀隻手卻不自覺收緊。",
-
-            "你高聲令鄉勇記住賊首面貌，戰後逐戶追索。幾名山賊聞言悄悄退後。"
-          ]
-        )
-      );
-    } else {
-      state.enemyMorale =
-        clamp(
-          state.enemyMorale + 5,
-          0,
-          100
-        );
-
-      paragraphs.push(
-        "韓魁仰頭大笑，以刀刃重重拍打皮甲。賊眾跟住鼓噪，你嘅說話反被聲浪壓過。"
-      );
-    }
-
-    const enemyResult =
-      enemyAttack(
-        result.disaster ? 2 : 0
-      );
-
-    paragraphs.push(
-      ...enemyResult.paragraphs
-    );
-
-    rolls.push(
-      ...enemyResult.rolls
-    );
-
-    if (state.hp <= 0) {
-      showDeath(
-        paragraphs,
-        rolls
-      );
-
-      return;
-    }
-
-    setScene(
-      "兩陣奪氣",
-      paragraphs,
-      rolls,
-      duelActions()
-    );
-  }
-
-  function executeEnemy() {
-    state.executionAttempted = true;
-
-    const natural = die(20);
-
-    const abilityMod =
-      abilityModifier(
-        state.abilities[
-          state.weapon.ability
-        ]
-      );
-
-    const skillMod =
-      skillModifier(
-        state.skills[
-          state.weapon.skill
-        ]
-      );
-
-    const fieldMod =
-      battlefieldModifier(true);
-
-    const total =
-      natural +
-      abilityMod +
-      skillMod +
-      state.weapon.attack +
-      fieldMod;
-
-    const target =
-      enemyDefence() + 2;
-
-    const success =
-      natural === 20 ||
-      (
-        natural !== 1 &&
-        total >= target
-      );
-
-    const rolls = [
-      (
-        `決死斬擊：d20 ${natural} ` +
-        `${signed(abilityMod)} 能力 ` +
-        `${signed(skillMod)} 武技 ` +
-        `${signed(state.weapon.attack)} 兵器 ` +
-        `${signed(fieldMod)} 戰況 ` +
-        `= ${total}，對抗 ${target}`
-      )
-    ];
-
-    if (success) {
-      const damage =
-        damageRoll(
-          state.weapon.sides,
-          true,
-          state.enemy.armour.reduction
-        );
-
-      rolls.push(
-        damageLine(
-          damage,
-          state.weapon.name
-        )
-      );
-
-      state.enemy.hp = 0;
-
-      winBattle(
-        [
-          "你睇見佢腳下已亂。",
-
-          "刀鋒已經進入斬殺線。此刻若退，韓魁尚有一戰之力；若出手，就係生死一瞬。",
-
-          natural === 20
-            ? `你由迎面落下嘅山刀之下穿過，雙手將${state.weapon.name}由韓魁肋側斬入。骨裂聲被兩軍吶喊吞沒，你旋身拔刃，韓魁重重墜入泥中。`
-            : `你以肩頭撞開佢嘅兵刃，踏碎泥地全力揮斬。${state.weapon.name}破開皮甲與血肉，韓魁喉中只剩半聲怒吼，便倒落山路中央。`,
-
-          "黑石寨眾賊望見頭領橫屍，軍心如破堤之水，頃刻潰散。"
-        ],
-        rolls,
-        "斬殺賊首"
-      );
-
-      return;
-    }
-
-    const paragraphs = [
-      "你睇見韓魁腳下已亂，決意喺呢一擊分出生死。",
-
-      natural === 1
-        ? "偏在踏步時，你受傷嘅腿突然一軟。斬擊擦住韓魁頸側飛過，胸腹完全暴露喺山刀之下。"
-        : "韓魁喺最後一刻以山刀卡住兵刃。佢滿手鮮血，卻獰笑住扭身反壓，將你逼入無法收勢嘅位置。",
-
-      "呢次機會已經失去。韓魁嘅反擊比之前更加兇狠。"
-    ];
-
-    const enemyResult =
-      enemyAttack(
-        natural === 1 ? 4 : 3
-      );
-
-    paragraphs.push(
-      ...enemyResult.paragraphs
-    );
-
-    rolls.push(
-      ...enemyResult.rolls
-    );
-
-    if (state.hp <= 0) {
-      showDeath(
-        paragraphs,
-        rolls
-      );
-
-      return;
-    }
-
-    setScene(
-      "生死一瞬",
-      paragraphs,
-      rolls,
-      duelActions()
-    );
-  }
-
-  function enemyAttack(bonus = 0) {
-    if (
-      state.enemy.hp <= 0 ||
-      state.hp <= 0
+    function defenceOf(
+      combatant,
+      extra = 0
     ) {
+      const agility =
+        abilityModifier(
+          combatant.abilities.agility
+        );
+
+      const dueling =
+        skillModifier(
+          combatant.skills.dueling
+        );
+
+      const guardBonus =
+        combatant.guarded ? 3 : 0;
+
+      const brokenPenalty =
+        combatant.posture <= 0
+          ? 3
+          : 0;
+
+      return (
+        12 +
+        agility +
+        dueling +
+        guardBonus +
+        extra -
+        woundPenalty(combatant) -
+        brokenPenalty
+      );
+    }
+
+    function rollD20(
+      advantage = false,
+      disadvantage = false
+    ) {
+      const first = die(20);
+
+      if (
+        advantage &&
+        !disadvantage
+      ) {
+        const second = die(20);
+
+        return {
+          value: Math.max(
+            first,
+            second
+          ),
+          dice: [first, second],
+          mode: "優勢"
+        };
+      }
+
+      if (
+        disadvantage &&
+        !advantage
+      ) {
+        const second = die(20);
+
+        return {
+          value: Math.min(
+            first,
+            second
+          ),
+          dice: [first, second],
+          mode: "劣勢"
+        };
+      }
+
       return {
-        paragraphs: [],
-        rolls: []
+        value: first,
+        dice: [first],
+        mode: "正常"
       };
     }
 
-    const natural = die(20);
-
-    const abilityMod =
-      abilityModifier(
-        state.enemy.abilities[
-          state.enemy.weapon.ability
-        ]
-      );
-
-    const skillMod =
-      skillModifier(
-        state.enemy.skills[
-          state.enemy.weapon.skill
-        ]
-      );
-
-    const fieldMod =
-      battlefieldModifier(false);
-
-    const guardBonus =
-      state.guarded ? 3 : 0;
-
-    const defence =
-      playerDefence(guardBonus);
-
-    const total =
-      natural +
-      state.enemy.weapon.attack +
-      abilityMod +
-      skillMod +
-      fieldMod +
-      bonus;
-
-    const hit =
-      natural === 20 ||
-      (
-        natural !== 1 &&
-        total >= defence
-      );
-
-    const rolls = [
-      (
-        `韓魁攻擊：d20 ${natural} ` +
-        `${signed(state.enemy.weapon.attack)} 兵器 ` +
-        `${signed(abilityMod)} 能力 ` +
-        `${signed(skillMod)} 武技 ` +
-        `${signed(fieldMod + bonus)} 戰況 ` +
-        `= ${total}，對抗 ${defence}`
-      )
-    ];
-
-    const paragraphs = [];
-
-    if (natural === 1) {
-      state.enemyMorale =
-        clamp(
-          state.enemyMorale - 8,
-          0,
-          100
-        );
-
-      state.exposed = true;
-
-      paragraphs.push(
-        varied(
-          "enemyNat1",
-          [
-            "韓魁重刀劈落，刀刃卻卡入糧車木框。佢怒吼住拔刀，側腹完全暴露。",
-
-            "韓魁踩中自己流下嘅血，身形突然一晃。林上賊眾發出不安驚呼。",
-
-            "韓魁掄刀過猛，刀背撞上山壁，火星喺兩人之間炸開。佢一時無法回守。"
-          ]
-        )
-      );
-
-      return {
-        paragraphs,
-        rolls
-      };
-    }
-
-    if (!hit) {
-      paragraphs.push(
-        varied(
-          "enemyMiss",
-          [
-            "韓魁山刀貼住你衣甲掃過，沉重風聲幾乎令人窒息，最終冇斬實。",
-
-            "你喺刀刃落下之前側身避開。山刀劈入泥地，濺起一片碎石。",
-
-            "韓魁連斬數步，你用兵刃與甲肩交替遮擋，總算冇畀刀鋒咬入身體。"
-          ]
-        )
-      );
-
-      return {
-        paragraphs,
-        rolls
-      };
-    }
-
-    const damage =
-      damageRoll(
-        state.enemy.weapon.sides,
-        natural === 20,
-        state.armour.reduction
-      );
-
-    state.hp =
-      Math.max(
-        0,
-        state.hp - damage.final
-      );
-
-    updateInjuryFromHp(
-      natural === 20
-    );
-
-    rolls.push(
-      damageLine(
-        damage,
-        state.enemy.weapon.name
-      )
-    );
-
-    if (natural === 20) {
-      state.friendlyMorale =
-        clamp(
-          state.friendlyMorale - 12,
-          0,
-          100
-        );
-
-      state.enemyMorale =
-        clamp(
-          state.enemyMorale + 10,
-          0,
-          100
-        );
-
-      paragraphs.push(
-        varied(
-          "enemyCrit",
-          [
-            "韓魁先以刀背撞開防守，隨即旋身重斬。甲片喺巨響中迸開，你被鮮血與衝力一同掀倒。",
-
-            "你只睇見寒光由下方翻起。山刀破開護衣，喺肋側留下深長傷口。",
-
-            "韓魁以肩頭硬撞你嘅格擋，近身一刀斬中要害。劇痛瞬間奪走呼吸。"
-          ]
-        )
-      );
-    } else if (
-      damage.final === 0
+    function spendStamina(
+      combatant,
+      amount
     ) {
-      paragraphs.push(
-        "山刀重重撞落甲衣，幾乎將你擊退。護具卸開刀勢，冇令刃口真正切入。"
-      );
-    } else {
-      paragraphs.push(
-        varied(
-          "enemyHit",
-          [
-            "韓魁突然縮短握刀距離，刀尖由你防守旁穿入。熱血立即沿衣襟流下。",
-
-            "你擋住正面一斬，卻被回刀割中肩臂。痛楚令持兵手短暫發麻。",
-
-            "韓魁逼你退向山壁，趁你轉身時斬中腰側。甲衣擋去部分力道，傷口仍然火辣作痛。"
-          ]
-        )
-      );
+      combatant.stamina =
+        Math.max(
+          0,
+          combatant.stamina - amount
+        );
     }
 
-    return {
-      paragraphs,
-      rolls
-    };
-  }
-
-  function battlefieldActions() {
-    if (state.hp <= 0) {
-      return [];
-    }
-
-    const actions = [
-      {
-        label: "穩住隊形",
-        note:
-          "喝止潰散，重新組織鄉勇。",
-        handler: () =>
-          resolveBattlefieldAction(
-            "rally"
-          )
-      },
-
-      {
-        label: "護住退路",
-        note:
-          "整理後方道路，避免全隊被堵死。",
-        handler: () =>
-          resolveBattlefieldAction(
-            "route"
-          )
-      },
-
-      {
-        label: "尋找敵人位置",
-        note:
-          "辨認賊眾來向與坡地空隙。",
-        handler: () =>
-          resolveBattlefieldAction(
-            "locate"
-          )
-      }
-    ];
-
-    const canCounter =
-      state.formation >= 43 &&
-      state.position >= -1 &&
-      (
-        state.enemyLocated ||
-        state.ambushDetected === true
-      );
-
-    if (canCounter) {
-      actions.unshift({
-        label: "率眾反擊",
-        note:
-          "隊形與位置已經容許你向敵陣施壓。",
-        className: "danger",
-        handler: () =>
-          resolveBattlefieldAction(
-            "counter"
-          )
-      });
-    }
-
-    if (
-      state.enemyMorale <= 18
+    function repetitionPenalty(
+      combatant,
+      action
     ) {
-      actions.unshift({
-        label: "逼退群賊",
-        note:
-          "敵軍已經動搖，但仍然要把握時機。",
-        className: "safe",
-        handler: () =>
-          resolveBattlefieldAction(
-            "break"
-          )
-      });
+      if (
+        combatant.lastAction === action
+      ) {
+        combatant.repeatCount += 1;
+      } else {
+        combatant.lastAction = action;
+        combatant.repeatCount = 1;
+      }
+
+      if (
+        combatant.repeatCount <= 2
+      ) {
+        return 0;
+      }
+
+      return clamp(
+        combatant.repeatCount - 2,
+        1,
+        4
+      ) * -2;
     }
 
-    if (
-      state.friendlyMorale <= 42 ||
-      state.danger >= 4 ||
-      state.formation <= 28
+    function initiativeModifier(
+      forPlayer
     ) {
-      actions.push({
-        label: "撤出山道",
-        note:
-          "嘗試帶住殘存人手離開戰場。",
-        className: "safe",
-        handler: () =>
-          resolveBattlefieldAction(
-            "retreat"
-          )
-      });
-    }
-
-    return actions;
-  }
-
-  function resolveBattlefieldAction(type) {
-    const paragraphs = [];
-    const rolls = [];
-
-    let result;
-
-    if (type === "rally") {
-      result =
-        rollCheck(
-          "presence",
-          13 +
-          Math.max(
-            0,
-            state.enemyAdvantage - 1
-          ),
-          state.friendlyMorale <= 30
-            ? -1
-            : 0,
-          "command"
-        );
-
-      rolls.push(
-        checkLine(
-          result,
-          "整隊判定"
-        )
-      );
-
-      if (result.critical) {
-        state.friendlyMorale += 20;
-        state.formation += 20;
-        state.enemyMorale -= 8;
-
-        paragraphs.push(
-          "你一把抓住正要逃走嘅鄉勇，將佢推回糧車之後。",
-
-          "『企住！背對住佢哋先係真正死路！』",
-
-          "命令好似火一樣傳過隊列，散開嘅人重新靠埋。"
-        );
-      } else if (result.success) {
-        state.friendlyMorale += 12;
-        state.formation += 11;
-        state.enemyMorale -= 3;
-
-        paragraphs.push(
-          "你沿糧車逐人喝令，令持盾者在外、長兵由車隙伸出。原本各自揮舞嘅鄉勇終於重新睇見彼此。"
-        );
-      } else {
-        state.friendlyMorale -=
-          result.disaster ? 12 : 7;
-
-        state.formation -=
-          result.disaster ? 9 : 5;
-
-        paragraphs.push(
-          "你嘅聲音被箭雨與哭喊切碎。有人聽到命令，更多人只顧尋找藏身位置。"
-        );
+      if (!state) {
+        return 0;
       }
+
+      return forPlayer
+        ? state.initiative
+        : -state.initiative;
     }
 
-    if (type === "route") {
-      result =
-        rollCheck(
-          "intellect",
-          13 +
-          Math.max(
-            0,
-            state.danger - 3
-          ),
-          state.position <= -2
-            ? -1
-            : 0,
-          "tactics"
-        );
+    function attackRoll(
+      attacker,
+      defender,
+      options = {}
+    ) {
+      const weapon = attacker.weapon;
 
-      rolls.push(
-        checkLine(
-          result,
-          "護路判定"
-        )
-      );
-
-      if (result.critical) {
-        state.position += 2;
-        state.formation += 12;
-        state.enemyAdvantage -= 2;
-        state.danger -= 1;
-
-        paragraphs.push(
-          "你命人卸下一袋糧米，墊住即將翻覆嘅車輪。後路喺最短時間內被清出，伏兵包圍出現缺口。"
-        );
-      } else if (result.success) {
-        state.position += 1;
-        state.formation += 8;
-        state.enemyAdvantage -= 1;
-
-        paragraphs.push(
-          "你帶人砍斷套繩，令受驚牲口離開車道。堵死嘅後路總算露出通行空隙。"
-        );
-      } else {
-        state.formation -= 5;
-
-        if (result.disaster) {
-          state.position -= 1;
-        }
-
-        paragraphs.push(
-          "橫倒糧車嘅車軸卡死喺石縫。幾名幫手反被散落貨物絆倒，退路仍然不暢。"
-        );
-      }
-    }
-
-    if (type === "locate") {
-      result =
-        rollCheck(
-          "perception",
-          12 +
-          Math.max(
-            0,
-            state.danger - 2
-          ),
-          state.formation <= 25
-            ? -1
-            : 0,
-          "awareness"
-        );
-
-      rolls.push(
-        checkLine(
-          result,
-          "察敵判定"
-        )
-      );
-
-      if (result.critical) {
-        state.enemyLocated = true;
-        state.enemyAdvantage -= 2;
-        state.position += 2;
-        state.enemyMorale -= 7;
-
-        paragraphs.push(
-          "你循箭矢角度望去，搵到枝葉後規律晃動嘅長矛。賊眾主力集中喺左側斷坡，右側只係疑兵。"
-        );
-      } else if (result.success) {
-        state.enemyLocated = true;
-        state.enemyAdvantage -= 1;
-        state.position += 1;
-
-        paragraphs.push(
-          "你由碎石滾落方向分清箭手同疑兵。敵人行動唔再完全隱蔽。"
-        );
-      } else {
-        if (result.disaster) {
-          state.enemyAdvantage += 1;
-        }
-
-        paragraphs.push(
-          "樹影、人聲同山壁回音混埋一齊。你幾次以為搵到旗號，最後都只係破布。"
-        );
-      }
-    }
-
-    if (type === "counter") {
       const ability =
-        state.weapon.ability;
+        abilityModifier(
+          attacker.abilities[
+            weapon.ability
+          ]
+        );
 
       const skill =
-        state.weapon.skill;
-
-      result =
-        rollCheck(
-          ability,
-          14 +
-          Math.max(
-            0,
-            state.enemyAdvantage
-          ),
-          state.weapon.attack +
-          battlefieldModifier(true),
-          skill
+        skillModifier(
+          attacker.skills[
+            weapon.skill
+          ]
         );
 
-      rolls.push(
-        checkLine(
-          result,
-          "反擊判定"
-        )
+      const injury =
+        woundPenalty(attacker);
+
+      const situation =
+        options.situation || 0;
+
+      const roll =
+        rollD20(
+          Boolean(options.advantage),
+          Boolean(options.disadvantage)
+        );
+
+      const total =
+        roll.value +
+        ability +
+        skill +
+        weapon.accuracy +
+        situation -
+        injury;
+
+      const defence =
+        defenceOf(
+          defender,
+          options.defenceModifier || 0
+        );
+
+      const naturalOne =
+        roll.value === 1;
+
+      const naturalTwenty =
+        roll.value === 20;
+
+      const success =
+        !naturalOne &&
+        (
+          naturalTwenty ||
+          total >= defence
+        );
+
+      return {
+        roll,
+        ability,
+        skill,
+        weaponBonus:
+          weapon.accuracy,
+        situation,
+        injury,
+        total,
+        defence,
+        success,
+        margin: total - defence,
+        critical: naturalTwenty,
+        disaster: naturalOne
+      };
+    }
+
+    function attackLine(
+      label,
+      result
+    ) {
+      return (
+        `${label}：${result.roll.mode} d20［` +
+        `${result.roll.dice.join("、")}］ ` +
+        `${signed(result.ability)} 能力 ` +
+        `${signed(result.skill)} 武技 ` +
+        `${signed(result.weaponBonus)} 兵器 ` +
+        `${signed(result.situation)} 戰況 ` +
+        `${signed(-result.injury)} 傷勢 ` +
+        `= ${result.total}，對抗防守 ${result.defence}`
       );
+    }
+
+    function resultLine(result) {
+      if (result.disaster) {
+        return "結果：大失敗";
+      }
+
+      if (!result.success) {
+        return "結果：失敗";
+      }
 
       if (result.critical) {
-        state.enemyMorale -= 25;
-        state.friendlyMorale += 12;
-        state.position += 2;
-        state.enemyAdvantage -= 2;
-        state.formation += 6;
+        return "結果：大成功";
+      }
 
-        paragraphs.push(
-          "你以兵刃敲擊車板，率先由兩車之間衝出。鄉勇緊隨其後，長矛一齊刺向落坡賊眾。",
+      if (result.margin >= 5) {
+        return "結果：強成功";
+      }
 
-          "最前方山賊當場翻倒，後排收勢不及，十餘人撞成一團。"
+      return "結果：成功";
+    }
+
+    function effectRoll(
+      sides,
+      critical = false
+    ) {
+      const dice = [die(sides)];
+
+      if (critical) {
+        dice.push(die(sides));
+      }
+
+      return {
+        dice,
+        total: dice.reduce(
+          (sum, value) =>
+            sum + value,
+          0
+        )
+      };
+    }
+
+    function woundName(severity) {
+      const names = {
+        輕傷: [
+          "手臂割傷",
+          "肩背裂傷",
+          "額角破裂",
+          "肋側刀傷",
+          "大腿創傷"
+        ],
+
+        重傷: [
+          "大腿深創",
+          "持兵手重傷",
+          "肋骨重創",
+          "肩部深裂",
+          "腹側重創"
+        ],
+
+        致命傷: [
+          "胸腹致命創傷",
+          "頸側致命刀傷",
+          "大量失血",
+          "腹部致命傷"
+        ]
+      };
+
+      return randomChoice(
+        names[severity]
+      );
+    }
+
+    function addWound(
+      target,
+      severity
+    ) {
+      const wound = {
+        severity,
+        name: woundName(severity)
+      };
+
+      target.wounds.push(wound);
+
+      if (severity === "重傷") {
+        target.defeated = true;
+      }
+
+      if (
+        severity === "致命傷"
+      ) {
+        target.defeated = true;
+        target.dead = true;
+      }
+
+      const minorCount =
+        target.wounds.filter(
+          item =>
+            item.severity === "輕傷"
+        ).length;
+
+      if (minorCount >= 2) {
+        target.defeated = true;
+      }
+
+      return wound;
+    }
+
+    function resolveImpact(
+      attacker,
+      defender,
+      attackResult,
+      options = {}
+    ) {
+      const effect =
+        effectRoll(
+          options.damageSides ||
+          attacker.weapon.damageSides,
+          attackResult.critical
         );
-      } else if (result.success) {
-        state.enemyMorale -= 15;
-        state.friendlyMorale += 6;
-        state.position += 1;
-        state.enemyAdvantage -= 1;
 
-        paragraphs.push(
-          "你捉住賊眾換箭空隙帶人衝前。幾名山賊被迫棄弓拔刀，原本壓制頓時中斷。"
+      const might =
+        Math.max(
+          0,
+          abilityModifier(
+            attacker.abilities.might
+          )
         );
-      } else {
-        state.friendlyMorale -= 8;
-        state.formation -= 8;
-        state.position -= 1;
 
-        if (result.disaster) {
-          state.danger += 1;
+      const styleBonus =
+        options.styleBonus || 0;
+
+      const marginBonus =
+        Math.max(
+          0,
+          Math.floor(
+            attackResult.margin / 5
+          )
+        );
+
+      const raw =
+        effect.total +
+        might +
+        styleBonus +
+        marginBonus;
+
+      const mitigation =
+        Math.max(
+          0,
+          defender.armour.mitigation -
+          (attacker.weapon.piercing || 0)
+        );
+
+      const impact =
+        Math.max(
+          1,
+          raw - mitigation
+        );
+
+      const postureBefore =
+        defender.posture;
+
+      defender.posture =
+        Math.max(
+          0,
+          defender.posture - impact
+        );
+
+      const ratioAfter =
+        defender.posture /
+        defender.maxPosture;
+
+      let vulnerability = 0;
+
+      if (ratioAfter <= 0) {
+        vulnerability = 6;
+      } else if (ratioAfter <= 0.3) {
+        vulnerability = 4;
+      } else if (ratioAfter <= 0.6) {
+        vulnerability = 2;
+      }
+
+      const woundEligible =
+        attackResult.critical ||
+        ratioAfter <= 0.3 ||
+        (
+          ratioAfter <= 0.6 &&
+          attackResult.margin >= 5
+        );
+
+      let woundCheck = null;
+      let wound = null;
+
+      if (woundEligible) {
+        const woundDie = die(20);
+
+        const endurance =
+          abilityModifier(
+            defender.abilities.endurance
+          );
+
+        const protection =
+          defender.armour.woundProtection || 0;
+
+        const total =
+          woundDie +
+          Math.floor(impact / 2) +
+          vulnerability -
+          endurance -
+          protection;
+
+        woundCheck = {
+          die: woundDie,
+          impact:
+            Math.floor(impact / 2),
+          vulnerability,
+          endurance,
+          protection,
+          total
+        };
+
+        let severity = null;
+
+        if (total >= 25) {
+          severity = "致命傷";
+        } else if (total >= 20) {
+          severity = "重傷";
+        } else if (total >= 15) {
+          severity = "輕傷";
         }
 
-        paragraphs.push(
-          "你先啱啱帶人離開糧車，坡上就落下第二輪箭矢。反擊被迫停喺半途。"
-        );
+        if (severity) {
+          wound =
+            addWound(
+              defender,
+              severity
+            );
+        }
       }
+
+      return {
+        effect,
+        raw,
+        mitigation,
+        impact,
+        postureBefore,
+        woundCheck,
+        wound
+      };
     }
 
-    if (type === "break") {
-      result =
-        rollCheck(
-          "presence",
-          12 +
-          Math.max(
-            0,
-            state.enemyAdvantage
-          ),
-          battlefieldModifier(true),
-          "command"
-        );
+    function impactLines(
+      label,
+      impact
+    ) {
+      const lines = [
+        `${label}衝擊：d${impact.effect.dice.length > 1 ? "雙骰" : ""}` +
+        `［${impact.effect.dice.join("、")}］，總衝擊 ${impact.raw}`,
 
-      rolls.push(
-        checkLine(
-          result,
-          "破膽判定"
-        )
-      );
+        `護甲抵消 ${impact.mitigation}；` +
+        `造成 ${impact.impact} 點架勢損失`
+      ];
 
-      if (result.success) {
-        state.enemyMorale = 0;
+      if (impact.woundCheck) {
+        const check =
+          impact.woundCheck;
 
-        paragraphs.push(
-          "你見敵陣旗號搖擺，立即令眾人齊聲踏地，高喊援兵將至。",
-
-          "一名山賊先轉身逃入林中，其他人亦相繼潰散。"
-        );
-      } else {
-        state.enemyMorale +=
-          result.disaster ? 18 : 11;
-
-        state.enemyAdvantage +=
-          result.disaster ? 1 : 0;
-
-        paragraphs.push(
-          "賊眾本已後退，卻被頭目強行壓住潰勢，再次向山道聚攏。"
+        lines.push(
+          `傷勢判定：d20 ${check.die} ` +
+          `${signed(check.impact)} 衝擊 ` +
+          `${signed(check.vulnerability)} 破綻 ` +
+          `${signed(-check.endurance)} 體魄 ` +
+          `${signed(-check.protection)} 護甲 ` +
+          `= ${check.total}`
         );
       }
+
+      if (impact.wound) {
+        lines.push(
+          `造成傷勢：${impact.wound.name}` +
+          `（${impact.wound.severity}）`
+        );
+      }
+
+      return lines;
     }
 
-    if (type === "retreat") {
-      result =
-        rollCheck(
-          "intellect",
-          13 +
-          Math.max(
-            0,
-            state.enemyAdvantage
-          ),
-          (
-            Math.floor(
-              state.formation / 30
-            ) -
-            state.danger +
-            2
-          ),
-          "tactics"
+    function woundSummary(combatant) {
+      if (
+        !combatant ||
+        combatant.wounds.length === 0
+      ) {
+        return "無";
+      }
+
+      return combatant.wounds
+        .map(
+          wound =>
+            `${wound.name}（${wound.severity}）`
+        )
+        .join("、");
+    }
+
+    function shiftInitiative(amount) {
+      state.initiative =
+        clamp(
+          state.initiative + amount,
+          -2,
+          2
+        );
+    }
+
+    function chooseEnemyIntent() {
+      const enemy = state.enemy;
+
+      if (
+        enemy.posture <=
+        enemy.maxPosture * 0.35 &&
+        enemy.recoveries < 2 &&
+        random() < 0.48
+      ) {
+        return "recover";
+      }
+
+      if (
+        enemy.stamina <=
+        enemy.maxStamina * 0.3
+      ) {
+        return random() < 0.55
+          ? "guard"
+          : "quick";
+      }
+
+      const roll = random();
+
+      if (roll < 0.21) return "quick";
+      if (roll < 0.40) return "heavy";
+      if (roll < 0.59) return "pressure";
+      if (roll < 0.75) return "guard";
+      if (roll < 0.89) return "feint";
+
+      return "recover";
+    }
+
+    function currentTell() {
+      if (
+        !state ||
+        !state.intent
+      ) {
+        return "";
+      }
+
+      return randomChoice(
+        INTENT_TELLS[state.intent]
+      );
+    }
+
+    function consumePlayerOpening() {
+      state.player.opening = false;
+      state.player.focus = 0;
+    }
+
+    function playerAttack(type) {
+      const player = state.player;
+      const enemy = state.enemy;
+      const intent = state.intent;
+
+      const paragraphs = [];
+      const lines = [];
+
+      let label = "快攻";
+      let situation = 0;
+      let styleBonus = 0;
+      let staminaCost = 2;
+      let interrupts = false;
+
+      const repeat =
+        repetitionPenalty(
+          player,
+          type
         );
 
-      rolls.push(
-        checkLine(
-          result,
-          "撤離判定"
-        )
+      situation += repeat;
+      situation +=
+        initiativeModifier(true);
+
+      if (type === "quick") {
+        label = "快攻";
+        situation += 1;
+        staminaCost = 1;
+
+        if (intent === "heavy") {
+          situation += 3;
+        }
+      }
+
+      if (type === "heavy") {
+        label = "猛擊";
+        situation -= 1;
+        styleBonus = 3;
+        staminaCost = 4;
+
+        if (
+          intent === "guard" ||
+          intent === "recover"
+        ) {
+          situation += 3;
+          styleBonus += 2;
+        }
+      }
+
+      if (type === "pressure") {
+        label = "迫攻";
+        situation += 0;
+        staminaCost = 3;
+
+        if (intent === "recover") {
+          situation += 4;
+        }
+
+        if (intent === "guard") {
+          situation += 1;
+        }
+      }
+
+      spendStamina(
+        player,
+        staminaCost
       );
 
-      if (result.success) {
-        showDefeat(
-          paragraphs.concat([
-            "你命最後一排交替掩護，傷者與仍能行動嘅人沿退路逐步撤下。",
+      if (repeat < 0) {
+        paragraphs.push(
+          "韓魁似乎已經開始熟悉你反覆使用的節奏。"
+        );
+      }
 
-            "糧車終究留喺黑松嶺，但山賊冇能夠將所有人困死。"
-          ]),
-          rolls,
-          "敗退而還"
+      const result =
+        attackRoll(
+          player,
+          enemy,
+          {
+            situation,
+            advantage:
+              player.opening ||
+              player.focus >= 3
+          }
+        );
+
+      lines.push(
+        attackLine(label, result),
+        resultLine(result)
+      );
+
+      if (!result.success) {
+        paragraphs.push(
+          result.disaster
+            ? "你踏步時失去平衡，攻勢完全走空。韓魁立即搶回主動。"
+            : `${label}未能越過韓魁的防守。`
+        );
+
+        shiftInitiative(
+          result.disaster ? -2 : -1
+        );
+
+        if (result.disaster) {
+          enemy.opening = true;
+        }
+
+        consumePlayerOpening();
+
+        resolveEnemyIntent(
+          paragraphs,
+          lines,
+          result.disaster ? 2 : 0
         );
 
         return;
       }
 
-      state.friendlyMorale -=
-        result.disaster ? 15 : 9;
+      if (type === "pressure") {
+        const effect =
+          effectRoll(
+            6,
+            result.critical
+          );
 
-      state.formation -= 10;
-      state.position -= 1;
+        const pressure =
+          effect.total +
+          Math.max(
+            0,
+            abilityModifier(
+              player.abilities.might
+            )
+          ) +
+          Math.max(
+            0,
+            Math.floor(
+              result.margin / 5
+            )
+          );
 
-      paragraphs.push(
-        "撤退命令先啱啱傳到後排，前方眾人就以為全隊已敗，爭相擠向狹路。"
-      );
-    }
+        enemy.posture =
+          Math.max(
+            0,
+            enemy.posture - pressure
+          );
 
-    normalizeBattlefield();
+        enemy.stamina =
+          Math.max(
+            0,
+            enemy.stamina -
+            (result.critical ? 4 : 2)
+          );
 
-    if (state.enemyMorale <= 0) {
-      winBattle(
-        paragraphs.concat([
-          "山賊再維持唔住陣勢。坡上旗號倒下，殘餘賊眾沿山徑四散而逃。",
+        lines.push(
+          `迫攻效果：d6［${effect.dice.join("、")}］，` +
+          `造成 ${pressure} 點架勢損失`
+        );
 
-          "糧車雖然受損，仍然可以繼續前行。"
-        ]),
-        rolls,
-        "山道破賊"
-      );
+        paragraphs.push(
+          "你連續逼近，不畀韓魁輕易重新站穩。"
+        );
 
-      return;
-    }
+        if (
+          intent === "recover" &&
+          result.margin >= 2
+        ) {
+          interrupts = true;
 
-    if (state.friendlyMorale <= 0) {
-      showDefeat(
-        paragraphs.concat([
-          "最後一點秩序亦消失。有人棄械奔逃，有人鑽入車底，已經冇人聽得清命令。"
-        ]),
-        rolls,
-        "軍心潰散"
-      );
+          paragraphs.push(
+            "韓魁未能完成換氣，重整被你打斷。"
+          );
+        }
+      } else {
+        const impact =
+          resolveImpact(
+            player,
+            enemy,
+            result,
+            { styleBonus }
+          );
 
-      return;
-    }
+        lines.push(
+          ...impactLines(
+            label,
+            impact
+          )
+        );
 
-    const pressure =
-      enemyBattlefieldPressure();
+        if (impact.wound) {
+          paragraphs.push(
+            `你的${player.weapon.name}越過防守，留下「${impact.wound.name}」。`
+          );
+        } else if (
+          enemy.posture <= 0
+        ) {
+          paragraphs.push(
+            "韓魁勉強架住兵刃，但刀架已經完全崩潰。"
+          );
+        } else {
+          paragraphs.push(
+            type === "heavy"
+              ? "沉重衝擊逼得韓魁連退數步。"
+              : "你搶入韓魁動作之間，逼佢倉促回刀。"
+          );
+        }
 
-    paragraphs.push(
-      ...pressure.paragraphs
-    );
+        if (
+          type === "quick" &&
+          intent === "heavy" &&
+          result.margin >= 3
+        ) {
+          interrupts = true;
 
-    rolls.push(
-      ...pressure.rolls
-    );
+          paragraphs.push(
+            "韓魁原本積蓄的刀勢被你搶先破壞。"
+          );
+        }
 
-    normalizeBattlefield();
-
-    if (state.hp <= 0) {
-      showDeath(
-        paragraphs,
-        rolls
-      );
-
-      return;
-    }
-
-    if (state.friendlyMorale <= 0) {
-      showDefeat(
-        paragraphs.concat([
-          "呢輪猛攻終於擊碎鄉勇最後勇氣。眾人四散逃命，你亦只能拖住傷勢離開。"
-        ]),
-        rolls,
-        "陣勢崩潰"
-      );
-
-      return;
-    }
-
-    setScene(
-      battlefieldHeading(),
-      paragraphs,
-      rolls,
-      battlefieldActions()
-    );
-  }
-
-  function normalizeBattlefield() {
-    state.friendlyMorale =
-      clamp(
-        state.friendlyMorale,
-        0,
-        100
-      );
-
-    state.enemyMorale =
-      clamp(
-        state.enemyMorale,
-        0,
-        100
-      );
-
-    state.position =
-      clamp(
-        state.position,
-        -3,
-        3
-      );
-
-    state.formation =
-      clamp(
-        state.formation,
-        0,
-        100
-      );
-
-    state.enemyAdvantage =
-      clamp(
-        state.enemyAdvantage,
-        -2,
-        5
-      );
-
-    state.danger =
-      clamp(
-        state.danger,
-        1,
-        5
-      );
-  }
-
-  function enemyBattlefieldPressure() {
-    if (
-      state.enemyMorale <= 0 ||
-      state.hp <= 0
-    ) {
-      return {
-        paragraphs: [],
-        rolls: []
-      };
-    }
-
-    const natural = die(20);
-
-    const attackBonus =
-      1 +
-      state.enemyAdvantage +
-      (
-        state.enemyMorale >= 75
-          ? 1
-          : 0
-      );
-
-    const defence =
-      playerDefence() +
-      Math.floor(
-        state.formation / 35
-      ) +
-      (
-        state.position >= 2
-          ? 1
-          : 0
-      );
-
-    const total =
-      natural + attackBonus;
-
-    const hit =
-      natural === 20 ||
-      (
-        natural !== 1 &&
-        total >= defence
-      );
-
-    const rolls = [
-      (
-        `賊眾攻勢：d20 ${natural} ` +
-        `${signed(attackBonus)} 戰況 ` +
-        `= ${total}，對抗 ${defence}`
-      )
-    ];
-
-    const paragraphs = [];
-
-    if (natural === 1) {
-      state.enemyMorale -= 7;
-      state.friendlyMorale += 5;
-
-      paragraphs.push(
-        "坡上一名山賊過早鬆手，滾木反而撞倒自己人。鄉勇見狀爆出喝彩。"
-      );
-
-      return {
-        paragraphs,
-        rolls
-      };
-    }
-
-    if (!hit) {
-      state.formation -= 2;
-
-      paragraphs.push(
-        "坡上再落下一陣箭矢，多數被糧車與甲衣擋住。眾人雖然被迫低頭，仍然冇完全散開。"
-      );
-
-      return {
-        paragraphs,
-        rolls
-      };
-    }
-
-    const critical =
-      natural === 20;
-
-    const damage =
-      damageRoll(
-        6,
-        critical,
-        state.armour.reduction
-      );
-
-    state.hp =
-      Math.max(
-        0,
-        state.hp - damage.final
-      );
-
-    state.friendlyMorale -=
-      critical ? 12 : 6;
-
-    state.formation -=
-      critical ? 13 : 7;
-
-    state.enemyMorale +=
-      critical ? 8 : 3;
-
-    updateInjuryFromHp(critical);
-
-    rolls.push(
-      damageLine(
-        damage,
-        "亂軍刀箭"
-      )
-    );
-
-    paragraphs.push(
-      critical
-        ? "敵人由兩側同時湧下。你被人群撞離隊列，刀箭接連落喺身上。"
-        : "敵人趁箭雨壓近。你護住身旁鄉勇，自己卻被刀鋒掃中。"
-    );
-
-    return {
-      paragraphs,
-      rolls
-    };
-  }
-
-  function battlefieldHeading() {
-    if (
-      state.enemyMorale <= 20
-    ) {
-      return "賊眾已有潰意";
-    }
-
-    if (
-      state.friendlyMorale <= 30
-    ) {
-      return "軍心將散";
-    }
-
-    if (
-      state.formation >= 70 &&
-      state.position >= 1
-    ) {
-      return "陣腳漸穩";
-    }
-
-    if (
-      state.enemyAdvantage >= 3
-    ) {
-      return "山勢仍在敵手";
-    }
-
-    return "黑松嶺激戰";
-  }
-
-  function retryActions() {
-    return [
-      {
-        label: "重試同一骰局",
-        note:
-          "保留人物與同一組隨機序列，可以改用另一套選擇。",
-        className: "safe",
-        handler: () =>
-          restartEncounter(true)
-      },
-
-      {
-        label: "以新骰局重試",
-        note:
-          "保留人物，但重新產生所有骰局。",
-        handler: () =>
-          restartEncounter(false)
-      },
-
-      {
-        label: "建立新人物",
-        className: "danger",
-        handler: startCreation
+        if (
+          type === "heavy" &&
+          (
+            intent === "guard" ||
+            intent === "recover"
+          ) &&
+          result.margin >= 2
+        ) {
+          interrupts = true;
+        }
       }
-    ];
-  }
 
-  function winBattle(
-    paragraphs,
-    rolls,
-    heading
-  ) {
-    state.phase = "victory";
-    state.duelActive = false;
+      if (result.margin >= 5) {
+        shiftInitiative(1);
+      }
 
-    state.enemy.hp =
-      Math.max(
-        0,
-        state.enemy.hp
+      if (
+        enemy.posture <= 0 &&
+        (
+          result.critical ||
+          result.margin >= 5
+        )
+      ) {
+        player.opening = true;
+
+        paragraphs.push(
+          "喺架勢崩潰的一瞬，你捕捉到一條直通要害的空隙。"
+        );
+      } else {
+        consumePlayerOpening();
+      }
+
+      if (
+        checkCombatEnd(
+          paragraphs,
+          lines
+        )
+      ) {
+        return;
+      }
+
+      if (interrupts) {
+        finishRound(
+          paragraphs,
+          lines
+        );
+
+        return;
+      }
+
+      resolveEnemyIntent(
+        paragraphs,
+        lines,
+        0
+      );
+    }
+
+    function playerObserve() {
+      const player = state.player;
+      const enemy = state.enemy;
+      const intent = state.intent;
+
+      const paragraphs = [];
+      const lines = [];
+
+      const repeat =
+        repetitionPenalty(
+          player,
+          "observe"
+        );
+
+      spendStamina(player, 1);
+
+      const roll = rollD20();
+
+      const perception =
+        abilityModifier(
+          player.abilities.perception
+        );
+
+      const awareness =
+        skillModifier(
+          player.skills.awareness
+        );
+
+      const injury =
+        woundPenalty(player);
+
+      const situation =
+        repeat +
+        initiativeModifier(true);
+
+      const total =
+        roll.value +
+        perception +
+        awareness +
+        situation -
+        injury;
+
+      const difficulty =
+        13 +
+        abilityModifier(
+          enemy.abilities.perception
+        );
+
+      const success =
+        roll.value !== 1 &&
+        (
+          roll.value === 20 ||
+          total >= difficulty
+        );
+
+      lines.push(
+        `觀察判定：d20［${roll.value}］ ` +
+        `${signed(perception)} 洞察 ` +
+        `${signed(awareness)} 臨敵經驗 ` +
+        `${signed(situation)} 戰況 ` +
+        `${signed(-injury)} 傷勢 ` +
+        `= ${total}，對抗 ${difficulty}`,
+
+        success
+          ? "結果：成功"
+          : "結果：失敗"
       );
 
-    state.status =
-      "山賊敗退，首戰得勝";
+      if (success) {
+        player.focus =
+          roll.value === 20 ? 4 : 3;
 
-    setScene(
+        shiftInitiative(1);
+
+        paragraphs.push(
+          "你沒有追逐刀鋒，而係觀察韓魁肩膀、腰胯與換氣節奏。"
+        );
+
+        if (intent === "feint") {
+          enemy.opening = true;
+
+          paragraphs.push(
+            "你察覺刀鋒只係誘餌。韓魁真正的重心反而暴露在另一側。"
+          );
+
+          if (
+            enemy.posture <= 0
+          ) {
+            player.opening = true;
+
+            paragraphs.push(
+              "韓魁架勢本已崩潰，假動作反而令致命空門完全暴露。"
+            );
+          }
+
+          finishRound(
+            paragraphs,
+            lines
+          );
+
+          return;
+        }
+
+        paragraphs.push(
+          "你大致掌握了下一次交鋒的節奏。"
+        );
+
+        resolveEnemyIntent(
+          paragraphs,
+          lines,
+          -2
+        );
+
+        return;
+      }
+
+      player.focus = 0;
+      shiftInitiative(-1);
+
+      paragraphs.push(
+        "韓魁的步法與刀鋒不斷改變，你未能看出真正落點。"
+      );
+
+      resolveEnemyIntent(
+        paragraphs,
+        lines,
+        1
+      );
+    }
+
+    function playerFeint() {
+      const player = state.player;
+      const enemy = state.enemy;
+      const intent = state.intent;
+
+      const paragraphs = [];
+      const lines = [];
+
+      const repeat =
+        repetitionPenalty(
+          player,
+          "feint"
+        );
+
+      spendStamina(player, 2);
+
+      const roll = rollD20();
+
+      const agility =
+        abilityModifier(
+          player.abilities.agility
+        );
+
+      const dueling =
+        skillModifier(
+          player.skills.dueling
+        );
+
+      const injury =
+        woundPenalty(player);
+
+      let situation =
+        repeat +
+        initiativeModifier(true);
+
+      if (
+        intent === "guard" ||
+        intent === "recover"
+      ) {
+        situation += 3;
+      }
+
+      const total =
+        roll.value +
+        agility +
+        dueling +
+        situation -
+        injury;
+
+      const difficulty =
+        13 +
+        abilityModifier(
+          enemy.abilities.perception
+        ) +
+        Math.max(
+          0,
+          skillModifier(
+            enemy.skills.dueling
+          )
+        );
+
+      const success =
+        roll.value !== 1 &&
+        (
+          roll.value === 20 ||
+          total >= difficulty
+        );
+
+      const margin =
+        total - difficulty;
+
+      lines.push(
+        `佯攻判定：d20［${roll.value}］ ` +
+        `${signed(agility)} 身法 ` +
+        `${signed(dueling)} 單挑技巧 ` +
+        `${signed(situation)} 戰況 ` +
+        `${signed(-injury)} 傷勢 ` +
+        `= ${total}，對抗 ${difficulty}`,
+
+        success
+          ? margin >= 5
+            ? "結果：強成功"
+            : "結果：成功"
+          : "結果：失敗"
+      );
+
+      if (!success) {
+        paragraphs.push(
+          "韓魁沒有追著假動作移動，反而趁你變勢時壓近。"
+        );
+
+        shiftInitiative(-1);
+
+        if (roll.value === 1) {
+          enemy.opening = true;
+        }
+
+        resolveEnemyIntent(
+          paragraphs,
+          lines,
+          roll.value === 1 ? 2 : 0
+        );
+
+        return;
+      }
+
+      shiftInitiative(
+        margin >= 5 ? 2 : 1
+      );
+
+      enemy.posture =
+        Math.max(
+          0,
+          enemy.posture -
+          (margin >= 5 ? 4 : 2)
+        );
+
+      player.opening = true;
+
+      paragraphs.push(
+        "你故意露出錯誤方向，等韓魁回刀之後突然變勢。"
+      );
+
+      if (
+        enemy.posture <= 0
+      ) {
+        paragraphs.push(
+          "韓魁的刀架已經崩潰。假動作將佢最後一道防線牽離要害。"
+        );
+      } else {
+        paragraphs.push(
+          "韓魁被迫改變防守，腳步與刀鋒之間出現短暫脫節。"
+        );
+      }
+
+      if (
+        intent === "guard" ||
+        intent === "recover"
+      ) {
+        finishRound(
+          paragraphs,
+          lines
+        );
+
+        return;
+      }
+
+      resolveEnemyIntent(
+        paragraphs,
+        lines,
+        -1
+      );
+    }
+
+    function playerDefend() {
+      const player = state.player;
+
+      const paragraphs = [
+        "你收緊架勢，將注意力放在韓魁兵刃真正進入攻擊距離的一刻。"
+      ];
+
+      const lines = [];
+
+      repetitionPenalty(
+        player,
+        "defend"
+      );
+
+      spendStamina(player, 1);
+
+      player.guarded = true;
+
+      const result =
+        resolveEnemyIntent(
+          paragraphs,
+          lines,
+          0,
+          true
+        );
+
+      if (
+        !result ||
+        state.phase !== "duel"
+      ) {
+        return;
+      }
+
+      if (
+        result.attacked &&
+        !result.hit &&
+        !state.enemy.defeated
+      ) {
+        const situation =
+          initiativeModifier(true) +
+          (
+            state.intent === "quick" ||
+            state.intent === "pressure"
+              ? 3
+              : 0
+          );
+
+        const counter =
+          attackRoll(
+            player,
+            state.enemy,
+            { situation }
+          );
+
+        lines.push(
+          attackLine(
+            "守後反擊",
+            counter
+          ),
+          resultLine(counter)
+        );
+
+        if (counter.success) {
+          const impact =
+            resolveImpact(
+              player,
+              state.enemy,
+              counter,
+              {
+                damageSides: 8,
+                styleBonus: 1
+              }
+            );
+
+          lines.push(
+            ...impactLines(
+              "守後反擊",
+              impact
+            )
+          );
+
+          paragraphs.push(
+            impact.wound
+              ? `你避開刀鋒後立即切入，造成「${impact.wound.name}」。`
+              : "你喺韓魁收刀之前回擊，逼佢失去原本位置。"
+          );
+
+          shiftInitiative(1);
+
+          if (
+            state.enemy.posture <= 0 &&
+            (
+              counter.critical ||
+              counter.margin >= 5
+            )
+          ) {
+            player.opening = true;
+
+            paragraphs.push(
+              "韓魁架勢崩潰，而你正好站在可以直取要害的位置。"
+            );
+          }
+        } else {
+          paragraphs.push(
+            "你成功守住攻勢，但反擊仍被韓魁及時封住。"
+          );
+        }
+      }
+
+      player.guarded = false;
+
+      if (
+        checkCombatEnd(
+          paragraphs,
+          lines
+        )
+      ) {
+        return;
+      }
+
+      finishRound(
+        paragraphs,
+        lines
+      );
+    }
+
+    function playerRecover() {
+      const player = state.player;
+
+      const paragraphs = [
+        "你拉開半步，重新調整握兵、呼吸與腳下重心。"
+      ];
+
+      const lines = [];
+
+      const repeat =
+        repetitionPenalty(
+          player,
+          "recover"
+        );
+
+      const recoveryDie = die(6);
+
+      const endurance =
+        Math.max(
+          0,
+          abilityModifier(
+            player.abilities.endurance
+          )
+        );
+
+      const recovery =
+        Math.max(
+          1,
+          recoveryDie +
+          endurance +
+          repeat
+        );
+
+      const oldPosture =
+        player.posture;
+
+      player.posture =
+        Math.min(
+          player.maxPosture,
+          player.posture + recovery
+        );
+
+      player.stamina =
+        Math.min(
+          player.maxStamina,
+          player.stamina + 3
+        );
+
+      lines.push(
+        `重整架勢：d6［${recoveryDie}］ ` +
+        `${signed(endurance)} 體魄 ` +
+        `${signed(repeat)} 重複影響 ` +
+        `= ${recovery}`,
+
+        `實際恢復 ${player.posture - oldPosture} 點架勢及 3 點體力`
+      );
+
+      let enemyBonus = 0;
+
+      if (
+        state.intent === "heavy" ||
+        state.intent === "pressure"
+      ) {
+        enemyBonus = 3;
+      }
+
+      resolveEnemyIntent(
+        paragraphs,
+        lines,
+        enemyBonus
+      );
+    }
+
+    function playerExecute() {
+      const player = state.player;
+      const enemy = state.enemy;
+
+      const paragraphs = [];
+      const lines = [];
+
+      spendStamina(player, 3);
+
+      const roll =
+        rollD20(true, false);
+
+      const ability =
+        abilityModifier(
+          player.abilities[
+            player.weapon.ability
+          ]
+        );
+
+      const skill =
+        skillModifier(
+          player.skills[
+            player.weapon.skill
+          ]
+        );
+
+      const injury =
+        woundPenalty(player);
+
+      const initiative =
+        initiativeModifier(true);
+
+      const total =
+        roll.value +
+        ability +
+        skill +
+        player.weapon.accuracy +
+        initiative -
+        injury;
+
+      const difficulty =
+        15 +
+        Math.max(
+          0,
+          abilityModifier(
+            enemy.abilities.agility
+          )
+        );
+
+      const success =
+        roll.value !== 1 &&
+        (
+          roll.value === 20 ||
+          total >= difficulty
+        );
+
+      const margin =
+        total - difficulty;
+
+      lines.push(
+        `決死斬擊：${roll.mode} d20［${roll.dice.join("、")}］ ` +
+        `${signed(ability)} 能力 ` +
+        `${signed(skill)} 武技 ` +
+        `${signed(player.weapon.accuracy)} 兵器 ` +
+        `${signed(initiative)} 先機 ` +
+        `${signed(-injury)} 傷勢 ` +
+        `= ${total}，對抗 ${difficulty}`
+      );
+
+      player.opening = false;
+
+      if (success) {
+        if (
+          roll.value === 20 ||
+          margin >= 6
+        ) {
+          enemy.defeated = true;
+          enemy.dead = true;
+
+          lines.push(
+            roll.value === 20
+              ? "結果：大成功・乾淨俐落的致命一擊"
+              : "結果：強成功・造成致命傷"
+          );
+
+          paragraphs.push(
+            "你踏入韓魁已經崩潰的防線，沒有再留退路。",
+            `你的${player.weapon.name}沿住刀架與身體之間唯一的空隙切入。`,
+            "韓魁來不及重新站穩，便重重倒在山路中央。"
+          );
+        } else {
+          enemy.defeated = true;
+
+          const wound =
+            addWound(
+              enemy,
+              "重傷"
+            );
+
+          lines.push(
+            "結果：成功・擊敗對手"
+          );
+
+          paragraphs.push(
+            "你踏入致命空門，將所有力量集中在一擊之內。",
+            `韓魁勉強避開真正要害，仍然受到「${wound.name}」。`,
+            "山刀脫手落地，佢已經無法繼續戰鬥。"
+          );
+        }
+
+        checkCombatEnd(
+          paragraphs,
+          lines
+        );
+
+        return;
+      }
+
+      lines.push(
+        roll.value === 1
+          ? "結果：大失敗"
+          : "結果：失敗"
+      );
+
+      paragraphs.push(
+        "你決意用呢一擊分出生死。",
+        roll.value === 1
+          ? "踏入斬殺線時，你的腳步突然失去平衡。兵刃擦身而過，胸腹完全暴露。"
+          : "韓魁喺最後一瞬勉強扭開身體。致命空門已經消失，而你踏得太深。",
+        "韓魁立即拼死反擊。"
+      );
+
+      enemy.opening = true;
+      shiftInitiative(-2);
+
+      enemyAttack(
+        "heavy",
+        paragraphs,
+        lines,
+        roll.value === 1 ? 4 : 2
+      );
+
+      if (
+        checkCombatEnd(
+          paragraphs,
+          lines
+        )
+      ) {
+        return;
+      }
+
+      finishRound(
+        paragraphs,
+        lines
+      );
+    }
+
+    function enemyAttack(
+      type,
+      paragraphs,
+      lines,
+      bonus = 0
+    ) {
+      const enemy = state.enemy;
+      const player = state.player;
+
+      let label = "韓魁快攻";
+      let situation =
+        bonus +
+        initiativeModifier(false);
+
+      let styleBonus = 0;
+      let staminaCost = 2;
+
+      if (type === "quick") {
+        label = "韓魁快攻";
+        situation += 1;
+        staminaCost = 1;
+      }
+
+      if (type === "heavy") {
+        label = "韓魁猛擊";
+        situation -= 1;
+        styleBonus = 3;
+        staminaCost = 4;
+      }
+
+      if (type === "pressure") {
+        label = "韓魁迫攻";
+        staminaCost = 3;
+      }
+
+      spendStamina(
+        enemy,
+        staminaCost
+      );
+
+      const result =
+        attackRoll(
+          enemy,
+          player,
+          {
+            situation,
+            advantage: enemy.opening
+          }
+        );
+
+      lines.push(
+        attackLine(label, result),
+        resultLine(result)
+      );
+
+      enemy.opening = false;
+
+      if (!result.success) {
+        paragraphs.push(
+          result.disaster
+            ? "韓魁用力過猛，山刀撞上山壁，整個身前暴露。"
+            : player.guarded
+              ? "你守住中線，將韓魁的刀鋒引向空處。"
+              : "韓魁的山刀從你身前掃過，沒有真正斬中。"
+        );
+
+        shiftInitiative(
+          result.disaster ? 2 : 1
+        );
+
+        if (result.disaster) {
+          player.opening = true;
+        }
+
+        return {
+          attacked: true,
+          hit: false
+        };
+      }
+
+      if (type === "pressure") {
+        const effect =
+          effectRoll(
+            6,
+            result.critical
+          );
+
+        const pressure =
+          effect.total +
+          Math.max(
+            0,
+            abilityModifier(
+              enemy.abilities.might
+            )
+          ) +
+          Math.max(
+            0,
+            Math.floor(
+              result.margin / 5
+            )
+          );
+
+        player.posture =
+          Math.max(
+            0,
+            player.posture - pressure
+          );
+
+        player.stamina =
+          Math.max(
+            0,
+            player.stamina -
+            (result.critical ? 4 : 2)
+          );
+
+        lines.push(
+          `韓魁迫攻：d6［${effect.dice.join("、")}］，` +
+          `造成 ${pressure} 點架勢損失`
+        );
+
+        paragraphs.push(
+          "韓魁連續壓刀逼近，迫使你不斷格擋退步。"
+        );
+      } else {
+        const impact =
+          resolveImpact(
+            enemy,
+            player,
+            result,
+            { styleBonus }
+          );
+
+        lines.push(
+          ...impactLines(
+            label,
+            impact
+          )
+        );
+
+        if (impact.wound) {
+          paragraphs.push(
+            `山刀越過你的防守，造成「${impact.wound.name}」。`
+          );
+        } else if (
+          player.posture <= 0
+        ) {
+          paragraphs.push(
+            "你勉強架住山刀，雙臂卻已經發麻，架勢完全崩潰。"
+          );
+        } else {
+          paragraphs.push(
+            type === "heavy"
+              ? "沉重山刀正面壓下，你被逼得連退數步。"
+              : "韓魁搶入你兵刃回收前的一瞬，削弱了你的架勢。"
+          );
+        }
+      }
+
+      if (result.margin >= 5) {
+        shiftInitiative(-1);
+      }
+
+      if (
+        player.posture <= 0 &&
+        (
+          result.critical ||
+          result.margin >= 5
+        )
+      ) {
+        enemy.opening = true;
+
+        paragraphs.push(
+          "韓魁看見你架勢崩潰，山刀開始移向真正致命的位置。"
+        );
+      }
+
+      return {
+        attacked: true,
+        hit: true
+      };
+    }
+
+    function enemyExecution(
+      paragraphs,
+      lines
+    ) {
+      const enemy = state.enemy;
+      const player = state.player;
+
+      const roll =
+        rollD20(true, false);
+
+      const ability =
+        abilityModifier(
+          enemy.abilities.might
+        );
+
+      const skill =
+        skillModifier(
+          enemy.skills.blade
+        );
+
+      const total =
+        roll.value +
+        ability +
+        skill +
+        initiativeModifier(false);
+
+      const difficulty =
+        15 +
+        Math.max(
+          0,
+          abilityModifier(
+            player.abilities.agility
+          )
+        );
+
+      const success =
+        roll.value !== 1 &&
+        (
+          roll.value === 20 ||
+          total >= difficulty
+        );
+
+      const margin =
+        total - difficulty;
+
+      lines.push(
+        `韓魁決死斬擊：${roll.mode} d20［${roll.dice.join("、")}］ ` +
+        `${signed(ability)} 能力 ` +
+        `${signed(skill)} 武技 ` +
+        `${signed(initiativeModifier(false))} 先機 ` +
+        `= ${total}，對抗 ${difficulty}`
+      );
+
+      enemy.opening = false;
+
+      if (success) {
+        if (
+          roll.value === 20 ||
+          margin >= 6
+        ) {
+          player.defeated = true;
+          player.dead = true;
+
+          addWound(
+            player,
+            "致命傷"
+          );
+
+          lines.push(
+            "結果：致命一擊"
+          );
+
+          paragraphs.push(
+            "韓魁踏入你已經崩潰的防線，山刀沒有再留半點餘地。",
+            "寒光越過兵刃與甲衣之間的空隙，你再也無法站穩。"
+          );
+        } else {
+          player.defeated = true;
+
+          const wound =
+            addWound(
+              player,
+              "重傷"
+            );
+
+          lines.push(
+            "結果：重傷倒地"
+          );
+
+          paragraphs.push(
+            `你喺最後一瞬避開真正要害，仍然受到「${wound.name}」。`,
+            "兵器脫手落地，你已經無法繼續戰鬥。"
+          );
+        }
+
+        return;
+      }
+
+      lines.push(
+        roll.value === 1
+          ? "結果：大失敗"
+          : "結果：失敗"
+      );
+
+      paragraphs.push(
+        "韓魁試圖把握你架勢崩潰的一瞬，但致命刀鋒擦身而過。",
+        "佢踏得太深，原本握住的主動亦開始動搖。"
+      );
+
+      player.opening = true;
+      shiftInitiative(2);
+    }
+
+    function resolveEnemyIntent(
+      paragraphs,
+      lines,
+      bonus = 0,
+      returnOnly = false
+    ) {
+      if (
+        checkCombatEnd(
+          paragraphs,
+          lines
+        )
+      ) {
+        return null;
+      }
+
+      const enemy = state.enemy;
+      const player = state.player;
+      const intent = state.intent;
+
+      enemy.guarded = false;
+
+      if (
+        player.posture <= 0 &&
+        enemy.opening
+      ) {
+        enemyExecution(
+          paragraphs,
+          lines
+        );
+
+        if (returnOnly) {
+          return {
+            attacked: true,
+            hit: true
+          };
+        }
+
+        if (
+          checkCombatEnd(
+            paragraphs,
+            lines
+          )
+        ) {
+          return null;
+        }
+
+        finishRound(
+          paragraphs,
+          lines
+        );
+
+        return {
+          attacked: true,
+          hit: true
+        };
+      }
+
+      let outcome = {
+        attacked: false,
+        hit: false
+      };
+
+      if (intent === "quick") {
+        outcome =
+          enemyAttack(
+            "quick",
+            paragraphs,
+            lines,
+            bonus
+          );
+      }
+
+      if (intent === "heavy") {
+        outcome =
+          enemyAttack(
+            "heavy",
+            paragraphs,
+            lines,
+            bonus
+          );
+      }
+
+      if (intent === "pressure") {
+        outcome =
+          enemyAttack(
+            "pressure",
+            paragraphs,
+            lines,
+            bonus
+          );
+      }
+
+      if (intent === "guard") {
+        const recovery = die(4);
+
+        const oldPosture =
+          enemy.posture;
+
+        enemy.posture =
+          Math.min(
+            enemy.maxPosture,
+            enemy.posture + recovery
+          );
+
+        enemy.guarded = true;
+
+        lines.push(
+          `韓魁固守：恢復 ${enemy.posture - oldPosture} 點架勢`
+        );
+
+        paragraphs.push(
+          "韓魁將山刀橫在身前，收緊防線，沒有貿然進攻。"
+        );
+      }
+
+      if (intent === "recover") {
+        const recovery =
+          die(6) +
+          Math.max(
+            0,
+            abilityModifier(
+              enemy.abilities.endurance
+            )
+          );
+
+        const oldPosture =
+          enemy.posture;
+
+        enemy.posture =
+          Math.min(
+            enemy.maxPosture,
+            enemy.posture + recovery
+          );
+
+        enemy.stamina =
+          Math.min(
+            enemy.maxStamina,
+            enemy.stamina + 3
+          );
+
+        enemy.recoveries += 1;
+
+        lines.push(
+          `韓魁重整：恢復 ${enemy.posture - oldPosture} 點架勢及 3 點體力`
+        );
+
+        paragraphs.push(
+          "韓魁拉開距離調整呼吸，重新整理刀架。"
+        );
+      }
+
+      if (intent === "feint") {
+        const roll = rollD20();
+
+        const agility =
+          abilityModifier(
+            enemy.abilities.agility
+          );
+
+        const dueling =
+          skillModifier(
+            enemy.skills.dueling
+          );
+
+        const total =
+          roll.value +
+          agility +
+          dueling +
+          initiativeModifier(false);
+
+        const difficulty =
+          13 +
+          abilityModifier(
+            player.abilities.perception
+          );
+
+        const success =
+          roll.value !== 1 &&
+          (
+            roll.value === 20 ||
+            total >= difficulty
+          );
+
+        lines.push(
+          `韓魁佯動：d20［${roll.value}］ ` +
+          `${signed(agility)} 身法 ` +
+          `${signed(dueling)} 單挑技巧 ` +
+          `${signed(initiativeModifier(false))} 先機 ` +
+          `= ${total}，對抗 ${difficulty}`
+        );
+
+        if (success) {
+          enemy.opening = true;
+          shiftInitiative(-1);
+
+          paragraphs.push(
+            "你跟住刀鋒移動的一瞬，韓魁突然改變真正落點。"
+          );
+
+          outcome =
+            enemyAttack(
+              "quick",
+              paragraphs,
+              lines,
+              bonus + 2
+            );
+        } else {
+          shiftInitiative(1);
+
+          paragraphs.push(
+            "韓魁的假動作未能完全騙開你，佢只好放棄後續攻勢。"
+          );
+
+          outcome = {
+            attacked: true,
+            hit: false
+          };
+        }
+      }
+
+      player.guarded = false;
+
+      if (returnOnly) {
+        return outcome;
+      }
+
+      if (
+        checkCombatEnd(
+          paragraphs,
+          lines
+        )
+      ) {
+        return outcome;
+      }
+
+      finishRound(
+        paragraphs,
+        lines
+      );
+
+      return outcome;
+    }
+
+    function applyLateFightPressure(
+      paragraphs
+    ) {
+      if (state.round < 8) {
+        return;
+      }
+
+      const player = state.player;
+      const enemy = state.enemy;
+
+      player.stamina =
+        Math.max(
+          0,
+          player.stamina - 1
+        );
+
+      enemy.stamina =
+        Math.max(
+          0,
+          enemy.stamina - 1
+        );
+
+      if (state.round >= 10) {
+        player.posture =
+          Math.max(
+            0,
+            player.posture - 1
+          );
+
+        enemy.posture =
+          Math.max(
+            0,
+            enemy.posture - 1
+          );
+
+        paragraphs.push(
+          "長時間交鋒令雙方呼吸愈來愈亂，任何細小失誤都可能變成致命空隙。"
+        );
+      }
+    }
+
+    function finishRound(
+      paragraphs,
+      lines
+    ) {
+      applyLateFightPressure(
+        paragraphs
+      );
+
+      if (
+        checkCombatEnd(
+          paragraphs,
+          lines
+        )
+      ) {
+        return;
+      }
+
+      state.round += 1;
+      state.intent =
+        chooseEnemyIntent();
+      state.tell =
+        currentTell();
+
+      setScene(
+        `山道交鋒・第 ${state.round} 合`,
+        paragraphs,
+        duelActions(),
+        lines
+      );
+    }
+
+    function checkCombatEnd(
+      paragraphs,
+      lines
+    ) {
+      if (
+        !state ||
+        state.phase !== "combat"
+      ) {
+        return false;
+      }
+
+      const player = state.player;
+      const enemy = state.enemy;
+
+      if (enemy.defeated) {
+        state.phase = "ending";
+
+        setScene(
+          enemy.dead
+            ? "斬將破賊"
+            : "韓魁倒地",
+          [
+            ...paragraphs,
+
+            enemy.dead
+              ? "韓魁受到致命傷，再也無法站起。"
+              : "韓魁傷勢太重，山刀脫手落地，再也無法戰鬥。",
+
+            "黑石寨眾賊眼見頭領敗亡，原本的叫陣聲迅速變成混亂。",
+
+            `這場交鋒在第 ${state.round} 合結束。`,
+
+            `你仍有 ${player.posture} 點架勢、${player.stamina} 點體力。`,
+
+            `你留下的傷勢：${woundSummary(player)}。`
+          ],
+          endingActions(),
+          lines
+        );
+
+        return true;
+      }
+
+      if (player.defeated) {
+        state.phase = "ending";
+
+        setScene(
+          player.dead
+            ? "命斷黑松嶺"
+            : "重傷倒地",
+          [
+            ...paragraphs,
+
+            player.dead
+              ? "你再也無法握住兵器。山道上的聲音逐漸遠去。"
+              : "你失去平衡倒在山道，意志仍然清醒，身體卻已經無法繼續。",
+
+            player.dead
+              ? "你曾跨越千多年重新出生，卻仍然只係一個會流血、會死亡的人。"
+              : "正式版本中，你可能被俘、獲救，或者目睹糧隊潰敗。",
+
+            `這場交鋒在第 ${state.round} 合結束。`,
+
+            `傷勢：${woundSummary(player)}。`
+          ],
+          endingActions(),
+          lines
+        );
+
+        return true;
+      }
+
+      if (state.round >= 14) {
+        state.phase = "ending";
+
+        setScene(
+          "兩敗俱疲",
+          [
+            ...paragraphs,
+
+            "雙方都已經無法維持最初的攻勢。韓魁退回賊眾之前，你亦被鄉勇接回車陣。",
+
+            "這場交鋒未能分出生死，但雙方都付出了代價。",
+
+            `你的傷勢：${woundSummary(player)}。`,
+
+            `韓魁的傷勢：${woundSummary(enemy)}。`
+          ],
+          endingActions(),
+          lines
+        );
+
+        return true;
+      }
+
+      return false;
+    }
+
+    function canPlayerExecute() {
+      return Boolean(
+        state &&
+        state.phase === "combat" &&
+        state.enemy.posture <= 0 &&
+        state.player.opening &&
+        !state.enemy.defeated
+      );
+    }
+
+    function duelActions() {
+      if (
+        !state ||
+        state.phase !== "combat"
+      ) {
+        return [];
+      }
+
+      const player = state.player;
+      const actions = [];
+
+      if (canPlayerExecute()) {
+        actions.push({
+          label: "決死斬擊",
+          note:
+            "對方架勢崩潰，而你已捕捉到致命空門。成功可以立即擊敗甚至斬殺對手；失敗會遭受危險反擊。",
+          className: "execution",
+          handler: playerExecute
+        });
+      }
+
+      actions.push(
+        {
+          label: "快攻",
+          note:
+            "以短促動作搶先出手，衝擊較低，體力消耗亦較少。",
+          handler: () =>
+            playerAttack("quick")
+        },
+
+        {
+          label: "猛擊",
+          note:
+            "投入較多體力發出沉重攻勢，失手後較難立即回防。",
+          className: "danger",
+          disabled:
+            player.stamina < 4,
+          handler: () =>
+            playerAttack("heavy")
+        },
+
+        {
+          label: "迫攻",
+          note:
+            "連續壓縮對手的活動空間，主要削弱架勢與體力。",
+          disabled:
+            player.stamina < 3,
+          handler: () =>
+            playerAttack("pressure")
+        },
+
+        {
+          label: "防守反擊",
+          note:
+            "收緊防線，等待對方真正進入攻擊距離。",
+          className: "safe",
+          handler: playerDefend
+        },
+
+        {
+          label: "觀察",
+          note:
+            "暫緩出手，判斷對方重心、呼吸與兵刃節奏。",
+          className: "info",
+          handler: playerObserve
+        },
+
+        {
+          label: "佯攻",
+          note:
+            "以假動作嘗試牽動對方防守，成功後可能創造空隙。",
+          handler: playerFeint
+        },
+
+        {
+          label: "重整架勢",
+          note:
+            "拉開少量距離，恢復部分架勢與體力。",
+          className: "safe",
+          handler: playerRecover
+        }
+      );
+
+      return actions;
+    }
+
+    function initiativeText() {
+      if (!state) {
+        return "勢均力敵";
+      }
+
+      if (state.initiative >= 2) {
+        return "你完全掌握先機";
+      }
+
+      if (state.initiative === 1) {
+        return "你略佔先機";
+      }
+
+      if (state.initiative <= -2) {
+        return "韓魁完全掌握先機";
+      }
+
+      if (state.initiative === -1) {
+        return "韓魁略佔先機";
+      }
+
+      return "勢均力敵";
+    }
+
+    function setScene(
       heading,
-      paragraphs.concat([
-        "你活過第一場真正戰鬥。勝利冇抹去傷口，亦冇令死者重新企起。",
+      paragraphs,
+      actions = [],
+      lines = []
+    ) {
+      document.getElementById(
+        "storyHeading"
+      ).textContent = heading;
 
-        "但由今日開始，你唔再只係被亂世裹挾嘅無名少年。"
-      ]),
-      rolls,
-      retryActions()
+      document.getElementById(
+        "storyText"
+      ).innerHTML =
+        paragraphs
+          .map(paragraph => {
+            const className =
+              paragraph.startsWith("『")
+                ? "speech"
+                : "";
+
+            return (
+              `<p class="${className}">` +
+              `${escapeHtml(paragraph)}` +
+              `</p>`
+            );
+          })
+          .join("");
+
+      document.getElementById(
+        "rollArea"
+      ).innerHTML =
+        lines.length > 0
+          ? `
+            <div class="roll-box">
+              ${lines
+                .map(line => {
+                  let className = "";
+
+                  if (
+                    line.includes("結果：成功") ||
+                    line.includes("結果：強成功") ||
+                    line.includes("結果：大成功")
+                  ) {
+                    className =
+                      "success-line";
+                  }
+
+                  if (
+                    line.includes("結果：失敗") ||
+                    line.includes("結果：大失敗")
+                  ) {
+                    className =
+                      "failure-line";
+                  }
+
+                  return (
+                    `<div class="roll-line ${className}">` +
+                    `${escapeHtml(line)}` +
+                    `</div>`
+                  );
+                })
+                .join("")}
+            </div>
+          `
+          : "";
+
+      renderActions(actions);
+      renderAll();
+    }
+
+    function renderActions(actions) {
+      const container =
+        document.getElementById(
+          "actions"
+        );
+
+      container.innerHTML = "";
+      buttonsLocked = false;
+
+      actions.forEach(action => {
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.type = "button";
+
+        button.className =
+          `action-button ${action.className || ""}`;
+
+        button.disabled =
+          Boolean(action.disabled);
+
+        button.innerHTML =
+          `${escapeHtml(action.label)}` +
+          (
+            action.note
+              ? `<small>${escapeHtml(action.note)}</small>`
+              : ""
+          );
+
+        button.addEventListener(
+          "click",
+          () => {
+            if (
+              buttonsLocked ||
+              button.disabled
+            ) {
+              return;
+            }
+
+            buttonsLocked = true;
+
+            container
+              .querySelectorAll(
+                "button"
+              )
+              .forEach(item => {
+                item.disabled = true;
+              });
+
+            action.handler();
+          }
+        );
+
+        container.appendChild(button);
+      });
+    }
+
+    function renderAll() {
+      renderPlayer();
+      renderEnemy();
+      renderTell();
+      renderInitiative();
+      renderExecution();
+    }
+
+    function renderPlayer() {
+      const player =
+        state ? state.player : null;
+
+      document.getElementById(
+        "playerName"
+      ).textContent =
+        player
+          ? player.name
+          : creation.name || "未題名";
+
+      document.getElementById(
+        "playerAge"
+      ).textContent =
+        state
+          ? "十八歲・光和六年"
+          : "尚未轉生";
+
+      document.getElementById(
+        "pastLifeText"
+      ).textContent =
+        creation.pastLife
+          ? PAST_LIVES[
+              creation.pastLife
+            ].name
+          : "尚未選定";
+
+      document.getElementById(
+        "formativeText"
+      ).textContent =
+        creation.formative
+          ? FORMATIVE_CHOICES[
+              creation.formative
+            ].name
+          : "尚未選定";
+
+      document.getElementById(
+        "weaponText"
+      ).textContent =
+        player
+          ? `${player.weapon.name}・${player.armour.name}`
+          : creation.weapon
+            ? WEAPONS[
+                creation.weapon
+              ].name
+            : "尚未持兵";
+
+      if (!player) {
+        document.getElementById(
+          "postureText"
+        ).textContent = "—";
+
+        document.getElementById(
+          "staminaText"
+        ).textContent = "—";
+
+        document.getElementById(
+          "postureFill"
+        ).style.width = "0%";
+
+        document.getElementById(
+          "staminaFill"
+        ).style.width = "0%";
+
+        document.getElementById(
+          "woundText"
+        ).textContent = "無";
+
+        document.getElementById(
+          "abilities"
+        ).innerHTML = "";
+
+        document.getElementById(
+          "statusText"
+        ).textContent =
+          "命書尚未展開";
+
+        return;
+      }
+
+      document.getElementById(
+        "postureText"
+      ).textContent =
+        `${player.posture} / ${player.maxPosture}`;
+
+      document.getElementById(
+        "staminaText"
+      ).textContent =
+        `${player.stamina} / ${player.maxStamina}`;
+
+      document.getElementById(
+        "postureFill"
+      ).style.width =
+        `${clamp(
+          player.posture /
+          player.maxPosture *
+          100,
+          0,
+          100
+        )}%`;
+
+      document.getElementById(
+        "staminaFill"
+      ).style.width =
+        `${clamp(
+          player.stamina /
+          player.maxStamina *
+          100,
+          0,
+          100
+        )}%`;
+
+      document.getElementById(
+        "woundText"
+      ).textContent =
+        woundSummary(player);
+
+      document.getElementById(
+        "abilities"
+      ).innerHTML =
+        Object.entries(
+          ABILITY_NAMES
+        )
+          .map(([key, label]) => {
+            return `
+              <div class="ability">
+                <span>${escapeHtml(label)}</span>
+                <span>${player.abilities[key]}</span>
+              </div>
+            `;
+          })
+          .join("");
+
+      let status =
+        "正與韓魁交鋒";
+
+      if (player.defeated) {
+        status = player.dead
+          ? "命斷黑松嶺"
+          : "已失去戰鬥能力";
+      } else if (
+        canPlayerExecute()
+      ) {
+        status =
+          "致命空門已經出現";
+      } else if (
+        player.posture <= 0
+      ) {
+        status =
+          "架勢崩潰，隨時可能遭到斬殺";
+      } else if (
+        player.stamina <=
+        player.maxStamina * 0.25
+      ) {
+        status =
+          "體力將盡，動作開始變慢";
+      } else if (
+        player.opening
+      ) {
+        status =
+          "已捕捉到對方空隙";
+      } else if (
+        player.focus > 0
+      ) {
+        status =
+          "已掌握部分交鋒節奏";
+      }
+
+      document.getElementById(
+        "statusText"
+      ).textContent = status;
+    }
+
+    function renderEnemy() {
+      const container =
+        document.getElementById(
+          "enemyArea"
+        );
+
+      if (
+        !state ||
+        !state.enemy ||
+        state.phase !== "combat"
+      ) {
+        container.innerHTML = "";
+        return;
+      }
+
+      const enemy = state.enemy;
+
+      const posturePercent =
+        clamp(
+          enemy.posture /
+          enemy.maxPosture *
+          100,
+          0,
+          100
+        );
+
+      const staminaPercent =
+        clamp(
+          enemy.stamina /
+          enemy.maxStamina *
+          100,
+          0,
+          100
+        );
+
+      const wounds =
+        enemy.wounds.length > 0
+          ? `
+            <ul class="wound-list">
+              ${enemy.wounds
+                .map(
+                  wound =>
+                    `<li>${escapeHtml(wound.name)}（${escapeHtml(wound.severity)}）</li>`
+                )
+                .join("")}
+            </ul>
+          `
+          : `
+            <div class="small-text">
+              暫無明顯傷勢
+            </div>
+          `;
+
+      container.innerHTML = `
+        <div class="enemy-card">
+          <div class="enemy-header">
+            <strong>${escapeHtml(enemy.name)}</strong>
+            <span>防守 ${defenceOf(enemy)}</span>
+          </div>
+
+          <div class="meter">
+            <div class="meter-header">
+              <span>敵方架勢</span>
+              <span>${enemy.posture} / ${enemy.maxPosture}</span>
+            </div>
+
+            <div class="meter-track">
+              <div
+                class="meter-fill enemy-posture"
+                style="width:${posturePercent}%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="meter">
+            <div class="meter-header">
+              <span>敵方體力</span>
+              <span>${enemy.stamina} / ${enemy.maxStamina}</span>
+            </div>
+
+            <div class="meter-track">
+              <div
+                class="meter-fill enemy-stamina"
+                style="width:${staminaPercent}%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="small-text">
+            ${escapeHtml(enemy.weapon.name)}・
+            ${escapeHtml(enemy.armour.name)}
+          </div>
+
+          ${wounds}
+        </div>
+      `;
+    }
+
+    function renderTell() {
+      const area =
+        document.getElementById(
+          "tellArea"
+        );
+
+      if (
+        !state ||
+        state.phase !== "combat" ||
+        !state.tell
+      ) {
+        area.innerHTML = "";
+        return;
+      }
+
+      area.innerHTML = `
+        <div class="tell-box">
+          <div class="tell-title">眼前動靜</div>
+          <div class="tell-text">${escapeHtml(state.tell)}</div>
+        </div>
+      `;
+    }
+
+    function renderInitiative() {
+      const area =
+        document.getElementById(
+          "initiativeArea"
+        );
+
+      if (
+        !state ||
+        state.phase !== "combat"
+      ) {
+        area.innerHTML = "";
+        return;
+      }
+
+      area.innerHTML = `
+        <div class="initiative-box">
+          <span>${escapeHtml(state.player.name)}</span>
+          <span class="initiative-centre">${escapeHtml(initiativeText())}</span>
+          <span>韓魁</span>
+        </div>
+      `;
+    }
+
+    function renderExecution() {
+      const area =
+        document.getElementById(
+          "executionArea"
+        );
+
+      if (!canPlayerExecute()) {
+        area.innerHTML = "";
+        return;
+      }
+
+      area.innerHTML = `
+        <div class="execution-alert">
+          <strong>斬殺機會</strong><br>
+          韓魁架勢已經崩潰，而你正掌握致命空門。呢個機會只會維持到戰況再次改變。
+        </div>
+      `;
+    }
+
+    function startCreation() {
+      state = null;
+
+      creation = {
+        name: "",
+        pastLife: null,
+        formative: null,
+        weapon: null
+      };
+
+      document.getElementById(
+        "enemyArea"
+      ).innerHTML = "";
+
+      document.getElementById(
+        "tellArea"
+      ).innerHTML = "";
+
+      document.getElementById(
+        "initiativeArea"
+      ).innerHTML = "";
+
+      document.getElementById(
+        "executionArea"
+      ).innerHTML = "";
+
+      document.getElementById(
+        "rollArea"
+      ).innerHTML = "";
+
+      document.getElementById(
+        "storyHeading"
+      ).textContent =
+        "前世已盡";
+
+      document.getElementById(
+        "storyText"
+      ).innerHTML = `
+        <p>你原本生活在另一個時代。</p>
+
+        <p>
+          死亡之後，你沒有迎來虛無。
+          再次睜眼時，屋頂是煙燻發黑的木樑，
+          窗外有人談論漢室、徵斂與太平道。
+        </p>
+
+        <p>
+          你帶著前世記憶，在東漢末年重新出生。
+          但記憶本身不是力量。這具身體仍要重新成長，
+          兵刃仍會割開血肉，而你熟悉的歷史亦可能被改寫。
+        </p>
+
+        <div class="creation-box">
+          <label for="nameInput">今世姓名</label>
+
+          <input
+            id="nameInput"
+            type="text"
+            maxlength="12"
+            placeholder="例如：沈越"
+            autocomplete="off"
+            enterkeyhint="done"
+          >
+        </div>
+      `;
+
+      renderActions(
+        Object.entries(
+          PAST_LIVES
+        ).map(([key, pastLife]) => ({
+          label: pastLife.name,
+          note: pastLife.description,
+          className: "info",
+          handler: () =>
+            choosePastLife(key)
+        }))
+      );
+
+      renderAll();
+    }
+
+    function choosePastLife(key) {
+      const input =
+        document.getElementById(
+          "nameInput"
+        );
+
+      const name =
+        input.value.trim();
+
+      if (!name) {
+        alert("請先輸入今世姓名。");
+
+        input.focus();
+        buttonsLocked = false;
+
+        document
+          .querySelectorAll(
+            "#actions button"
+          )
+          .forEach(button => {
+            button.disabled = false;
+          });
+
+        return;
+      }
+
+      creation.name =
+        name.slice(0, 12);
+
+      creation.pastLife = key;
+
+      setScene(
+        "兩世記憶",
+        [
+          `${creation.name}，你在漢末一戶尋常人家長大。`,
+
+          `前世的你是「${PAST_LIVES[key].name}」。`,
+
+          "你無法向任何人證明自己曾活在千多年後，只能將記憶藏在心底。",
+
+          "成長期間，邊一段經歷對你影響最大？"
+        ],
+
+        Object.entries(
+          FORMATIVE_CHOICES
+        ).map(([choiceKey, choice]) => ({
+          label: choice.name,
+          note: choice.description,
+          handler: () =>
+            chooseFormative(choiceKey)
+        }))
+      );
+    }
+
+    function chooseFormative(key) {
+      creation.formative = key;
+
+      setScene(
+        "光和六年・大亂前夕",
+        [
+          `十八歲時，你已經因「${FORMATIVE_CHOICES[key].name}」形成自己的本領。`,
+
+          "你記得黃巾之亂將近，但準確日期與細節已經模糊。",
+
+          "附近村落準備押送糧藥穿過黑松嶺。山路近來有盜匪出沒，鄉勇讓你從有限兵械中選一件上陣。"
+        ],
+
+        Object.entries(
+          WEAPONS
+        ).map(([weaponKey, weapon]) => ({
+          label: weapon.name,
+
+          note:
+            `${weapon.description} ` +
+            `命中 ${signed(weapon.accuracy)}・` +
+            `衝擊 d${weapon.damageSides}`,
+
+          handler: () =>
+            chooseWeapon(weaponKey)
+        }))
+      );
+    }
+
+    function chooseWeapon(key) {
+      creation.weapon = key;
+
+      startCombat(
+        createHiddenSeed()
+      );
+    }
+
+    function startCombat(seed) {
+      seedRng(seed);
+
+      state = {
+        phase: "combat",
+        seed,
+        round: 1,
+        initiative: 0,
+        player: buildPlayer(),
+        enemy: buildEnemy(),
+        intent: null,
+        tell: ""
+      };
+
+      state.intent =
+        chooseEnemyIntent();
+
+      state.tell =
+        currentTell();
+
+      setScene(
+        "黑松嶺・山道叫陣",
+        [
+          "糧隊走入山道深處時，坡上忽然傳來碎石滾動的聲音。",
+
+          "十餘名山賊從林間現身，弓箭與短矛對準糧車。一名虯髯大漢提著缺口山刀走落山道。",
+
+          "『留下糧車，我可以讓其他人走。若有人自認是好漢，便出來與韓魁決個生死！』",
+
+          "你知道歷史上的黃巾大亂即將來臨，卻可能先死在一個史書從未記載的山賊手上。"
+        ],
+
+        duelActions()
+      );
+    }
+
+    function endingActions() {
+      return [
+        {
+          label: "重試同一骰局",
+          note:
+            "角色、敵人與骰局起點保持不變，可以改用另一套戰術。",
+          className: "safe",
+          handler: () =>
+            startCombat(state.seed)
+        },
+
+        {
+          label: "以新骰局重試",
+          note:
+            "角色保持不變，重新產生所有骰局。",
+          handler: () =>
+            startCombat(
+              createHiddenSeed()
+            )
+        },
+
+        {
+          label: "建立新人物",
+          className: "danger",
+          handler: startCreation
+        }
+      ];
+    }
+
+      /*
+   * V4.0C Hotfix 1
+   *
+   * 修正：
+   * 1. 重複使用同一行動會更快被韓魁適應。
+   * 2. 韓魁有更多架勢，避免 martial build 兩三擊穩定取勝。
+   * 3. 防守反擊無論敵方採取邊種行動，都會正常進入下一合。
+   * 4. 重試同一骰局時，清除文案隨機紀錄，提升重現一致性。
+   */
+
+  function repetitionPenalty(combatant, action) {
+    if (combatant.lastAction !== action) {
+      combatant.lastAction = action;
+      combatant.repeatCount = 1;
+      return 0;
+    }
+
+    combatant.repeatCount += 1;
+
+    const penalties = {
+      2: -1,
+      3: -3,
+      4: -5
+    };
+
+    return penalties[combatant.repeatCount] ?? -7;
+  }
+
+  function buildEnemy() {
+    const enemy = makeCombatant(ENEMY_DATA);
+
+    /*
+     * 韓魁係有實戰經驗嘅地方悍匪。
+     * 額外架勢令純粹連續攻擊唔會兩三下穩定解決戰鬥，
+     * 但利用佯攻、觀察同防守反擊仍然可以較快製造決勝機會。
+     */
+    enemy.maxPosture += 6;
+    enemy.posture = enemy.maxPosture;
+
+    enemy.maxStamina += 2;
+    enemy.stamina = enemy.maxStamina;
+
+    return enemy;
+  }
+
+  function playerDefend() {
+    const player = state.player;
+    const enemy = state.enemy;
+
+    const paragraphs = [
+      "你收緊架勢，將注意力放喺韓魁真正進入攻擊距離嘅一刻。"
+    ];
+
+    const lines = [];
+
+    const repeatPenalty = repetitionPenalty(
+      player,
+      "defend"
+    );
+
+    spendStamina(player, 1);
+    player.guarded = true;
+
+    if (repeatPenalty < 0) {
+      paragraphs.push(
+        "韓魁似乎已經察覺你反覆守候反擊，開始改變進攻節奏。"
+      );
+    }
+
+    /*
+     * 連續防守會令韓魁逐漸掌握時機。
+     * 數值轉成敵方本合判定 bonus，而唔係令防守按鈕失效。
+     */
+    const enemyBonus = Math.abs(repeatPenalty);
+
+    let enemyResult = null;
+
+    try {
+      enemyResult = resolveEnemyIntent(
+        paragraphs,
+        lines,
+        enemyBonus,
+        true
+      );
+    } catch (error) {
+      console.error("防守反擊解算失敗：", error);
+
+      player.guarded = false;
+
+      setScene(
+        "交鋒一滯",
+        [
+          ...paragraphs,
+          "戰鬥解算遇到問題，但你仍然可以繼續下一合。"
+        ],
+        duelActions(),
+        [
+          ...lines,
+          `系統錯誤：${error.message}`
+        ]
+      );
+
+      return;
+    }
+
+    /*
+     * 如果敵方行動已經令戰鬥結束，
+     * resolveEnemyIntent 會自行顯示結局畫面。
+     */
+    if (state.phase !== "combat") {
+      player.guarded = false;
+      return;
+    }
+
+    /*
+     * 無論敵人係固守、重整，定進攻後冇命中，
+     * 呢個 function 最後都必須進入下一合。
+     */
+    if (
+      enemyResult &&
+      enemyResult.attacked &&
+      !enemyResult.hit &&
+      !enemy.defeated
+    ) {
+      const counterSituation =
+        initiativeModifier(true) +
+        (
+          state.intent === "quick" ||
+          state.intent === "pressure"
+            ? 3
+            : 0
+        ) +
+        Math.min(0, repeatPenalty);
+
+      const counterResult = attackRoll(
+        player,
+        enemy,
+        {
+          situation: counterSituation
+        }
+      );
+
+      lines.push(
+        attackLine(
+          "守後反擊",
+          counterResult
+        ),
+        resultLine(counterResult)
+      );
+
+      if (counterResult.success) {
+        const impact = resolveImpact(
+          player,
+          enemy,
+          counterResult,
+          {
+            damageSides: 8,
+            styleBonus: 1
+          }
+        );
+
+        lines.push(
+          ...impactLines(
+            "守後反擊",
+            impact
+          )
+        );
+
+        if (impact.wound) {
+          paragraphs.push(
+            `你避開刀鋒後立即切入，造成「${impact.wound.name}」。`
+          );
+        } else {
+          paragraphs.push(
+            "你喺韓魁收刀之前回擊，逼佢失去原本位置。"
+          );
+        }
+
+        shiftInitiative(1);
+
+        if (
+          enemy.posture <= 0 &&
+          (
+            counterResult.critical ||
+            counterResult.margin >= 5
+          )
+        ) {
+          player.opening = true;
+
+          paragraphs.push(
+            "韓魁架勢崩潰，而你正好企喺可以直取要害嘅位置。"
+          );
+        }
+      } else {
+        paragraphs.push(
+          "你成功守住攻勢，但反擊仍然被韓魁及時封住。"
+        );
+      }
+    } else if (
+      enemyResult &&
+      !enemyResult.attacked
+    ) {
+      paragraphs.push(
+        "韓魁今合冇直接攻入，你亦搵唔到足以安全反擊嘅空隙。"
+      );
+    }
+
+    player.guarded = false;
+
+    if (
+      checkCombatEnd(
+        paragraphs,
+        lines
+      )
+    ) {
+      return;
+    }
+
+    /*
+     * 關鍵修正：
+     * 唔可以因為敵人冇攻擊或 enemyResult 為空就停住。
+     * 只要戰鬥未結束，就一定 render 下一合。
+     */
+    finishRound(
+      paragraphs,
+      lines
     );
   }
 
-  function showDefeat(
-    paragraphs,
-    rolls,
-    heading
-  ) {
-    state.phase = "defeat";
-    state.duelActive = false;
+  /*
+   * 同一 seed 重試時，連文案 variation 狀態都一併清除。
+   * 否則文案系統可能額外消耗 RNG，令後續骰序出現偏差。
+   */
+  const startCombatBeforeHotfix = startCombat;
 
-    state.status =
-      "首戰失利，僥倖生還";
+  startCombat = function startCombatWithHotfix(seed) {
+    Object.keys(lastTextChoice).forEach((key) => {
+      delete lastTextChoice[key];
+    });
 
-    setScene(
-      heading,
-      paragraphs.concat([
-        "你冇死，但失敗同樣會留喺一個人嘅一生之中。",
-
-        "傷勢、同伴目光，同被奪走嘅糧藥都唔會憑空消失。"
-      ]),
-      rolls,
-      retryActions()
-    );
-  }
-
-  function showDeath(
-    paragraphs,
-    rolls
-  ) {
-    state.hp = 0;
-    state.phase = "death";
-    state.duelActive = false;
-    state.injury = "致命傷";
-    state.status = "命絕黑松嶺";
-
-    setScene(
-      "命斷黑松嶺",
-      paragraphs.concat([
-        "你嘅手指再握唔住兵刃。山道喊殺逐漸遠去，天空只剩被枝葉割碎嘅一小片灰白。",
-
-        `${state.name}，年十八。你跨越千多年重新出生，命運卻冇因為你係轉生者而收回呢一擊。`,
-
-        "此頁至此染血，再無後文。"
-      ]),
-      rolls,
-      retryActions()
-    );
-  }
+    return startCombatBeforeHotfix(seed);
+  };
 
   startCreation();
 </script>
