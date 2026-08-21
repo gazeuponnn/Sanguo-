@@ -4554,19 +4554,7 @@
     );
   }
 
-  /*
-   * 同一 seed 重試時，連文案 variation 狀態都一併清除。
-   * 否則文案系統可能額外消耗 RNG，令後續骰序出現偏差。
-   */
-  const startCombatBeforeHotfix = startCombat;
-
-  startCombat = function startCombatWithHotfix(seed) {
-    Object.keys(lastTextChoice).forEach((key) => {
-      delete lastTextChoice[key];
-    });
-
-    return startCombatBeforeHotfix(seed);
-  };
+ 
 
   startCreation();
 </script>
