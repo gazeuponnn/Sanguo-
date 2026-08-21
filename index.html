@@ -1,574 +1,343 @@
 <!doctype html>
-<html lang="zh-HK">
+<html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0c0f">
-<title>三國・逆命錄 V0.2.2</title>
+<meta name="theme-color" content="#090a0d">
+<title>三國・逆命錄 V3</title>
 <style>
-
-*{box-sizing:border-box}
-:root{
-  --bg:#0f1115;--panel:#171a21;--panel2:#1d222b;--line:#343b48;
-  --text:#eee9dc;--muted:#aaa595;--accent:#c89b5d;--good:#7fc58b;
-  --bad:#d56b6b;--blue:#7fa9d8;--purple:#b28bd9;
-}
-body{margin:0;background:radial-gradient(circle at top,#24201a 0,#0f1115 48%);color:var(--text);
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;min-height:100vh}
-button{font:inherit;color:inherit;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;cursor:pointer}
-button:hover{border-color:var(--accent);transform:translateY(-1px)}
-button.primary{background:#76552d;border-color:#b88c50}
-button.good{border-color:#4f7f59}
-button.danger{border-color:#8b4d4d}
-button.ghost{background:transparent}
-#app{max-width:1120px;margin:auto;padding:20px}
-.topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px}
-.eyebrow{font-size:11px;letter-spacing:2px;color:var(--accent)}
-h1,h2,h3{font-family:Georgia,"Noto Serif TC",serif;margin:4px 0 10px}
-h1{font-size:32px}.top-actions{display:flex;gap:8px}
-.screen{margin-top:20px}
-.hero,.panel,.event,.combat,.death{background:rgba(23,26,33,.94);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 12px 40px rgba(0,0,0,.2)}
-.hero{text-align:center;padding:55px 25px}
-.hero h2{font-size:44px}.subtitle{color:var(--muted);margin:12px auto 28px;max-width:650px}
-.grid{display:grid;gap:14px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat{background:var(--panel2);border:1px solid var(--line);padding:12px;border-radius:10px}
-.stat .label{color:var(--muted);font-size:13px}.stat .value{font-size:23px;font-weight:700}
-.meter{height:7px;background:#2a2f38;border-radius:99px;overflow:hidden;margin-top:7px}.meter>i{display:block;height:100%;background:var(--accent)}
-.cardrow{display:flex;flex-wrap:wrap;gap:8px}.tag{padding:5px 8px;border:1px solid var(--line);border-radius:99px;color:#d7d0c2;font-size:12px;background:#14171c}
-.meta{color:var(--muted);font-size:13px}.choices{display:grid;gap:10px;margin-top:18px}.choice{text-align:left;padding:15px}
-.choice strong{display:block;margin-bottom:5px}.choice small{color:var(--muted)}
-.event-title{font-size:27px}.quote{font-family:Georgia,serif;font-size:18px;line-height:1.8;color:#ded7c8}
-.banner{padding:12px 14px;border-radius:9px;margin:10px 0;background:#242a34;border:1px solid var(--line)}
-.banner.good{border-color:#4f7f59}.banner.bad{border-color:#8b4d4d}.banner.gold{border-color:#a47a3e}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.progress{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:7px}
-.log{max-height:320px;overflow:auto;display:grid;gap:8px}
-.log-item{padding:9px 11px;background:#14171c;border-left:3px solid var(--line);font-size:13px}
-.character-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
-.hp{font-size:14px}.hp b{color:#ef9b8f}
-.combat-layout{display:grid;grid-template-columns:1fr 1fr;gap:14px}.fighter{padding:15px;background:var(--panel2);border-radius:12px;border:1px solid var(--line)}
-.fighter h3{display:flex;justify-content:space-between}.hpbar{height:12px;background:#30353e;border-radius:99px;overflow:hidden}.hpbar i{display:block;height:100%;background:var(--good)}
-.enemy .hpbar i{background:var(--bad)}
-.combat-log{height:210px;overflow:auto;background:#101217;border:1px solid var(--line);padding:12px;border-radius:10px;line-height:1.7}
-.action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-button:disabled{opacity:.4;cursor:not-allowed;transform:none}
-@media(max-width:760px){#app{padding:12px}.topbar{align-items:flex-start}.top-actions{flex-wrap:wrap;justify-content:flex-end}.two,.three,.combat-layout,.stats{grid-template-columns:1fr 1fr}.hero h2{font-size:34px}}
-@media(max-width:500px){.two,.three,.stats,.combat-layout,.action-grid{grid-template-columns:1fr}.topbar{flex-direction:column}.top-actions{width:100%}.top-actions button{flex:1}}
-
-
-.combat-topline{display:flex;justify-content:space-between}
-.combat-log.compact{height:145px;line-height:1.55;font-size:13px}
-.action-grid button{min-height:58px}
-.action-grid button small{display:block;color:var(--muted);margin-top:3px}
-
+:root{--bg:#090a0d;--panel:#111318;--panel2:#171920;--line:#292d36;--text:#eeeae0;--muted:#9b9da5;--gold:#d7ae62;--red:#c95b58;--green:#78a77b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#171923 0,#090a0d 46%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;min-height:100vh}
+button,input{font:inherit}button{color:inherit}#app{max-width:720px;margin:auto;min-height:100vh;padding:18px 14px 34px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.brand{font-weight:800;letter-spacing:.08em}.age{color:var(--gold);font-size:13px}.card{background:rgba(17,19,24,.94);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 18px 50px #0006}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.14em;margin-bottom:10px}.hero{text-align:center;padding:28px 8px}.hero h1{font-size:34px;margin:8px 0 12px}.hero p{color:var(--muted);line-height:1.8}.name{width:100%;padding:14px;border-radius:10px;border:1px solid var(--line);background:#0c0e12;color:var(--text);margin:12px 0 10px}.btn{width:100%;border:1px solid var(--line);background:var(--panel2);padding:15px 14px;border-radius:11px;text-align:left;margin-top:9px;cursor:pointer}.btn:hover{border-color:#5b606c}.btn strong{display:block}.btn small{display:block;color:var(--muted);margin-top:5px;line-height:1.45}.primary{background:linear-gradient(180deg,#6e5529,#4a381c);border-color:#8f703a}.scene h1{font-size:26px;margin:4px 0 10px}.scene .story{font-size:16px;line-height:1.95;white-space:pre-line}.divider{height:1px;background:var(--line);margin:18px 0}.tag{display:inline-block;border:1px solid #51462f;color:#d9b975;border-radius:999px;padding:5px 9px;font-size:12px;margin:3px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{background:#0d0f13;border:1px solid var(--line);border-radius:10px;padding:9px;text-align:center}.stat b{display:block;font-size:18px}.stat span{color:var(--muted);font-size:11px}.combatHead{display:flex;justify-content:space-between;align-items:center}.fighters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}..fighter{background:#0d0f13;border:1px solid var(--line);border-radius:12px;padding:12px}.fighter h3{margin:0 0 8px;font-size:15px}.bar{height:8px;background:#242730;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--red);border-radius:99px}.fighter.you .bar i{background:var(--green)}.fighter p{font-size:12px;color:var(--muted);margin:7px 0 0}.log{background:#0b0d10;border:1px solid var(--line);border-radius:12px;padding:12px;min-height:170px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.55}.log div:first-child{color:#f4ead4}.damage{font-weight:800;color:#e7bd69}.critical{color:#f0a55b;font-weight:800}.danger{color:#df7b77}.good{color:#8fb58e}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.actions .btn{margin:0;text-align:center}.execute{grid-column:1/-1;background:linear-gradient(180deg,#6d2926,#401919);border-color:#9b4742}.execute strong{font-size:16px}.locked{opacity:.5}.end{text-align:center;padding:18px 0}.end h2{font-size:27px}.small{font-size:12px;color:var(--muted);line-height:1.6}.choiceTitle{font-size:17px}.hidden{display:none!important}
+@media(max-width:430px){#app{padding:12px 10px 28px}.card{padding:16px}.hero h1{font-size:30px}.fighters{gap:7px}.log{min-height:155px}.actions{gap:7px}}
 </style>
 </head>
 <body>
-
-  <main id="app">
-    <header class="topbar">
-      <div>
-        <div class="eyebrow">THREE KINGDOMS · LIFE SIMULATOR</div>
-        <h1>三國・逆命錄</h1>
-      </div>
-      <div class="top-actions">
-        <button id="saveBtn">保存</button>
-        <button id="loadBtn">讀取</button>
-        <button id="newBtn" class="ghost">新人生</button>
-      </div>
-    </header>
-
-    <section id="screen"></section>
-  </main>
-  
-
+<div id="app"></div>
 <script>
+"use strict";
 
-const SAVE_KEY="sanguo_ni_ming_v01";
+const app=document.getElementById("app");
+const SAVE="sanguo_v3_save";
 
-const STAT_NAMES={str:"武力",int:"智略",pol:"政治",cha:"魅力",lea:"統率",sur:"生存"};
-const STAT_ICONS={str:"⚔️",int:"🧠",pol:"🏯",cha:"🗣️",lea:"👑",sur:"🌲"};
-const TAG_NAMES={
-  martial:"武藝", scholar:"求知", political:"仕途", social:"人脈", hunter:"獵人",
-  leadership:"統率", discipline:"紀律", compassion:"仁心", ambition:"野心",
-  cunning:"機智", family:"家族", risk:"冒險", survival:"求生", archery:"弓術"
+const state={
+  phase:"start", age:0, name:"",
+  stats:{str:25,int:25,cha:25,agi:25},
+  potential:{martial:50,scholar:50},
+  traits:[], history:[], inventory:[],
+  combat:null
 };
 
-const backgrounds=[
- {name:"獵戶之子",desc:"熟悉山林與弓箭。",stats:{sur:8,str:2},tags:{hunter:12,archery:8,survival:8}},
- {name:"寒門書生",desc:"家貧，但自幼接觸經史。",stats:{int:8,pol:4},tags:{scholar:12,discipline:5}},
- {name:"鄉勇之子",desc:"家中與地方武裝關係密切。",stats:{str:4,lea:4},tags:{martial:10,leadership:8,discipline:5}},
- {name:"商人之子",desc:"從小聽見各地消息。",stats:{cha:6,pol:6},tags:{social:10,political:10,cunning:5}},
- {name:"士族旁支",desc:"有一些人脈，但家族並不顯赫。",stats:{cha:5,pol:7},tags:{political:12,social:8,family:5}},
- {name:"流民孤兒",desc:"沒有靠山，卻比任何人更懂得活下去。",stats:{sur:10,cha:2},tags:{survival:14,risk:7,cunning:5}}
-];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const roll=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 
-const formative=[
- {age:6,title:"父親的舊兵器",text:"你在家中翻找東西時，發現父親藏起來的一把舊兵器。你第一次意識到，亂世並不只是大人們口中的故事。",
- choices:[
-  {text:"「教我用刀。」",mods:{stats:{str:2},pot:{str:2}},tags:{martial:7,discipline:3},trait:"武藝啟蒙"},
-  {text:"「可以教我射箭嗎？」",mods:{stats:{str:1,sur:2},pot:{sur:2}},tags:{archery:8,hunter:4}},
-  {text:"「我想知道這把刀從哪裡來。」",mods:{stats:{int:2},pot:{int:2}},tags:{scholar:6,cunning:3}},
-  {text:"偷偷拿出去玩。",mods:{stats:{sur:2},pot:{sur:1}},tags:{risk:8,survival:4},risk:true}
- ]},
- {age:7,title:"村中小孩",text:"村口有幾個孩子正在欺負一個比你弱小的孩子。大人們還沒注意到。",
- choices:[
-  {text:"出手阻止。",mods:{stats:{str:1,cha:1},pot:{lea:1}},tags:{martial:4,leadership:7,compassion:6},trait:"勇敢"},
-  {text:"去叫大人。",mods:{stats:{pol:2}},tags:{political:5,caution:4}},
-  {text:"加入欺負人的一方。",mods:{stats:{cha:1},pot:{cha:1}},tags:{social:5,risk:5},trait:"冷酷傾向"},
-  {text:"偷偷幫被欺負的人。",mods:{stats:{sur:1,cha:1},pot:{cha:1}},tags:{compassion:8,survival:4},trait:"護友之心"}
- ]},
- {age:8,title:"第一次離開村子",text:"父親帶你到市集。你第一次看見士兵、商人、士人和大量流民。",
- choices:[
-  {text:"跟士兵談話。",mods:{stats:{str:1,lea:1},pot:{lea:2}},tags:{martial:5,leadership:6}},
-  {text:"跟士人請教。",mods:{stats:{int:2},pot:{int:2}},tags:{scholar:8}},
-  {text:"跟商人聊天。",mods:{stats:{cha:2,pol:1},pot:{pol:1}},tags:{social:8,political:6,cunning:4}},
-  {text:"自己四處觀察。",mods:{stats:{sur:2,int:1},pot:{sur:2}},tags:{survival:7,cunning:5}}
- ]},
- {age:9,title:"先生來了",text:"村中來了一位落魄先生，願意免費教幾個孩子讀書。",
- choices:[
-  {text:"每日去。",mods:{stats:{int:3},pot:{int:3}},tags:{scholar:12,discipline:5},trait:"好學"},
-  {text:"有空先去。",mods:{stats:{int:1},pot:{int:1}},tags:{scholar:6}},
-  {text:"「我不想讀。」",mods:{stats:{sur:1,str:1},pot:{str:1}},tags:{martial:4,risk:4}},
-  {text:"問先生兵法。",mods:{stats:{int:2,lea:1},pot:{int:2,lea:2}},tags:{scholar:10,leadership:5},requires:{tag:"scholar",value:8},trait:"戰略思維"}
- ]},
- {age:10,title:"第一次狩獵",text:"你第一次獨自跟著獵戶入山。今天沒有大人會替你收拾失誤。",
- choices:[
-  {text:"遠距離射擊。",mods:{stats:{str:2},pot:{str:2}},tags:{archery:10,hunter:5}},
-  {text:"靠近獵物。",mods:{stats:{str:2},pot:{str:2}},tags:{martial:8,risk:4}},
-  {text:"追蹤足跡。",mods:{stats:{sur:3},pot:{sur:3}},tags:{hunter:12,survival:6},trait:"獵人"},
-  {text:"設下陷阱。",mods:{stats:{int:2,sur:1},pot:{int:2}},tags:{hunter:7,cunning:8}}
- ]},
- {age:11,title:"山坡上的意外",text:"同伴不慎跌落山坡。你只有很短時間決定怎樣做。",
- choices:[
-  {text:"冒險救人。",mods:{stats:{sur:2,lea:1},pot:{sur:2,lea:1}},tags:{compassion:8,risk:7,leadership:5}},
-  {text:"找路求援。",mods:{stats:{int:2,sur:1},pot:{int:1}},tags:{cunning:6,survival:6}},
-  {text:"留在原地照顧他。",mods:{stats:{cha:2,lea:1},pot:{cha:1,lea:1}},tags:{compassion:10,leadership:5}},
-  {text:"離開。",mods:{stats:{sur:2},pot:{sur:1}},tags:{survival:8,risk:4},rel:-12,trait:"冷酷傾向"}
- ]},
- {age:12,title:"師傅",text:"你的天賦逐漸被人看見。一名師傅願意花時間教你，但每個人只能選一條主要道路。",
- choices:[
-  {text:"跟鄉勇教頭習武。",mods:{stats:{str:3,lea:1},pot:{str:3,lea:2}},tags:{martial:14,discipline:8},trait:"武藝根基"},
-  {text:"跟老獵人入山。",mods:{stats:{sur:3,str:1},pot:{sur:3}},tags:{hunter:14,archery:6,survival:8},trait:"山林之子"},
-  {text:"跟先生讀兵書。",mods:{stats:{int:3,lea:2},pot:{int:3,lea:2}},tags:{scholar:14,leadership:7},trait:"戰略思維"},
-  {text:"跟商旅學做人做事。",mods:{stats:{cha:2,pol:2},pot:{pol:3,cha:2}},tags:{social:12,political:10,cunning:6}}
- ]},
- {age:13,title:"第一次真正的失敗",text:"你曾經最有把握的一件事失敗了。這一次，沒有人會替你找藉口。",
- choices:[
-  {text:"「我要變強。」",mods:{stats:{str:1},pot:{str:3}},tags:{martial:7,discipline:8},trait:"百折不撓"},
-  {text:"「我要弄清楚自己為何會輸。」",mods:{stats:{int:2},pot:{int:3}},tags:{scholar:9,cunning:7},trait:"善於反省"},
-  {text:"「下次我不會再犯。」",mods:{stats:{sur:1,lea:1},pot:{lea:2,sur:1}},tags:{discipline:10}},
-  {text:"「我不需要證明自己。」",mods:{stats:{cha:1,int:1},pot:{cha:1,int:2}},tags:{social:5,scholar:5}}
- ]},
- {age:14,title:"亂世逼近",text:"流民增加，地方官開始徵糧，商路也不再安全。你第一次明白「天下大亂」會如何落到普通人身上。",
- choices:[
-  {text:"保護家人。",mods:{stats:{lea:2,sur:1},pot:{lea:2}},tags:{family:10,leadership:8,compassion:6}},
-  {text:"幫助流民。",mods:{stats:{cha:2,pol:1},pot:{cha:2}},tags:{compassion:10,social:8}},
-  {text:"賺錢囤糧。",mods:{stats:{pol:2,cha:1},pot:{pol:2}},tags:{political:9,cunning:7}},
-  {text:"參與地方武裝。",mods:{stats:{str:2,lea:2},pot:{str:2,lea:3}},tags:{martial:9,leadership:12,risk:5}},
-  {text:"偷偷收集情報。",mods:{stats:{int:2,sur:1},pot:{int:2}},tags:{cunning:12,survival:5}}
- ]},
- {age:15,title:"第一次真正殺人",text:"夜裡，你們遭到山賊襲擊。這一次，你手中的兵器不是木頭做的。",
- choices:[
-  {text:"正面迎戰。",combat:true,mods:{stats:{str:2,lea:1},pot:{str:2,lea:1}},tags:{martial:10,leadership:5,risk:6}},
-  {text:"設法誘敵。",combat:true,mods:{stats:{int:2,sur:1},pot:{int:2}},tags:{cunning:10,hunter:5}},
-  {text:"嘗試談判。",combat:false,mods:{stats:{cha:2},pot:{cha:2}},tags:{social:10,compassion:5}},
-  {text:"逃走。",combat:false,mods:{stats:{sur:3},pot:{sur:2}},tags:{survival:12,risk:3}}
- ]},
- {age:16,title:"你想成為誰？",text:"你已經不再是孩子。你開始思考，自己究竟想成為怎樣的人。",
- choices:[
-  {text:"「我要成為天下名將。」",mods:{stats:{str:1,lea:2},pot:{str:3,lea:3}},tags:{martial:10,leadership:12,ambition:10}},
-  {text:"「我要成為軍師。」",mods:{stats:{int:2,lea:1},pot:{int:3,lea:2}},tags:{scholar:12,cunning:8}},
-  {text:"「我要入仕。」",mods:{stats:{pol:3,cha:1},pot:{pol:3}},tags:{political:14,social:6}},
-  {text:"「亂世之中，有錢才有活路。」",mods:{stats:{pol:2,cha:1},pot:{pol:2,cha:1}},tags:{political:10,cunning:10}},
-  {text:"「我只想保護自己和家人。」",mods:{stats:{sur:2,lea:1},pot:{sur:3}},tags:{family:12,survival:10}},
-  {text:"「我要改變這個亂世。」",mods:{stats:{int:1,lea:2,cha:1},pot:{int:3,lea:3,cha:2}},tags:{ambition:15,leadership:10},requires:{tag:"ambition",value:8},trait:"改命之志"}
- ]},
- {age:17,title:"成年前最後一課",text:"你遇到一個陌生人。他看著你很久，問了一句：「如果你知道亂世即將開始，你會做什麼？」",
- choices:[
-  {text:"「保護弱者。」",mods:{stats:{cha:1,lea:1},pot:{cha:2,lea:1}},tags:{compassion:12,leadership:6},trait:"仁心"},
-  {text:"「勝者為王。」",mods:{stats:{str:1,pol:1},pot:{str:2,pol:1}},tags:{ambition:12,cunning:6},trait:"野心"},
-  {text:"「天下大勢，順勢而行。」",mods:{stats:{int:1,pol:1},pot:{int:2,pol:2}},tags:{political:8,cunning:10},trait:"現實主義"},
-  {text:"「我一定要出人頭地。」",mods:{stats:{str:1,cha:1},pot:{str:1,cha:2}},tags:{ambition:12,risk:6}},
-  {text:"「我想知道真相。」",mods:{stats:{int:2},pot:{int:3}},tags:{scholar:12,cunning:8}}
- ]}
-];
-
-const equipmentPool=[
- {name:"黃巾短刀",slot:"weapon",quality:"普通",power:3,traits:["輕巧"]},
- {name:"舊鐵刀",slot:"weapon",quality:"普通",power:4,traits:["平衡"]},
- {name:"精鋼短劍",slot:"weapon",quality:"良好",power:8,traits:["鋒利"]},
- {name:"獵人硬弓",slot:"weapon",quality:"良好",power:7,traits:["遠射"]},
- {name:"雲紋長刀",slot:"weapon",quality:"稀有",power:12,traits:["破甲"]},
- {name:"玄鐵重刃",slot:"weapon",quality:"稀有",power:15,traits:["重擊"]},
- {name:"無名古劍",slot:"weapon",quality:"史詩",power:18,traits:["鋒利","靈巧"]},
- {name:"青龍偃月刀",slot:"weapon",quality:"傳說",power:24,traits:["威震華夏","破甲","重擊"]},
- {name:"赤兔",slot:"mount",quality:"傳說",power:0,traits:["疾馳","衝陣","脫戰"]}
-];
-
-function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
-function pick(a){return a[Math.floor(Math.random()*a.length)]}
-function clamp(n,a=0,b=100){return Math.max(a,Math.min(b,n))}
-function pct(n){return Math.round(n)+"%"}
-function deepCopy(x){return JSON.parse(JSON.stringify(x))}
-
-let state=null;
-let formativeIndex=0;
-let pendingCombat=false;
-
-function renderStart(){
-  document.getElementById("screen").innerHTML=`
-    <section class="hero">
-      <div class="eyebrow">THREE KINGDOMS · MOBILE EDITION</div>
-      <h2>三國・逆命錄</h2>
-      <p class="subtitle">你不是來重演歷史。你是來看看——如果你活在那個時代，歷史會否因你而改變。</p>
-      <label class="meta" for="heroName">你的名字（必填）</label>
-      <input id="heroName" maxlength="8" autocomplete="off" placeholder="輸入你的名字"
-        style="width:100%;margin:8px 0 14px;padding:13px 14px;border-radius:9px;border:1px solid var(--line);background:#101217;color:var(--text);font:inherit">
-      <div class="choices">
-        <button class="choice primary" id="startLifeBtn"><strong>開始新人生</strong><small>你的名字由你決定。</small></button>
-        <button class="choice" id="continueBtn"><strong>讀取保存</strong></button>
-      </div>
-    </section>`;
-  const input=document.getElementById("heroName");
-  document.getElementById("startLifeBtn").addEventListener("click",()=>{
-    const name=input.value.trim();
-    if(!name){alert("請先輸入你的名字。");input.focus();return;}
-    newLife(name);
-  });
-  document.getElementById("continueBtn").addEventListener("click",()=>{
-    if(localStorage.getItem(SAVE_KEY)) loadGame(); else alert("目前沒有保存檔。");
-  });
+function render(){
+  if(state.phase==="start") return startScreen();
+  if(state.phase==="combat") return combatScreen();
+  if(state.phase==="ending") return endingScreen();
+  sceneScreen();
 }
 
-function newLife(customName){
-  const bg=pick(backgrounds);
-  const stats={str:rand(20,42),int:rand(20,42),pol:rand(15,38),cha:rand(20,45),lea:rand(15,38),sur:rand(25,50)};
-  Object.entries(bg.stats).forEach(([k,v])=>stats[k]+=v);
-  const pot={};
-  Object.keys(STAT_NAMES).forEach(k=>pot[k]=rand(55,82));
-  Object.entries(bg.stats).forEach(([k,v])=>pot[k]=clamp(pot[k]+Math.floor(v/2)));
-  state={
-    name:customName || randomName(),courtesy:randomCourtesy(),
-    age:6,level:0,xp:0,money:rand(8,25),
-    background:bg.name,stats,pot,mastery:{str:0,int:0,pol:0,cha:0,lea:0,sur:0},
-    tags:{},traits:[],relationships:{family:50,mentor:0},
-    inventory:[],equipped:{weapon:null,mount:null},history:[],
-    divergence:0,renown:0,wounds:[],stress:0,
-    formativeDone:false, combat:null, pendingEvent:null
+function chrome(content){
+  app.innerHTML=`<div class="top"><div class="brand">三國・逆命錄</div><div class="age">${state.age?state.age+" 歲":""}</div></div>${content}`;
+}
+
+function startScreen(){
+  app.innerHTML=`<div class="card hero">
+    <div class="eyebrow">THREE KINGDOMS · V3 VERTICAL SLICE</div>
+    <h1>三國・逆命錄</h1>
+    <p>你會由一個嬰兒開始。你的性格、天賦、選擇，會一步一步塑造你。<br>直到你第一次真正面對刀鋒。</p>
+    <input id="name" class="name" maxlength="10" placeholder="輸入你的名字（必填）" autocomplete="off">
+    <button id="start" class="btn primary"><strong>開始新人生</strong><small>出生 → 成長 → 少年 → 第一場戰鬥</small></button>
+    <div class="small" style="margin-top:16px">V3 暫不進入改寫歷史；先把「成為你自己」做好。</div>
+  </div>`;
+  document.getElementById("start").onclick=()=>{
+    const n=document.getElementById("name").value.trim();
+    if(!n){alert("請先輸入你的名字。");return}
+    Object.assign(state,{phase:"scene",age:0,name:n,stats:{str:25,int:25,cha:25,agi:25},potential:{martial:50,scholar:50},traits:[],history:[],inventory:[]});
+    birth();
   };
-  Object.entries(bg.tags).forEach(([k,v])=>addTag(k,v));
-  log(`出生：${bg.name}。`);
-  formativeIndex=0;
-  renderFormative();
 }
 
-function randomName(){
-  const surnames=["張","李","王","趙","陳","劉","周","馬","許","高","郭","徐"];
-  const names=["玄","烈","安","衡","朔","遠","雲","川","策","昱","明","武","靖","昭","恆"];
-  return pick(surnames)+pick(names);
+function birth(){
+  state.age=0;
+  showScene("184年 · 出生",`黃巾之亂的陰影正在蔓延。\n你出生於一個沒有人知道名字的小村。\n\n父母望著你，並不知道你將會成為甚麼樣的人。`,[
+    ["取一個平凡的名字","你的人生從安穩開始。",()=>{state.traits.push("謹慎");state.history.push("幼年：家人教你珍惜平凡。");age6()}],
+    ["讓家人替你決定一切","你從小便習慣聽從別人的安排。",()=>{state.stats.cha+=3;state.traits.push("隨和");state.history.push("幼年：你很少與人爭執。");age6()}],
+    ["握住父親伸來的手","那一刻，你還不知道刀是甚麼，只知道那隻手很穩。",()=>{state.potential.martial+=8;state.traits.push("膽識初萌");state.history.push("幼年：你對父親的武藝產生好奇。");age6()}]
+  ]);
 }
-function randomCourtesy(){return pick(["子烈","伯玄","元衡","仲遠","子明","文昭","景川"])}
-function addTag(k,v){state.tags[k]=(state.tags[k]||0)+v}
-function log(t){if(!state.history)state.history=[];state.history.unshift({age:state.age,text:t})}
-function addTrait(t){if(t && !state.traits.includes(t))state.traits.push(t)}
-function statTier(v){if(v<25)return"弱";if(v<50)return"基本";if(v<75)return"一般";if(v<90)return"Above Average";if(v<100)return"Elite";return"Peak Human"}
 
-function applyChoice(c){
-  if(c.mods?.stats) Object.entries(c.mods.stats).forEach(([k,v])=>state.stats[k]=clamp(state.stats[k]+v));
-  if(c.mods?.pot) Object.entries(c.mods.pot).forEach(([k,v])=>state.pot[k]=clamp(state.pot[k]+v));
-  if(c.tags) Object.entries(c.tags).forEach(([k,v])=>addTag(k,v));
-  if(c.trait)addTrait(c.trait);
-  if(c.rel)state.relationships.family=clamp(state.relationships.family+c.rel);
-  Object.keys(state.stats).forEach(k=>state.stats[k]=Math.min(state.stats[k],state.pot[k]));
-  state.xp+=rand(8,18);
-  log(`做出選擇：「${c.text}」`);
-  if(c.combat){startFormativeCombat();return;}
-  advanceFormative();
+function age6(){
+  state.age=6;
+  showScene("6歲 · 村口的孩子",`幾個年長的孩子正在欺負一個比你更小的孩子。\n\n大人就在不遠處。\n但沒有人出手。`,[
+    ["站出去","你明知道自己打不過，仍然走了過去。\n\n「夠了。」",()=>{state.stats.str+=5;state.stats.agi+=2;state.traits.push("不屈");state.history.push("6歲：第一次為陌生人出頭。");age9()}],
+    ["去找大人","你跑去叫人。\n\n事情很快被制止。父親卻問你：「如果沒有人來呢？」",()=>{state.stats.int+=5;state.traits.push("審慎");state.history.push("6歲：你懂得先找方法，而不是只找勇氣。");age9()}],
+    ["站在旁邊看","你沒有出聲。\n\n那個孩子最後哭著跑走。\n你記住了他的眼神。",()=>{state.stats.cha+=4;state.traits.push("旁觀者");state.history.push("6歲：你第一次知道沉默也會留下重量。");age9()}]
+  ]);
 }
-function canChoose(c){
-  if(!c.requires)return true;
-  return (state.tags[c.requires.tag]||0)>=c.requires.value;
+
+function age9(){
+  state.age=9;
+  showScene("9歲 · 你最擅長甚麼？",`村裡來了一名遊方先生。\n他說可以教孩子一件事，但只能選一樣。`,[
+    ["跟他讀書","你開始喜歡那些能把混亂說清楚的文字。",()=>{state.stats.int+=8;state.potential.scholar+=8;state.traits.push("好學");state.history.push("9歲：你開始讀書。");age12()}],
+    ["跟鄉勇練身手","木刀很重，你的手掌很快磨出水泡。\n但第二天，你又去了。",()=>{state.stats.str+=7;state.stats.agi+=5;state.potential.martial+=10;state.traits.push("苦練");state.history.push("9歲：你開始習武。");age12()}],
+    ["學怎樣說服人","你發現一句話，有時比拳頭更快讓人改變主意。",()=>{state.stats.cha+=8;state.potential.scholar+=3;state.traits.push("口才");state.history.push("9歲：你開始懂得揣摩人心。");age12()}]
+  ]);
 }
-function advanceFormative(){
-  if(formativeIndex>=formative.length-1){finishFormative();return;}
-  formativeIndex++;
-  state.age=formative[formativeIndex].age;
-  renderFormative();
+
+function age12(){
+  state.age=12;
+  showScene("12歲 · 雨夜",`暴雨淹過村路。\n一名陌生旅人倒在屋外，身上有血。\n\n父親看著你。`,[
+    ["開門救他","你把陌生人拖進屋裡。\n\n第二天，他醒來時只說了一句：「亂世裡，記住你今天的選擇。」",()=>{state.stats.cha+=5;state.traits.push("仁心");state.history.push("12歲：你救過一個陌生人。");age14()}],
+    ["先搜他的東西","你先確認他是不是帶著麻煩。\n\n你在他身上找到一枚陌生的令牌。",()=>{state.stats.int+=6;state.traits.push("多疑");state.history.push("12歲：你學會先看清代價。");age14()}],
+    ["不靠近","你沒有冒險。\n\n那一夜，你第一次聽見村外有人慘叫。",()=>{state.stats.agi+=4;state.traits.push("警覺");state.history.push("12歲：你開始知道活下來本身也是本事。");age14()}]
+  ]);
 }
-function finishFormative(){
-  state.formativeDone=true; state.age=18; state.level=1;
-  Object.keys(state.stats).forEach(k=>state.mastery[k]=clamp(Math.floor(state.tags[k==="str"?"martial":k==="int"?"scholar":k==="pol"?"political":k==="cha"?"social":k==="lea"?"leadership":"survival"]||0)/2));
-  state.inventory.push(deepCopy(pick([equipmentPool[0],equipmentPool[1],equipmentPool[3]])));
-  state.equipped.weapon=state.inventory[state.inventory.length-1];
-  log("十八歲：少年時代結束，你的人生真正開始。");
-  renderMain();
+
+function age14(){
+  state.age=14;
+  showScene("14歲 · 真刀",`父親把一把舊刀放到桌上。\n\n「木刀可以讓你練習。」\n「這把，會讓你受傷。」`,[
+    ["拿起來","刀比你想像中重。\n但你沒有放下。",()=>{state.stats.str+=8;state.potential.martial+=7;state.traits.push("敢於見血");state.inventory.push("舊環首刀");state.history.push("14歲：你第一次握住真正的兵器。");age15()}],
+    ["先研究它","你沒有急著拔刀。\n你看見刀刃磨損的位置，也看見護手留下的舊痕。",()=>{state.stats.int+=7;state.potential.martial+=4;state.traits.push("觀刀");state.inventory.push("舊環首刀");state.history.push("14歲：你學會先讀懂兵器。");age15()}],
+    ["拒絕","「我不需要。」\n父親看了你很久。\n「希望有一天，你仍然可以這樣說。」",()=>{state.stats.cha+=5;state.traits.push("自持");state.history.push("14歲：你選擇自己的道路。");age15()}]
+  ]);
 }
-function startFormativeCombat(){
+
+function age15(){
   state.age=15;
-  state.combat={
-    enemy:{name:"山賊",maxHp:55,hp:55,morale:70,momentum:0,str:38,def:25,wounds:[],alive:true},
-    player:{maxHp:100,hp:100,morale:90,momentum:0},
-    round:1,log:["夜色中，山賊向你們襲來。你第一次握住真正的兵器。"],
-    surprise:false,ended:false
-  };
-  renderCombat(true);
+  showScene("15歲 · 山道",`你跟著一支小商隊穿過山道。\n天色將暗。\n\n馬突然停下。\n\n林中沒有聲音。\n\n但樹上的鳥——突然全飛走了。`,[
+    ["停下","你抬手。\n商隊停住。\n\n下一刻——\n\n嗖！\n\n一支箭釘進木箱。",()=>startCombat(true)],
+    ["繼續前進","「只是鳥。」\n你向前走了兩步。\n\n嗖！\n\n箭矢擦過你的耳邊。\n山林裡，十幾雙眼睛亮了起來。",()=>startCombat(false)],
+    ["觀察四周","你沒有看樹。\n你看地面。\n\n新踩出的泥印，三處。\n\n「有人。」",()=>{state.traits.push("戰前直覺");startCombat(true)}]
+  ]);
 }
 
-function playerCPR(){
-  const w=state.equipped.weapon?.power||0;
-  const woundPenalty=state.wounds.length*7;
-  return Math.round(state.stats.str*.3+state.stats.lea*.15+state.stats.sur*.15+w*.9+Object.values(state.mastery).reduce((a,b)=>a+b,0)/60+(100-woundPenalty)*.15);
+function showScene(title,story,choices){
+  state.phase="scene";
+  chrome(`<main class="card scene"><div class="eyebrow">${esc(title)}</div><h1>${esc(title)}</h1><div class="story">${esc(story)}</div><div class="divider"></div><div id="choices"></div></main>`);
+  const box=document.getElementById("choices");
+  choices.forEach(([title,desc,fn])=>{
+    const b=document.createElement("button");b.className="btn";
+    b.innerHTML=`<strong class="choiceTitle">${esc(title)}</strong><small>${esc(desc)}</small>`;
+    b.onclick=()=>fn();
+    box.appendChild(b);
+  });
 }
-function enemyCPR(e){return Math.round(e.str*.5+e.def*.5)}
-function combatChance(action){
-  const c=state.combat,e=c.enemy;
-  const gap=playerCPR()-enemyCPR(e);
-  let chance=45+gap*.12;
-  if(action==="quick")chance+=12;
-  if(action==="heavy")chance-=10;
-  if(action==="feint")chance-=2;
-  if(action==="counter")chance+=5;
-  if(c.surprise)chance+=12;
-  chance+=c.player.momentum*3-e.momentum*2;
-  if(e.wounds.length)chance+=8;
-  return clamp(chance,8,92);
+
+function combatStats(){
+  return {
+    str:state.stats.str,
+    agi:state.stats.agi,
+    weapon:state.inventory.includes("舊環首刀")?6:0
+  };
 }
-function combatAction(action){
-  const c=state.combat,e=c.enemy,p=c.player;
-  if(c.ended)return;
-  let chance=combatChance(action);
-  const roll=rand(1,100);
-  let text="";
-  if(action==="defend"){
-    p.momentum=Math.min(5,p.momentum+1);
-    c.log.unshift(`你採取防守姿態。Momentum +1。`);
-  }else if(action==="maneuver"){
-    p.momentum=Math.min(5,p.momentum+2);
-    c.log.unshift(`你繞向敵人側翼。Momentum +2。`);
-    if(Math.random()<.35)c.surprise=true;
-  }else if(action==="retreat"){
-    if(rand(1,100)<=clamp(45+state.stats.sur*.35,20,85)){endCombat("escape");return}
-    c.log.unshift("你試圖脫離戰鬥，但山賊逼得太緊。");
+
+function startCombat(prepared){
+  state.age=15;
+  const s=combatStats();
+  state.combat={
+    you:{hp:100,max:100,morale:100},
+    enemy:{hp:92,max:92,morale:78},
+    round:1,log:[],
+    prepared,
+    first:true,
+    enemyWounded:false,
+    executeReady:false,
+    ended:false
+  };
+  if(prepared){
+    state.combat.enemy.hp-=12;
+    state.combat.enemy.morale-=14;
+    state.combat.log.unshift("你比他更早看見這場伏擊。");
+    state.combat.log.unshift("🥷 你先出手。");
   }else{
-    if(roll<=chance){
-      let dmg=rand(7,13)+(state.equipped.weapon?.power||0);
-      if(action==="heavy")dmg+=rand(5,10);
-      if(action==="quick")dmg-=2;
-      if(c.surprise)dmg=Math.round(dmg*1.25);
-      if(action==="feint")e.def=Math.max(0,e.def-8);
-      if(rand(1,100)<=12+(state.equipped.weapon?.quality==="傳說"?8:0)){dmg=Math.round(dmg*1.5);text=" CRITICAL HIT！"}
-      e.hp=Math.max(0,e.hp-dmg);
-      e.morale=Math.max(0,e.morale-Math.round(dmg/2));
-      p.momentum=Math.min(5,p.momentum+1);
-      if(dmg>=18)e.wounds.push("重傷");
-      c.log.unshift(`你使用${actionName(action)}命中，造成 ${dmg} 傷害。${text}`);
+    state.combat.you.hp-=8;
+    state.combat.you.morale-=8;
+    state.combat.log.unshift("箭矢擦過你的肩。");
+    state.combat.log.unshift("你被迫在混亂中拔刀。");
+  }
+  combatScreen();
+}
+
+function chanceFor(action){
+  const c=state.combat,s=combatStats(),e=c.enemy;
+  let base=42;
+  if(action==="quick")base+=s.agi*.38+s.str*.16;
+  if(action==="heavy")base+=s.str*.46-s.agi*.08;
+  if(action==="feint")base+=s.int*.28+s.agi*.22;
+  if(action==="defend")base=70+s.agi*.18;
+  if(action==="maneuver")base=50+s.agi*.35;
+  if(c.prepared)base+=8;
+  if(e.morale<35)base+=6;
+  return clamp(Math.round(base),20,88);
+}
+
+function combatLine(action,success,damage,crit){
+  const c=state.combat;
+  if(!success){
+    const miss={
+      quick:["你搶得太急，刀鋒擦空。","對手縮身，讓你撲了個空。","你踏前，卻慢了半步。"],
+      heavy:["你沉肩發力，對方卻避開了。","重擊落在地面，碎石飛濺。","你的一刀太重，反而給了他躲閃的空間。"],
+      feint:["你賣出的破綻沒騙過他。","他沒有上當。","你收刀太慢，對手已經看穿。"]
+    };
+    return pick(miss[action]||["你穩住了腳步。"]);
+  }
+  if(crit)return pick(["刀鋒從他防守的縫隙穿過。","你抓住那一瞬的破綻，整個人撞進去。","他才抬手，你的刀已經到了。"]);
+  const good={
+    quick:["你踏入刀距，先手得手。","短刀貼身一閃。","你沒有給他第二次揮刀的機會。"],
+    heavy:["你沉腰發力，兵器狠狠撞上他的防守。","這一刀逼得他連退三步。","你的力量讓他的刀直接偏開。"],
+    feint:["你故意露出空隙，他果然上鉤。","假動作一晃，他的重心露了出來。","你收刀、轉身、再出手——只是一瞬。"]
+  };
+  return pick(good[action]||["你抓住機會，刀鋒得手。"]);
+}
+
+function enemyLine(success,damage){
+  if(success)return pick(["山賊咬牙逼近。","他怒吼著重新揮刀。","他沒有給你喘息的時間。"]);
+  return pick(["他一刀劈空。","你側身閃過，刀鋒擦著衣角過去。","他急了，腳步露出破綻。"]);
+}
+
+function takeAction(action){
+  const c=state.combat;
+  if(c.ended)return;
+  const s=combatStats(),e=c.enemy;
+  let success=Math.random()*100<chanceFor(action);
+  if(action==="defend"){
+    c.you.morale=clamp(c.you.morale+6,0,100);
+    c.log.unshift(pick(["你架刀而立，沒有急著追。","你退半步，讓對方的刀落空。","你穩住呼吸，等他先露破綻。"]));
+  }else if(action==="maneuver"){
+    const ok=Math.random()<.62;
+    if(ok){
+      c.prepared=true;
+      c.you.morale=clamp(c.you.morale+5,0,100);
+      c.log.unshift(pick(["你逼向他的側面。","你踩住山路較高的一側。","你突然換位，他只能轉身追你。"]));
+      if(Math.random()<.35)c.executeReady=true;
     }else{
-      p.momentum=Math.max(-3,p.momentum-1);
-      c.log.unshift(`你使用${actionName(action)}失手了。（${pct(chance)}）`);
+      c.log.unshift("你換位時踩到碎石。");
+      c.you.hp-=roll(2,5);
+    }
+  }else{
+    let dmg=0;
+    if(success){
+      dmg=action==="heavy"?roll(15,23)+Math.floor(s.str/18):action==="quick"?roll(9,16)+Math.floor(s.agi/20):roll(8,14);
+      dmg+=s.weapon;
+      const crit=Math.random()<0.12+(s.str>70?.08:0);
+      if(crit)dmg=Math.round(dmg*1.55);
+      e.hp=Math.max(0,e.hp-dmg);
+      e.morale=clamp(e.morale-Math.round(dmg*.65),0,100);
+      if(dmg>=22)c.enemyWounded=true;
+      c.log.unshift(`<span class="${crit?"critical":"damage"}">${crit?"🔥 ":""}${combatLine(action,true,dmg,crit)} <b>${dmg}</b></span>`);
+    }else{
+      c.log.unshift(combatLine(action,false,0,false));
+      c.you.morale=clamp(c.you.morale-4,0,100);
     }
   }
-  if(e.hp<=0||e.morale<=15){endCombat("victory");return}
-  enemyTurn();
-}
-function actionName(a){return({quick:"迅擊",heavy:"重擊",feint:"佯攻",counter:"反擊"})[a]||a}
-function enemyTurn(){
-  const c=state.combat,e=c.enemy,p=c.player;
-  if(c.ended)return;
-  const roll=rand(1,100);
-  const chance=clamp(48+(enemyCPR(e)-playerCPR())*.12-e.wounds.length*5,12,88);
-  if(roll<=chance){
-    const dmg=rand(5,11)+(e.wounds.length? -2:0);
-    p.hp=Math.max(0,p.hp-dmg);
-    p.momentum=Math.max(-3,p.momentum-1);
-    c.log.unshift(`山賊反擊，造成 ${dmg} 傷害。`);
-    if(dmg>=12)state.wounds.push("手臂輕傷");
-  }else{
-    p.momentum=Math.min(5,p.momentum+1);
-    c.log.unshift("山賊的攻擊被你避開。");
+
+  if(e.hp<=22 || e.morale<=22){
+    c.executeReady=(s.str>70);
+  }
+  if(e.hp<=0||e.morale<=0){finishCombat(true);return}
+  if(c.you.hp<=0){finishCombat(false);return}
+
+  if(action!=="defend"&&action!=="maneuver"){
+    const enemyChance=clamp(48-(c.prepared?9:0)+(e.morale<30?-10:0),18,70);
+    if(Math.random()*100<enemyChance){
+      const dmg=roll(6,13);
+      c.you.hp=Math.max(0,c.you.hp-dmg);
+      c.you.morale=clamp(c.you.morale-7,0,100);
+      c.log.unshift(`<span class="danger">${enemyLine(true,dmg)} <b>-${dmg}</b></span>`);
+    }else{
+      c.log.unshift(enemyLine(false,0));
+    }
   }
   c.round++;
-  c.surprise=false;
-  if(p.hp<=0){endCombat("defeat");return}
-  renderCombat(false);
-}
-function endCombat(result){
-  const c=state.combat;c.ended=true;
-  if(result==="victory"){
-    state.xp+=45;state.renown+=3;
-    const loot=deepCopy(pick([equipmentPool[0],equipmentPool[1],equipmentPool[3]]));
-    state.inventory.push(loot);
-    state.equipped.weapon=loot;
-    state.wounds=state.wounds.slice(0,1);
-    addTrait("初戰之血");
-    c.log.unshift("⚔️ 勝利。你第一次真正見血。");
-    log("十五歲：山賊襲擊中取得勝利，獲得「初戰之血」。");
-    log(`戰利品：${loot.name}`);
-  }else{
-    state.wounds.push("戰鬥重傷");
-    state.xp+=10;
-    c.log.unshift("你倒下了，但有人把你救走。");
-    log("十五歲：第一次真正戰鬥失敗，留下重傷。");
-  }
-  renderCombat(false);
-}
-function continueAfterCombat(){
-  state.combat=null;
-  advanceFormative();
+  c.prepared=false;
+  c.executeReady=(s.str>70 && (e.hp<=22||e.morale<=22));
+  combatScreen();
 }
 
-function renderFormative(){
-  const e=formative[formativeIndex];
-  const progress=Math.round((formativeIndex/(formative.length-1))*100);
-  document.getElementById("screen").innerHTML=`
-    <div class="grid two">
-      <section class="event">
-        <div class="progress"><span>少年時代 · ${state.age}歲</span><span>${formativeIndex+1}/${formative.length}</span></div>
-        <div class="meter"><i style="width:${progress}%"></i></div>
-        <div class="meta" style="margin-top:16px">出身：${state.background} · ${state.name}・${state.courtesy}</div>
-        <h2 class="event-title">${e.title}</h2>
-        <p class="quote">${e.text}</p>
-        <div class="choices">
-          ${e.choices.map((c,i)=>`
-            <button class="choice" ${canChoose(c)?"":"disabled"} onclick="choose(${i})">
-              <strong>${c.text}</strong>
-              <small>${choiceHint(c)}</small>
-            </button>`).join("")}
-        </div>
-      </section>
-      <aside class="panel">
-        ${renderMiniCharacter()}
-        <hr style="border-color:var(--line);margin:18px 0">
-        <h3>已形成的方向</h3>
-        <div class="cardrow">${Object.entries(state.tags).filter(([k,v])=>v>=6).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>`<span class="tag">${TAG_NAMES[k]||k} ${v}</span>`).join("")||"<span class='meta'>你的道路尚未明朗。</span>"}</div>
-        <h3 style="margin-top:18px">特質</h3>
-        <div class="cardrow">${state.traits.map(t=>`<span class="tag">${t}</span>`).join("")||"<span class='meta'>尚未形成明確特質。</span>"}</div>
-      </aside>
-    </div>`;
-}
-function choiceHint(c){
-  const s=[];
-  if(c.requires&&!canChoose(c))s.push(`需要「${TAG_NAMES[c.requires.tag]||c.requires.tag}」${c.requires.value}`);
-  if(c.combat)s.push("可能進入戰鬥");
-  if(c.risk)s.push("有額外風險");
-  return s.join(" · ")||"這個選擇會影響你的成長方向。";
-}
-function choose(i){applyChoice(formative[formativeIndex].choices[i])}
-
-function renderMiniCharacter(){
-  return `<div class="character-head"><div><div class="meta">AGE ${state.age}</div><h2>${state.name}・${state.courtesy}</h2></div><div class="meta">XP ${state.xp}</div></div>
-  <div class="stats">${Object.entries(state.stats).map(([k,v])=>`<div class="stat"><div class="label">${STAT_ICONS[k]} ${STAT_NAMES[k]}</div><div class="value">${v}</div><div class="meter"><i style="width:${v}%"></i></div><div class="meta">${statTier(v)} · 潛能 ${state.pot[k]}</div></div>`).join("")}</div>`;
-}
-
-function renderMain(){
-  document.getElementById("screen").innerHTML=`
-    <div class="toolbar">
-      <button class="primary" onclick="showProfile()">角色</button>
-      <button onclick="showInventory()">裝備</button>
-      <button onclick="showHistory()">人生史</button>
-      <button onclick="nextMainEvent()">下一事件</button>
-    </div>
-    <div class="grid two">
-      <section class="panel">${renderMiniCharacter()}
-        <div class="banner gold">十八歲。少年時代結束。亂世正開始。</div>
-        <div class="cardrow">${state.traits.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
-      </section>
-      <section class="panel">
-        <h2>📜 目前局勢</h2>
-        <p class="quote">184年，黃巾之亂爆發。天下開始動盪。你還沒有名聲，也沒有軍隊，但你已經擁有一段真正屬於自己的少年史。</p>
-        <div class="banner">聲望：${state.renown} · 金錢：${state.money} · 歷史偏移：${state.divergence}</div>
-        <button class="primary" onclick="nextMainEvent()">繼續人生 →</button>
-      </section>
-    </div>`;
-}
-function showProfile(){
-  document.getElementById("screen").innerHTML=`<div class="panel">
-    <div class="toolbar"><button onclick="renderMain()">← 返回</button></div>
-    ${renderMiniCharacter()}
-    <h3 style="margin-top:20px">Potential</h3>
-    <div class="stats">${Object.entries(state.pot).map(([k,v])=>`<div class="stat"><div class="label">${STAT_ICONS[k]} ${STAT_NAMES[k]}</div><div class="value">${v}</div><div class="meta">${statTier(v)}</div></div>`).join("")}</div>
-    <h3 style="margin-top:20px">Development</h3>
-    ${["martial","scholar","political","social","hunter","leadership","survival","ambition"].map(k=>`<div class="progress"><span>${TAG_NAMES[k]||k}</span><span>${state.tags[k]||0}</span></div><div class="meter"><i style="width:${Math.min(100,(state.tags[k]||0))}%"></i></div>`).join("")}
-  </div>`;
-}
-function showInventory(){
-  document.getElementById("screen").innerHTML=`<div class="panel">
-    <div class="toolbar"><button onclick="renderMain()">← 返回</button></div>
-    <h2>🎒 裝備</h2>
-    <div class="grid two">${state.inventory.map((it,i)=>`<div class="stat"><div class="meta">${it.slot==="mount"?"坐騎":"武器"} · ${it.quality}</div><h3>${it.name}</h3><div>${it.slot==="weapon"?"Weapon Power +"+it.power:"機動能力 +" + 25}</div><div class="cardrow">${it.traits.map(t=>`<span class="tag">${t}</span>`).join("")}</div><button onclick="equip(${i})">${state.equipped.weapon===it||state.equipped.mount===it?"已裝備":"裝備"}</button></div>`).join("")}</div>
-  </div>`;
-}
-function equip(i){
-  const it=state.inventory[i];
-  if(it.slot==="weapon")state.equipped.weapon=it; else state.equipped.mount=it;
-  log(`裝備：${it.name}`);
-  showInventory();
-}
-function showHistory(){
-  document.getElementById("screen").innerHTML=`<div class="panel"><div class="toolbar"><button onclick="renderMain()">← 返回</button></div><h2>📜 我的人生</h2><div class="log">${state.history.map(x=>`<div class="log-item"><b>${x.age}歲</b>　${x.text}</div>`).join("")}</div></div>`;
-}
-function nextMainEvent(){
-  state.age++;
-  const events=[
-    ["184年・黃巾","縣城正在招募鄉勇。你要不要投身亂局？",[["參軍",{lea:2,str:1},4],["留在地方",{pol:1,cha:1},1],["去外地尋師",{int:2},2]]],
-    ["陌生的消息","一名旅人說，北方有位年輕武人正在招募門客。",[["追上去",{sur:1,cha:1},2],["打聽消息",{int:1,pol:1},2],["不理會",{sur:1},0]]],
-    ["山道伏擊","你發現一隊人似乎沒有注意到你。",[["偷襲",{sur:2,str:1},5],["觀察",{int:2,sur:1},2],["離開",{sur:1},1]]]
+function execute(){
+  const c=state.combat;
+  if(!c.executeReady||c.ended)return;
+  const weapon=state.inventory.includes("舊環首刀");
+  const endings=weapon?[
+    "你沒有再退。\n\n你抬刀。\n\n山賊剛轉身——\n\n寒光已經越過他的視線。\n\n戰場突然安靜。",
+    "他跪倒在泥地。\n\n你一步踏前。\n\n刀鋒落下。\n\n這一次，沒有第二招。",
+    "山賊看見你逼近，眼神終於變了。\n\n你沒有吼叫。\n\n只有一刀。\n\n乾脆、迅猛。\n\n他倒下了。"
+  ]:[
+    "你逼近一步。\n\n他已經沒有退路。\n\n你的最後一擊乾脆而狠。\n\n山道重新安靜下來。"
   ];
-  const ev=pick(events);
-  document.getElementById("screen").innerHTML=
-    `<div class="event"><div class="meta">${ev[0]}</div><h2>${ev[0]}</h2><p class="quote">${ev[1]}</p><div class="choices" id="adultChoices"></div></div>`;
-  const box=document.getElementById("adultChoices");
-  ev[2].forEach(x=>{
-    const btn=document.createElement("button");
-    btn.className="choice";
-    btn.innerHTML=`<strong>${x[0]}</strong><small>選擇會影響你的未來。</small>`;
-    btn.addEventListener("click",()=>mainChoice(x[1],x[2]));
-    box.appendChild(btn);
-  });
-}
-function mainChoice(mods,div){
-  Object.entries(mods).forEach(([k,v])=>state.stats[k]=clamp(state.stats[k]+v));
-  state.stats=Object.fromEntries(Object.entries(state.stats).map(([k,v])=>[k,Math.min(v,state.pot[k])]));
-  state.divergence+=div;
-  state.xp+=rand(10,22);
-  log(`成年後事件：能力發生變化。`);
-  renderMain();
+  c.enemy.hp=0;c.enemy.morale=0;c.ended=true;
+  c.log.unshift(`<span class="critical">⚔️ ${pick(endings)}</span>`);
+  finishCombat(true,true);
 }
 
-function renderCombat(first){
-  const c=state.combat,e=c.enemy,p=c.player;
-  document.getElementById("screen").innerHTML=`
-  <div class="combat">
-    <div class="meta">⚔️ BATTLE · ${c.round} 回合</div>
-    <h2>${first?"第一次真正殺人":"戰鬥仍在繼續"}</h2>
-    ${c.surprise?'<div class="banner gold">🥷 AMBUSH — 你取得先手！</div>':""}
-    <div class="combat-layout">
-      <div class="fighter enemy"><h3><span>山賊</span><span>${e.hp}/${e.maxHp}</span></h3><div class="hpbar"><i style="width:${e.hp/e.maxHp*100}%"></i></div><p>士氣 ${e.morale} · Momentum ${e.momentum}</p><div class="cardrow">${e.wounds.map(w=>`<span class="tag">${w}</span>`).join("")}</div></div>
-      <div class="fighter"><h3><span>${state.name}</span><span>${p.hp}/${p.maxHp}</span></h3><div class="hpbar"><i style="width:${p.hp/p.maxHp*100}%"></i></div><p>士氣 ${p.morale} · Momentum ${p.momentum} · CPR ${playerCPR()}</p><div class="cardrow">${state.wounds.map(w=>`<span class="tag">${w}</span>`).join("")}</div></div>
+function finishCombat(win,executed=false){
+  const c=state.combat;
+  c.ended=true;c.win=win;c.executed=executed;
+  if(win){
+    state.history.push(executed?"15歲：第一次戰鬥中，以一擊終結敵人。":"15歲：第一次戰鬥中活了下來。");
+  }else{
+    state.history.push("15歲：第一次戰鬥失敗，留下傷痕。");
+  }
+  combatScreen();
+}
+
+function combatScreen(){
+  const c=state.combat,s=combatStats(),e=c.enemy,y=c.you;
+  const hpPct=(x,m)=>clamp(x/m*100,0,100);
+  let actions="";
+  if(c.ended){
+    actions=`<div class="end"><h2>${c.win?"你活了下來":"你倒下了"}</h2>
+      <p>${c.win?(c.executed?"你的第一場戰鬥，以一個令人難忘的終結收場。":"你第一次真正見血。你活了下來。"):"亂世的第一課，比你想像中殘酷。"} </p>
+      <button id="finish" class="btn primary"><strong>看見你的成年</strong><small>這個 Vertical Slice 到此結束。</small></button></div>`;
+  }else{
+    actions=`<div class="actions">
+      <button class="btn" data-a="quick"><strong>⚡ 迅擊</strong><small>${chanceFor("quick")}% · 快、狠</small></button>
+      <button class="btn" data-a="heavy"><strong>💥 重擊</strong><small>${chanceFor("heavy")}% · 破防</small></button>
+      <button class="btn" data-a="feint"><strong>🪤 佯攻</strong><small>${chanceFor("feint")}% · 誘敵</small></button>
+      <button class="btn" data-a="defend"><strong>🛡 穩住</strong><small>等待破綻</small></button>
+      <button class="btn" data-a="maneuver"><strong>🥷 走位</strong><small>尋找先手</small></button>
+      ${c.executeReady?`<button id="execute" class="btn execute"><strong>⚔️ 終結</strong><small>你看見了他的破綻。</small></button>`:""}
+    </div>`;
+  }
+  chrome(`<main class="card">
+    <div class="combatHead"><div><div class="eyebrow">15歲 · 山道</div><h1 style="margin:0">第一次見血</h1></div><div class="age">第 ${c.round} 回合</div></div>
+    <div class="fighters">
+      <div class="fighter you"><h3>${esc(state.name)}</h3><div class="bar"><i style="width:${hpPct(y.hp,y.max)}%"></i></div><p>傷勢 ${y.hp}/${y.max} · 士氣 ${y.morale}</p></div>
+      <div class="fighter"><h3>山賊</h3><div class="bar"><i style="width:${hpPct(e.hp,e.max)}%"></i></div><p>傷勢 ${e.hp}/${e.max} · 士氣 ${e.morale}</p></div>
     </div>
-    <div class="combat-log" style="margin-top:14px">${c.log.slice(0,12).map(x=>`<div>${x}</div>`).join("")}</div>
-    ${c.ended?`<div class="banner ${e.hp<=0?"good":"bad"}">${e.hp<=0?"勝利！":"你敗下陣來。"}</div><button class="primary" onclick="continueAfterCombat()">繼續人生 →</button>`:
-    `<div class="action-grid">
-      <button onclick="combatAction('quick')">⚡ 迅擊<br><small>${pct(combatChance("quick"))}</small></button>
-      <button onclick="combatAction('heavy')">💥 重擊<br><small>${pct(combatChance("heavy"))}</small></button>
-      <button onclick="combatAction('feint')">🪤 佯攻<br><small>${pct(combatChance("feint"))}</small></button>
-      <button onclick="combatAction('defend')">🛡️ 防守</button>
-      <button onclick="combatAction('maneuver')">🥷 走位</button>
-      <button onclick="combatAction('retreat')">🏃 撤退</button>
-    </div>`}
-  </div>`;
+    <div class="log">${c.log.slice(0,7).map(x=>`<div>${x}</div>`).join("")}</div>
+    ${actions}
+  </main>`);
+  document.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>takeAction(b.dataset.a));
+  const ex=document.getElementById("execute");if(ex)ex.onclick=execute;
+  const fin=document.getElementById("finish");if(fin)fin.onclick=ending;
 }
 
-function saveGame(){localStorage.setItem(SAVE_KEY,JSON.stringify({state,formativeIndex}));alert("已保存。")}
-function loadGame(){const raw=localStorage.getItem(SAVE_KEY);if(!raw){alert("沒有保存檔。");return}const d=JSON.parse(raw);state=d.state;formativeIndex=d.formativeIndex;state.combat?renderCombat(false):state.formativeDone?renderMain():renderFormative()}
-document.getElementById("saveBtn").onclick=saveGame;
-document.getElementById("loadBtn").onclick=loadGame;
-document.getElementById("newBtn").onclick=()=>{if(confirm("開始新人生？目前未保存的進度會消失。"))renderStart()};
-renderStart();
+function ending(){
+  state.phase="ending";
+  const tags=state.traits.map(t=>`<span class="tag">${esc(t)}</span>`).join("");
+  chrome(`<main class="card scene">
+    <div class="eyebrow">V3 · END OF VERTICAL SLICE</div>
+    <h1>${esc(state.name)}，你成年了。</h1>
+    <div class="story">十五歲的你，第一次真正面對刀鋒。\n\n你現在還不知道自己會成為誰。\n\n但你已經知道一件事：\n\n亂世不會等你準備好。</div>
+    <div class="divider"></div>
+    <p><b>你一路留下的痕跡</b></p>
+    <div>${tags||'<span class="tag">尚未留下名字</span>'}</div>
+    <div class="stats">
+      <div class="stat"><b>${state.stats.str}</b><span>力量</span></div>
+      <div class="stat"><b>${state.stats.int}</b><span>悟性</span></div>
+      <div class="stat"><b>${state.stats.cha}</b><span>人望</span></div>
+    </div>
+    <button id="restart" class="btn primary" style="margin-top:16px"><strong>再走一次</strong><small>下一次，你會作出不同選擇。</small></button>
+  </main>`);
+  document.getElementById("restart").onclick=()=>{state.phase="start";render()};
+}
 
-
+render();
 </script>
 </body>
 </html>
