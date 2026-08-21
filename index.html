@@ -2,31 +2,40 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
+
   <meta name="theme-color" content="#17110d">
-  <title>逆命錄・黃巾初起</title>
+
+  <title>逆命錄・V4.0A</title>
 
   <style>
     :root {
       color-scheme: dark;
+
       --black: #0d0a08;
       --deep: #17110d;
       --panel: #211812;
       --panel-soft: #2b2018;
+
       --parchment: #decda6;
-      --bright: #f1e4c4;
-      --muted: #aa9675;
+      --parchment-bright: #f1e4c4;
+      --muted: #a99472;
+
       --border: #6c5234;
       --border-bright: #9b784c;
+
       --blood: #8c2924;
       --blood-bright: #bd493d;
+
       --gold: #c69a4b;
       --green: #72885d;
-      --blue: #687f88;
-      --shadow: rgba(0, 0, 0, 0.52);
+      --blue: #718496;
+
+      --shadow: rgba(0, 0, 0, 0.5);
     }
 
     * {
@@ -42,14 +51,21 @@
     body {
       min-height: 100vh;
       margin: 0;
+
       padding:
         env(safe-area-inset-top)
         env(safe-area-inset-right)
         env(safe-area-inset-bottom)
         env(safe-area-inset-left);
+
       color: var(--parchment);
+
       background:
-        radial-gradient(circle at 50% 0%, rgba(122, 84, 46, 0.16), transparent 36rem),
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(122, 84, 46, 0.16),
+          transparent 35rem
+        ),
         repeating-linear-gradient(
           0deg,
           rgba(255, 255, 255, 0.012) 0,
@@ -58,13 +74,15 @@
           transparent 5px
         ),
         var(--black);
+
       font-family:
         "Songti TC",
         "Noto Serif TC",
         "PingFang TC",
         "Microsoft JhengHei",
         serif;
-      line-height: 1.65;
+
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
@@ -78,164 +96,160 @@
       touch-action: manipulation;
     }
 
-    button:focus-visible,
-    input:focus-visible,
-    summary:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 2px;
-    }
-
     #app {
-      width: min(1200px, 100%);
+      width: min(1180px, 100%);
       margin: 0 auto;
-      padding: 14px;
+      padding: 10px;
     }
 
     .masthead {
-      position: relative;
-      padding: 18px 150px 14px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      padding: 15px 12px;
+
       text-align: center;
+
       border: 1px solid var(--border);
+
       background:
-        linear-gradient(rgba(27, 19, 14, 0.92), rgba(18, 13, 10, 0.96)),
+        linear-gradient(
+          rgba(27, 19, 14, 0.92),
+          rgba(18, 13, 10, 0.96)
+        ),
         var(--panel);
+
       box-shadow: 0 8px 24px var(--shadow);
     }
 
     .masthead h1 {
       margin: 0;
-      color: var(--bright);
-      font-size: clamp(1.9rem, 7vw, 3rem);
-      letter-spacing: 0.22em;
-      text-indent: 0.22em;
+
+      color: var(--parchment-bright);
+
+      font-size: clamp(1.8rem, 7vw, 2.8rem);
+      letter-spacing: 0.2em;
+      text-indent: 0.2em;
     }
 
     .masthead p {
       margin: 4px 0 0;
+
       color: var(--muted);
-      font-size: 0.88rem;
+
+      font-size: 0.83rem;
       letter-spacing: 0.1em;
-    }
-
-    .top-controls {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      display: flex;
-      gap: 7px;
-    }
-
-    .small-button {
-      min-height: 38px;
-      padding: 7px 10px;
-      color: var(--parchment);
-      border: 1px solid var(--border);
-      border-radius: 0;
-      background: #211812;
-      cursor: pointer;
-    }
-
-    .small-button:hover {
-      border-color: var(--gold);
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
-      gap: 12px;
+      grid-template-columns: minmax(270px, 330px) minmax(0, 1fr);
+      gap: 10px;
       align-items: start;
     }
 
-    .character-panel,
-    .story-panel {
+    .panel {
       border: 1px solid var(--border);
+
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.018), transparent 40%),
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.018),
+          transparent 40%
+        ),
         var(--panel);
+
       box-shadow: 0 8px 24px var(--shadow);
     }
 
     .character-panel {
       position: sticky;
-      top: 12px;
-      padding: 15px;
+      top: 10px;
+      padding: 14px;
     }
 
-    .story-panel {
-      min-height: 660px;
-      padding: clamp(16px, 4vw, 28px);
+    .main-panel {
+      min-height: 650px;
+      padding: clamp(15px, 4vw, 26px);
     }
 
     .panel-title {
-      margin: 0 0 12px;
-      padding-bottom: 8px;
+      margin: 0 0 11px;
+      padding-bottom: 7px;
+
       color: var(--gold);
       border-bottom: 1px solid var(--border);
-      font-size: 1rem;
-      letter-spacing: 0.13em;
+
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
     }
 
-    .identity,
-    .bar-header,
-    .enemy-row,
-    .battle-row {
+    .identity {
       display: flex;
       justify-content: space-between;
       gap: 10px;
       align-items: baseline;
-    }
 
-    .identity {
-      margin-bottom: 11px;
+      margin-bottom: 12px;
     }
 
     .identity strong {
-      color: var(--bright);
-      font-size: 1.35rem;
-      overflow-wrap: anywhere;
+      color: var(--parchment-bright);
+      font-size: 1.25rem;
     }
 
-    .identity span,
-    .bar-header {
+    .identity span {
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
     }
 
-    .track {
-      height: 12px;
-      margin: 5px 0 12px;
+    .meter {
+      margin-bottom: 11px;
+    }
+
+    .meter-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      margin-bottom: 4px;
+      font-size: 0.84rem;
+    }
+
+    .meter-track {
+      height: 11px;
       overflow: hidden;
-      border: 1px solid #67433a;
+
+      border: 1px solid #5d4731;
       background: #100c0a;
     }
 
-    .fill {
+    .meter-fill {
       height: 100%;
       width: 100%;
-      transition: width 220ms ease;
+
+      transition: width 180ms ease;
     }
 
-    .hp-fill {
-      background: linear-gradient(90deg, #6f1c1a, var(--blood-bright));
+    .guard-fill {
+      background: linear-gradient(90deg, #4f6370, #87a3b5);
     }
 
-    .enemy-fill {
-      background: linear-gradient(90deg, #6d221d, #9e3b32);
+    .stamina-fill {
+      background: linear-gradient(90deg, #4d5c3d, #859b65);
     }
 
-    .morale-fill {
-      background: linear-gradient(90deg, #536347, #81976b);
+    .enemy-guard-fill {
+      background: linear-gradient(90deg, #642b28, #a7473f);
     }
 
-    .formation-fill {
-      background: linear-gradient(90deg, #4d6066, #78909a);
+    .enemy-stamina-fill {
+      background: linear-gradient(90deg, #57472f, #a17d48);
     }
 
     .abilities {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px 12px;
+      gap: 5px 12px;
+
       margin: 12px 0;
     }
 
@@ -243,216 +257,174 @@
       display: flex;
       justify-content: space-between;
       gap: 8px;
-      padding-bottom: 3px;
-      border-bottom: 1px dotted rgba(222, 205, 166, 0.22);
+
+      padding-bottom: 2px;
+      border-bottom: 1px dotted rgba(222, 205, 166, 0.2);
     }
 
     .ability span:last-child {
-      color: var(--bright);
+      color: var(--parchment-bright);
       font-variant-numeric: tabular-nums;
     }
 
     .info-block {
-      margin-top: 12px;
-      padding-top: 9px;
-      border-top: 1px solid rgba(108, 82, 52, 0.7);
+      margin-top: 11px;
+      padding-top: 8px;
+
+      border-top: 1px solid rgba(108, 82, 52, 0.65);
     }
 
     .info-label {
       display: block;
+
       margin-bottom: 3px;
+
       color: var(--muted);
-      font-size: 0.76rem;
+
+      font-size: 0.74rem;
       letter-spacing: 0.1em;
     }
 
     .info-value {
-      color: var(--bright);
+      color: var(--parchment-bright);
       overflow-wrap: anywhere;
     }
 
-    .equipment-detail {
-      display: block;
+    .small-text {
       color: var(--muted);
-      font-size: 0.81rem;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 5px;
-    }
-
-    .tag {
-      padding: 2px 6px;
-      border: 1px solid rgba(155, 120, 76, 0.56);
-      color: var(--muted);
-      background: rgba(0, 0, 0, 0.15);
-      font-size: 0.72rem;
+      font-size: 0.78rem;
     }
 
     .status-box {
-      margin-top: 13px;
-      padding: 10px;
+      margin-top: 12px;
+      padding: 9px 10px;
+
       border-left: 3px solid var(--gold);
-      background: rgba(0, 0, 0, 0.19);
+      background: rgba(0, 0, 0, 0.2);
     }
 
     .story-heading {
-      margin: 0 0 4px;
-      color: var(--bright);
-      font-size: clamp(1.35rem, 5vw, 2rem);
+      margin: 0 0 14px;
+
+      color: var(--parchment-bright);
+
+      font-size: clamp(1.3rem, 5vw, 1.9rem);
       line-height: 1.35;
     }
 
-    .scene-meta {
-      margin-bottom: 16px;
-      color: var(--muted);
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-    }
-
-    #storyText {
-      min-height: 180px;
-    }
-
     #storyText p {
-      margin: 0 0 13px;
+      margin: 0 0 12px;
     }
 
-    #storyText .speech {
-      color: var(--bright);
+    .speech {
+      color: var(--parchment-bright);
       font-weight: 600;
     }
 
-    #storyText .warning {
+    .warning {
       color: #e7b099;
     }
 
-    #storyText .good {
+    .good {
       color: #bdc99f;
     }
 
-    #storyText .history {
-      padding-left: 11px;
-      border-left: 2px solid var(--border);
-      color: var(--muted);
-    }
-
-    .creation-box,
-    .enemy-card,
-    .battle-card,
-    .chapter-card,
-    .ending-card {
-      margin: 14px 0;
-      padding: 13px;
-      border: 1px solid rgba(155, 120, 76, 0.58);
-      background: rgba(0, 0, 0, 0.18);
-    }
-
     .enemy-card {
-      border-color: rgba(140, 41, 36, 0.75);
+      margin: 14px 0;
+      padding: 12px;
+
+      border: 1px solid rgba(140, 41, 36, 0.75);
       background: rgba(75, 22, 19, 0.16);
     }
 
-    .battle-card {
-      border-color: rgba(104, 127, 136, 0.72);
+    .enemy-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      margin-bottom: 8px;
     }
 
-    .chapter-card {
-      border-left: 4px solid var(--gold);
+    .enemy-header strong {
+      color: var(--parchment-bright);
     }
 
-    .ending-card {
-      border-color: var(--gold);
+    .wounds {
+      margin: 7px 0 0;
+      padding-left: 20px;
     }
 
-    .creation-box label {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--gold);
+    .wounds li {
+      margin-bottom: 3px;
+      color: #e0b09a;
     }
 
-    .creation-box input {
-      width: 100%;
-      min-height: 49px;
-      margin-bottom: 14px;
-      padding: 10px 12px;
-      color: var(--bright);
-      border: 1px solid var(--border-bright);
-      border-radius: 0;
-      background: #120e0b;
-    }
+    .roll-box {
+      margin: 14px 0;
+      padding: 10px 11px;
 
-    .choice-note {
-      display: block;
+      border: 1px solid rgba(155, 120, 76, 0.62);
+      background: rgba(8, 6, 5, 0.42);
+
       color: var(--muted);
-      font-size: 0.78rem;
-    }
 
-    details.roll-details,
-    details.ledger-details {
-      margin: 15px 0;
-      border: 1px solid rgba(155, 120, 76, 0.5);
-      background: rgba(8, 6, 5, 0.38);
-    }
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
 
-    details summary {
-      padding: 9px 11px;
-      color: var(--muted);
-      cursor: pointer;
-      user-select: none;
-    }
+      font-size: 0.75rem;
+      line-height: 1.55;
 
-    .roll-lines,
-    .ledger-content {
-      padding: 0 11px 10px;
-      color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.78rem;
       overflow-wrap: anywhere;
     }
 
     .roll-line + .roll-line {
-      margin-top: 5px;
+      margin-top: 4px;
     }
 
     .actions-title {
-      margin: 22px 0 9px;
+      margin: 20px 0 8px;
+
       color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
+
+      font-size: 0.88rem;
+      letter-spacing: 0.11em;
     }
 
-    #actions {
+    .actions {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 9px;
     }
 
     .action-button {
       width: 100%;
       min-height: 56px;
-      padding: 12px 13px;
-      color: var(--bright);
+      padding: 11px 12px;
+
+      color: var(--parchment-bright);
+
       border: 1px solid var(--border-bright);
       border-radius: 0;
+
       background:
-        linear-gradient(rgba(71, 51, 36, 0.76), rgba(43, 31, 23, 0.9)),
+        linear-gradient(
+          rgba(71, 51, 36, 0.76),
+          rgba(43, 31, 23, 0.9)
+        ),
         var(--panel-soft);
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.28);
+
       cursor: pointer;
       text-align: left;
       line-height: 1.35;
     }
 
-    .action-button:hover:not(:disabled) {
-      border-color: var(--gold);
-    }
-
     .action-button:active:not(:disabled) {
       transform: translateY(1px);
+      background: #513825;
     }
 
     .action-button.danger {
@@ -464,80 +436,76 @@
       border-color: var(--green);
     }
 
-    .action-button.history-action {
+    .action-button.info {
       border-color: var(--blue);
     }
 
     .action-button:disabled {
-      opacity: 0.48;
-      cursor: not-allowed;
+      opacity: 0.42;
+      cursor: default;
     }
 
     .action-button small {
       display: block;
+
       margin-top: 4px;
+
       color: var(--muted);
-      font-size: 0.74rem;
-      font-weight: normal;
+      font-size: 0.73rem;
+    }
+
+    .creation-box {
+      margin: 12px 0;
+      padding: 13px;
+
+      border: 1px solid rgba(155, 120, 76, 0.55);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .creation-box label {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: var(--gold);
+    }
+
+    .creation-box input {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+
+      color: var(--parchment-bright);
+
+      border: 1px solid var(--border-bright);
+      border-radius: 0;
+      outline: none;
+
+      background: #120e0b;
+    }
+
+    .creation-box input:focus {
+      border-color: var(--gold);
+    }
+
+    .selection-summary {
+      margin: 12px 0;
+      padding: 11px;
+
+      border-left: 3px solid var(--green);
+      background: rgba(0, 0, 0, 0.18);
     }
 
     .footer {
-      padding: 16px 4px 6px;
+      padding: 15px 4px 6px;
+
       color: #77664f;
+
       text-align: center;
-      font-size: 0.75rem;
-    }
-
-    .modal-backdrop {
-      position: fixed;
-      z-index: 20;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      background: rgba(0, 0, 0, 0.76);
-    }
-
-    .modal-backdrop[hidden] {
-      display: none;
-    }
-
-    .modal {
-      width: min(540px, 100%);
-      max-height: 90vh;
-      overflow: auto;
-      padding: 18px;
-      border: 1px solid var(--border-bright);
-      background: var(--panel);
-      box-shadow: 0 18px 60px #000;
-    }
-
-    .modal h2 {
-      margin-top: 0;
-      color: var(--bright);
-    }
-
-    .modal-actions {
-      display: grid;
-      gap: 9px;
-      margin-top: 16px;
+      font-size: 0.72rem;
     }
 
     @media (max-width: 760px) {
-      #app {
-        padding: 8px;
-      }
-
-      .masthead {
-        padding: 14px 10px 54px;
-      }
-
-      .top-controls {
-        top: auto;
-        right: 10px;
-        bottom: 9px;
-      }
-
       .layout {
         grid-template-columns: 1fr;
       }
@@ -546,11 +514,11 @@
         position: static;
       }
 
-      .story-panel {
-        min-height: 540px;
+      .main-panel {
+        min-height: 520px;
       }
 
-      .compact-mobile {
+      .mobile-summary {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0 12px;
@@ -558,15 +526,19 @@
     }
 
     @media (max-width: 460px) {
-      .masthead h1 {
-        font-size: 1.85rem;
+      #app {
+        padding: 7px;
       }
 
-      .story-panel {
-        padding: 16px 14px;
+      .masthead {
+        padding: 12px 8px;
       }
 
-      #actions {
+      .main-panel {
+        padding: 14px 12px;
+      }
+
+      .actions {
         grid-template-columns: 1fr;
       }
 
@@ -577,7 +549,6 @@
 
     @media (prefers-reduced-motion: reduce) {
       * {
-        scroll-behavior: auto !important;
         transition: none !important;
       }
     }
@@ -588,442 +559,344 @@
   <main id="app">
     <header class="masthead">
       <h1>逆命錄</h1>
-      <p>第一、二卷・黑松嶺與黃巾初起</p>
-
-      <div class="top-controls">
-        <button id="ledgerButton" class="small-button" type="button">命簿</button>
-        <button id="menuButton" class="small-button" type="button">卷冊</button>
-      </div>
+      <p>轉生篇・黑松嶺首戰・V4.0A</p>
     </header>
 
     <div class="layout">
-      <aside class="character-panel" aria-label="人物狀態">
+      <aside class="panel character-panel">
         <h2 class="panel-title">人物命簿</h2>
 
         <div class="identity">
           <strong id="playerName">未題名</strong>
-          <span id="playerAge">初生</span>
+          <span id="playerAge">尚未轉生</span>
         </div>
 
-        <div class="bar-header">
-          <span>氣血</span>
-          <span id="hpText">尚未定命</span>
+        <div class="meter">
+          <div class="meter-header">
+            <span>Guard</span>
+            <span id="guardText">—</span>
+          </div>
+
+          <div class="meter-track">
+            <div id="guardFill" class="meter-fill guard-fill"></div>
+          </div>
         </div>
-        <div class="track" aria-hidden="true">
-          <div id="hpFill" class="fill hp-fill"></div>
+
+        <div class="meter">
+          <div class="meter-header">
+            <span>Stamina</span>
+            <span id="staminaText">—</span>
+          </div>
+
+          <div class="meter-track">
+            <div id="staminaFill" class="meter-fill stamina-fill"></div>
+          </div>
         </div>
 
         <div id="abilities" class="abilities"></div>
 
-        <div class="compact-mobile">
+        <div class="mobile-summary">
           <div class="info-block">
-            <span class="info-label">天賦所向</span>
-            <span id="potentialText" class="info-value">尚未選定</span>
+            <span class="info-label">前世</span>
+            <span id="pastLifeText" class="info-value">尚未選定</span>
           </div>
 
           <div class="info-block">
-            <span class="info-label">傷勢</span>
-            <span id="injuryText" class="info-value">無</span>
+            <span class="info-label">成長經歷</span>
+            <span id="formativeText" class="info-value">尚未選定</span>
           </div>
 
           <div class="info-block">
             <span class="info-label">兵器</span>
             <span id="weaponText" class="info-value">尚未持兵</span>
-            <span id="weaponDetail" class="equipment-detail"></span>
           </div>
 
           <div class="info-block">
-            <span class="info-label">甲衣</span>
-            <span id="armourText" class="info-value">尋常布衣</span>
-            <span id="armourDetail" class="equipment-detail"></span>
+            <span class="info-label">傷勢</span>
+            <span id="woundText" class="info-value">無</span>
           </div>
-        </div>
-
-        <div class="info-block">
-          <span class="info-label">經歷</span>
-          <div id="tagList" class="tag-list">
-            <span class="tag">尚無</span>
-          </div>
-        </div>
-
-        <div class="info-block">
-          <span class="info-label">聲望</span>
-          <span id="reputationText" class="info-value">鄉里無名</span>
         </div>
 
         <div class="status-box">
           <span class="info-label">此刻境況</span>
-          <span id="battleStatus" class="info-value">命書尚未展開</span>
+          <span id="statusText" class="info-value">命書尚未展開</span>
+        </div>
+
+        <div class="info-block">
+          <span class="info-label">Random Seed</span>
+          <span id="seedText" class="small-text">—</span>
         </div>
       </aside>
 
-      <section class="story-panel" aria-live="polite">
-        <h2 id="storyHeading" class="story-heading">一頁無字之書</h2>
-        <div id="sceneMeta" class="scene-meta"></div>
+      <section class="panel main-panel" aria-live="polite">
+        <h2 id="storyHeading" class="story-heading">無字命頁</h2>
+
         <div id="storyText"></div>
         <div id="enemyArea"></div>
-        <div id="battleArea"></div>
         <div id="rollArea"></div>
 
         <h3 class="actions-title">你要如何做？</h3>
-        <div id="actions"></div>
+        <div id="actions" class="actions"></div>
       </section>
     </div>
 
     <footer class="footer">
-      歷史如河，人命如舟。此卷不保證英雄得勝，亦不保證善人長存。
+      Prototype V4.0A：本版本只測試角色建立、骰局與一對一 duel。
     </footer>
   </main>
-
-  <div id="modalBackdrop" class="modal-backdrop" hidden>
-    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h2 id="modalTitle">卷冊</h2>
-      <div id="modalContent"></div>
-      <div id="modalActions" class="modal-actions"></div>
-    </section>
-  </div>
 
   <script>
     "use strict";
 
-    const SAVE_KEY = "niminglu_campaign_v4";
-    const CHECKPOINT_KEY = "niminglu_checkpoint_v4";
-    const SAVE_VERSION = 4;
-
-    const $ = (id) => document.getElementById(id);
-
     const ABILITY_NAMES = {
-      strength: "武力",
-      agility: "身法",
-      intellect: "才智",
-      presence: "氣度",
-      awareness: "洞察"
+      might: "Might",
+      agility: "Agility",
+      endurance: "Endurance",
+      perception: "Perception",
+      intellect: "Intellect",
+      will: "Will",
+      presence: "Presence"
     };
 
-    const TAG_NAMES = {
-      mountain: "山地經驗",
-      classics: "粗通經史",
-      wrestling: "角力奔走",
-      militia: "鄉勇訓練",
-      roads: "商道經驗",
-      mediation: "地方調解",
-      bladeTraining: "刀兵訓練",
-      scouting: "斥候經驗",
-      strategy: "粗通兵書",
-      command: "巡夜號令",
-      firstBattle: "初陣經驗",
-      ambushSense: "識破伏擊",
-      convoyGuard: "糧道護衛",
-      banditHunter: "破寨經驗",
-      yellowClue: "甲子線索",
-      volunteer: "義兵從軍",
-      militaryScout: "軍中斥候",
-      logistics: "軍糧庶務",
-      localLeader: "鄉里領眾",
-      taipingContact: "接觸太平道"
+    const PAST_LIVES = {
+      history: {
+        name: "歷史愛好者",
+        description:
+          "你記得漢末大勢、重要人物與部分年份，但記憶並不完整。",
+        abilities: {
+          intellect: 8,
+          perception: 4,
+          will: 2
+        },
+        skills: {
+          tactics: 12,
+          battlefieldAwareness: 6
+        }
+      },
+
+      martial: {
+        name: "現代武術愛好者",
+        description:
+          "你理解距離、步法與訓練原則，但未曾真正持兵殺敵。",
+        abilities: {
+          agility: 6,
+          endurance: 3,
+          will: 4
+        },
+        skills: {
+          dueling: 12,
+          blade: 6,
+          spear: 5
+        }
+      },
+
+      medical: {
+        name: "醫科學生",
+        description:
+          "你明白衛生、失血、感染與基礎人體結構。",
+        abilities: {
+          intellect: 7,
+          endurance: 4,
+          perception: 3,
+          will: 3
+        },
+        skills: {
+          medicine: 15
+        }
+      },
+
+      management: {
+        name: "管理工作者",
+        description:
+          "你熟悉組織、分工、談判與有限資源下的決策。",
+        abilities: {
+          presence: 7,
+          intellect: 5,
+          will: 4
+        },
+        skills: {
+          command: 12,
+          tactics: 6
+        }
+      }
     };
 
-    const TRAIT_NAMES = {
-      brave: "勇猛",
-      prudent: "持重",
-      benevolent: "仁義",
-      strategist: "善謀",
-      commanding: "善於號令",
-      ruthless: "冷酷",
-      reliable: "可信",
-      survivor: "敗而不亂"
-    };
+    const FORMATIVE_CHOICES = {
+      hunter: {
+        name: "跟隨獵戶翻山",
+        description:
+          "你熟悉山林聲息、腳印與危險來臨前的細微變化。",
+        abilities: {
+          perception: 8,
+          agility: 4,
+          endurance: 3
+        },
+        skills: {
+          battlefieldAwareness: 8,
+          archery: 10
+        }
+      },
 
-    const POTENTIALS = {
-      strength: {
-        name: "天生神力",
-        description: "筋骨雄健，日後鍛鍊武力時成長尤其迅速。",
-        scores: { strength: 57, agility: 47, intellect: 44, presence: 47, awareness: 45 }
+      militia: {
+        name: "隨鄉勇操練",
+        description:
+          "你搬運兵械、練習隊列，亦曾用木兵器與成年人較量。",
+        abilities: {
+          might: 7,
+          endurance: 5,
+          will: 3
+        },
+        skills: {
+          blade: 8,
+          spear: 8,
+          battlefieldAwareness: 4
+        }
       },
-      agility: {
-        name: "迅捷如猿",
-        description: "步法輕疾，對身法與精細技藝有過人領悟。",
-        scores: { strength: 46, agility: 57, intellect: 46, presence: 45, awareness: 48 }
+
+      scholar: {
+        name: "研讀經史兵書",
+        description:
+          "你學會書寫、推演地形，亦嘗試將前世記憶與今世知識連接。",
+        abilities: {
+          intellect: 8,
+          perception: 3,
+          will: 3
+        },
+        skills: {
+          tactics: 10,
+          command: 4
+        }
       },
-      intellect: {
-        name: "早慧善謀",
-        description: "思路敏銳，研讀文書與判斷局勢事半功倍。",
-        scores: { strength: 44, agility: 46, intellect: 58, presence: 47, awareness: 49 }
-      },
-      presence: {
-        name: "氣度攝人",
-        description: "言語神情自有分量，容易使旁人信服或畏懼。",
-        scores: { strength: 47, agility: 45, intellect: 47, presence: 58, awareness: 46 }
-      },
-      awareness: {
-        name: "耳聰目明",
-        description: "對細微聲息極為敏感，洞察成長遠勝常人。",
-        scores: { strength: 45, agility: 48, intellect: 48, presence: 45, awareness: 58 }
+
+      mediator: {
+        name: "協助鄉里調解紛爭",
+        description:
+          "你學會觀察利益、恐懼與人群在壓力下的反應。",
+        abilities: {
+          presence: 8,
+          will: 5,
+          perception: 2
+        },
+        skills: {
+          command: 8,
+          dueling: 3
+        }
       }
     };
 
     const WEAPONS = {
-      sword: {
-        id: "sword",
-        name: "百鍊環首刀",
-        attack: 1,
-        sides: 8,
-        ability: "strength",
-        flavour: "刀背厚重，宜於近身劈斬。"
+      blade: {
+        key: "blade",
+        name: "舊制環首刀",
+        ability: "might",
+        skill: "blade",
+        accuracy: 1,
+        damageSides: 8,
+        staminaCost: 2,
+        armourPiercing: 0,
+        description:
+          "攻守平衡，近身時容易運用。"
       },
+
       spear: {
-        id: "spear",
-        name: "白蠟短矛",
-        attack: 2,
-        sides: 6,
+        key: "spear",
+        name: "白蠟長矛",
         ability: "agility",
-        flavour: "矛身輕巧，可在狹處搶先出手。"
+        skill: "spear",
+        accuracy: 2,
+        damageSides: 6,
+        staminaCost: 2,
+        armourPiercing: 0,
+        description:
+          "命中較穩定，擅長保持距離。"
       },
-      axe: {
-        id: "axe",
-        name: "沉背戰斧",
-        attack: 0,
-        sides: 10,
-        ability: "strength",
-        flavour: "勢大而沉，一擊若中便足以碎骨。"
-      },
-      straightSword: {
-        id: "straightSword",
-        name: "舊制鐵劍",
-        attack: 1,
-        sides: 8,
-        ability: "agility",
-        flavour: "久經磨礪，攻守之間頗為平衡。"
+
+      polearm: {
+        key: "polearm",
+        name: "沉背長戟",
+        ability: "might",
+        skill: "heavyPolearm",
+        accuracy: 0,
+        damageSides: 10,
+        staminaCost: 3,
+        armourPiercing: 1,
+        description:
+          "Impact 強，但揮動時消耗較大。"
       }
     };
 
     const ARMOURS = {
-      leather: {
-        id: "leather",
+      player: {
         name: "綴片皮甲",
-        defence: 2,
-        reduction: 1,
-        flavour: "以皮革綴入小鐵片，尚能護住胸腹。"
+        mitigation: 2,
+        woundProtection: 1
       },
-      padded: {
-        id: "padded",
-        name: "厚絮戰衣",
-        defence: 1,
-        reduction: 2,
-        flavour: "行動稍慢，卻能卸去部分鈍重衝擊。"
-      },
-      light: {
-        id: "light",
-        name: "輕皮護衣",
-        defence: 2,
-        reduction: 0,
-        flavour: "護身有限，但不妨礙轉身與步法。"
+
+      enemy: {
+        name: "硬皮坎肩",
+        mitigation: 1,
+        woundProtection: 1
       }
     };
 
-    const CHILDHOOD = [
-      {
-        age: 6,
-        heading: "總角之年",
-        intro:
-          "熹平三年，涿郡北地仍未見刀兵遍野。你只知道賦稅一年重過一年，村外流民亦一年多過一年。",
-        choices: [
-          {
-            label: "跟獵戶杜岳翻山越嶺",
-            gains: { strength: 5, awareness: 4 },
-            tag: "mountain",
-            npc: "duYue",
-            text:
-              "杜岳教你辨足跡、看風向，也教你若在荒野發現太整齊的寂靜，便要立即停步。"
-          },
-          {
-            label: "在塾師門外偷聽經史",
-            gains: { intellect: 6, presence: 3 },
-            tag: "classics",
-            npc: "luSheng",
-            text:
-              "塾師盧生沒有趕你離開。你尚未有正式席位，卻慢慢認得朝廷文書上那些決定百姓命運的字。"
-          },
-          {
-            label: "與周平等少年角力奔走",
-            gains: { strength: 4, agility: 5 },
-            tag: "wrestling",
-            npc: "zhouPing",
-            text:
-              "田埂成了校場。周平每次摔倒都會再爬起來，你亦學會如何在失去平衡前挪開半步。"
-          }
-        ]
+    const ENEMY_TEMPLATE = {
+      name: "黑石寨頭領・韓魁",
+
+      abilities: {
+        might: 63,
+        agility: 54,
+        endurance: 60,
+        perception: 52,
+        intellect: 43,
+        will: 61,
+        presence: 57
       },
-      {
-        age: 11,
-        heading: "亂世少年",
-        intro:
-          "光和二年，疫病與歉收令道路更加擠迫。官吏催糧，太平道的符水亦開始在窮戶之間流傳。",
-        choices: [
-          {
-            label: "替鄉勇搬運兵械並練習刀勢",
-            gains: { strength: 7, awareness: 2 },
-            tag: "militia",
-            npc: "tianBo",
-            text:
-              "鄉勇領隊田伯先叫你搬木樁、磨舊刀，後來才准你跟著劈砍。虎口裂開，又結成硬繭。"
-          },
-          {
-            label: "替商旅帶路，記熟涿郡道路",
-            gains: { agility: 4, awareness: 6 },
-            tag: "roads",
-            npc: "zhouPing",
-            text:
-              "你走過泥濘驛道，也見過販馬商人從北方而來。哪條路能避開官卡，哪條路容易藏人，你逐漸一眼便知。"
-          },
-          {
-            label: "幫里正盧生調解糧水爭端",
-            gains: { presence: 6, intellect: 4 },
-            tag: "mediation",
-            npc: "luSheng",
-            text:
-              "你學會先聽完怒罵，再找出每個人真正害怕失去的東西。有時一句話，確實比木棍更能止亂。"
-          }
-        ]
+
+      skills: {
+        blade: 55,
+        spear: 20,
+        heavyPolearm: 25,
+        archery: 20,
+        dueling: 50,
+        battlefieldAwareness: 45,
+        command: 42,
+        tactics: 35,
+        medicine: 5
       },
-      {
-        age: 15,
-        heading: "冠禮之前",
-        intro:
-          "光和六年，各地秘密聚眾的傳聞愈來愈多。距離成年只剩一年，你開始為真正可能到來的戰鬥準備。",
-        choices: [
-          {
-            label: "日日負石揮刀",
-            gains: { strength: 9 },
-            tag: "bladeTraining",
-            npc: "tianBo",
-            text:
-              "晨霧未散，你便對著枯樁出刀。腰背與雙臂被一次次重擊鍛成整體。"
-          },
-          {
-            label: "練習步法與短兵進退",
-            gains: { agility: 8, awareness: 2 },
-            tag: "scouting",
-            npc: "duYue",
-            text:
-              "你在狹窄土牆間反覆穿行，練習避開想像中的矛尖。腳下慢半寸，衣角便會被木刺劃破。"
-          },
-          {
-            label: "研讀殘缺兵書，推演山道攻守",
-            gains: { intellect: 8, awareness: 3 },
-            tag: "strategy",
-            npc: "luSheng",
-            text:
-              "殘卷缺了數頁，你便拿石子補全陣勢。勝負未必都在兵刃相碰之後才決定。"
-          },
-          {
-            label: "隨鄉勇巡夜，學著號令眾人",
-            gains: { presence: 7, awareness: 3 },
-            tag: "command",
-            npc: "tianBo",
-            text:
-              "黑夜會放大每一點遲疑。你學會在自己也害怕時先站直，讓身後的人聽見清楚命令。"
-          }
-        ]
-      }
-    ];
 
-    function newNpc(name, role) {
-      return {
-        name,
-        role,
-        relationship: 0,
-        alive: true,
-        status: "安好",
-        memories: []
-      };
+      weapon: {
+        key: "blade",
+        name: "缺口山刀",
+        ability: "might",
+        skill: "blade",
+        accuracy: 1,
+        damageSides: 8,
+        staminaCost: 2,
+        armourPiercing: 0
+      },
+
+      armour: ARMOURS.enemy
+    };
+
+    let state = null;
+    let creation = {
+      name: "",
+      pastLife: null,
+      formative: null,
+      weapon: null
+    };
+
+    let rngState = 1;
+
+    function clamp(value, minimum, maximum) {
+      return Math.max(minimum, Math.min(maximum, value));
     }
 
-    function newState() {
-      return {
-        version: SAVE_VERSION,
-        locked: false,
-        chapter: 0,
-        phase: "creation",
-        scene: "creation",
-        year: 168,
-        month: "春",
-        name: "未題名",
-        birthYear: 168,
-        age: 0,
-        originRegion: "幽州・涿郡",
-        home: "桑澤里",
-        location: "桑澤里",
-        potential: null,
-        abilities: {
-          strength: 50,
-          agility: 50,
-          intellect: 50,
-          presence: 50,
-          awareness: 50
-        },
-        maxHp: 30,
-        hp: 30,
-        injury: {
-          name: "無",
-          severity: 0,
-          ability: null,
-          penalty: 0
-        },
-        weapon: null,
-        armour: null,
-        tags: [],
-        traits: [],
-        history: [],
-        items: [],
-        reputation: {
-          village: 0,
-          military: 0,
-          government: 0
-        },
-        faction: "無",
-        childhoodIndex: 0,
-        status: "命書尚未展開",
-        chapter1: {
-          ambushDetected: null,
-          convoySaved: null,
-          hanKuiFate: "未遇",
-          banditsBroken: false,
-          clues: 0,
-          outcome: null,
-          casualties: 0
-        },
-        chapter2: {
-          route: null,
-          allegiance: "未定",
-          metLiuBei: false,
-          metGuanYu: false,
-          metZhangFei: false,
-          yellowTruth: null,
-          civiliansSaved: 0,
-          objective: null,
-          outcome: null
-        },
-        npcs: {
-          duYue: newNpc("杜岳", "獵戶"),
-          luSheng: newNpc("盧生", "里正兼塾師"),
-          zhouPing: newNpc("周平", "同齡伙伴"),
-          tianBo: newNpc("田伯", "鄉勇領隊"),
-          hanKui: newNpc("韓魁", "黑石寨頭領")
-        },
-        combat: null,
-        battle: null,
-        lastRolls: []
-      };
+    function signed(value) {
+      return value >= 0 ? `+${value}` : `${value}`;
     }
 
-    let state = newState();
-
-    function clone(value) {
-      return JSON.parse(JSON.stringify(value));
-    }
-
-    function esc(value) {
+    function escapeHtml(value) {
       return String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
@@ -1032,3528 +905,1694 @@
         .replaceAll("'", "&#039;");
     }
 
-    function clamp(value, min, max) {
-      return Math.max(min, Math.min(max, value));
+    function seedRng(seed) {
+      rngState = seed >>> 0;
+
+      if (rngState === 0) {
+        rngState = 1;
+      }
+    }
+
+    function random() {
+      rngState += 0x6D2B79F5;
+
+      let value = rngState;
+
+      value = Math.imul(value ^ (value >>> 15), value | 1);
+      value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+
+      return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
     }
 
     function die(sides) {
-      return Math.floor(Math.random() * sides) + 1;
-    }
-
-    function signed(value) {
-      return value >= 0 ? `+${value}` : `${value}`;
+      return Math.floor(random() * sides) + 1;
     }
 
     function abilityModifier(score) {
-      return clamp(Math.round((score - 50) / 12.5), -3, 5);
+      return clamp(Math.round((score - 50) / 10), -5, 5);
     }
 
-    function hasTag(tag) {
-      return state.tags.includes(tag);
+    function skillModifier(score) {
+      return clamp(Math.round((score - 50) / 10), -5, 5);
     }
 
-    function addTag(tag) {
-      if (!state.tags.includes(tag)) state.tags.push(tag);
+    function blankAbilities() {
+      return {
+        might: 50,
+        agility: 50,
+        endurance: 50,
+        perception: 50,
+        intellect: 50,
+        will: 50,
+        presence: 50
+      };
     }
 
-    function addTrait(trait) {
-      if (!state.traits.includes(trait)) state.traits.push(trait);
+    function blankSkills() {
+      return {
+        blade: 25,
+        spear: 25,
+        heavyPolearm: 20,
+        archery: 20,
+        dueling: 25,
+        battlefieldAwareness: 25,
+        command: 15,
+        tactics: 20,
+        medicine: 10
+      };
     }
 
-    function addHistory(text) {
-      if (!state.history.includes(text)) state.history.push(text);
-    }
-
-    function addItem(item) {
-      if (!state.items.includes(item)) state.items.push(item);
-    }
-
-    function remember(npcId, memory, relationship = 0) {
-      const npc = state.npcs[npcId];
-      if (!npc) return;
-      if (!npc.memories.includes(memory)) npc.memories.push(memory);
-      npc.relationship = clamp(npc.relationship + relationship, -100, 100);
-    }
-
-    function applyGrowth(gains) {
-      Object.entries(gains).forEach(([ability, amount]) => {
-        const multiplier = state.potential === ability ? 1.45 : 1;
-        state.abilities[ability] += Math.round(amount * multiplier);
+    function applyBonuses(target, bonuses) {
+      Object.entries(bonuses || {}).forEach(([key, amount]) => {
+        target[key] = clamp((target[key] || 0) + amount, 0, 99);
       });
-      updateMaxHp(true);
     }
 
-    function updateMaxHp(heal = false) {
-      const oldMax = state.maxHp;
-      state.maxHp = 27 + Math.floor(state.abilities.strength / 10);
-      if (heal) {
-        state.hp = clamp(state.hp + Math.max(0, state.maxHp - oldMax), 0, state.maxHp);
-      }
-    }
+    function makeCombatant(data) {
+      const enduranceMod = abilityModifier(data.abilities.endurance);
+      const willMod = abilityModifier(data.abilities.will);
 
-    function injuryPenalty(ability) {
-      if (
-        state.injury.severity >= 2 &&
-        (!state.injury.ability || state.injury.ability === ability)
-      ) {
-        return state.injury.penalty;
-      }
-      return 0;
-    }
-
-    function setInjury(critical = false) {
-      if (state.hp <= 0) return;
-      const ratio = state.hp / state.maxHp;
-
-      if (critical && ratio <= 0.45) {
-        const injuries = [
-          { name: "肋側深創", ability: "strength", penalty: -2 },
-          { name: "肩骨重挫", ability: "strength", penalty: -2 },
-          { name: "大腿裂傷", ability: "agility", penalty: -2 }
-        ];
-        state.injury = { ...injuries[die(injuries.length) - 1], severity: 3 };
-      } else if (critical && state.injury.severity < 2) {
-        state.injury = {
-          name: "深長刀創",
-          severity: 2,
-          ability: "strength",
-          penalty: -1
-        };
-      } else if (ratio <= 0.3 && state.injury.severity < 2) {
-        state.injury = {
-          name: "失血眩暈",
-          severity: 2,
-          ability: "agility",
-          penalty: -1
-        };
-      } else if (ratio <= 0.65 && state.injury.severity === 0) {
-        state.injury = {
-          name: "皮肉傷",
-          severity: 1,
-          ability: null,
-          penalty: 0
-        };
-      }
-    }
-
-    function check(ability, dc, extra = 0, label = "判定") {
-      const natural = die(20);
-      const abilityMod = abilityModifier(state.abilities[ability]);
-      const injuryMod = injuryPenalty(ability);
-      const total = natural + abilityMod + extra + injuryMod;
-      const success = natural === 20 || (natural !== 1 && total >= dc);
+      const maxGuard = 15 + enduranceMod + willMod;
+      const maxStamina = 18 + enduranceMod * 2;
 
       return {
-        natural,
-        ability,
+        name: data.name,
+        abilities: structuredClone(data.abilities),
+        skills: structuredClone(data.skills),
+
+        weapon: structuredClone(data.weapon),
+        armour: structuredClone(data.armour),
+
+        maxGuard: Math.max(10, maxGuard),
+        guard: Math.max(10, maxGuard),
+
+        maxStamina: Math.max(12, maxStamina),
+        stamina: Math.max(12, maxStamina),
+
+        wounds: [],
+
+        guarded: false,
+        opening: false,
+        focus: 0,
+        defeated: false,
+        dead: false
+      };
+    }
+
+    function buildPlayer() {
+      const abilities = blankAbilities();
+      const skills = blankSkills();
+
+      applyBonuses(
+        abilities,
+        PAST_LIVES[creation.pastLife].abilities
+      );
+
+      applyBonuses(
+        skills,
+        PAST_LIVES[creation.pastLife].skills
+      );
+
+      applyBonuses(
+        abilities,
+        FORMATIVE_CHOICES[creation.formative].abilities
+      );
+
+      applyBonuses(
+        skills,
+        FORMATIVE_CHOICES[creation.formative].skills
+      );
+
+      const weapon = WEAPONS[creation.weapon];
+
+      skills[weapon.skill] = clamp(
+        skills[weapon.skill] + 10,
+        0,
+        99
+      );
+
+      return makeCombatant({
+        name: creation.name,
+        abilities,
+        skills,
+        weapon,
+        armour: ARMOURS.player
+      });
+    }
+
+    function buildEnemy() {
+      return makeCombatant(ENEMY_TEMPLATE);
+    }
+
+    function woundPenalty(combatant) {
+      let penalty = 0;
+
+      for (const wound of combatant.wounds) {
+        if (wound.severity === "Minor") {
+          penalty += 0.5;
+        }
+
+        if (wound.severity === "Serious") {
+          penalty += 2;
+        }
+
+        if (wound.severity === "Critical") {
+          penalty += 5;
+        }
+      }
+
+      if (combatant.stamina <= combatant.maxStamina * 0.25) {
+        penalty += 2;
+      } else if (combatant.stamina <= combatant.maxStamina * 0.5) {
+        penalty += 1;
+      }
+
+      return Math.floor(penalty);
+    }
+
+    function defenceOf(combatant) {
+      const agilityMod =
+        abilityModifier(combatant.abilities.agility);
+
+      const duelingMod =
+        skillModifier(combatant.skills.dueling);
+
+      const guardBonus = combatant.guarded ? 3 : 0;
+
+      return (
+        11 +
+        agilityMod +
+        duelingMod +
+        guardBonus -
+        woundPenalty(combatant)
+      );
+    }
+
+    function rollD20(hasAdvantage = false, hasDisadvantage = false) {
+      const first = die(20);
+
+      if (hasAdvantage && !hasDisadvantage) {
+        const second = die(20);
+
+        return {
+          value: Math.max(first, second),
+          dice: [first, second],
+          mode: "Advantage"
+        };
+      }
+
+      if (hasDisadvantage && !hasAdvantage) {
+        const second = die(20);
+
+        return {
+          value: Math.min(first, second),
+          dice: [first, second],
+          mode: "Disadvantage"
+        };
+      }
+
+      return {
+        value: first,
+        dice: [first],
+        mode: "Normal"
+      };
+    }
+
+    function actionRoll(
+      attacker,
+      defender,
+      options = {}
+    ) {
+      const weapon = attacker.weapon;
+
+      const abilityMod =
+        abilityModifier(attacker.abilities[weapon.ability]);
+
+      const skillMod =
+        skillModifier(attacker.skills[weapon.skill]);
+
+      const injuryPenalty = woundPenalty(attacker);
+
+      const situation =
+        (options.situation || 0) +
+        attacker.focus;
+
+      const hasAdvantage =
+        Boolean(options.advantage || attacker.opening);
+
+      const hasDisadvantage =
+        Boolean(options.disadvantage);
+
+      const roll = rollD20(hasAdvantage, hasDisadvantage);
+
+      const total =
+        roll.value +
+        abilityMod +
+        skillMod +
+        weapon.accuracy +
+        situation -
+        injuryPenalty;
+
+      const defence = defenceOf(defender);
+
+      const naturalOne = roll.value === 1;
+      const naturalTwenty = roll.value === 20;
+
+      const success =
+        !naturalOne &&
+        (
+          naturalTwenty ||
+          total >= defence
+        );
+
+      const margin = total - defence;
+
+      return {
+        roll,
         abilityMod,
-        injuryMod,
-        extra,
+        skillMod,
+        weaponBonus: weapon.accuracy,
+        situation,
+        injuryPenalty,
         total,
-        dc,
+        defence,
         success,
-        critical: natural === 20,
-        disaster: natural === 1,
-        line:
-          `${label}：d20 ${natural} ${signed(abilityMod)} ` +
-          `${signed(extra)} ${signed(injuryMod)} = ${total}，對抗 ${dc}`
+        margin,
+        critical: naturalTwenty,
+        disaster: naturalOne
       };
     }
 
-    function damage(sides, critical, reduction = 0) {
-      const rolls = [die(sides)];
-      if (critical) rolls.push(die(sides));
-      const raw = rolls.reduce((sum, value) => sum + value, 0);
+    function effectDice(sides, critical = false) {
+      const dice = [die(sides)];
+
+      if (critical) {
+        dice.push(die(sides));
+      }
+
       return {
-        rolls,
-        raw,
-        reduction,
-        final: Math.max(0, raw - reduction)
+        dice,
+        total: dice.reduce((sum, value) => sum + value, 0)
       };
     }
 
-    function saveGame() {
-      if (state.phase === "creation" && state.name === "未題名") return;
-      state.version = SAVE_VERSION;
-      localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+    function actionRollLine(label, result) {
+      const diceText = result.roll.dice.join(", ");
+
+      return (
+        `${label}：${result.roll.mode} d20 [${diceText}] ` +
+        `${signed(result.abilityMod)} Ability ` +
+        `${signed(result.skillMod)} Skill ` +
+        `${signed(result.weaponBonus)} Weapon ` +
+        `${signed(result.situation)} Situation ` +
+        `${signed(-result.injuryPenalty)} Injury ` +
+        `= ${result.total}，對抗 Defense ${result.defence}`
+      );
     }
 
-    function saveCheckpoint() {
-      localStorage.setItem(CHECKPOINT_KEY, JSON.stringify(state));
-      saveGame();
-    }
+    function addWound(target, severity) {
+      const woundNames = {
+        Minor: [
+          "手臂割傷",
+          "肩背挫傷",
+          "額角裂傷",
+          "肋側擦傷"
+        ],
 
-    function loadStored(key) {
-      try {
-        const raw = localStorage.getItem(key);
-        if (!raw) return null;
-        const data = JSON.parse(raw);
-        if (data.version !== SAVE_VERSION) return null;
-        return data;
-      } catch {
-        return null;
-      }
-    }
+        Serious: [
+          "大腿深創",
+          "左臂重傷",
+          "肋骨受創",
+          "肩部裂傷"
+        ],
 
-    function clearSaves() {
-      localStorage.removeItem(SAVE_KEY);
-      localStorage.removeItem(CHECKPOINT_KEY);
-    }
+        Critical: [
+          "胸腹重創",
+          "頸側深創",
+          "大量失血",
+          "腿骨重創"
+        ],
 
-    function formatParagraphs(paragraphs) {
-      return paragraphs
-        .filter(Boolean)
-        .map((paragraph) => {
-          const safe = esc(paragraph);
-          if (paragraph.startsWith("『")) return `<p class="speech">${safe}</p>`;
-          if (paragraph.startsWith("【史勢】")) return `<p class="history">${safe}</p>`;
-          if (paragraph.startsWith("【警告】")) return `<p class="warning">${safe}</p>`;
-          if (paragraph.startsWith("【結果】")) return `<p class="good">${safe}</p>`;
-          return `<p>${safe}</p>`;
-        })
-        .join("");
-    }
+        Mortal: [
+          "致命胸創",
+          "頸部致命傷",
+          "腹部致命傷",
+          "失血瀕死"
+        ]
+      };
 
-    function naturalStatus() {
-      if (state.phase === "creation") return "命書尚未展開";
-      if (state.phase === "childhood") return "尚在桑澤里成長";
-      if (state.phase === "equipment") return "即將踏入成年";
-      if (state.phase === "chapter1") return "黑松嶺危機之中";
-      if (state.phase === "duel") return "正與韓魁交鋒";
-      if (state.phase === "battlefield1") return "正護衛黑松嶺糧隊";
-      if (state.phase === "chapter1End") return "第一卷已留下後果";
-      if (state.phase === "chapter2") return "黃巾之亂已經爆發";
-      if (state.phase === "battlefield2") return "涿水渡口激戰之中";
-      if (state.phase === "chapter2End") return "第二卷已告終";
-      if (state.phase === "death") return "命書染血";
-      return state.status;
-    }
+      const list = woundNames[severity];
+      const name = list[die(list.length) - 1];
 
-    function reputationSummary() {
-      const r = state.reputation;
-      const parts = [];
+      target.wounds.push({
+        severity,
+        name
+      });
 
-      if (r.village >= 20) parts.push("鄉里敬重");
-      else if (r.village <= -15) parts.push("鄉里非議");
-      else parts.push("鄉里聲望平常");
-
-      if (r.military >= 20) parts.push("軍中有名");
-      if (r.government >= 15) parts.push("官府信任");
-      if (state.traits.length) {
-        parts.push(state.traits.slice(0, 2).map((t) => TRAIT_NAMES[t]).join("、"));
+      if (severity === "Critical") {
+        target.defeated = true;
       }
 
-      return parts.join("・");
-    }
-
-    function renderSidebar() {
-      $("playerName").textContent = state.name;
-      $("playerAge").textContent =
-        state.age ? `${state.age} 歲・${state.year} 年` : "初生";
-
-      const safeHp = Math.max(0, state.hp);
-      $("hpText").textContent = `${safeHp} / ${state.maxHp}`;
-      $("hpFill").style.width =
-        `${state.maxHp ? clamp(safeHp / state.maxHp * 100, 0, 100) : 0}%`;
-
-      $("abilities").innerHTML = Object.entries(ABILITY_NAMES)
-        .map(([key, name]) => `
-          <div class="ability">
-            <span>${name}</span>
-            <span>${state.abilities[key]}</span>
-          </div>
-        `)
-        .join("");
-
-      $("potentialText").textContent =
-        state.potential ? POTENTIALS[state.potential].name : "尚未選定";
-
-      $("injuryText").textContent =
-        state.injury.severity
-          ? `${state.injury.name}${state.injury.penalty ? `（${state.injury.penalty}）` : ""}`
-          : "無";
-
-      $("weaponText").textContent = state.weapon?.name || "尚未持兵";
-      $("weaponDetail").textContent = state.weapon
-        ? `命中 ${signed(state.weapon.attack)}・傷害 1d${state.weapon.sides}`
-        : "";
-
-      $("armourText").textContent = state.armour?.name || "尋常布衣";
-      $("armourDetail").textContent = state.armour
-        ? `護勢 ${signed(state.armour.defence)}・減傷 ${state.armour.reduction}`
-        : "";
-
-      $("tagList").innerHTML = state.tags.length
-        ? state.tags.slice(-8).map((tag) => `<span class="tag">${esc(TAG_NAMES[tag] || tag)}</span>`).join("")
-        : '<span class="tag">尚無</span>';
-
-      $("reputationText").textContent = reputationSummary();
-      $("battleStatus").textContent = naturalStatus();
-    }
-
-    function renderEnemy() {
-      const area = $("enemyArea");
-      const enemy = state.combat?.enemy;
-
-      if (state.phase !== "duel" || !enemy || enemy.hp <= 0) {
-        area.innerHTML = "";
-        return;
+      if (severity === "Mortal") {
+        target.defeated = true;
+        target.dead = true;
       }
 
-      const percent = clamp(enemy.hp / enemy.maxHp * 100, 0, 100);
-      area.innerHTML = `
-        <div class="enemy-card">
-          <div class="enemy-row">
-            <strong>${esc(enemy.name)}</strong>
-            <span>${enemy.hp} / ${enemy.maxHp}</span>
-          </div>
-          <div class="track">
-            <div class="fill enemy-fill" style="width:${percent}%"></div>
-          </div>
-          <span class="equipment-detail">
-            ${esc(enemy.weapon.name)}・${esc(enemy.armour.name)}
-          </span>
-        </div>
-      `;
-    }
+      const seriousCount = target.wounds.filter(
+        wound => wound.severity === "Serious"
+      ).length;
 
-    function renderBattle() {
-      const area = $("battleArea");
-      const b = state.battle;
-
-      if (!b || !["battlefield1", "battlefield2"].includes(state.phase)) {
-        area.innerHTML = "";
-        return;
+      if (seriousCount >= 2) {
+        target.defeated = true;
       }
 
-      area.innerHTML = `
-        <div class="battle-card">
-          <div class="battle-row">
-            <strong>${esc(b.name)}</strong>
-            <span>第 ${b.round} / ${b.maxRounds} 輪</span>
-          </div>
-
-          <div class="bar-header">
-            <span>我方士氣</span><span>${b.morale}</span>
-          </div>
-          <div class="track">
-            <div class="fill morale-fill" style="width:${b.morale}%"></div>
-          </div>
-
-          <div class="bar-header">
-            <span>隊形</span><span>${b.formation}</span>
-          </div>
-          <div class="track">
-            <div class="fill formation-fill" style="width:${b.formation}%"></div>
-          </div>
-
-          <div class="bar-header">
-            <span>敵軍士氣</span><span>${b.enemyMorale}</span>
-          </div>
-          <div class="track">
-            <div class="fill enemy-fill" style="width:${b.enemyMorale}%"></div>
-          </div>
-
-          <span class="equipment-detail">
-            ${esc(b.objective)}・位置 ${signed(b.position)}・受護目標 ${b.protected}
-          </span>
-        </div>
-      `;
+      return name;
     }
 
-    function setActions(actions) {
-      const container = $("actions");
+    function applyImpact(
+      attacker,
+      target,
+      rawImpact,
+      margin,
+      armourPiercing = 0
+    ) {
+      const result = {
+        rawImpact,
+        armourMitigation: Math.max(
+          0,
+          target.armour.mitigation - armourPiercing
+        ),
+        finalImpact: 0,
+        guardLoss: 0,
+        overflow: 0,
+        woundRoll: null,
+        wound: null
+      };
+
+      result.finalImpact = Math.max(
+        1,
+        rawImpact - result.armourMitigation
+      );
+
+      result.guardLoss = Math.min(
+        target.guard,
+        result.finalImpact
+      );
+
+      target.guard -= result.guardLoss;
+
+      result.overflow =
+        result.finalImpact - result.guardLoss;
+
+      if (result.overflow <= 0) {
+        return result;
+      }
+
+      const woundDie = die(20);
+
+      const enduranceMod =
+        abilityModifier(target.abilities.endurance);
+
+      const marginBonus =
+        Math.max(0, Math.floor(margin / 5));
+
+      const woundProtection =
+        target.armour.woundProtection || 0;
+
+      const woundScore =
+        woundDie +
+        result.overflow +
+        marginBonus -
+        enduranceMod -
+        woundProtection;
+
+      result.woundRoll = {
+        die: woundDie,
+        overflow: result.overflow,
+        marginBonus,
+        enduranceMod,
+        woundProtection,
+        total: woundScore
+      };
+
+      let severity = null;
+
+      if (woundScore >= 24) {
+        severity = "Mortal";
+      } else if (woundScore >= 20) {
+        severity = "Critical";
+      } else if (woundScore >= 16) {
+        severity = "Serious";
+      } else if (woundScore >= 12) {
+        severity = "Minor";
+      }
+
+      if (severity) {
+        result.wound = {
+          severity,
+          name: addWound(target, severity)
+        };
+      }
+
+      return result;
+    }
+
+    function impactLines(label, diceResult, impactResult) {
+      const lines = [];
+
+      lines.push(
+        `${label} Effect：` +
+        `[${diceResult.dice.join(", ")}] = ${diceResult.total}`
+      );
+
+      lines.push(
+        `Impact：${impactResult.rawImpact} ` +
+        `- Armor ${impactResult.armourMitigation} ` +
+        `= ${impactResult.finalImpact}；` +
+        `Guard 損失 ${impactResult.guardLoss}`
+      );
+
+      if (impactResult.woundRoll) {
+        const wound = impactResult.woundRoll;
+
+        lines.push(
+          `Wound Roll：d20 ${wound.die} ` +
+          `${signed(wound.overflow)} Overflow ` +
+          `${signed(wound.marginBonus)} Margin ` +
+          `${signed(-wound.enduranceMod)} Endurance ` +
+          `${signed(-wound.woundProtection)} Armor ` +
+          `= ${wound.total}`
+        );
+      }
+
+      if (impactResult.wound) {
+        lines.push(
+          `傷勢：${impactResult.wound.severity}・` +
+          `${impactResult.wound.name}`
+        );
+      }
+
+      return lines;
+    }
+
+    function woundSummary(combatant) {
+      if (!combatant || combatant.wounds.length === 0) {
+        return "無";
+      }
+
+      return combatant.wounds
+        .map(wound => `${wound.name}（${wound.severity}）`)
+        .join("、");
+    }
+
+    function setScene(
+      heading,
+      paragraphs,
+      actions = [],
+      rolls = []
+    ) {
+      document.getElementById("storyHeading").textContent = heading;
+
+      document.getElementById("storyText").innerHTML =
+        paragraphs
+          .map(paragraph => {
+            const className =
+              paragraph.startsWith("『")
+                ? "speech"
+                : "";
+
+            return (
+              `<p class="${className}">` +
+              `${escapeHtml(paragraph)}` +
+              `</p>`
+            );
+          })
+          .join("");
+
+      document.getElementById("rollArea").innerHTML =
+        rolls.length > 0
+          ? `
+            <div class="roll-box">
+              ${rolls
+                .map(line => (
+                  `<div class="roll-line">${escapeHtml(line)}</div>`
+                ))
+                .join("")}
+            </div>
+          `
+          : "";
+
+      renderActions(actions);
+      renderAll();
+    }
+
+    function renderActions(actions) {
+      const container = document.getElementById("actions");
+
       container.innerHTML = "";
 
-      actions.forEach((action) => {
+      actions.forEach(action => {
         const button = document.createElement("button");
-        const available = action.available !== false;
 
         button.type = "button";
         button.className =
-          `action-button${action.className ? ` ${action.className}` : ""}`;
-        button.disabled = !available;
-        button.innerHTML =
-          `${esc(action.label)}` +
-          (action.note ? `<small>${esc(action.note)}</small>` : "") +
-          (!available && action.reason
-            ? `<small>未能採取：${esc(action.reason)}</small>`
-            : "");
+          `action-button ${action.className || ""}`;
 
-        if (available) {
-          button.addEventListener("click", () => {
-            if (state.locked) return;
-            state.locked = true;
-            container.querySelectorAll("button").forEach((item) => {
-              item.disabled = true;
-            });
-            action.handler();
-          }, { once: true });
-        }
+        button.disabled = Boolean(action.disabled);
+
+        button.innerHTML =
+          `${escapeHtml(action.label)}` +
+          (
+            action.note
+              ? `<small>${escapeHtml(action.note)}</small>`
+              : ""
+          );
+
+        button.addEventListener("click", action.handler);
 
         container.appendChild(button);
       });
     }
 
-    function setScene({
-      heading,
-      paragraphs = [],
-      rolls = [],
-      actions = [],
-      meta = null,
-      save = true
-    }) {
-      state.locked = false;
-      state.lastRolls = rolls;
-      renderSidebar();
-
-      $("storyHeading").textContent = heading;
-      $("sceneMeta").textContent =
-        meta || `${state.originRegion}・${state.year} 年${state.month ? `・${state.month}` : ""}`;
-      $("storyText").innerHTML = formatParagraphs(paragraphs);
-
-      $("rollArea").innerHTML = rolls.length
-        ? `
-          <details class="roll-details">
-            <summary>展開判定詳情</summary>
-            <div class="roll-lines">
-              ${rolls.map((line) => `<div class="roll-line">${esc(line)}</div>`).join("")}
-            </div>
-          </details>
-        `
-        : "";
-
+    function renderAll() {
+      renderPlayer();
       renderEnemy();
-      renderBattle();
-      setActions(actions);
+    }
 
-      if (save) saveGame();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    function renderPlayer() {
+      const player = state ? state.player : null;
+
+      document.getElementById("playerName").textContent =
+        player ? player.name : creation.name || "未題名";
+
+      document.getElementById("playerAge").textContent =
+        state ? "18 歲・光和六年" : "尚未轉生";
+
+      document.getElementById("pastLifeText").textContent =
+        creation.pastLife
+          ? PAST_LIVES[creation.pastLife].name
+          : "尚未選定";
+
+      document.getElementById("formativeText").textContent =
+        creation.formative
+          ? FORMATIVE_CHOICES[creation.formative].name
+          : "尚未選定";
+
+      document.getElementById("weaponText").textContent =
+        player
+          ? `${player.weapon.name}・${player.armour.name}`
+          : creation.weapon
+            ? WEAPONS[creation.weapon].name
+            : "尚未持兵";
+
+      document.getElementById("seedText").textContent =
+        state ? String(state.seed) : "—";
+
+      if (!player) {
+        document.getElementById("guardText").textContent = "—";
+        document.getElementById("staminaText").textContent = "—";
+        document.getElementById("guardFill").style.width = "0%";
+        document.getElementById("staminaFill").style.width = "0%";
+        document.getElementById("woundText").textContent = "無";
+        document.getElementById("abilities").innerHTML = "";
+        document.getElementById("statusText").textContent =
+          "命書尚未展開";
+
+        return;
+      }
+
+      document.getElementById("guardText").textContent =
+        `${player.guard} / ${player.maxGuard}`;
+
+      document.getElementById("staminaText").textContent =
+        `${player.stamina} / ${player.maxStamina}`;
+
+      document.getElementById("guardFill").style.width =
+        `${clamp(player.guard / player.maxGuard * 100, 0, 100)}%`;
+
+      document.getElementById("staminaFill").style.width =
+        `${clamp(player.stamina / player.maxStamina * 100, 0, 100)}%`;
+
+      document.getElementById("woundText").textContent =
+        woundSummary(player);
+
+      document.getElementById("abilities").innerHTML =
+        Object.entries(ABILITY_NAMES)
+          .map(([key, label]) => {
+            return `
+              <div class="ability">
+                <span>${escapeHtml(label)}</span>
+                <span>${player.abilities[key]}</span>
+              </div>
+            `;
+          })
+          .join("");
+
+      let status = "正與韓魁交鋒";
+
+      if (player.defeated) {
+        status = player.dead
+          ? "命斷黑松嶺"
+          : "已失去戰鬥能力";
+      } else if (player.stamina <= player.maxStamina * 0.25) {
+        status = "體力將盡，動作開始變慢";
+      } else if (player.guard <= 0) {
+        status = "Guard 已崩潰，下一擊可能造成重傷";
+      } else if (player.opening) {
+        status = "已看穿敵人空門";
+      } else if (player.focus > 0) {
+        status = "已掌握敵人部分節奏";
+      }
+
+      document.getElementById("statusText").textContent = status;
+    }
+
+    function renderEnemy() {
+      const container = document.getElementById("enemyArea");
+
+      if (!state || !state.enemy || state.phase !== "duel") {
+        container.innerHTML = "";
+        return;
+      }
+
+      const enemy = state.enemy;
+
+      const guardPercent = clamp(
+        enemy.guard / enemy.maxGuard * 100,
+        0,
+        100
+      );
+
+      const staminaPercent = clamp(
+        enemy.stamina / enemy.maxStamina * 100,
+        0,
+        100
+      );
+
+      const woundsHtml =
+        enemy.wounds.length > 0
+          ? `
+            <ul class="wounds">
+              ${enemy.wounds
+                .map(wound => (
+                  `<li>${escapeHtml(wound.name)}（${escapeHtml(wound.severity)}）</li>`
+                ))
+                .join("")}
+            </ul>
+          `
+          : `<div class="small-text">暫無明顯傷勢</div>`;
+
+      container.innerHTML = `
+        <div class="enemy-card">
+          <div class="enemy-header">
+            <strong>${escapeHtml(enemy.name)}</strong>
+            <span>Defense ${defenceOf(enemy)}</span>
+          </div>
+
+          <div class="meter">
+            <div class="meter-header">
+              <span>Enemy Guard</span>
+              <span>${enemy.guard} / ${enemy.maxGuard}</span>
+            </div>
+
+            <div class="meter-track">
+              <div
+                class="meter-fill enemy-guard-fill"
+                style="width: ${guardPercent}%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="meter">
+            <div class="meter-header">
+              <span>Enemy Stamina</span>
+              <span>${enemy.stamina} / ${enemy.maxStamina}</span>
+            </div>
+
+            <div class="meter-track">
+              <div
+                class="meter-fill enemy-stamina-fill"
+                style="width: ${staminaPercent}%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="small-text">
+            ${escapeHtml(enemy.weapon.name)}・
+            ${escapeHtml(enemy.armour.name)}
+          </div>
+
+          ${woundsHtml}
+        </div>
+      `;
     }
 
     function startCreation() {
-      state = newState();
-      clearSaves();
-      renderSidebar();
+      state = null;
 
-      $("storyHeading").textContent = "無字命頁";
-      $("sceneMeta").textContent = "幽州・涿郡・公元一六八年";
-      $("enemyArea").innerHTML = "";
-      $("battleArea").innerHTML = "";
-      $("rollArea").innerHTML = "";
+      creation = {
+        name: "",
+        pastLife: null,
+        formative: null,
+        weapon: null
+      };
 
-      $("storyText").innerHTML = `
-        <p>你原本不屬於這個時代。</p>
-        <p>睜眼之時，漢室未亡，天下卻已處處腐壞。你生於幽州涿郡桑澤里一戶尋常人家，既無名門血統，亦無天命保證。</p>
-        <p>你會長成甚麼人，要由往後十六年逐步決定。</p>
+      document.getElementById("enemyArea").innerHTML = "";
+      document.getElementById("rollArea").innerHTML = "";
+
+      document.getElementById("storyHeading").textContent =
+        "前世已盡";
+
+      document.getElementById("storyText").innerHTML = `
+        <p>你原本生活在另一個時代。</p>
+
+        <p>
+          死亡之後，你沒有迎來虛無。
+          再次睜眼時，屋頂是煙燻發黑的木樑，
+          窗外有人談論漢室、徵斂與太平道。
+        </p>
+
+        <p>
+          你帶著前世記憶，在東漢末年重新出生。
+          但記憶不是力量本身。這具身體仍要重新成長，
+          兵器仍會割開血肉，而你記得的歷史亦可能被自己的選擇改寫。
+        </p>
 
         <div class="creation-box">
-          <label for="nameInput">在命簿寫下姓名</label>
+          <label for="nameInput">今世姓名</label>
+
           <input
             id="nameInput"
             type="text"
             maxlength="12"
             placeholder="例如：沈越"
             autocomplete="off"
-            enterkeyhint="done"
           >
-          <label>選擇與生俱來的潛能</label>
-          <span class="choice-note">
-            潛能影響初始能力與日後成長，並不保證你能在亂世生還。
-          </span>
         </div>
       `;
 
-      setActions(Object.entries(POTENTIALS).map(([key, potential]) => ({
-        label: potential.name,
-        note: potential.description,
-        handler: () => choosePotential(key)
-      })));
+      const actions = Object.entries(PAST_LIVES).map(
+        ([key, pastLife]) => ({
+          label: pastLife.name,
+          note: pastLife.description,
+          className: "info",
+          handler: () => choosePastLife(key)
+        })
+      );
+
+      renderActions(actions);
+      renderAll();
     }
 
-    function choosePotential(key) {
-      const input = $("nameInput");
-      const name = input?.value.trim();
+    function choosePastLife(key) {
+      const input = document.getElementById("nameInput");
+      const name = input.value.trim();
 
       if (!name) {
-        state.locked = false;
-        $("actions").querySelectorAll("button").forEach((button) => {
-          button.disabled = false;
-        });
-        alert("請先寫下人物姓名。");
-        input?.focus();
+        alert("請先輸入今世姓名。");
+        input.focus();
         return;
       }
 
-      state.name = name.slice(0, 12);
-      state.potential = key;
-      state.abilities = clone(POTENTIALS[key].scores);
-      state.age = 1;
-      state.year = 169;
-      state.chapter = 1;
-      state.phase = "childhood";
-      state.scene = "birth";
-      updateMaxHp();
-      state.hp = state.maxHp;
+      creation.name = name.slice(0, 12);
+      creation.pastLife = key;
 
-      addHistory(`生於公元一六八年，幽州涿郡桑澤里。`);
-      addHistory(`先天天賦為「${POTENTIALS[key].name}」。`);
-
-      setScene({
-        heading: "第一卷・黑松嶺",
-        paragraphs: [
-          `${state.name}，你的名字被寫入桑澤里一戶尋常人家的舊冊。`,
-          `你有「${POTENTIALS[key].name}」之資，但亂世從不保證有才之人能活到成名。`,
-          "這一卷記下你如何長大，以及你第一次真正見血的日子。"
+      setScene(
+        "兩世記憶",
+        [
+          `${creation.name}，你在漢末的一戶尋常人家長大。`,
+          `前世的你是「${PAST_LIVES[key].name}」。`,
+          "你不能向任何人證明自己曾活在千多年後。你只能將模糊記憶藏在心底，等待真正能夠運用它們的一日。",
+          "成長期間，哪一段經歷對你影響最大？"
         ],
-        actions: [{
-          label: "讓歲月向前",
-          className: "history-action",
-          handler: showChildhoodStage
-        }]
-      });
-
-      saveCheckpoint();
-    }
-
-    function showChildhoodStage() {
-      const stage = CHILDHOOD[state.childhoodIndex];
-      state.phase = "childhood";
-      state.age = stage.age;
-      state.year = state.birthYear + stage.age;
-
-      setScene({
-        heading: stage.heading,
-        paragraphs: [stage.intro],
-        actions: stage.choices.map((choice) => ({
-          label: choice.label,
-          handler: () => resolveChildhood(choice)
-        }))
-      });
-    }
-
-    function resolveChildhood(choice) {
-      applyGrowth(choice.gains);
-      addTag(choice.tag);
-      addHistory(`${state.age} 歲：${choice.label}。`);
-      remember(choice.npc, `曾在${state.age}歲時與${state.name}共同生活或訓練。`, 12);
-
-      const growth = Object.entries(choice.gains).map(([ability, amount]) => {
-        const actual = Math.round(amount * (state.potential === ability ? 1.45 : 1));
-        return `${ABILITY_NAMES[ability]} ${signed(actual)}`;
-      });
-
-      state.childhoodIndex += 1;
-
-      if (state.childhoodIndex < CHILDHOOD.length) {
-        setScene({
-          heading: "歲月留痕",
-          paragraphs: [
-            choice.text,
-            "數字會留在命簿，旁人記得的卻是你曾經做過甚麼。這段經歷日後可能替你打開另一條路。"
-          ],
-          rolls: growth,
-          actions: [{
-            label: "走向下一段歲月",
-            handler: showChildhoodStage
-          }]
-        });
-      } else {
-        state.age = 16;
-        state.year = 184;
-        state.month = "正月";
-        state.phase = "equipment";
-
-        setScene({
-          heading: "光和七年・年十六",
-          paragraphs: [
-            choice.text,
-            "鄰近數里準備合力將糧食與藥材送往北面聚落。道路上已有數隊商旅失蹤，田伯仍決定帶鄉勇護送。",
-            "你已成年。村中拿出僅存的兵械，讓你選擇第一次上陣所持之物。",
-            "遠方有人低聲傳唱「蒼天已死」，但此刻大部分人仍只當那是流民之間的怪話。"
-          ],
-          rolls: growth,
-          actions: equipmentActions()
-        });
-      }
-    }
-
-    function equipmentActions() {
-      return [
-        {
-          label: "百鍊環首刀與綴片皮甲",
-          note: "武力近戰，攻守平衡。",
-          handler: () => chooseEquipment("sword", "leather")
-        },
-        {
-          label: "白蠟短矛與輕皮護衣",
-          note: "身法命中較佳，護身較薄。",
-          handler: () => chooseEquipment("spear", "light")
-        },
-        {
-          label: "沉背戰斧與厚絮戰衣",
-          note: "命中較難，但一擊沉重。",
-          handler: () => chooseEquipment("axe", "padded")
-        },
-        {
-          label: "舊制鐵劍與綴片皮甲",
-          note: "依靠身法，沒有明顯短處。",
-          handler: () => chooseEquipment("straightSword", "leather")
-        }
-      ];
-    }
-
-    function chooseEquipment(weaponId, armourId) {
-      state.weapon = clone(WEAPONS[weaponId]);
-      state.armour = clone(ARMOURS[armourId]);
-      state.phase = "chapter1";
-      state.scene = "convoy";
-      addHistory(`成年時選擇${state.weapon.name}與${state.armour.name}。`);
-
-      setScene({
-        heading: "第一次披甲",
-        paragraphs: [
-          `你握住${state.weapon.name}。${state.weapon.flavour}`,
-          `身上的${state.armour.name}並不華美。${state.armour.flavour}`,
-          "周平也加入護糧隊，田伯則帶著十餘名鄉勇走在最前。杜岳臨行前只提醒你一句：山林忽然無鳥，往往不是好事。"
-        ],
-        actions: [{
-          label: "隨隊進入黑松嶺",
-          className: "danger",
-          handler: blackPineApproach
-        }]
-      });
-    }
-
-    function blackPineApproach() {
-      setScene({
-        heading: "黑松嶺山道",
-        paragraphs: [
-          "午後寒霧沿山坡沉下。糧車陷入濕泥，十餘名鄉勇前後拉成長線。",
-          "兩側坡地不算高，灌木卻足以藏人。田伯催促眾人加快腳步，周平握矛的手則一直沒有放鬆。",
-          "呢段路只需要作出一次真正重要的安排。"
-        ],
-        actions: [
-          {
-            label: "放慢腳步，仔細察看山坡與泥地",
-            note: "洞察；山地經驗可提供幫助。",
-            handler: () => detectAmbush("awareness")
-          },
-          {
-            label: "先行探看彎口，再從側坡折返",
-            note: "身法；斥候或商道經驗可提供幫助。",
-            handler: () => detectAmbush("agility")
-          },
-          {
-            label: "重排前後人手，以糧車互相掩護",
-            note: "才智；兵書或鄉勇經驗可提供幫助。",
-            handler: () => detectAmbush("intellect")
-          },
-          {
-            label: "喝令眾人收聲結隊，停止爭相推車",
-            note: "氣度；巡夜號令可提供幫助。",
-            handler: () => detectAmbush("presence")
-          }
-        ]
-      });
-    }
-
-    function detectAmbush(ability) {
-      let extra = 0;
-      if (ability === "awareness" && hasTag("mountain")) extra += 2;
-      if (ability === "agility" && (hasTag("scouting") || hasTag("roads"))) extra += 2;
-      if (ability === "intellect" && (hasTag("strategy") || hasTag("militia"))) extra += 2;
-      if (ability === "presence" && hasTag("command")) extra += 2;
-
-      const result = check(ability, 13, extra, "黑松嶺警戒");
-      state.chapter1.ambushDetected = result.success;
-
-      if (result.success) {
-        addTag("ambushSense");
-        addTrait(
-          ability === "presence" ? "commanding" :
-          ability === "intellect" ? "strategist" : "prudent"
-        );
-
-        setScene({
-          heading: "林上伏兵",
-          paragraphs: [
-            result.critical
-              ? "你在第一支箭離弦之前已經看見灌木後的人影。鄉勇靠向糧車，無人被最初一輪箭矢射中。"
-              : "碎石由坡頂滾下時，你立即喝停隊伍。箭矢落在眾人原本將要踏入的位置。",
-            "虯髯大漢韓魁提著缺口山刀走下坡來，身後十餘名賊眾齊聲呼喝。",
-            "『糧車留下，某可讓你們帶傷者回去。若自問有膽，便出來與韓某決個生死！』",
-            "你看見幾名山賊臂上纏著褪色黃布，但那不像正式旗號，更像刻意遮掩甚麼。"
-          ],
-          rolls: [result.line],
-          actions: [
-            {
-              label: "迎戰韓魁，借斬將動搖群賊",
-              className: "danger",
-              handler: startHanKuiDuel
-            },
-            {
-              label: "拒絕叫陣，結車守住糧藥",
-              className: "safe",
-              handler: () => startBlackPineBattle(true)
-            },
-            {
-              label: "指出黃布與囤糧之事，試探韓魁",
-              note: "需要足夠洞察、才智或經史見聞。",
-              available:
-                state.abilities.awareness >= 60 ||
-                state.abilities.intellect >= 60 ||
-                hasTag("classics"),
-              reason: "你未能從零碎跡象推斷背後意義。",
-              handler: questionHanKui
-            }
-          ]
-        });
-      } else {
-        state.chapter1.casualties += result.disaster ? 3 : 1;
-        state.npcs.zhouPing.status = result.disaster ? "箭傷" : "輕傷";
-
-        setScene({
-          heading: "伏擊驟發",
-          paragraphs: [
-            "坡上驟然響起喊聲。箭矢、碎石與滾木一同落下，牲口受驚，糧車橫在路中。",
-            result.disaster
-              ? "周平被一箭射倒，田伯帶人回身救他時，原本鬆散的隊列瞬間斷成數截。"
-              : "一名鄉勇倒在車輪旁，其他人則爭相尋找掩護。",
-            "你沒有看清頭領所在。此刻只能在混亂之中重建陣腳，或者帶人放棄糧車。"
-          ],
-          rolls: [result.line],
-          actions: [{
-            label: "在伏擊中穩住隊伍",
-            className: "danger",
-            handler: () => startBlackPineBattle(false)
-          }]
-        });
-      }
-    }
-
-    function questionHanKui() {
-      const extra =
-        (hasTag("classics") ? 1 : 0) +
-        (hasTag("strategy") ? 1 : 0);
-      const result = check(
-        state.abilities.presence >= state.abilities.intellect ? "presence" : "intellect",
-        14,
-        extra,
-        "試探韓魁"
+        Object.entries(FORMATIVE_CHOICES).map(
+          ([choiceKey, choice]) => ({
+            label: choice.name,
+            note: choice.description,
+            handler: () => chooseFormative(choiceKey)
+          })
+        )
       );
-
-      if (result.success) {
-        state.chapter1.clues += result.critical ? 2 : 1;
-        addTag("yellowClue");
-        addItem("寫有「甲子」二字的殘信");
-
-        setScene({
-          heading: "未起之亂",
-          paragraphs: [
-            "你沒有回應單挑，只把目光落在黃布與坡後被油布遮住的兵器上。",
-            "『普通山寨不需要數十柄新磨的矛頭。買你們兵器的人，是否也叫你們等到甲子年？』",
-            "韓魁臉上的笑意消失了。他身後一名賊人下意識望向坡後，隨即被韓魁一刀背打翻。",
-            "『知道得太多，只會死得更快。』",
-            "你未知道山寨背後係邊個，但已經證明黑松嶺唔只係一次尋常劫糧。"
-          ],
-          rolls: [result.line],
-          actions: [
-            {
-              label: "趁其軍心動搖結車反擊",
-              className: "safe",
-              handler: () => startBlackPineBattle(true, 10)
-            },
-            {
-              label: "迎戰韓魁，逼他留下更多答案",
-              className: "danger",
-              handler: startHanKuiDuel
-            }
-          ]
-        });
-      } else {
-        setScene({
-          heading: "言語未能破局",
-          paragraphs: [
-            "你試圖逼問黃布與兵器來歷，韓魁卻只仰頭大笑。",
-            "賊眾跟著敲打兵刃，將你聲音完全壓過。無論真相係乜，今日仍要先保住性命。"
-          ],
-          rolls: [result.line],
-          actions: [
-            {
-              label: "結車迎戰",
-              handler: () => startBlackPineBattle(true)
-            },
-            {
-              label: "接受韓魁叫陣",
-              className: "danger",
-              handler: startHanKuiDuel
-            }
-          ]
-        });
-      }
     }
 
-    function startHanKuiDuel() {
-      state.phase = "duel";
-      state.scene = "hanKuiDuel";
-      state.combat = {
-        enemy: {
-          id: "hanKui",
-          name: "黑石寨頭領・韓魁",
-          hp: 31,
-          maxHp: 31,
-          strength: 61,
-          agility: 54,
-          morale: 62,
-          exposed: false,
-          weapon: {
-            name: "缺口山刀",
-            attack: 1,
-            sides: 8,
-            ability: "strength"
-          },
-          armour: {
-            name: "硬皮坎肩",
-            defence: 2,
-            reduction: 1
-          }
-        },
-        guarded: false,
-        rounds: 0
+    function chooseFormative(key) {
+      creation.formative = key;
+
+      setScene(
+        "光和六年・大亂前夕",
+        [
+          `十八歲時，你已因「${FORMATIVE_CHOICES[key].name}」形成自己的本領。`,
+          "你記得黃巾之亂將近，但準確日期與細節已經模糊。附近村落仍然照常耕作，官吏仍然催收糧稅，只有愈來愈多流民與秘密集會令人不安。",
+          "村中準備押送糧藥穿過黑松嶺。山路近來有盜匪出沒，鄉勇讓你從有限兵械中選一件上陣。"
+        ],
+        Object.entries(WEAPONS).map(
+          ([weaponKey, weapon]) => ({
+            label: weapon.name,
+            note:
+              `${weapon.description} ` +
+              `命中 ${signed(weapon.accuracy)}・` +
+              `Effect 1d${weapon.damageSides}`,
+            handler: () => chooseWeapon(weaponKey)
+          })
+        )
+      );
+    }
+
+    function chooseWeapon(key) {
+      creation.weapon = key;
+
+      const seed =
+        (
+          Date.now() ^
+          Math.floor(Math.random() * 2147483647)
+        ) >>> 0;
+
+      startDuel(seed);
+    }
+
+    function startDuel(seed) {
+      seedRng(seed);
+
+      state = {
+        phase: "duel",
+        seed,
+        round: 1,
+        player: buildPlayer(),
+        enemy: buildEnemy()
       };
 
-      setScene({
-        heading: "山道鬥將",
-        paragraphs: [
-          "你越過糧車踏入山道中央。左右鄉勇讓出窄路，坡上賊眾亦逐漸收聲。",
-          "韓魁扛起缺口山刀，咧嘴露出黃牙。",
-          "『敢站出來，便算半條好漢。另一半，要看你流多少血！』"
+      setScene(
+        "黑松嶺・山道叫陣",
+        [
+          "糧隊走入山道深處時，坡上忽然傳來碎石滾動的聲音。",
+          "十餘名山賊從林間現身，弓箭與短矛對準糧車。一名虯髯大漢提著缺口山刀走落山道。",
+          "『留下糧車，我可以讓其他人走。若有人自認是好漢，便出來與韓魁決個生死！』",
+          "你知道歷史上的黃巾大亂即將來臨，卻可能先死在一個史書從未記載的山賊手上。"
         ],
-        actions: duelActions()
-      });
-    }
-
-    function playerDefence(extra = 0) {
-      return 10 +
-        (state.armour?.defence || 0) +
-        abilityModifier(state.abilities.agility) +
-        extra;
-    }
-
-    function enemyDefence(enemy) {
-      return 10 + enemy.armour.defence + abilityModifier(enemy.agility);
+        duelActions()
+      );
     }
 
     function duelActions() {
-      const enemy = state.combat?.enemy;
-      if (!enemy || enemy.hp <= 0 || state.hp <= 0) return [];
+      if (!state || state.phase !== "duel") {
+        return [];
+      }
+
+      const player = state.player;
 
       return [
         {
-          label: `以${state.weapon.name}進攻`,
-          handler: duelAttack
+          label: "Observe",
+          note:
+            "觀察步法與呼吸。成功後提高下一次 Action Roll。",
+          className: "info",
+          handler: playerObserve
         },
+
         {
-          label: "沉身守勢，尋找空門",
-          note: "本回合提高防護；才智較高者更易取得優勢。",
-          handler: duelDefend
+          label: "Feint",
+          note:
+            "製造假動作。成功後下一次攻擊獲得 Advantage。",
+          handler: playerFeint
         },
+
         {
-          label: "厲聲挫其膽氣",
-          note: "氣度可能令韓魁暴露，但失敗仍會遭反擊。",
-          handler: duelIntimidate
+          label: "Pressure",
+          note:
+            "集中削減敵人 Guard 與 Stamina，較難直接造成傷勢。",
+          handler: playerPressure
         },
+
         {
-          label: "退回車陣，放棄單挑",
-          note: "保留性命，將勝負交回整體戰場。",
+          label: "Quick Strike",
+          note:
+            "Stamina 消耗較低，命中獲得小量加成。",
+          handler: () => playerStrike("quick")
+        },
+
+        {
+          label: "Heavy Strike",
+          note:
+            "Effect 較強，但消耗更大，命中較困難。",
+          className: "danger",
+          disabled: player.stamina < 4,
+          handler: () => playerStrike("heavy")
+        },
+
+        {
+          label: "Guard",
+          note:
+            "恢復部分 Guard，並提高本回合 Defense。",
           className: "safe",
-          handler: withdrawFromDuel
+          handler: playerGuard
+        },
+
+        {
+          label: "Withdraw",
+          note:
+            "嘗試離開 duel，返回糧車陣線。",
+          className: "safe",
+          handler: playerWithdraw
         }
       ];
     }
 
-    function duelAttack() {
-      const enemy = state.combat.enemy;
-      state.combat.rounds += 1;
+    function preparePlayerAction(staminaCost = 0) {
+      const player = state.player;
 
-      const ability = state.weapon.ability;
-      const natural = die(20);
-      const mod = abilityModifier(state.abilities[ability]);
-      const injury = injuryPenalty(ability);
-      const exposed = enemy.exposed ? 2 : 0;
-      const total = natural + state.weapon.attack + mod + injury + exposed;
-      const defence = enemyDefence(enemy);
-      const hit = natural === 20 || (natural !== 1 && total >= defence);
-
-      const rolls = [
-        `攻擊：d20 ${natural} ${signed(state.weapon.attack)} ${signed(mod)} ${signed(injury + exposed)} = ${total}，對抗 ${defence}`
-      ];
-      const paragraphs = [];
-      enemy.exposed = false;
-
-      if (hit) {
-        const dealt = damage(
-          state.weapon.sides,
-          natural === 20,
-          enemy.armour.reduction
-        );
-        enemy.hp = Math.max(0, enemy.hp - dealt.final);
-        rolls.push(
-          `${state.weapon.name}：${dealt.rolls.join(" + ")}，甲衣抵去 ${dealt.reduction}，造成 ${dealt.final} 點傷害`
-        );
-
-        if (natural === 20) {
-          enemy.morale -= 15;
-          paragraphs.push(
-            "你迎著刀光踏入半步，刃鋒從韓魁甲縫斬入。血沿腰側湧出，坡上吶喊驟然一滯。"
-          );
-        } else if (dealt.final === 0) {
-          paragraphs.push("兵刃正中硬皮坎肩，卻只把韓魁震退半步。");
-        } else {
-          paragraphs.push("你壓開山刀，順勢在韓魁肩臂留下血口。");
-        }
-      } else if (natural === 1) {
-        paragraphs.push("你踩中鬆動碎石，出手尚未展開便失去重心。");
-      } else {
-        paragraphs.push("韓魁橫刀封住路線，你的兵刃從皮甲外掠過。");
-      }
-
-      if (enemy.hp <= 0) {
-        finishHanKui("killed", paragraphs, rolls);
-        return;
-      }
-
-      const retaliation = enemyDuelAttack(natural === 1 ? 2 : 0);
-      paragraphs.push(...retaliation.paragraphs);
-      rolls.push(...retaliation.rolls);
-
-      if (state.hp <= 0) {
-        showDeath(paragraphs, rolls, "命斷黑松嶺");
-        return;
-      }
-
-      setScene({
-        heading: "刀光未歇",
-        paragraphs,
-        rolls,
-        actions: duelActions()
-      });
-    }
-
-    function duelDefend() {
-      const result = check(
-        "intellect",
-        12,
-        hasTag("strategy") ? 2 : 0,
-        "守勢判定"
+      player.guarded = false;
+      player.stamina = Math.max(
+        0,
+        player.stamina - staminaCost
       );
-      const enemy = state.combat.enemy;
+    }
+
+    function consumeSetup(player) {
+      player.focus = 0;
+      player.opening = false;
+    }
+
+    function playerObserve() {
+      const player = state.player;
+      const enemy = state.enemy;
+
+      preparePlayerAction(1);
+
+      const roll = rollD20();
+
+      const perceptionMod =
+        abilityModifier(player.abilities.perception);
+
+      const awarenessMod =
+        skillModifier(player.skills.battlefieldAwareness);
+
+      const injuryPenalty = woundPenalty(player);
+
+      const total =
+        roll.value +
+        perceptionMod +
+        awarenessMod -
+        injuryPenalty;
+
+      const difficulty =
+        12 +
+        abilityModifier(enemy.abilities.perception);
+
+      const success =
+        roll.value !== 1 &&
+        (
+          roll.value === 20 ||
+          total >= difficulty
+        );
+
+      const lines = [
+        `Observe：d20 [${roll.dice.join(", ")}] ` +
+        `${signed(perceptionMod)} Perception ` +
+        `${signed(awarenessMod)} Awareness ` +
+        `${signed(-injuryPenalty)} Injury ` +
+        `= ${total}，對抗 ${difficulty}`
+      ];
+
       const paragraphs = [];
-      state.combat.guarded = true;
+
+      if (success) {
+        player.focus = roll.value === 20 ? 4 : 2;
+
+        paragraphs.push(
+          "你沒有立即出手，而是觀察韓魁肩膀、握刀與換氣節奏。"
+        );
+
+        paragraphs.push(
+          roll.value === 20
+            ? "你發現他每次準備重斬之前，右腳都會先向外轉開。這個習慣幾乎將下一步寫在地上。"
+            : "你逐漸掌握他重刀發力前的細微停頓。下一次行動會更有把握。"
+        );
+      } else {
+        player.focus = 0;
+
+        paragraphs.push(
+          "韓魁故意左右晃動刀鋒，腳步與呼吸都沒有固定節奏。你未能看穿他的真正意圖。"
+        );
+      }
+
+      enemyTurn(paragraphs, lines);
+    }
+
+    function playerFeint() {
+      const player = state.player;
+      const enemy = state.enemy;
+
+      preparePlayerAction(2);
+
+      const roll = rollD20();
+
+      const agilityMod =
+        abilityModifier(player.abilities.agility);
+
+      const duelingMod =
+        skillModifier(player.skills.dueling);
+
+      const injuryPenalty = woundPenalty(player);
+
+      const total =
+        roll.value +
+        agilityMod +
+        duelingMod +
+        player.focus -
+        injuryPenalty;
+
+      const difficulty =
+        12 +
+        abilityModifier(enemy.abilities.perception) +
+        skillModifier(enemy.skills.dueling);
+
+      const success =
+        roll.value !== 1 &&
+        (
+          roll.value === 20 ||
+          total >= difficulty
+        );
+
+      const lines = [
+        `Feint：d20 [${roll.dice.join(", ")}] ` +
+        `${signed(agilityMod)} Agility ` +
+        `${signed(duelingMod)} Dueling ` +
+        `${signed(player.focus)} Focus ` +
+        `${signed(-injuryPenalty)} Injury ` +
+        `= ${total}，對抗 ${difficulty}`
+      ];
+
+      const paragraphs = [];
+
+      player.focus = 0;
+
+      if (success) {
+        player.opening = true;
+
+        paragraphs.push(
+          "你將兵刃向韓魁左肩一送，卻在他舉刀攔截前突然收勢。"
+        );
+
+        paragraphs.push(
+          roll.value === 20
+            ? "韓魁全力轉向錯誤方向，胸腹與持刀手同時暴露。你已完全奪得這一合的節奏。"
+            : "韓魁的防守被假動作牽開。下一次攻擊會獲得 Advantage。"
+        );
+      } else {
+        player.opening = false;
+
+        paragraphs.push(
+          "韓魁沒有追著你的兵刃移動，只用刀尖守住中線。你的假動作未能騙過他。"
+        );
+      }
+
+      enemyTurn(paragraphs, lines);
+    }
+
+    function playerPressure() {
+      const player = state.player;
+      const enemy = state.enemy;
+
+      preparePlayerAction(2);
+
+      const result = actionRoll(
+        player,
+        enemy,
+        {
+          situation: 1
+        }
+      );
+
+      const lines = [
+        actionRollLine("Pressure", result)
+      ];
+
+      const paragraphs = [];
 
       if (result.success) {
-        enemy.exposed = true;
+        const effect = effectDice(6, result.critical);
+
+        const mightMod =
+          Math.max(
+            0,
+            abilityModifier(player.abilities.might)
+          );
+
+        const guardDamage =
+          effect.total +
+          mightMod +
+          Math.max(0, Math.floor(result.margin / 5));
+
+        enemy.guard = Math.max(
+          0,
+          enemy.guard - guardDamage
+        );
+
+        const staminaDamage =
+          result.critical ? 4 : 2;
+
+        enemy.stamina = Math.max(
+          0,
+          enemy.stamina - staminaDamage
+        );
+
+        lines.push(
+          `Pressure Effect：[${effect.dice.join(", ")}] ` +
+          `${signed(mightMod)} Might = ${guardDamage} Guard；` +
+          `${staminaDamage} Stamina`
+        );
+
         paragraphs.push(
           result.critical
-            ? "你故意讓出半步。韓魁重刀劈入糧車木框，你已轉到他側後。"
-            : "你斜引刀勢，迫使韓魁連續兩次斬向空處。"
+            ? "你連續逼近，不讓韓魁重新站穩。兵刃碰撞之間，他的防守被徹底壓開，呼吸亦開始散亂。"
+            : "你不急於斬中身體，只是不斷迫使韓魁格擋、退步與重新舉刀。他的 Guard 與體力同時受壓。"
         );
       } else {
-        paragraphs.push("你想誘他深入，韓魁卻以刀背猛撞，反把你逼向山壁。");
-      }
-
-      const retaliation = enemyDuelAttack(0);
-      state.combat.guarded = false;
-      paragraphs.push(...retaliation.paragraphs);
-
-      const rolls = [result.line, ...retaliation.rolls];
-
-      if (state.hp <= 0) {
-        showDeath(paragraphs, rolls, "命斷黑松嶺");
-        return;
-      }
-
-      setScene({
-        heading: "守中待變",
-        paragraphs,
-        rolls,
-        actions: duelActions()
-      });
-    }
-
-    function duelIntimidate() {
-      const enemy = state.combat.enemy;
-      const result = check(
-        "presence",
-        14,
-        hasTag("command") ? 1 : 0,
-        "喝陣判定"
-      );
-      const paragraphs = [];
-
-      if (result.success) {
-        enemy.morale -= result.critical ? 24 : 12;
-        enemy.exposed = true;
-        paragraphs.push(
-          "你逐一喝出韓魁方才退過的步數。賊眾之間傳來不安低語，韓魁暴怒前衝，胸前空門亦隨之露出。"
-        );
-      } else {
-        enemy.morale += 5;
-        paragraphs.push(
-          "韓魁以刀刃重拍皮甲，賊眾跟著鼓噪。你的話被山呼般的聲浪壓了回來。"
-        );
-      }
-
-      const retaliation = enemyDuelAttack(result.disaster ? 2 : 0);
-      paragraphs.push(...retaliation.paragraphs);
-      const rolls = [result.line, ...retaliation.rolls];
-
-      if (state.hp <= 0) {
-        showDeath(paragraphs, rolls, "命斷黑松嶺");
-        return;
-      }
-
-      setScene({
-        heading: "兩陣奪氣",
-        paragraphs,
-        rolls,
-        actions: duelActions()
-      });
-    }
-
-    function enemyDuelAttack(bonus = 0) {
-      const enemy = state.combat.enemy;
-      const natural = die(20);
-      const mod = abilityModifier(enemy.strength);
-      const total = natural + enemy.weapon.attack + mod + bonus;
-      const defence = playerDefence(state.combat.guarded ? 3 : 0);
-      const hit = natural === 20 || (natural !== 1 && total >= defence);
-
-      const rolls = [
-        `韓魁攻擊：d20 ${natural} ${signed(enemy.weapon.attack)} ${signed(mod + bonus)} = ${total}，對抗 ${defence}`
-      ];
-      const paragraphs = [];
-
-      if (natural === 1) {
-        enemy.exposed = true;
-        paragraphs.push("韓魁踩上自己流下的血，重刀撞向山壁，一時無法回守。");
-        return { paragraphs, rolls };
-      }
-
-      if (!hit) {
-        paragraphs.push("山刀貼著衣甲掃過，沉重風聲幾乎奪走呼吸，終究沒有斬實。");
-        return { paragraphs, rolls };
-      }
-
-      const dealt = damage(
-        enemy.weapon.sides,
-        natural === 20,
-        state.armour.reduction
-      );
-      state.hp = Math.max(0, state.hp - dealt.final);
-      setInjury(natural === 20);
-
-      rolls.push(
-        `${enemy.weapon.name}：${dealt.rolls.join(" + ")}，甲衣抵去 ${dealt.reduction}，造成 ${dealt.final} 點傷害`
-      );
-
-      paragraphs.push(
-        natural === 20
-          ? "韓魁先撞開你的防守，再旋身重斬。甲片在巨響中迸裂，鮮血立即浸透內衣。"
-          : "你擋住正面一斬，卻被回刀割中腰側。護甲卸去部分力道，傷口仍火辣作痛。"
-      );
-
-      return { paragraphs, rolls };
-    }
-
-    function withdrawFromDuel() {
-      addTrait("prudent");
-      state.reputation.military -= 2;
-
-      setScene({
-        heading: "退回車陣",
-        paragraphs: [
-          "你以兵刃逼開韓魁，沒有繼續將整隊命運押在一場單挑之上。",
-          "賊眾嘲笑你怯戰，田伯卻立即讓出車陣缺口。韓魁未死，糧隊亦尚未敗。"
-        ],
-        actions: [{
-          label: "結車迎擊群賊",
-          handler: () => startBlackPineBattle(true)
-        }]
-      });
-    }
-
-    function finishHanKui(fate, paragraphs, rolls) {
-      state.combat = null;
-      state.phase = "chapter1";
-      state.chapter1.hanKuiFate = fate;
-      state.chapter1.banditsBroken = true;
-      state.chapter1.convoySaved = true;
-      state.npcs.hanKui.alive = fate !== "killed";
-      state.npcs.hanKui.status = fate === "killed" ? "死於黑松嶺" : "敗退";
-      state.reputation.village += 20;
-      state.reputation.military += 16;
-      addTrait("brave");
-      addTag("firstBattle");
-      addTag("banditHunter");
-      addHistory("於黑松嶺單挑擊敗賊首韓魁。");
-
-      if (state.chapter1.clues > 0) {
-        paragraphs.push(
-          "你從韓魁貼身衣袋找到一封殘信，上面只有「甲子」、「大吉」與一個模糊收糧地點。"
-        );
-      } else {
-        state.chapter1.clues = 1;
-        addTag("yellowClue");
-        addItem("韓魁身上的黃布符記");
-        paragraphs.push(
-          "韓魁倒地後，一塊繡有古怪符號的黃布從衣內滑出。你暫時不明白它代表甚麼。"
-        );
-      }
-
-      endChapter1Victory(
-        paragraphs.concat([
-          "韓魁倒下後，黑石寨群賊失去主心骨，先後逃入坡後荒林。糧車得以繼續前行。"
-        ]),
-        rolls,
-        "斬將破賊"
-      );
-    }
-
-    function startBlackPineBattle(prepared, moraleBonus = 0) {
-      state.phase = "battlefield1";
-      state.combat = null;
-      state.battle = {
-        id: "blackPine",
-        name: "黑松嶺護糧戰",
-        objective: "保住糧車並帶眾人離開山道",
-        round: 1,
-        maxRounds: 4,
-        morale: clamp((prepared ? 58 : 35) + moraleBonus, 0, 100),
-        formation: prepared ? 60 : 28,
-        enemyMorale: prepared ? 62 : 75,
-        position: prepared ? 1 : -2,
-        protected: prepared ? 3 : 2,
-        enemyAdvantage: prepared ? 0 : 3
-      };
-
-      setScene({
-        heading: "黑松嶺激戰",
-        paragraphs: [
-          prepared
-            ? "糧車首尾相接，持矛者由車隙向外，傷者退入中央。群賊無法再靠第一輪箭矢奪走勝勢。"
-            : "你踩過散落糧袋，把仍能聽見命令的人逐個拉回車旁。隊形破碎，但未到完全無法挽救。",
-          "你不需要指揮每一個腳步，只需要喺真正改變勝負的時候落決定。"
-        ],
-        actions: blackPineBattleActions()
-      });
-    }
-
-    function blackPineBattleActions() {
-      const b = state.battle;
-      return [
-        {
-          label: "穩住隊形與軍心",
-          note: "氣度；恢復士氣與隊形。",
-          handler: () => resolveBlackPineAction("rally")
-        },
-        {
-          label: "尋找坡上敵軍主力",
-          note: "洞察；削弱敵軍地勢優勢。",
-          handler: () => resolveBlackPineAction("locate")
-        },
-        {
-          label: "清出糧車退路",
-          note: "才智；增加受護目標與戰場位置。",
-          handler: () => resolveBlackPineAction("route")
-        },
-        {
-          label: "率眾反擊",
-          note: "需要尚可隊形；武器能力影響結果。",
-          className: "danger",
-          available: b.formation >= 42,
-          reason: "隊形太散，貿然衝出只會被逐個殺死。",
-          handler: () => resolveBlackPineAction("counter")
-        },
-        {
-          label: "放棄糧車，帶生還者撤走",
-          className: "safe",
-          available: b.morale <= 42 || b.protected <= 1,
-          reason: "眾人仍願意守住糧車，現時撤退只會自行放棄勝機。",
-          handler: () => resolveBlackPineAction("retreat")
-        }
-      ];
-    }
-
-    function resolveBlackPineAction(type) {
-      const b = state.battle;
-      const paragraphs = [];
-      const rolls = [];
-      let result;
-
-      if (type === "rally") {
-        result = check("presence", 13 + b.enemyAdvantage, hasTag("command") ? 2 : 0, "整隊");
-        if (result.success) {
-          b.morale += result.critical ? 20 : 12;
-          b.formation += result.critical ? 18 : 10;
-          b.enemyMorale -= result.critical ? 9 : 3;
-          paragraphs.push("你沿車陣逐人喝令，散開的鄉勇重新看見彼此，長兵亦再次由車隙伸出。");
-        } else {
-          b.morale -= result.disaster ? 12 : 6;
-          paragraphs.push("箭雨與慘叫切碎你的命令。有人聽見，更多人卻只顧躲避。");
-        }
-      }
-
-      if (type === "locate") {
-        result = check("awareness", 13 + b.enemyAdvantage, hasTag("mountain") ? 2 : 0, "察敵");
-        if (result.success) {
-          b.enemyAdvantage -= result.critical ? 2 : 1;
-          b.position += result.critical ? 2 : 1;
-          b.enemyMorale -= 6;
-          paragraphs.push("你循箭矢角度找到左坡主力，並指出右側只有數人虛張聲勢。包圍終於露出缺口。");
-        } else {
-          b.enemyAdvantage += result.disaster ? 1 : 0;
-          paragraphs.push("山壁回音與人影混成一片，你幾次追錯旗號，仍未找到真正主力。");
-        }
-      }
-
-      if (type === "route") {
-        result = check("intellect", 13 + Math.max(0, -b.position), hasTag("roads") || hasTag("strategy") ? 2 : 0, "護路");
-        if (result.success) {
-          b.position += 1;
-          b.formation += 7;
-          b.protected = Math.min(4, b.protected + 1);
-          paragraphs.push("你命人砍斷套繩、移開受驚牲口，再用糧袋墊住車輪。後路與傷者都得到掩護。");
-        } else {
-          b.formation -= 6;
-          paragraphs.push("車軸卡死石縫，幫手又被散落貨物絆倒，退路未能清出。");
-        }
-      }
-
-      if (type === "counter") {
-        const ability = state.weapon.ability;
-        result = check(
-          ability,
-          14 + b.enemyAdvantage,
-          state.weapon.attack + (hasTag("militia") ? 1 : 0),
-          "反擊"
-        );
-        if (result.success) {
-          b.enemyMorale -= result.critical ? 27 : 16;
-          b.morale += 8;
-          b.position += 1;
-          paragraphs.push("你由兩車之間衝出，鄉勇緊隨其後。最前方山賊翻倒，後排收勢不及，彼此撞成一團。");
-        } else {
-          b.morale -= 8;
-          b.formation -= 9;
-          b.position -= 1;
-          paragraphs.push("你才離開糧車，坡上第二輪箭矢便已落下。反擊停在半途，退回的人更加混亂。");
-        }
-      }
-
-      if (type === "retreat") {
-        result = check(
-          "intellect",
-          14 + b.enemyAdvantage,
-          Math.floor(b.formation / 30) - 1,
-          "撤離"
-        );
-        rolls.push(result.line);
-
-        if (result.success) {
-          state.chapter1.convoySaved = false;
-          state.chapter1.hanKuiFate = "佔據黑石寨並奪得糧藥";
-          state.chapter1.casualties += 2;
-          addTrait("survivor");
-          addTag("firstBattle");
-          addHistory("黑松嶺敗退，但帶部分鄉勇生還。");
-
-          finishChapter1Defeat([
-            "你令最後一排交替掩護，傷者沿清出的窄路逐步撤走。",
-            "糧車與藥材終究留在黑松嶺。韓魁得到足以供養更多人嘅物資，桑澤里亦將為此付出代價。"
-          ], rolls);
-          return;
-        }
-
-        b.morale -= 14;
-        b.formation -= 12;
-        paragraphs.push("撤退命令傳到後排時，前方已誤以為全隊潰敗。人群爭相擠入窄路，山賊趁勢壓下。");
-      }
-
-      if (result && type !== "retreat") rolls.push(result.line);
-      normalizeBattle(b);
-
-      if (b.enemyMorale <= 0) {
-        state.chapter1.convoySaved = true;
-        state.chapter1.banditsBroken = true;
-        state.chapter1.hanKuiFate = "敗逃";
-        state.npcs.hanKui.status = "負傷逃離黑松嶺";
-        addTag("firstBattle");
-        addTag("convoyGuard");
-        addTrait("commanding");
-        state.reputation.village += 17;
-        state.reputation.military += 13;
-        addHistory("率眾守住黑松嶺糧隊，韓魁敗逃。");
-
-        if (state.chapter1.clues === 0) {
-          state.chapter1.clues = 1;
-          addTag("yellowClue");
-          addItem("黑石寨遺下的甲子符記");
-          paragraphs.push("賊眾遺下的糧袋底部畫有黃符，旁邊寫著「甲子」二字。");
-        }
-
-        endChapter1Victory(
-          paragraphs.concat([
-            "群賊再無法維持陣勢。韓魁在幾名親信掩護下逃入荒林，黑石寨勢力卻已被擊破。",
-            "糧車仍能前行，但泥地上亦留下幾名永遠無法回村的人。"
-          ]),
-          rolls,
-          "山道破賊"
-        );
-        return;
-      }
-
-      const pressure = blackPinePressure();
-      paragraphs.push(...pressure.paragraphs);
-      rolls.push(...pressure.rolls);
-      normalizeBattle(b);
-
-      if (state.hp <= 0) {
-        showDeath(paragraphs, rolls, "命斷黑松嶺");
-        return;
-      }
-
-      if (b.morale <= 0 || b.formation <= 0) {
-        state.chapter1.convoySaved = false;
-        state.chapter1.hanKuiFate = "奪取糧藥";
-        state.chapter1.casualties += 3;
-        addTag("firstBattle");
-        addTrait("survivor");
-        addHistory("黑松嶺軍心潰散，糧藥落入黑石寨。");
-
-        finishChapter1Defeat(
-          paragraphs.concat([
-            "最後一點秩序終於消失。有人棄械奔逃，有人鑽入車底，再沒有人聽得清命令。",
-            "你只能隨殘存人手離開山道。糧車、傷者與未能帶走的兵械，全落入韓魁手中。"
-          ]),
-          rolls
-        );
-        return;
-      }
-
-      b.round += 1;
-
-      if (b.round > b.maxRounds) {
-        if (b.protected >= 3 && b.morale >= 35) {
-          state.chapter1.convoySaved = true;
-          state.chapter1.hanKuiFate = "未能奪糧，退回黑石寨";
-          state.reputation.village += 12;
-          addTag("convoyGuard");
-          addTag("firstBattle");
-          addTrait("reliable");
-          addHistory("在黑松嶺捱過圍攻，成功護走糧車。");
-
-          endChapter1Victory(
-            paragraphs.concat([
-              "夜色逐漸壓下。韓魁無法在援手可能趕到前攻破車陣，只能帶賊眾退回山上。",
-              "你沒有殲滅黑石寨，但成功把糧藥與生還者帶離山道。"
-            ]),
-            rolls,
-            "守糧而還"
-          );
-        } else {
-          finishChapter1Defeat(
-            paragraphs.concat([
-              "天色已黑，糧車仍困在山道。你只能焚去部分物資，再帶傷者趁夜撤離。",
-              "韓魁沒有得到全部糧食，但桑澤里亦未能完成原本的護送。"
-            ]),
-            rolls
-          );
-        }
-        return;
-      }
-
-      setScene({
-        heading: b.enemyAdvantage >= 3 ? "山勢仍在敵手" : "車陣血戰",
-        paragraphs,
-        rolls,
-        actions: blackPineBattleActions()
-      });
-    }
-
-    function blackPinePressure() {
-      const b = state.battle;
-      const natural = die(20);
-      const bonus = 1 + b.enemyAdvantage;
-      const total = natural + bonus;
-      const defence = playerDefence() + Math.floor(b.formation / 35);
-      const hit = natural === 20 || (natural !== 1 && total >= defence);
-      const rolls = [`賊眾攻勢：d20 ${natural} ${signed(bonus)} = ${total}，對抗 ${defence}`];
-      const paragraphs = [];
-
-      if (natural === 1) {
-        b.enemyMorale -= 8;
-        paragraphs.push("一根滾木反撞倒坡上賊眾，鄉勇見狀爆出喝彩。");
-      } else if (!hit) {
-        b.formation -= 2;
-        paragraphs.push("箭矢大多被糧車與甲衣擋住。眾人被迫低頭，陣腳仍未散開。");
-      } else {
-        const dealt = damage(6, natural === 20, state.armour.reduction);
-        state.hp = Math.max(0, state.hp - dealt.final);
-        b.morale -= natural === 20 ? 12 : 6;
-        b.formation -= natural === 20 ? 12 : 7;
-        setInjury(natural === 20);
-        rolls.push(
-          `亂軍刀箭：${dealt.rolls.join(" + ")}，減傷 ${dealt.reduction}，造成 ${dealt.final} 點傷害`
-        );
-        paragraphs.push(
-          natural === 20
-            ? "箭矢集中落向同一段車陣。木板碎裂，鄉勇倒地，你亦在缺口中被重重斬中。"
-            : "山賊由車底鑽入，短刀越過護甲。你將他逼退，傷口卻已開始滲血。"
-        );
-      }
-
-      return { paragraphs, rolls };
-    }
-
-    function normalizeBattle(b) {
-      b.morale = clamp(b.morale, 0, 100);
-      b.formation = clamp(b.formation, 0, 100);
-      b.enemyMorale = clamp(b.enemyMorale, 0, 100);
-      b.position = clamp(b.position, -3, 3);
-      b.enemyAdvantage = clamp(b.enemyAdvantage, -2, 5);
-      b.protected = clamp(b.protected, 0, 4);
-    }
-
-    function endChapter1Victory(paragraphs, rolls, heading) {
-      state.phase = "chapter1End";
-      state.chapter1.outcome = "victory";
-      state.battle = null;
-      state.combat = null;
-
-      if (state.npcs.zhouPing.status === "箭傷") {
-        remember("zhouPing", `${state.name}在黑松嶺將他帶回。`, 10);
-      }
-
-      setScene({
-        heading,
-        paragraphs: paragraphs.concat([
-          "你活過第一場真正戰鬥。勝利沒有令死者重新站起，亦沒有解開黃布與「甲子」背後的意思。",
-          "但桑澤里從此有人記得你的名字。"
-        ]),
-        rolls,
-        actions: [{
-          label: "收束第一卷",
-          className: "history-action",
-          handler: chapter1Aftermath
-        }]
-      });
-    }
-
-    function finishChapter1Defeat(paragraphs, rolls) {
-      state.phase = "chapter1End";
-      state.chapter1.outcome = "defeat";
-      state.battle = null;
-      state.combat = null;
-      state.reputation.village -= 6;
-
-      setScene({
-        heading: "敗退而還",
-        paragraphs: paragraphs.concat([
-          "你沒有死，但失敗同樣會留在人的一生。桑澤里失去糧藥，死者家人亦不會因你已盡力便停止哀哭。",
-          "黑松嶺之敗將成為下一段人生的起點，而不是被重置的舊紀錄。"
-        ]),
-        rolls,
-        actions: [{
-          label: "收束第一卷",
-          handler: chapter1Aftermath
-        }]
-      });
-    }
-
-    function chapter1Aftermath() {
-      state.chapter = 1;
-      state.year = 184;
-      state.month = "二月";
-      state.location = state.home;
-
-      const result = state.chapter1.outcome === "victory"
-        ? "糧藥得以送達，桑澤里雖辦了幾場喪事，仍有餘力照顧傷者。"
-        : "失去糧藥後，村中病者最先受苦。有人責怪田伯，亦有人把怨氣落在每個生還者身上。";
-
-      setScene({
-        heading: "第一卷終・風雨欲來",
-        paragraphs: [
-          result,
-          state.chapter1.hanKuiFate === "敗逃"
-            ? "韓魁仍然生還。有人看見他帶殘部向南而去，亦有人話黑石寨夜裡出現更多黃布人。"
-            : state.chapter1.hanKuiFate === "killed"
-              ? "韓魁已死，但黑石寨背後提供兵器與消息的人仍未現身。"
-              : "黑石寨仍然存在，而且比一個月前得到更多糧食與兵器。",
-          "二十餘日後，驛道上傳來急馬。冀州、潁川、南陽等地同時爆發大規模起事，聚眾者以黃巾裹頭，州郡震動。",
-          "【史勢】光和七年，太平道起事。原定日期因告密而提前，地方官府倉促徵兵，各地豪強亦開始自募人手。",
-          "你在黑松嶺見過的黃布與「甲子」，終於有了名字。"
-        ],
-        actions: [{
-          label: "帶着此身進入第二卷",
-          className: "danger",
-          handler: beginChapter2
-        }]
-      });
-    }
-
-    function healBetweenChapters() {
-      if (state.injury.severity === 1) {
-        state.injury = { name: "無", severity: 0, ability: null, penalty: 0 };
-        state.hp = state.maxHp;
-      } else if (state.injury.severity === 2) {
-        state.injury.severity = 1;
-        state.injury.penalty = 0;
-        state.hp = Math.max(state.hp, Math.ceil(state.maxHp * 0.8));
-      } else if (state.injury.severity >= 3) {
-        state.injury.severity = 2;
-        state.injury.penalty = -1;
-        state.hp = Math.max(state.hp, Math.ceil(state.maxHp * 0.65));
-      } else {
-        state.hp = state.maxHp;
-      }
-    }
-
-    function beginChapter2() {
-      healBetweenChapters();
-      state.chapter = 2;
-      state.phase = "chapter2";
-      state.scene = "yellowOutbreak";
-      state.year = 184;
-      state.month = "二月下旬";
-      state.age = 16;
-      addHistory("親歷黃巾之亂爆發。");
-      saveCheckpoint();
-
-      setScene({
-        heading: "第二卷・黃巾初起",
-        paragraphs: [
-          "涿縣城門外擠滿流民、徵募者與等待入城的車隊。官府文書貼了一層又一層，昨日的命令今日便可能作廢。",
-          "太平道信眾並非全是持刀亂軍。有人曾替窮戶治病，有人只求免於苛稅；但城外亦已有黃巾隊伍殺吏奪倉，裹挾不願從者。",
-          "涿郡開始招募義兵。兩名販馬商人張世平、蘇雙願意提供馬匹與資財，一名叫劉備的本地人亦開始招合徒眾。",
-          "同一時間，盧生發現黑松嶺殘信上的收糧地點，可能就位於涿水渡口附近。",
-          "你唔需要處理所有事情。今日所揀嘅道路，將決定你以甚麼身份撞入歷史。"
-        ],
-        actions: chapter2RouteActions()
-      });
-    }
-
-    function routeRequirement(condition, reason) {
-      return { available: condition, reason };
-    }
-
-    function chapter2RouteActions() {
-      const scoutAvailable =
-        state.abilities.awareness >= 58 ||
-        state.abilities.agility >= 58 ||
-        hasTag("mountain") ||
-        hasTag("roads") ||
-        hasTag("scouting");
-
-      const logisticsAvailable =
-        state.abilities.intellect >= 58 ||
-        hasTag("strategy") ||
-        hasTag("classics") ||
-        hasTag("convoyGuard");
-
-      const leaderAvailable =
-        state.abilities.presence >= 58 ||
-        state.reputation.village >= 10 ||
-        hasTag("command") ||
-        hasTag("mediation");
-
-      const yellowAvailable =
-        hasTag("yellowClue") ||
-        state.chapter1.outcome === "defeat" ||
-        state.reputation.government < 0;
-
-      return [
-        {
-          label: "響應劉備等人的義兵招募",
-          note: "以普通應募者身份進入前線。",
-          className: "history-action",
-          handler: () => chooseChapter2Route("volunteer")
-        },
-        {
-          label: "沿黑松嶺線索偵察涿水渡口",
-          note: "由情報與山路開始接近亂局。",
-          ...routeRequirement(scoutAvailable, "缺乏偵察能力或相關道路經驗。"),
-          handler: () => chooseChapter2Route("scout")
-        },
-        {
-          label: "協助商隊整理軍糧與道路",
-          note: "由後勤與謀略支援新募義兵。",
-          ...routeRequirement(logisticsAvailable, "未有足夠文書、兵書或護糧經驗。"),
-          handler: () => chooseChapter2Route("logistics")
-        },
-        {
-          label: "先組織桑澤里青壯與難民",
-          note: "帶住自己建立的人際關係進入亂局。",
-          ...routeRequirement(leaderAvailable, "你目前未有足夠聲望或號令經驗。"),
-          handler: () => chooseChapter2Route("organize")
-        },
-        {
-          label: "留守桑澤里，不把家人交給陌生軍隊",
-          note: "留守同樣係完整道路，但戰火未必會避開你。",
-          className: "safe",
-          handler: () => chooseChapter2Route("stay")
-        },
-        {
-          label: "循黃符接觸當地太平道信眾",
-          note: "不等於立即加入黃巾；你會先看清他們係甚麼人。",
-          className: "danger",
-          ...routeRequirement(yellowAvailable, "你未有足夠線索找到秘密接頭者。"),
-          handler: () => chooseChapter2Route("taiping")
-        }
-      ];
-    }
-
-    function chooseChapter2Route(route) {
-      state.chapter2.route = route;
-
-      const handlers = {
-        volunteer: volunteerRoute,
-        scout: scoutRoute,
-        logistics: logisticsRoute,
-        organize: organizeRoute,
-        stay: stayRoute,
-        taiping: taipingRoute
-      };
-
-      handlers[route]();
-    }
-
-    function volunteerRoute() {
-      state.chapter2.allegiance = "涿郡義兵";
-      state.faction = "涿郡義兵";
-      addTag("volunteer");
-      addHistory("黃巾初起時響應涿郡義兵招募。");
-
-      setScene({
-        heading: "市井募兵",
-        paragraphs: [
-          "涿縣市口聚了數百人。有人自備刀弓，更多人只拿木棍與農具。",
-          "一名身長臂長、神色沉靜的男子逐一問明應募者籍貫與所長。他便是劉備。",
-          "不遠處，一名赤面長髯大漢替受欺壓的流民攔住醉卒；另一名豹頭環眼的壯漢則在空地高聲整隊。",
-          "你不是他們等待多年的英雄，只是今日眾多應募者之一。"
-        ],
-        actions: [
-          {
-            label: "展示黑松嶺實戰所得",
-            note: "初陣經驗會影響劉備判斷。",
-            handler: () => volunteerTest("combat")
-          },
-          {
-            label: "先說清自己能替眾人做甚麼",
-            note: "氣度與可靠名聲較重要。",
-            handler: () => volunteerTest("presence")
-          },
-          {
-            label: "呈上黑石寨留下的甲子線索",
-            note: "可能令你直接接觸軍中情報工作。",
-            available: hasTag("yellowClue"),
-            reason: "你沒有可以證明黑石寨聯繫的實物。",
-            handler: () => volunteerTest("clue")
-          }
-        ]
-      });
-    }
-
-    function volunteerTest(type) {
-      let result;
-
-      if (type === "combat") {
-        result = check(
-          state.weapon.ability,
-          13,
-          hasTag("firstBattle") ? 2 : 0,
-          "試武"
-        );
-      } else if (type === "presence") {
-        result = check(
-          "presence",
-          13,
-          state.traits.includes("reliable") ? 2 : 0,
-          "應募陳詞"
-        );
-      } else {
-        result = check(
-          "intellect",
-          12,
-          state.chapter1.clues,
-          "呈報線索"
-        );
-      }
-
-      state.chapter2.metLiuBei = true;
-
-      if (result.success) {
-        state.reputation.military += 8;
-        paragraphsMeetLiu(result, type, true);
-      } else {
-        state.reputation.military += 2;
-        paragraphsMeetLiu(result, type, false);
-      }
-    }
-
-    function paragraphsMeetLiu(result, type, success) {
-      const special =
-        type === "clue"
-          ? "劉備讀完殘信，沒有在眾人面前聲張，只叫你把渡口位置再說一遍。"
-          : type === "combat"
-            ? "赤面長髯的關羽看過你的步法，微微點頭，卻沒有出言稱讚。"
-            : "劉備聽完你對桑澤里人手與糧況的說明，先問傷者如何，再問你願意承擔甚麼。";
-
-      setScene({
-        heading: success ? "獲留軍前" : "仍是新卒",
-        paragraphs: [
-          special,
-          success
-            ? "『有實戰而不妄言者，可用。』劉備將你編入前隊，並准你參與渡口行動。"
-            : "你沒有立即脫穎而出。劉備仍把你留下，只係安排在較外圍的位置。亂世從軍，本來就唔會人人第一日得到賞識。",
-          "張飛從旁拋來一條綁甲皮帶：『先把自己綁穩。戰場唔會等你慢慢學。』"
-        ],
-        rolls: [result.line],
-        actions: [{
-          label: "隨義兵前往涿水渡口",
-          className: "danger",
-          handler: () => chapter2Convergence("義兵前隊")
-        }]
-      });
-    }
-
-    function scoutRoute() {
-      state.chapter2.allegiance = "涿郡義兵";
-      state.faction = "涿郡義兵";
-      addTag("militaryScout");
-      addHistory("沿黑松嶺線索偵察涿水渡口。");
-
-      const result = check(
-        state.abilities.awareness >= state.abilities.agility ? "awareness" : "agility",
-        13,
-        (hasTag("roads") ? 1 : 0) + (hasTag("yellowClue") ? 1 : 0),
-        "渡口偵察"
-      );
-
-      state.chapter2.metGuanYu = true;
-
-      setScene({
-        heading: "長髯行者",
-        paragraphs: [
-          result.success
-            ? "你避開主路，在蘆葦間找到新近拖動過的糧車痕跡。渡口旁並非單純難民營，而是一處秘密轉運點。"
-            : "你一度追錯車痕，幾乎撞入黃巾哨點。正當兩名持矛者逼近，一柄長刀從側面截住去路。",
-          "持刀者赤面長髯，自稱河東關羽。佢亦在追查渡口聚眾，並準備前往涿縣投奔新募義兵。",
-          result.success
-            ? "關羽沒有因你年少而輕視，只問你願唔願意把所見帶回涿縣。"
-            : "關羽替你逼退追兵，卻直言：『偵察者若只憑膽氣，害的不止自己。』",
-          "你們確認渡口上游藏有一批兵器，而黑石寨殘部亦可能在其中。"
-        ],
-        rolls: [result.line],
-        actions: [{
-          label: "與關羽返回涿縣呈報",
-          className: "history-action",
-          handler: () => scoutMeetLiu(result.success)
-        }]
-      });
-    }
-
-    function scoutMeetLiu(success) {
-      state.chapter2.metLiuBei = true;
-      state.reputation.military += success ? 10 : 4;
-
-      setScene({
-        heading: "義兵初聚",
-        paragraphs: [
-          "關羽將你帶到市口。劉備聽完渡口情報，立即停止原定行軍，改由小隊先行控制兩岸。",
-          "張飛已集合一批鄉勇，聽見黑石寨殘部亦在渡口，只重重拍了一下矛桿。",
-          success
-            ? "你提供的路線令義兵避開正面哨卡。由今日起，你不再只係偶然路過的鄉民。"
-            : "雖然情報並不完整，你仍指出了真正危險所在。劉備將你編入熟悉道路的人手之中。",
-          "三人尚未有後世傳說中那場無人能證實的桃園儀式，但彼此之間已經有一種旁人難以插入的信任。"
-        ],
-        actions: [{
-          label: "引義兵前往渡口",
-          className: "danger",
-          handler: () => chapter2Convergence("斥候引路")
-        }]
-      });
-    }
-
-    function logisticsRoute() {
-      state.chapter2.allegiance = "涿郡義兵";
-      state.faction = "涿郡義兵";
-      addTag("logistics");
-      addHistory("協助張世平、蘇雙整理義兵糧馬。");
-
-      const result = check(
-        "intellect",
-        13,
-        (hasTag("roads") ? 1 : 0) + (hasTag("strategy") ? 1 : 0),
-        "軍糧籌畫"
-      );
-
-      state.chapter2.metLiuBei = true;
-
-      setScene({
-        heading: "糧馬先於刀兵",
-        paragraphs: [
-          "張世平與蘇雙帶來馬匹與資財，真正困難卻係如何令數百名新卒每日都有糧食，而且不在同一條路上擠死。",
-          result.success
-            ? "你把黑松嶺護糧經驗寫成三條簡單規矩：前後車距、傷者位置、遇伏時棄牲不棄路。劉備看完後立即採用。"
-            : "你最初低估人數，第一份糧冊漏洞百出。幸而盧生教過你重新核對戶數，總算在出發前補救。",
-          "一名豹頭環眼的壯漢抱臂站在旁邊，嫌文書太慢。劉備只說：『無糧，壯士亦走不過三日。』張飛聽後便不再催促。",
-          "渡口傳來消息：一批難民被夾在黃巾轉運隊與官府潰卒之間，義兵必須立即行動。"
-        ],
-        rolls: [result.line],
-        actions: [{
-          label: "帶糧隊支援涿水渡口",
-          className: "danger",
-          handler: () => chapter2Convergence("糧隊庶務")
-        }]
-      });
-    }
-
-    function organizeRoute() {
-      state.chapter2.allegiance = "桑澤鄉勇";
-      state.faction = "桑澤鄉勇";
-      addTag("localLeader");
-      addHistory("黃巾初起時組織桑澤里青壯與難民。");
-
-      const result = check(
-        "presence",
-        13,
-        (hasTag("mediation") ? 1 : 0) +
-        (state.reputation.village >= 15 ? 2 : 0),
-        "鄉里動員"
-      );
-
-      const followers = result.critical ? 18 : result.success ? 11 : 5;
-      state.chapter2.civiliansSaved += followers;
-      state.chapter2.metZhangFei = true;
-
-      setScene({
-        heading: "聚眾不是一句豪言",
-        paragraphs: [
-          result.success
-            ? `有 ${followers} 名青壯願意跟隨你，另外幾戶人家答應照顧傷者與孩童。`
-            : `多數人不願把性命交畀一名十六歲少年。最後只有 ${followers} 人帶著農具站到你身後。`,
-          "你帶眾人前往涿縣尋找安置地時，一群潰卒企圖搶走難民糧袋。豹頭環眼的張飛當街喝止，聲音幾乎壓過整條街。",
-          "得知你曾守過黑松嶺後，張飛沒有問你殺過幾多人，只問你能否令身後人聽令。",
-          "渡口正受威脅。你可以帶自己組織的人加入義兵，但仍要承擔他們死傷的後果。"
-        ],
-        rolls: [result.line],
-        actions: [{
-          label: "帶桑澤人與張飛前往渡口",
-          className: "danger",
-          handler: () => {
-            state.chapter2.metLiuBei = true;
-            chapter2Convergence("桑澤鄉勇");
-          }
-        }]
-      });
-    }
-
-    function stayRoute() {
-      state.chapter2.allegiance = "桑澤里";
-      state.faction = "桑澤里";
-      addHistory("黃巾初起時選擇留守桑澤里。");
-
-      setScene({
-        heading: "戰火不問去留",
-        paragraphs: [
-          "你拒絕立即前往涿縣。村中仍有傷者、老弱與未能收起的糧食，離開並不一定比留下更勇敢。",
-          "第三日，渡口方向湧來百餘名難民。後方有黃巾小隊徵糧，另一邊則係失去主官的潰卒，兩者都要求桑澤里交出物資。",
-          "周平站到你身旁。若黑松嶺一戰令他受傷，他此刻仍然行動不便，卻沒有退回屋內。",
-          "你本來不想加入任何大軍，但桑澤里已經變成通往涿水渡口的必經之路。"
-        ],
-        actions: [
-          {
-            label: "帶村民與難民退向渡口",
-            note: "以保存人命為首要目標。",
-            className: "safe",
-            handler: () => {
-              addTrait("benevolent");
-              state.chapter2.civiliansSaved += 15;
-              chapter2Convergence("桑澤護民隊");
-            }
-          },
-          {
-            label: "設法拖延兩股人馬，再分批撤離",
-            note: "才智或氣度可以改變出發時局勢。",
-            handler: stayDelay
-          }
-        ]
-      });
-    }
-
-    function stayDelay() {
-      const ability =
-        state.abilities.intellect >= state.abilities.presence
-          ? "intellect"
-          : "presence";
-      const result = check(
-        ability,
-        14,
-        hasTag("mediation") || hasTag("strategy") ? 2 : 0,
-        "拖延撤村"
-      );
-
-      if (result.success) {
-        state.chapter2.civiliansSaved += 22;
-        state.reputation.village += 12;
-        addTrait(ability === "presence" ? "commanding" : "strategist");
-      } else {
-        state.chapter2.civiliansSaved += 9;
-        state.chapter1.casualties += result.disaster ? 4 : 2;
-      }
-
-      setScene({
-        heading: result.success ? "一村得撤" : "火起桑澤",
-        paragraphs: [
-          result.success
-            ? "你以空糧車堵路，再派人分別向兩邊傳出對方將到的假消息。兩股人馬互相戒備時，村民已由小路撤走。"
-            : "你的安排未能完全騙過追兵。村尾幾間屋被點燃，未及離開的人在煙中失散。",
-          "退路最終仍指向涿水渡口。遠處已傳來新募義兵的號聲。"
-        ],
-        rolls: [result.line],
-        actions: [{
-          label: "護送生還者前往渡口",
-          className: "danger",
-          handler: () => chapter2Convergence("桑澤護民隊")
-        }]
-      });
-    }
-
-    function taipingRoute() {
-      state.chapter2.allegiance = "未定";
-      state.faction = "無";
-      addTag("taipingContact");
-      addHistory("曾秘密接觸涿郡太平道信眾。");
-
-      setScene({
-        heading: "符水與刀兵",
-        paragraphs: [
-          "盧生替你找到一名曾在桑澤里施藥的太平道信眾。她名叫馬蘭，並非渠帥，只係一名替窮戶治病的寡婦。",
-          "馬蘭承認有人叫她們準備黃布與糧食，亦承認黑石寨曾替一名外來使者收糧。但韓魁只認利益，從未真正信奉太平道。",
-          "起事提前之後，一名自稱神上使的頭目接管渡口，準備燒毀橋梁，強迫難民加入。拒絕者會被當成官府耳目。",
-          "馬蘭沒有要求你相信太平道。她只問：『若官府與渠帥都把人當糧草，你願意替邊一邊殺人？』"
-        ],
-        actions: [
-          {
-            label: "協助溫和信眾救走渡口難民",
-            note: "你會同黃巾強硬派為敵。",
-            className: "safe",
-            handler: () => taipingDecision("rescue")
-          },
-          {
-            label: "把轉運與燒橋情報交給涿郡義兵",
-            note: "可能被太平道視為背叛。",
-            handler: () => taipingDecision("inform")
-          },
-          {
-            label: "加入起事，但拒絕屠殺不從者",
-            note: "需要足夠氣度或太平道相關信任。",
-            className: "danger",
-            available:
-              state.abilities.presence >= 58 ||
-              state.chapter1.outcome === "defeat",
-            reason: "你未有足夠立場令當地信眾接受你。",
-            handler: () => taipingDecision("join")
-          }
-        ]
-      });
-    }
-
-    function taipingDecision(choice) {
-      if (choice === "rescue") {
-        state.chapter2.allegiance = "太平道溫和信眾";
-        state.faction = "無";
-        state.chapter2.yellowTruth = "保護百姓的信眾與強硬渠帥已經分裂";
-        addTrait("benevolent");
-        state.chapter2.civiliansSaved += 12;
-
-        setScene({
-          heading: "同袍相向",
-          paragraphs: [
-            "馬蘭帶你由蘆葦小路接近渡口。部分黃巾信眾願意放人，強硬派卻已架起柴薪。",
-            "你第一次清楚看見：同樣包黃巾的人，可以因同一個理想選擇完全不同的道路。",
-            "涿郡義兵亦正由北岸接近。一場混戰無法避免。"
-          ],
-          actions: [{
-            label: "在兩軍之間救出難民",
-            className: "danger",
-            handler: () => chapter2Convergence("太平道救民者")
-          }]
-        });
-      }
-
-      if (choice === "inform") {
-        state.chapter2.allegiance = "涿郡義兵";
-        state.faction = "涿郡義兵";
-        state.chapter2.yellowTruth = "黑石寨曾替黃巾強硬派轉運糧械";
-        state.chapter2.metLiuBei = true;
-        addTrait("reliable");
-
-        setScene({
-          heading: "密報劉備",
-          paragraphs: [
-            "你把馬蘭所知帶到涿縣。劉備沒有下令拘捕所有太平道信眾，而係先問清楚燒橋者位置。",
-            "『持黃巾者未必皆願殺人，但今日要燒橋的人，必須阻止。』",
-            "關羽與張飛已帶隊出發。你熟悉接頭方式，亦被編入先行人手。"
-          ],
-          actions: [{
-            label: "隨義兵趕赴渡口",
-            className: "danger",
-            handler: () => chapter2Convergence("義兵情報引路")
-          }]
-        });
-      }
-
-      if (choice === "join") {
-        state.chapter2.allegiance = "涿郡黃巾";
-        state.faction = "太平道地方眾";
-        state.chapter2.yellowTruth = "起事者內部已因是否裹挾百姓而分裂";
-        addTrait("commanding");
-
-        setScene({
-          heading: "黃巾之內",
-          paragraphs: [
-            "你把黃布纏上手臂，而不是頭頂。你願意反抗貪官苛吏，卻不肯替任何渠帥焚燒難民退路。",
-            "部分信眾站到你與馬蘭一邊，強硬派則斥你們臨陣背道。",
-            "北岸出現涿郡義兵旗號。若兩邊直接衝撞，橋上百姓會先被踩死。",
-            "你必須守住難民通道，同時決定自己在黃巾之中究竟代表甚麼。"
-          ],
-          actions: [{
-            label: "帶願意護民的信眾控制渡口",
-            className: "danger",
-            handler: () => chapter2Convergence("黃巾護民隊")
-          }]
-        });
-      }
-    }
-
-    function chapter2Convergence(role) {
-      state.phase = "chapter2";
-      state.location = "涿水渡口";
-      state.chapter2.objective = "保住渡口與難民通道";
-
-      let opening;
-
-      if (state.chapter2.allegiance === "涿郡黃巾") {
-        opening = [
-          "渡口強硬派已點燃第一堆柴薪。你帶願意護民的黃巾信眾守住橋頭，既要抵擋渠帥親兵，亦要避免同北岸義兵全面互殺。",
-          "遠處可見關羽長刀與張飛蛇矛般的長兵在人群間開路。劉備則不斷喝令義兵放開難民通道。",
-          "你唔係為殺光其中一邊而戰，而係要令百姓活著過橋。"
-        ];
-      } else if (state.chapter2.allegiance === "太平道溫和信眾") {
-        opening = [
-          "你與馬蘭打開南岸柵欄，難民開始湧向橋面。強硬派立即派人封路，北岸義兵亦誤以為所有黃巾都準備進攻。",
-          "你要在兩股兵力之間維持一條生路。任何一邊失控，都會先把橋上百姓推入河中。"
-        ];
-      } else {
-        opening = [
-          "義兵趕到時，強硬黃巾已經控制南岸糧棚。數百名難民被困在橋面與營地之間。",
-          "劉備下令不得向橋上放箭。關羽領人壓住左岸，張飛則準備撞開焚橋隊伍。",
-          `你以「${role}」身份進入戰場。任務唔係殺盡黃巾，而係保住渡口、糧道與百姓。`
-        ];
-      }
-
-      setScene({
-        heading: "涿水渡口",
-        paragraphs: opening.concat([
-          "黑石寨殘部亦出現在南岸。如果韓魁仍然生還，今日可能就藏在黃巾旗號之後。"
-        ]),
-        actions: [{
-          label: "進入渡口決戰",
-          className: "danger",
-          handler: startChapter2Battle
-        }]
-      });
-    }
-
-    function startChapter2Battle() {
-      state.phase = "battlefield2";
-
-      const route = state.chapter2.route;
-      let morale = 52;
-      let formation = 48;
-      let position = 0;
-      let protectedPeople = 2;
-
-      if (route === "organize" || route === "stay") morale += 8;
-      if (route === "scout") position += 1;
-      if (route === "logistics") formation += 8;
-      if (state.chapter1.outcome === "victory") morale += 5;
-      if (state.chapter2.civiliansSaved >= 15) protectedPeople += 1;
-
-      state.battle = {
-        id: "zhuoFord",
-        name: "涿水渡口爭奪",
-        objective: "守住難民通道直至最後一批人過橋",
-        round: 1,
-        maxRounds: 5,
-        morale: clamp(morale, 0, 100),
-        formation: clamp(formation, 0, 100),
-        enemyMorale: 72,
-        position,
-        protected: protectedPeople,
-        enemyAdvantage: 2,
-        bridgeIntegrity: 3,
-        personalThreat: 0
-      };
-
-      setScene({
-        heading: "黃巾、義兵與百姓",
-        paragraphs: [
-          "鼓聲響起後，再冇人能完整看清全場。黃巾、義兵、潰卒與逃難百姓擠在同一片泥地。",
-          "真正重要的只有三件事：橋不能太早被燒、隊伍不能崩潰、難民通道必須保持。",
-          "你只能選擇自己最能改變的一處。"
-        ],
-        actions: chapter2BattleActions()
-      });
-    }
-
-    function chapter2BattleActions() {
-      const b = state.battle;
-      const route = state.chapter2.route;
-
-      const actions = [
-        {
-          label: "穩住隊伍，分開兵卒與難民",
-          note: "氣度；提升士氣、隊形與受護目標。",
-          handler: () => resolveChapter2Battle("rally")
-        },
-        {
-          label: "搶佔橋側高地",
-          note: "洞察或身法；改善位置並壓制縱火者。",
-          handler: () => resolveChapter2Battle("position")
-        },
-        {
-          label: "護送一批難民過橋",
-          note: "直接推進主要目標，但會承受更大個人風險。",
-          className: "safe",
-          handler: () => resolveChapter2Battle("escort")
-        },
-        {
-          label: "率隊打擊焚橋頭目",
-          note: "個人戰鬥會影響敵軍士氣，但不能代替護送目標。",
-          className: "danger",
-          handler: () => resolveChapter2Battle("strike")
-             }
-      ];
-
-      const canParley =
-        state.chapter2.route === "taiping" ||
-        hasTag("taipingContact") ||
-        state.abilities.presence >= 68;
-
-      actions.push({
-        label: "向仍願護民的黃巾喊話",
-        note: "分化強硬派，避免所有黃巾都被迫死戰。",
-        available: canParley,
-        reason: "你未有足夠聯繫或聲望令敵陣相信你。",
-        handler: () => resolveChapter2Battle("parley")
-      });
-
-      if (
-        state.chapter2.route === "scout" ||
-        hasTag("militaryScout") ||
-        hasTag("mountain") ||
-        hasTag("roads")
-      ) {
-        actions.push({
-          label: "沿蘆葦灘繞到焚橋隊側後",
-          note: "斥候道路；可削弱地勢優勢並保護橋梁。",
-          handler: () => resolveChapter2Battle("flank")
-        });
-      }
-
-      if (
-        !b.hanKuiResolved &&
-        state.chapter1.hanKuiFate !== "killed" &&
-        b.round >= 2
-      ) {
-        actions.unshift({
-          label: "迎向黑石寨殘部",
-          note: "韓魁可能就在亂軍之中。此舉會令你離開難民通道。",
-          className: "danger",
-          handler: confrontHanKuiAtFord
-        });
-      }
-
-      return actions;
-    }
-
-    function resolveChapter2Battle(type) {
-      const b = state.battle;
-      const paragraphs = [];
-      const rolls = [];
-      let result;
-
-      if (type === "rally") {
-        result = check(
-          "presence",
-          13 + Math.max(0, b.enemyAdvantage),
-          (hasTag("command") ? 2 : 0) +
-          (hasTag("localLeader") ? 1 : 0),
-          "渡口整隊"
-        );
-
-        if (result.critical) {
-          b.morale += 20;
-          b.formation += 18;
-          b.protected += 1;
-          b.enemyMorale -= 8;
-          paragraphs.push(
-            "你衝到橋頭中央，先將兵卒與難民分成兩條通道，再命持盾者面向南岸。清楚命令迅速壓過哭喊，幾名原本失控的鄉勇亦重新歸隊。"
-          );
-        } else if (result.success) {
-          b.morale += 12;
-          b.formation += 10;
-          b.protected += 1;
-          paragraphs.push(
-            "你沿橋頭逐人喝令，將傷者、孩童與持兵者分開。混亂未止，但眾人終於知道下一步要往哪裡走。"
-          );
-        } else {
-          b.morale -= result.disaster ? 12 : 6;
-          b.formation -= result.disaster ? 8 : 4;
-          paragraphs.push(
-            "鼓聲、火聲與哭喊吞沒你的命令。有人誤以為橋已失守，反而推著人群向最窄處擠去。"
-          );
-        }
-      }
-
-      if (type === "position") {
-        const ability =
-          state.abilities.awareness >= state.abilities.agility
-            ? "awareness"
-            : "agility";
-
-        result = check(
-          ability,
-          14 + Math.max(0, b.enemyAdvantage - 1),
-          (hasTag("militaryScout") ? 2 : 0) +
-          (hasTag("scouting") ? 1 : 0),
-          "搶佔橋側"
-        );
-
-        if (result.critical) {
-          b.position += 2;
-          b.enemyAdvantage -= 2;
-          b.bridgeIntegrity = Math.min(3, b.bridgeIntegrity + 1);
-          b.enemyMorale -= 8;
-          paragraphs.push(
-            "你沒有沿石階直衝，而是踩過淺水與蘆根繞到橋側土丘。焚橋者忽然發現自己暴露在兩面兵刃之間，只得丟下火把退走。"
-          );
-        } else if (result.success) {
-          b.position += 1;
-          b.enemyAdvantage -= 1;
-          b.bridgeIntegrity = Math.min(3, b.bridgeIntegrity + 1);
-          paragraphs.push(
-            "你搶先佔住橋側高地，幾名弓手隨即跟上。縱火者無法再毫無遮掩地接近木樁。"
-          );
-        } else {
-          b.position -= 1;
-          b.morale -= 4;
-          paragraphs.push(
-            "你沿濕滑斜坡上攀，卻撞上一隊早已伏在蘆葦後的持矛者。隊伍被迫退回橋邊。"
-          );
-        }
-      }
-
-      if (type === "escort") {
-        const ability =
-          state.abilities.strength >= state.abilities.presence
-            ? "strength"
-            : "presence";
-
-        result = check(
-          ability,
-          13 + Math.max(0, b.enemyAdvantage),
-          (state.traits.includes("benevolent") ? 1 : 0) +
-          (hasTag("localLeader") ? 1 : 0),
-          "護送難民"
-        );
-
-        if (result.critical) {
-          b.protected += 2;
-          b.morale += 8;
-          state.chapter2.civiliansSaved += 20;
-          paragraphs.push(
-            "你帶持盾者逆著人流推開一條窄路，再親手抱起倒在橋面的孩童。兩批難民趁空隙越過北岸，後方人群亦不再盲目推擠。"
-          );
-        } else if (result.success) {
-          b.protected += 1;
-          state.chapter2.civiliansSaved += 10;
-          paragraphs.push(
-            "你守在通道最外側，讓老人、傷者與孩童先過。刀矛幾次伸到身前，仍未能截斷人流。"
-          );
-        } else {
-          b.formation -= 6;
-          b.morale -= 5;
-          b.personalThreat += result.disaster ? 2 : 1;
-          paragraphs.push(
-            "人群忽然因一匹倒下的牲口堵成一團。你試圖拉開通道，自己與護衛反被擠離隊形。"
-          );
-        }
-      }
-
-      if (type === "strike") {
-        const ability = state.weapon.ability;
-
-        result = check(
-          ability,
-          15 + Math.max(0, b.enemyAdvantage),
-          state.weapon.attack +
-          (hasTag("firstBattle") ? 1 : 0) +
-          (state.traits.includes("brave") ? 1 : 0),
-          "突擊焚橋隊"
-        );
-
-        if (result.critical) {
-          b.enemyMorale -= 26;
-          b.morale += 10;
-          b.position += 1;
-          b.bridgeIntegrity = Math.min(3, b.bridgeIntegrity + 1);
-          paragraphs.push(
-            "你踏過未燃盡的柴薪直取焚橋頭目。對方才舉刀，兵刃已穿過防守。頭目倒地後，周圍黃巾一時無人敢再拾起火把。"
-          );
-        } else if (result.success) {
-          b.enemyMorale -= 15;
-          b.morale += 5;
-          paragraphs.push(
-            "你帶數名同伴撞入焚橋隊側面，迫使他們放棄柴薪拔刀迎戰。橋下火勢暫時停止蔓延。"
-          );
-        } else {
-          b.formation -= 8;
-          b.morale -= 7;
-          b.personalThreat += result.disaster ? 3 : 2;
-          paragraphs.push(
-            "你離開護送通道後，敵方弓手立即集中箭矢。突擊未能接近頭目，身後隊形反而露出缺口。"
-          );
-        }
-      }
-
-      if (type === "parley") {
-        result = check(
-          "presence",
-          15,
-          (hasTag("taipingContact") ? 2 : 0) +
-          (state.chapter2.yellowTruth ? 1 : 0) +
-          (state.traits.includes("benevolent") ? 1 : 0),
-          "陣前喊話"
-        );
-
-        if (result.critical) {
-          b.enemyMorale -= 25;
-          b.protected += 1;
-          b.enemyAdvantage -= 1;
-          paragraphs.push(
-            "你高聲叫出馬蘭與幾名太平道施藥者的名字，再指出強硬派正準備連自己人一同燒死。最前排黃巾先放低長矛，隨後整隊讓開難民通道。"
-          );
-        } else if (result.success) {
-          b.enemyMorale -= 14;
-          b.protected += 1;
-          paragraphs.push(
-            "你沒有要求所有黃巾投降，只要求仍記得救民初衷的人退開一步。幾名信眾互望片刻，終於轉身制止身後的縱火者。"
-          );
-        } else {
-          b.enemyMorale += result.disaster ? 10 : 5;
-          b.morale -= 5;
-          paragraphs.push(
-            "強硬派敲響銅鑼，斥你受官府收買。原本仍在猶豫的人被逼著重新舉起兵刃。"
-          );
-        }
-      }
-
-      if (type === "flank") {
-        const ability =
-          state.abilities.agility >= state.abilities.awareness
-            ? "agility"
-            : "awareness";
-
-        result = check(
-          ability,
-          14,
-          (hasTag("militaryScout") ? 2 : 0) +
-          (hasTag("roads") ? 1 : 0) +
-          (hasTag("mountain") ? 1 : 0),
-          "蘆灘迂迴"
-        );
-
-        if (result.critical) {
-          b.enemyAdvantage -= 2;
-          b.position += 2;
-          b.enemyMorale -= 13;
-          b.bridgeIntegrity = Math.min(3, b.bridgeIntegrity + 1);
-          paragraphs.push(
-            "你帶人伏低穿過蘆葦灘，從火油車後突然現身。敵方以為退路被截，立即棄下數桶火油。"
-          );
-        } else if (result.success) {
-          b.enemyAdvantage -= 1;
-          b.position += 1;
-          b.enemyMorale -= 7;
-          paragraphs.push(
-            "你由淺灘繞過正面，迫使焚橋隊分兵回守。北岸壓力隨之減輕。"
-          );
-        } else {
-          b.position -= 1;
-          b.personalThreat += 1;
-          paragraphs.push(
-            "河泥比預想更深，幾名同伴陷在蘆根之間。敵方發現動靜後立即向淺灘射箭。"
-          );
-        }
-      }
-
-      if (result) rolls.push(result.line);
-
-      normalizeChapter2Battle();
-
-      if (checkChapter2BattleEnd(paragraphs, rolls)) return;
-
-      const pressure = chapter2EnemyPressure();
-      paragraphs.push(...pressure.paragraphs);
-      rolls.push(...pressure.rolls);
-
-      normalizeChapter2Battle();
-
-      if (state.hp <= 0) {
-        showDeath(paragraphs, rolls, "命斷涿水");
-        return;
-      }
-
-      if (checkChapter2BattleEnd(paragraphs, rolls)) return;
-
-      b.round += 1;
-
-      if (b.round > b.maxRounds) {
-        resolveChapter2Timeout(paragraphs, rolls);
-        return;
-      }
-
-      setScene({
-        heading: chapter2BattleHeading(),
-        paragraphs,
-        rolls,
-        actions: chapter2BattleActions()
-      });
-    }
-
-    function confrontHanKuiAtFord() {
-      const b = state.battle;
-      b.hanKuiRevealed = true;
-
-      const paragraphs = [];
-      const rolls = [];
-
-      if (state.chapter1.hanKuiFate === "敗逃") {
-        paragraphs.push(
-          "你在亂旗之間認出韓魁。黑松嶺留下的傷令他一邊肩膀明顯低垂，但他仍提著缺口山刀。",
-          "韓魁沒有正式戴上黃巾，只把黃布纏在刀柄。顯然佢仍然把起事當成另一宗可以獲利的買賣。"
-        );
-      } else {
-        paragraphs.push(
-          "黑石寨殘部由南岸衝出，韓魁仍站在最前。他身上的新甲與手下兵器，正係用黑松嶺奪來的糧藥換回。",
-          "『上次讓你逃了，今日連人帶橋一同留下！』"
-        );
-      }
-
-      const ability = state.weapon.ability;
-      const result = check(
-        ability,
-        16,
-        state.weapon.attack +
-        (state.chapter1.hanKuiFate === "敗逃" ? 2 : 0) +
-        (state.traits.includes("brave") ? 1 : 0),
-        "亂軍中迎擊韓魁"
-      );
-
-      rolls.push(result.line);
-
-      if (result.critical) {
-        b.hanKuiResolved = true;
-        b.enemyMorale -= 24;
-        b.morale += 10;
-        state.chapter1.hanKuiFate = "死於涿水渡口";
-        state.npcs.hanKui.alive = false;
-        state.npcs.hanKui.status = "死於涿水渡口";
-        addHistory("於涿水渡口斬殺再度出現的韓魁。");
-        addTrait("brave");
-
-        paragraphs.push(
-          "韓魁揮刀斬來，你沒有後退。兩柄兵刃在橋側相撞，你轉身借勢切入佢舊傷一側。",
-          "韓魁跪落泥地時，仍然伸手想抓住掉落的山刀。下一刻，渡口人流已從佢身旁越過。",
-          "黑石寨殘部眼見頭領斃命，立即有人棄械逃走。"
-        );
-      } else if (result.success) {
-        b.hanKuiResolved = true;
-        b.enemyMorale -= 16;
-        b.position += 1;
-        state.chapter1.hanKuiFate = "涿水被俘";
-        state.npcs.hanKui.alive = true;
-        state.npcs.hanKui.status = "被涿郡義兵俘虜";
-        addHistory("於涿水渡口生擒韓魁。");
-
-        paragraphs.push(
-          "你避開山刀正面，將韓魁逼向倒塌木欄。關羽由另一側截住退路，韓魁終於被長兵壓倒。",
-          "被綁起前，韓魁吐出帶血唾沫，承認黑石寨一直替一名外來使者轉運兵器。",
-          "佢只知道對方自稱『神上使』，並唔知道真正渠帥身份。"
-        );
-
-        state.chapter2.yellowTruth =
-          "韓魁承認黑石寨替自稱神上使者轉運糧械";
-      } else {
-        b.hanKuiResolved = result.disaster;
-        b.formation -= result.disaster ? 13 : 8;
-        b.morale -= result.disaster ? 10 : 6;
-        b.personalThreat += result.disaster ? 3 : 2;
-
         paragraphs.push(
           result.disaster
-            ? "你衝向韓魁時腳下木板突然斷裂。韓魁趁勢一刀斬下，迫使你跌入橋側泥水。"
-            : "你與韓魁短暫交鋒，卻被兩名黑石寨賊人由側面夾擊。韓魁趁亂退入黃巾陣後。",
-          "你未能解決舊敵，亦因離開通道而令身後隊形承受更大壓力。"
+            ? "你壓得太急，兵刃撞上山壁。韓魁趁機將你逼回原位。"
+            : "韓魁以刀背強行撞開你的攻勢，沒有讓你建立持續壓力。"
+        );
+      }
+
+      consumeSetup(player);
+
+      if (checkCombatEnd(paragraphs, lines)) {
+        return;
+      }
+
+      enemyTurn(paragraphs, lines);
+    }
+
+    function playerStrike(type) {
+      const player = state.player;
+      const enemy = state.enemy;
+
+      const heavy = type === "heavy";
+
+      const staminaCost =
+        player.weapon.staminaCost +
+        (heavy ? 2 : 0);
+
+      preparePlayerAction(staminaCost);
+
+      const result = actionRoll(
+        player,
+        enemy,
+        {
+          situation: heavy ? -2 : 1
+        }
+      );
+
+      const label =
+        heavy ? "Heavy Strike" : "Quick Strike";
+
+      const lines = [
+        actionRollLine(label, result)
+      ];
+
+      const paragraphs = [];
+
+      if (!result.success) {
+        paragraphs.push(
+          result.disaster
+            ? "你踏步時踩中鬆石，攻勢完全失去重心。韓魁立刻看見你的空門。"
+            : heavy
+              ? "你全力揮出的重擊被韓魁及時避開，兵器的重量反而拖慢了回守。"
+              : "韓魁將刀橫在身前，你的快速攻擊只擦過刀背。"
+        );
+
+        consumeSetup(player);
+
+        enemyTurn(
+          paragraphs,
+          lines,
+          result.disaster ? 3 : 0
+        );
+
+        return;
+      }
+
+      const effect = effectDice(
+        player.weapon.damageSides,
+        result.critical
+      );
+
+      const mightMod =
+        Math.max(
+          0,
+          abilityModifier(player.abilities.might)
+        );
+
+      const styleBonus = heavy ? 4 : 0;
+
+      const marginBonus =
+        Math.max(
+          0,
+          Math.floor(result.margin / 5)
+        );
+
+      const rawImpact =
+        effect.total +
+        mightMod +
+        styleBonus +
+        marginBonus;
+
+      const impact = applyImpact(
+        player,
+        enemy,
+        rawImpact,
+        result.margin,
+        player.weapon.armourPiercing
+      );
+
+      lines.push(
+        ...impactLines(label, effect, impact)
+      );
+
+      if (impact.wound) {
+        paragraphs.push(
+          `你的${player.weapon.name}越過韓魁的防守，造成「${impact.wound.name}」。`
+        );
+      } else if (enemy.guard <= 0) {
+        paragraphs.push(
+          "韓魁勉強擋下攻擊，但 Guard 已經完全崩潰。下一次有效命中可能造成真正重傷。"
+        );
+      } else {
+        paragraphs.push(
+          result.critical
+            ? "你抓住破綻猛然切入。韓魁雖未立即倒下，防守節奏已被這一擊打亂。"
+            : "兵刃正面相撞。韓魁被逼退數步，Guard 明顯下降。"
+        );
+      }
+
+      consumeSetup(player);
+
+      if (checkCombatEnd(paragraphs, lines)) {
+        return;
+      }
+
+      enemyTurn(paragraphs, lines);
+    }
+
+    function playerGuard() {
+      const player = state.player;
+
+      preparePlayerAction(0);
+
+      const recoveryDie = die(6);
+
+      const enduranceMod =
+        Math.max(
+          0,
+          abilityModifier(player.abilities.endurance)
+        );
+
+      const recovery =
+        recoveryDie +
+        enduranceMod;
+
+      const oldGuard = player.guard;
+
+      player.guard = Math.min(
+        player.maxGuard,
+        player.guard + recovery
+      );
+
+      player.stamina = Math.min(
+        player.maxStamina,
+        player.stamina + 2
+      );
+
+      player.guarded = true;
+
+      const actualRecovery =
+        player.guard - oldGuard;
+
+      const paragraphs = [
+        "你沒有追擊，而是重新整理腳步，將兵刃收回能夠防守與反擊的位置。",
+        `你恢復了 ${actualRecovery} Guard，並準備承受韓魁下一次攻勢。`
+      ];
+
+      const lines = [
+        `Guard Recovery：d6 ${recoveryDie} ` +
+        `${signed(enduranceMod)} Endurance ` +
+        `= ${recovery}`
+      ];
+
+      enemyTurn(paragraphs, lines);
+    }
+
+    function playerWithdraw() {
+      const player = state.player;
+      const enemy = state.enemy;
+
+      preparePlayerAction(1);
+
+      const roll = rollD20();
+
+      const agilityMod =
+        abilityModifier(player.abilities.agility);
+
+      const duelingMod =
+        skillModifier(player.skills.dueling);
+
+      const enemyPressure =
+        Math.max(
+          0,
+          abilityModifier(enemy.abilities.agility)
+        );
+
+      const injuryPenalty = woundPenalty(player);
+
+      const total =
+        roll.value +
+        agilityMod +
+        duelingMod -
+        injuryPenalty;
+
+      const difficulty =
+        13 +
+        enemyPressure;
+
+      const success =
+        roll.value !== 1 &&
+        (
+          roll.value === 20 ||
+          total >= difficulty
+        );
+
+      const lines = [
+        `Withdraw：d20 ${roll.value} ` +
+        `${signed(agilityMod)} Agility ` +
+        `${signed(duelingMod)} Dueling ` +
+        `${signed(-injuryPenalty)} Injury ` +
+        `= ${total}，對抗 ${difficulty}`
+      ];
+
+      if (success) {
+        state.phase = "ending";
+
+        setScene(
+          "退回車陣",
+          [
+            "你以兵刃封住韓魁追擊路線，逐步退回鄉勇與糧車之間。",
+            "這場 duel 沒有分出生死。韓魁仍然活著，而山賊亦未退去。",
+            "正式版本之中，戰鬥會由 duel 轉入 group skirmish。V4.0A 暫時在此結束。",
+            `你帶著「${woundSummary(player)}」離開單挑位置。`
+          ],
+          endingActions()
+        );
+
+        return;
+      }
+
+      const paragraphs = [
+        "你試圖拉開距離，但韓魁一直用刀鋒封住退路。",
+        "撤離失敗，韓魁已趁你轉身時追上。"
+      ];
+
+      enemyTurn(
+        paragraphs,
+        lines,
+        roll.value === 1 ? 3 : 1
+      );
+    }
+
+    function enemyTurn(
+      paragraphs,
+      lines,
+      bonus = 0
+    ) {
+      const enemy = state.enemy;
+      const player = state.player;
+
+      if (checkCombatEnd(paragraphs, lines)) {
+        return;
+      }
+
+      enemy.guarded = false;
+
+      if (
+        enemy.stamina <= enemy.maxStamina * 0.3 &&
+        enemy.guard < enemy.maxGuard * 0.7
+      ) {
+        const recoveryDie = die(4);
+
+        const recovery =
+          recoveryDie +
+          Math.max(
+            0,
+            abilityModifier(enemy.abilities.endurance)
+          );
+
+        const oldGuard = enemy.guard;
+
+        enemy.guard = Math.min(
+          enemy.maxGuard,
+          enemy.guard + recovery
+        );
+
+        enemy.stamina = Math.min(
+          enemy.maxStamina,
+          enemy.stamina + 2
+        );
+
+        enemy.guarded = true;
+
+        lines.push(
+          `韓魁 Guard Recovery：d4 ${recoveryDie}，` +
+          `恢復 ${enemy.guard - oldGuard} Guard`
+        );
+
+        paragraphs.push(
+          "韓魁沒有立即進攻。他退開半步重新握刀，趁機調整呼吸與防守。"
+        );
+
+        player.guarded = false;
+
+        finishRound(paragraphs, lines);
+        return;
+      }
+
+      const heavy =
+        enemy.stamina >= 5 &&
+        random() < 0.35;
+
+      const staminaCost =
+        enemy.weapon.staminaCost +
+        (heavy ? 2 : 0);
+
+      enemy.stamina = Math.max(
+        0,
+        enemy.stamina - staminaCost
+      );
+
+      const result = actionRoll(
+        enemy,
+        player,
+        {
+          situation: bonus + (heavy ? -2 : 0)
+        }
+      );
+
+      const label =
+        heavy ? "韓魁重斬" : "韓魁攻擊";
+
+      lines.push(
+        actionRollLine(label, result)
+      );
+
+      if (!result.success) {
+        paragraphs.push(
+          result.disaster
+            ? "韓魁怒吼著揮刀，卻因用力過猛撞上山壁。他一時無法立即收刀。"
+            : player.guarded
+              ? "你穩穩守住中線，將韓魁的刀勢引向甲片與兵刃之外。"
+              : "韓魁的山刀從你身前掃過，只割開一小片衣角。"
         );
 
         if (result.disaster) {
-          const dealt = damage(8, false, state.armour.reduction);
-          state.hp = Math.max(0, state.hp - dealt.final);
-          setInjury(false);
-          rolls.push(
-            `韓魁山刀：${dealt.rolls.join(" + ")}，減傷 ${dealt.reduction}，造成 ${dealt.final} 點傷害`
-          );
+          player.opening = true;
         }
-      }
 
-      normalizeChapter2Battle();
+        player.guarded = false;
 
-      if (state.hp <= 0) {
-        showDeath(paragraphs, rolls, "舊仇斷命");
+        finishRound(paragraphs, lines);
         return;
       }
 
-      if (checkChapter2BattleEnd(paragraphs, rolls)) return;
+      const effect = effectDice(
+        enemy.weapon.damageSides,
+        result.critical
+      );
 
-      const pressure = chapter2EnemyPressure();
-      paragraphs.push(...pressure.paragraphs);
-      rolls.push(...pressure.rolls);
-      normalizeChapter2Battle();
+      const mightMod =
+        Math.max(
+          0,
+          abilityModifier(enemy.abilities.might)
+        );
 
-      if (state.hp <= 0) {
-        showDeath(paragraphs, rolls, "命斷涿水");
+      const heavyBonus =
+        heavy ? 4 : 0;
+
+      const marginBonus =
+        Math.max(
+          0,
+          Math.floor(result.margin / 5)
+        );
+
+      const rawImpact =
+        effect.total +
+        mightMod +
+        heavyBonus +
+        marginBonus;
+
+      const impact = applyImpact(
+        enemy,
+        player,
+        rawImpact,
+        result.margin,
+        enemy.weapon.armourPiercing
+      );
+
+      lines.push(
+        ...impactLines(label, effect, impact)
+      );
+
+      if (impact.wound) {
+        paragraphs.push(
+          `韓魁的山刀越過你的防守，造成「${impact.wound.name}」。`
+        );
+      } else if (player.guard <= 0) {
+        paragraphs.push(
+          "你勉強擋下山刀，雙臂卻被震得發麻。Guard 已經崩潰。"
+        );
+      } else {
+        paragraphs.push(
+          heavy
+            ? "沉重山刀正面壓下，你被逼得連退數步，Guard 大幅下降。"
+            : "你以兵刃與護甲卸開部分力量，但韓魁的攻勢仍然消耗了你的 Guard。"
+        );
+      }
+
+      player.guarded = false;
+
+      if (checkCombatEnd(paragraphs, lines)) {
         return;
       }
 
-      if (checkChapter2BattleEnd(paragraphs, rolls)) return;
+      finishRound(paragraphs, lines);
+    }
 
-      b.round += 1;
+    function finishRound(paragraphs, lines) {
+      state.round += 1;
 
-      if (b.round > b.maxRounds) {
-        resolveChapter2Timeout(paragraphs, rolls);
-        return;
-      }
-
-      setScene({
-        heading: "舊敵與新亂",
+      setScene(
+        `山道鬥將・第 ${state.round} 合`,
         paragraphs,
-        rolls,
-        actions: chapter2BattleActions()
-      });
+        duelActions(),
+        lines
+      );
     }
 
-    function chapter2EnemyPressure() {
-      const b = state.battle;
-      const paragraphs = [];
-      const rolls = [];
+    function checkCombatEnd(paragraphs, lines) {
+      const player = state.player;
+      const enemy = state.enemy;
 
-      const natural = die(20);
-      const attackBonus =
-        2 +
-        b.enemyAdvantage +
-        (b.enemyMorale >= 75 ? 1 : 0) +
-        Math.max(0, b.personalThreat);
+      if (enemy.defeated) {
+        state.phase = "ending";
 
-      const defence =
-        playerDefence() +
-        Math.floor(b.formation / 35) +
-        (b.position >= 2 ? 1 : 0);
+        const outcome = enemy.dead
+          ? "韓魁受到致命傷，山刀脫手落地。"
+          : "韓魁傷勢太重，再也無法維持戰鬥姿勢。";
 
-      const total = natural + attackBonus;
-      const hit =
-        natural === 20 ||
-        (natural !== 1 && total >= defence);
-
-      rolls.push(
-        `渡口敵軍攻勢：d20 ${natural} ${signed(attackBonus)} = ${total}，對抗 ${defence}`
-      );
-
-      if (natural === 1) {
-        b.enemyMorale -= 9;
-        b.morale += 5;
-        b.personalThreat = Math.max(0, b.personalThreat - 1);
-
-        paragraphs.push(
-          "強硬派催促前排向橋面擠壓，後方卻誤將火油撞翻。火勢反向燒入自己營地，黃巾陣中頓時一片混亂。"
+        setScene(
+          "首戰得勝",
+          [
+            ...paragraphs,
+            outcome,
+            "山賊看見頭領倒下，叫喊聲迅速變成混亂。有人逃入林中，亦有人拋下兵器。",
+            "你不是因為主角身份而勝利。前世經歷、今世成長、兵器、每一次 decision 與每一粒骰，都共同造成了這個結果。",
+            `你結束戰鬥時仍有 ${player.guard} Guard、${player.stamina} Stamina。`,
+            `你留下的傷勢是：${woundSummary(player)}。`
+          ],
+          endingActions(),
+          lines
         );
 
-        return { paragraphs, rolls };
-      }
-
-      if (!hit) {
-        b.formation -= 2;
-        b.bridgeIntegrity -= natural >= 15 ? 1 : 0;
-        b.personalThreat = Math.max(0, b.personalThreat - 1);
-
-        paragraphs.push(
-          natural >= 15
-            ? "敵軍未能撞開隊形，幾支火箭卻釘入橋側木欄。火勢被暫時壓下，橋身仍受到損害。"
-            : "持矛者由南岸壓近，卻被交錯伸出的長兵逼退。難民通道仍然保持。"
-        );
-
-        return { paragraphs, rolls };
-      }
-
-      const critical = natural === 20;
-      const dealt = damage(6, critical, state.armour.reduction);
-
-      state.hp = Math.max(0, state.hp - dealt.final);
-      b.morale -= critical ? 12 : 6;
-      b.formation -= critical ? 12 : 7;
-      b.bridgeIntegrity -= critical ? 1 : 0;
-      b.personalThreat = Math.max(0, b.personalThreat - 1);
-
-      setInjury(critical);
-
-      rolls.push(
-        `亂軍矛箭：${dealt.rolls.join(" + ")}，甲衣抵去 ${dealt.reduction}，造成 ${dealt.final} 點傷害`
-      );
-
-      paragraphs.push(
-        critical
-          ? "南岸銅鑼驟響，箭矢集中落向同一段橋頭。木欄碎裂，人群倒下，你亦被衝入缺口的長矛重重刺中。"
-          : "一隊持刀黃巾借人群遮掩逼近。你護住身旁難民時，刀鋒越過甲衣，在腰側留下血口。"
-      );
-
-      return { paragraphs, rolls };
-    }
-
-    function normalizeChapter2Battle() {
-      const b = state.battle;
-
-      b.morale = clamp(b.morale, 0, 100);
-      b.formation = clamp(b.formation, 0, 100);
-      b.enemyMorale = clamp(b.enemyMorale, 0, 100);
-      b.position = clamp(b.position, -3, 3);
-      b.enemyAdvantage = clamp(b.enemyAdvantage, -2, 5);
-      b.protected = clamp(b.protected, 0, 7);
-      b.bridgeIntegrity = clamp(b.bridgeIntegrity, 0, 3);
-      b.personalThreat = clamp(b.personalThreat, 0, 4);
-    }
-
-    function checkChapter2BattleEnd(paragraphs, rolls) {
-      const b = state.battle;
-
-      if (b.protected >= 6) {
-        finishChapter2Victory(
-          paragraphs.concat([
-            "最後一批傷者與孩童越過北岸。橋面仍有兵刃相撞，但需要保護的人已經離開最危險的位置。",
-            "劉備立即命人收縮隊形，唔再為追殺潰兵而堵塞通道。渡口主要目標已經達成。"
-          ]),
-          rolls,
-          "百姓盡渡",
-          "rescue"
-        );
         return true;
       }
 
-      if (b.enemyMorale <= 0) {
-        if (b.protected >= 4) {
-          finishChapter2Victory(
-            paragraphs.concat([
-              "強硬派陣中先有人丟下兵器，隨後整片黃巾旗號向南倒退。",
-              "敵軍未被殺盡，但已無法繼續控制渡口。餘下難民得以由義兵與溫和信眾共同護送過橋。"
-            ]),
-            rolls,
-            "渡口解圍",
-            "rout"
+      if (player.defeated) {
+        state.phase = "ending";
+
+        if (player.dead) {
+          setScene(
+            "命斷黑松嶺",
+            [
+              ...paragraphs,
+              "你再也無法握住兵器。山道上的聲音逐漸遠去。",
+              "你曾跨越千多年重新出生，卻仍然只是一個會流血、會死亡的人。",
+              `${player.name}，十八歲，死於光和六年的黑松嶺。`
+            ],
+            endingActions(),
+            lines
           );
         } else {
-          finishChapter2Mixed(
-            paragraphs.concat([
-              "敵軍終於潰退，但橋面已留下過多屍體。你們贏得渡口，卻未能及時保護所有被困百姓。",
-              "有人會把今日稱為勝仗；失去家人的人未必同意。"
-            ]),
-            rolls,
-            "勝中有失",
-            "costlyVictory"
+          setScene(
+            "重傷倒地",
+            [
+              ...paragraphs,
+              "你失去平衡跪倒在山道。兵器仍在手邊，身體卻已經無法繼續服從意志。",
+              "韓魁沒有立即補刀。正式版本之中，你可能被俘、獲救，或者目睹糧隊潰敗。",
+              `今次 prototype 以失去戰鬥能力結束。傷勢：${woundSummary(player)}。`
+            ],
+            endingActions(),
+            lines
           );
         }
-        return true;
-      }
 
-      if (b.bridgeIntegrity <= 0) {
-        finishChapter2Defeat(
-          paragraphs.concat([
-            "橋側木樁終於在火中斷裂。半邊橋面連同尚未過河的人群一同向水面傾斜。",
-            "有人抓住繩索，有人直接被木板與人潮壓入涿水。兩岸隊伍被徹底分開。",
-            "渡口已經失守。你只能決定帶住邊一批生還者離開。"
-          ]),
-          rolls,
-          "橋斷涿水",
-          "bridgeLost"
-        );
-        return true;
-      }
-
-      if (b.morale <= 0 || b.formation <= 0) {
-        finishChapter2Defeat(
-          paragraphs.concat([
-            "隊伍最後一點秩序亦被人潮沖散。有人高喊撤退，有人仍在橋頭死戰，但已經無人能統一行動。",
-            "難民通道被兵卒與潰兵重新堵死。你們未能完成原本目標。"
-          ]),
-          rolls,
-          "陣勢崩潰",
-          "formationCollapsed"
-        );
         return true;
       }
 
       return false;
     }
 
-    function resolveChapter2Timeout(paragraphs, rolls) {
-      const b = state.battle;
-
-      if (
-        b.protected >= 5 &&
-        b.bridgeIntegrity >= 1 &&
-        b.morale >= 25
-      ) {
-        finishChapter2Victory(
-          paragraphs.concat([
-            "黃昏前，絕大部分難民已經離開橋面。剩餘敵軍見火勢無法蔓延，亦不願繼續承受兩岸夾擊，逐步退往南方。",
-            "你未能取得乾淨俐落的勝利，但渡口與人命大致保住。"
-          ]),
-          rolls,
-          "守至日暮",
-          "held"
-        );
-        return;
-      }
-
-      if (
-        b.protected >= 3 &&
-        b.bridgeIntegrity >= 1
-      ) {
-        finishChapter2Mixed(
-          paragraphs.concat([
-            "日暮令兩邊都無法再維持完整攻勢。你帶著已經過橋的人撤離，仍有一批難民被迫散入南岸荒野。",
-            "渡口沒有完全落入任何一方，但你亦未能救走所有人。"
-          ]),
-          rolls,
-          "殘陽退兵",
-          "partial"
-        );
-        return;
-      }
-
-      finishChapter2Defeat(
-        paragraphs.concat([
-          "夜色落下時，橋上仍然擠滿無法前進的人。強硬派重新掌握南岸，義兵亦只能帶殘存人手後撤。",
-          "渡口行動失敗，失散者數目到第二日仍無人能點算清楚。"
-        ]),
-        rolls,
-        "渡口失陷",
-        "fordLost"
-      );
-    }
-
-    function chapter2BattleHeading() {
-      const b = state.battle;
-
-      if (b.bridgeIntegrity <= 1) return "橋火將噬人群";
-      if (b.protected >= 5) return "最後一批難民";
-      if (b.enemyMorale <= 25) return "強硬派已有潰意";
-      if (b.morale <= 30) return "橋頭軍心將散";
-      if (b.position >= 2) return "兩岸漸入掌握";
-      if (b.enemyAdvantage >= 3) return "南岸壓力大增";
-      return "涿水血戰";
-    }
-
-    function awardChapter2Reputation(outcome) {
-      if (outcome === "victory") {
-        state.reputation.military += 16;
-        state.reputation.village += 12;
-        state.reputation.government +=
-          state.chapter2.allegiance === "涿郡黃巾" ? -10 : 8;
-      }
-
-      if (outcome === "mixed") {
-        state.reputation.military += 7;
-        state.reputation.village += 4;
-        state.reputation.government +=
-          state.chapter2.allegiance === "涿郡黃巾" ? -12 : 2;
-      }
-
-      if (outcome === "defeat") {
-        state.reputation.military -= 3;
-        state.reputation.village -= 2;
-        state.reputation.government +=
-          state.chapter2.allegiance === "涿郡黃巾" ? -15 : 0;
-      }
-
-      if (state.chapter2.civiliansSaved >= 25) {
-        addTrait("benevolent");
-      }
-
-      if (state.battle?.morale >= 65) {
-        addTrait("commanding");
-      }
-
-      if (state.chapter2.route === "logistics") {
-        addTrait("strategist");
-      }
-
-      if (
-        state.chapter2.route === "scout" ||
-        state.chapter2.route === "stay"
-      ) {
-        addTrait("prudent");
-      }
-    }
-
-    function finishChapter2Victory(paragraphs, rolls, heading, result) {
-      awardChapter2Reputation("victory");
-
-      state.phase = "chapter2End";
-      state.chapter2.outcome = result;
-      state.chapter2.resultClass = "victory";
-      state.status = "黃巾初戰得勝";
-      state.location = "涿水北岸";
-
-      addHistory(`涿水渡口之戰：${heading}。`);
-
-      const historicalParagraphs = historyFigureAftermath(true);
-
-      state.battle = null;
-      state.combat = null;
-
-      setScene({
-        heading,
-        paragraphs: paragraphs.concat(historicalParagraphs, [
-          "你在黑松嶺學到如何活過一場伏擊；在涿水渡口，你第一次明白一場戰役可以勝利，仍然留下數不清的屍體與失散者。",
-          "你唔再只係桑澤里一個無名少年。有人記得你持兵的樣子，有人記得你打開過一條生路，亦可能有人因你今日選擇而永遠把你視為敵人。"
-        ]),
-        rolls,
-        actions: [{
-          label: "查看第二卷結語",
-          className: "history-action",
-          handler: showChapter2Ending
-        }]
-      });
-    }
-
-    function finishChapter2Mixed(paragraphs, rolls, heading, result) {
-      awardChapter2Reputation("mixed");
-
-      state.phase = "chapter2End";
-      state.chapter2.outcome = result;
-      state.chapter2.resultClass = "mixed";
-      state.status = "渡口一戰勝敗相半";
-      state.location = "涿水北岸";
-
-      addHistory(`涿水渡口之戰：${heading}。`);
-
-      const historicalParagraphs = historyFigureAftermath(false);
-
-      state.battle = null;
-      state.combat = null;
-
-      setScene({
-        heading,
-        paragraphs: paragraphs.concat(historicalParagraphs, [
-          "軍中有人稱你們守住了渡口，村民則只計算有幾多人未能回來。歷史往往用一句勝負，遮住每個家庭付出的代價。",
-          "你活下來，亦帶走一個不會因章節完結而消失的結果。"
-        ]),
-        rolls,
-        actions: [{
-          label: "查看第二卷結語",
-          handler: showChapter2Ending
-        }]
-      });
-    }
-
-    function finishChapter2Defeat(paragraphs, rolls, heading, result) {
-      awardChapter2Reputation("defeat");
-
-      state.phase = "chapter2End";
-      state.chapter2.outcome = result;
-      state.chapter2.resultClass = "defeat";
-      state.status = "涿水渡口失利";
-      state.location = "涿郡北道";
-
-      addHistory(`涿水渡口之戰失利：${heading}。`);
-      addTrait("survivor");
-
-      const historicalParagraphs = historyFigureAftermath(false);
-
-      state.battle = null;
-      state.combat = null;
-
-      setScene({
-        heading,
-        paragraphs: paragraphs.concat(historicalParagraphs, [
-          "失敗沒有令黃巾之亂停止，亦沒有令你的人生立即結束。傷者、失散者、被奪走的糧食與旁人的指責，全部會跟住你離開渡口。",
-          "若下一卷展開，今日失去的信任與機會都不會自動恢復。"
-        ]),
-        rolls,
-        actions: [{
-          label: "查看第二卷結語",
-          handler: showChapter2Ending
-        }]
-      });
-    }
-
-    function historyFigureAftermath(clearVictory) {
-      const paragraphs = [];
-
-      if (
-        state.chapter2.allegiance === "涿郡黃巾" ||
-        state.chapter2.allegiance === "太平道溫和信眾"
-      ) {
-        paragraphs.push(
-          clearVictory
-            ? "劉備沒有命令義兵追殺已經放下兵器的信眾。佢隔著滿地斷矛望向你，顯然記住了渡口另一邊曾有人保護百姓。"
-            : "義兵撤走前，劉備仍下令留出一條讓傷者離開的路。你與佢並非同袍，但今日亦未成為非要互相殺死的仇敵。"
-        );
-
-        if (state.chapter2.allegiance === "涿郡黃巾") {
-          paragraphs.push(
-            "你仍然身在黃巾一方，卻已公開違抗強硬渠帥。官府會視你為賊，部分太平道頭目亦會視你為叛徒。"
-          );
-        }
-      } else {
-        state.chapter2.metLiuBei = true;
-        state.chapter2.metGuanYu = true;
-        state.chapter2.metZhangFei = true;
-
-        paragraphs.push(
-          clearVictory
-            ? "戰後，劉備親自沿橋點算傷者，關羽守住南岸退路，張飛則帶人撲滅橋火。三人沒有因初勝而飲宴，只在泥地上分食剩下的乾糧。"
-            : "劉備收攏殘兵時沒有掩飾失敗，關羽負責殿後，張飛則幾次回頭尋找未能撤走的人。三人的名字尚未震動天下，但已有人願意繼續跟隨。"
-        );
-
-        if (state.reputation.military >= 18) {
-          paragraphs.push(
-            "劉備記下你的姓名與籍貫，並問你是否願意在下一次行軍前往軍帳議事。這不是顯赫官位，只代表你終於由無名新卒變成一個值得再次召見的人。"
-          );
-        } else {
-          paragraphs.push(
-            "你仍然只係新募人手之一。關羽與張飛未必記得你的全部經歷，但至少認得你曾在渡口站穩。"
-          );
-        }
-      }
-
-      return paragraphs;
-    }
-
-    function showChapter2Ending() {
-      state.phase = "chapter2End";
-      state.chapter = 2;
-      state.year = 184;
-      state.month = "三月";
-      state.age = 16;
-
-      const resultText =
-        state.chapter2.resultClass === "victory"
-          ? "你在涿水渡口完成了主要目標。"
-          : state.chapter2.resultClass === "mixed"
-            ? "你帶走部分勝果，亦留下無法挽回的損失。"
-            : "你在涿水渡口未能完成主要目標，但仍然活著離開。";
-
-      const allegianceText =
-        state.chapter2.allegiance === "涿郡黃巾"
-          ? "你已踏入黃巾陣營，卻同強硬渠帥決裂。"
-          : state.chapter2.allegiance === "太平道溫和信眾"
-            ? "你與願意護民的太平道信眾建立了聯繫。"
-            : state.chapter2.allegiance === "桑澤里"
-              ? "你仍以桑澤里存亡為首要責任。"
-              : `你目前與「${state.faction}」建立了聯繫。`;
-
-      const hanKuiText =
-        state.chapter1.hanKuiFate === "killed" ||
-        state.chapter1.hanKuiFate === "死於涿水渡口"
-          ? "韓魁已死，黑石寨留下的線索卻指向更大的地方網絡。"
-          : state.chapter1.hanKuiFate === "涿水被俘"
-            ? "韓魁已被俘，佢對所謂「神上使」的供詞可能在下一卷產生作用。"
-            : `韓魁命運仍為：「${state.chapter1.hanKuiFate}」。`;
-
-      setScene({
-        heading: "逆命錄・第二卷終",
-        paragraphs: [
-          resultText,
-          allegianceText,
-          hanKuiText,
-          `此時的${state.name}年十六，仍持有${state.weapon.name}與${state.armour.name}。`,
-          `你現時傷勢為「${state.injury.name}」，鄉里、軍中與官府亦已各自留下對你的評價。`,
-          "【史勢】黃巾之亂並未因涿水一戰結束。皇甫嵩、朱儁、盧植等人將先後率軍鎮壓各地起事；劉備、關羽、張飛亦會在戰亂之中逐步建立名聲。",
-          "如果第三卷展開，你將帶住現有能力、經歷、裝備、傷勢、關係、陣營與全部重大後果繼續生活。",
-          "本版本內容至此結束。"
-        ],
-        actions: [
-          {
-            label: "查看完整人物命簿",
-            className: "safe",
-            handler: openLedger
-          },
-          {
-            label: "以新人物重新開始",
-            className: "danger",
-            handler: confirmNewCampaign
-          }
-        ]
-      });
-
-      saveCheckpoint();
-    }
-
-    function showDeath(paragraphs, rolls, heading) {
-      state.hp = 0;
-      state.phase = "death";
-      state.status = "命書染血";
-      state.injury = {
-        name: "致命傷",
-        severity: 4,
-        ability: null,
-        penalty: 0
-      };
-
-      state.battle = null;
-      state.combat = null;
-
-      addHistory(`${state.year} 年，${state.age} 歲，死於${state.location}附近。`);
-
-      setScene({
-        heading,
-        paragraphs: paragraphs.concat([
-          "你的手指再也握不住兵刃。周圍喊殺漸漸遠去，最後只剩風吹過旗布的聲音。",
-          `${state.name}，生於公元一六八年，卒年十六。你曾經嘗試改變自己與身邊人的命運。`,
-          "命運沒有因你係故事主角而收回最後一擊。",
-          "此頁至此染血，再無後文。"
-        ]),
-        rolls,
-        actions: [
-          {
-            label: "重新開始本章",
-            note: "回到本章開始時保存的角色狀態。",
-            handler: restartChapter
-          },
-          {
-            label: "建立新人物",
-            className: "danger",
-            handler: confirmNewCampaign
-          }
-        ]
-      });
-    }
-
-    function restartChapter() {
-      const checkpoint = loadStored(CHECKPOINT_KEY);
-
-      if (!checkpoint) {
-        alert("未有可用章節存檔。");
-        confirmNewCampaign();
-        return;
-      }
-
-      state = checkpoint;
-      state.locked = false;
-      saveGame();
-      resumeLoadedState(true);
-    }
-
-    function relationDescription(value) {
-      if (value >= 45) return "生死相託";
-      if (value >= 25) return "信任";
-      if (value >= 10) return "熟悉";
-      if (value <= -35) return "深恨";
-      if (value <= -15) return "不滿";
-      return "平常";
-    }
-
-    function openLedger() {
-      const npcRows = Object.values(state.npcs)
-        .map((npc) => `
-          <div class="info-block">
-            <strong>${esc(npc.name)}</strong>
-            <span class="equipment-detail">
-              ${esc(npc.role)}・${esc(relationDescription(npc.relationship))}・${esc(npc.status)}
-            </span>
-            ${
-              npc.memories.length
-                ? `<span class="equipment-detail">${esc(npc.memories.join("；"))}</span>`
-                : ""
-            }
-          </div>
-        `)
-        .join("");
-
-      const abilityRows = Object.entries(ABILITY_NAMES)
-        .map(([key, name]) => `
-          <div class="ability">
-            <span>${esc(name)}</span>
-            <span>${state.abilities[key]}</span>
-          </div>
-        `)
-        .join("");
-
-      const historyRows = state.history.length
-        ? `<ol>${state.history.map((item) => `<li>${esc(item)}</li>`).join("")}</ol>`
-        : "<p>尚無重大紀錄。</p>";
-
-      const tagRows = state.tags.length
-        ? state.tags
-            .map((tag) => `<span class="tag">${esc(TAG_NAMES[tag] || tag)}</span>`)
-            .join("")
-        : '<span class="tag">尚無</span>';
-
-      const traitRows = state.traits.length
-        ? state.traits
-            .map((trait) => `<span class="tag">${esc(TRAIT_NAMES[trait] || trait)}</span>`)
-            .join("")
-        : '<span class="tag">尚未形成鮮明名聲</span>';
-
-      openModal(
-        "人物命簿",
-        `
-          <div class="ending-card">
-            <strong>${esc(state.name)}</strong>
-            <span class="equipment-detail">
-              公元 ${state.birthYear} 年生・${esc(state.originRegion)}・${state.age} 歲
-            </span>
-            <span class="equipment-detail">
-              陣營：${esc(state.faction)}・所在地：${esc(state.location)}
-            </span>
-          </div>
-
-          <h3 class="panel-title">核心能力</h3>
-          <div class="abilities">${abilityRows}</div>
-
-          <div class="info-block">
-            <span class="info-label">天賦</span>
-            <span class="info-value">
-              ${esc(state.potential ? POTENTIALS[state.potential].name : "尚未選定")}
-            </span>
-          </div>
-
-          <div class="info-block">
-            <span class="info-label">氣血與傷勢</span>
-            <span class="info-value">
-              ${Math.max(0, state.hp)} / ${state.maxHp}・${esc(state.injury.name)}
-            </span>
-          </div>
-
-          <div class="info-block">
-            <span class="info-label">裝備</span>
-            <span class="info-value">
-              ${esc(state.weapon?.name || "無兵器")}・${esc(state.armour?.name || "無甲衣")}
-            </span>
-          </div>
-
-          <div class="info-block">
-            <span class="info-label">經歷標記</span>
-            <div class="tag-list">${tagRows}</div>
-          </div>
-
-          <div class="info-block">
-            <span class="info-label">人物特質</span>
-            <div class="tag-list">${traitRows}</div>
-          </div>
-
-          <div class="info-block">
-            <span class="info-label">聲望</span>
-            <span class="equipment-detail">
-              鄉里 ${state.reputation.village}・
-              軍中 ${state.reputation.military}・
-              官府 ${state.reputation.government}
-            </span>
-          </div>
-
-          <div class="info-block">
-            <span class="info-label">重要物品與線索</span>
-            <span class="equipment-detail">
-              ${
-                state.items.length
-                  ? esc(state.items.join("、"))
-                  : "無"
-              }
-            </span>
-          </div>
-
-          <h3 class="panel-title">人物關係</h3>
-          ${npcRows}
-
-          <h3 class="panel-title">人生紀錄</h3>
-          <div class="ledger-content">${historyRows}</div>
-        `,
-        [{
-          label: "關閉命簿",
+    function endingActions() {
+      return [
+        {
+          label: "以相同角色重新挑戰",
+          note:
+            "使用相同 Random Seed，方便重現同檢查戰鬥結果。",
           className: "safe",
-          handler: closeModal
-        }]
-      );
-    }
+          handler: () => startDuel(state.seed)
+        },
 
-    function openMenu() {
-      const hasCheckpoint = Boolean(loadStored(CHECKPOINT_KEY));
+        {
+          label: "使用新 Seed 再戰",
+          note:
+            "角色不變，但產生另一組骰局。",
+          handler: () => {
+            const newSeed =
+              (
+                Date.now() ^
+                Math.floor(Math.random() * 2147483647)
+              ) >>> 0;
 
-      openModal(
-        "卷冊",
-        `
-          <p>進度會自動保存在此瀏覽器的 <code>localStorage</code>。</p>
-          <p class="choice-note">
-            重新開始本章會回到該章開端；建立新人物會刪除現有命書。
-          </p>
-        `,
-        [
-          {
-            label: "返回遊戲",
-            className: "safe",
-            handler: closeModal
-          },
-          {
-            label: "查看人物命簿",
-            handler: openLedger
-          },
-          {
-            label: "重新開始本章",
-            available: hasCheckpoint,
-            reason: "未有章節 checkpoint。",
-            handler: () => {
-              closeModal();
-              restartChapter();
-            }
-          },
-          {
-            label: "建立新人物",
-            className: "danger",
-            handler: () => {
-              closeModal();
-              confirmNewCampaign();
-            }
+            startDuel(newSeed);
           }
-        ]
-      );
-    }
+        },
 
-    function openModal(title, content, actions = []) {
-      $("modalTitle").textContent = title;
-      $("modalContent").innerHTML = content;
-
-      const container = $("modalActions");
-      container.innerHTML = "";
-
-      actions.forEach((action) => {
-        const button = document.createElement("button");
-        const available = action.available !== false;
-
-        button.type = "button";
-        button.className =
-          `action-button${action.className ? ` ${action.className}` : ""}`;
-        button.disabled = !available;
-        button.innerHTML =
-          `${esc(action.label)}` +
-          (!available && action.reason
-            ? `<small>${esc(action.reason)}</small>`
-            : "");
-
-        if (available) {
-          button.addEventListener("click", action.handler);
-        }
-
-        container.appendChild(button);
-      });
-
-      $("modalBackdrop").hidden = false;
-    }
-
-    function closeModal() {
-      $("modalBackdrop").hidden = true;
-    }
-
-    function confirmNewCampaign() {
-      const hasSave = Boolean(loadStored(SAVE_KEY));
-
-      if (
-        hasSave &&
-        !confirm("建立新人物會刪除目前命書與章節存檔。確定繼續？")
-      ) {
-        state.locked = false;
-        renderSidebar();
-        return;
-      }
-
-      closeModal();
-      startCreation();
-    }
-
-    function resumeLoadedState(fromCheckpoint = false) {
-      state.locked = false;
-      renderSidebar();
-
-      if (state.phase === "death") {
-        setScene({
-          heading: "染血命頁",
-          paragraphs: [
-            `${state.name}的命書已經停止在死亡一頁。`,
-            fromCheckpoint
-              ? "章節存檔已經重展，你可以重新走入尚未發生的危機。"
-              : "你可以重新開始本章，或者建立另一個人物。"
-          ],
-          actions: [
-            {
-              label: "重新開始本章",
-              handler: restartChapter
-            },
-            {
-              label: "建立新人物",
-              className: "danger",
-              handler: confirmNewCampaign
-            }
-          ]
-        });
-        return;
-      }
-
-      if (state.phase === "childhood") {
-        setScene({
-          heading: fromCheckpoint ? "第一卷重新展開" : "歲月續行",
-          paragraphs: [
-            fromCheckpoint
-              ? "命頁回到第一卷開始時。角色的童年將重新由你選擇。"
-              : "舊卷記錄仍在。你可以由目前人生階段繼續。"
-          ],
-          actions: [{
-            label: "繼續成長",
-            handler: showChildhoodStage
-          }]
-        });
-        return;
-      }
-
-      if (state.phase === "equipment") {
-        setScene({
-          heading: "成年命頁重展",
-          paragraphs: [
-            "村中兵械仍放在你面前。你尚未踏入黑松嶺。"
-          ],
-          actions: equipmentActions()
-        });
-        return;
-      }
-
-      if (state.phase === "duel" && state.combat?.enemy) {
-        setScene({
-          heading: "山道鬥將・續",
-          paragraphs: [
-            "卷冊重新展開時，韓魁仍站在山道對面。刀上血跡與傷勢都沒有消失。"
-          ],
-          actions: duelActions()
-        });
-        return;
-      }
-
-      if (state.phase === "battlefield1" && state.battle) {
-        setScene({
-          heading: "黑松嶺激戰・續",
-          paragraphs: [
-            "糧車、傷者與山賊仍留在原本位置。戰場狀態已由命書恢復。"
-          ],
-          actions: blackPineBattleActions()
-        });
-        return;
-      }
-
-      if (state.phase === "chapter1") {
-        setScene({
-          heading: "黑松嶺之前",
-          paragraphs: [
-            "命頁重新展開於護糧隊進入山路之前。"
-          ],
-          actions: [{
-            label: "進入黑松嶺",
-            className: "danger",
-            handler: blackPineApproach
-          }]
-        });
-        return;
-      }
-
-      if (state.phase === "chapter1End") {
-        setScene({
-          heading: "第一卷餘波",
-          paragraphs: [
-            "黑松嶺一戰已經結束，所有傷亡與後果仍然保留。"
-          ],
-          actions: [{
-            label: "進入第一卷結語",
-            handler: chapter1Aftermath
-          }]
-        });
-        return;
-      }
-
-      if (state.phase === "battlefield2" && state.battle) {
-        setScene({
-          heading: "涿水渡口・續",
-          paragraphs: [
-            "橋火、難民與兩岸兵馬仍維持存檔時的狀態。你要繼續完成原本目標。"
-          ],
-          actions: chapter2BattleActions()
-        });
-        return;
-      }
-
-      if (state.phase === "chapter2End") {
-        setScene({
-          heading: "第二卷餘頁",
-          paragraphs: [
-            "涿水渡口一戰已經留下結果。人物能力、裝備、傷勢、關係與聲望全部仍在。",
-            "你可以查看本卷總結與完整人物命簿。"
-          ],
-          actions: [
-            {
-              label: "查看第二卷結語",
-              className: "history-action",
-              handler: showChapter2Ending
-            },
-            {
-              label: "查看人物命簿",
-              className: "safe",
-              handler: openLedger
-            }
-          ]
-        });
-        return;
-      }
-
-      if (state.phase === "chapter2") {
-        if (!state.chapter2.route) {
-          setScene({
-            heading: "黃巾初起・續",
-            paragraphs: [
-              "涿郡仍在徵募人手。你尚未決定以甚麼身份進入亂局。"
-            ],
-            actions: chapter2RouteActions()
-          });
-        } else {
-          setScene({
-            heading: "前往涿水渡口",
-            paragraphs: [
-              `命書記得你選擇了「${routeName(state.chapter2.route)}」道路。`,
-              "為避免讀檔後遺失中途狀態，你可以由渡口決戰前繼續。所有角色資料與前章後果仍然保留。"
-            ],
-            actions: [{
-              label: "前往渡口決戰",
-              className: "danger",
-              handler: () => chapter2Convergence(routeName(state.chapter2.route))
-            }]
-          });
-        }
-        return;
-      }
-
-      startCreation();
-    }
-
-    function routeName(route) {
-      const names = {
-        volunteer: "義兵前線",
-        scout: "斥候情報",
-        logistics: "軍糧後勤",
-        organize: "鄉里組織",
-        stay: "留守護民",
-        taiping: "太平道接觸"
-      };
-
-      return names[route] || "未定道路";
-    }
-
-    function showBootScreen(saved) {
-      state = saved || newState();
-      renderSidebar();
-
-      $("storyHeading").textContent = saved
-        ? "舊卷尚存"
-        : "一頁無字之書";
-
-      $("sceneMeta").textContent = saved
-        ? `${state.originRegion}・${state.year} 年`
-        : "幽州・涿郡・公元一六八年";
-
-      $("enemyArea").innerHTML = "";
-      $("battleArea").innerHTML = "";
-      $("rollArea").innerHTML = "";
-
-      if (saved) {
-        $("storyText").innerHTML = formatParagraphs([
-          `命簿記得${state.name}曾經作出的選擇。`,
-          `目前進度位於第 ${state.chapter || 1} 卷，時間為公元 ${state.year} 年。`,
-          "讀取後會恢復人物能力、經歷、裝備、傷勢、聲望、NPC 記憶與當前戰鬥狀態。"
-        ]);
-
-        setActions([
-          {
-            label: "繼續舊卷",
-            className: "safe",
-            handler: () => resumeLoadedState(false)
-          },
-          {
-            label: "建立新人物",
-            className: "danger",
-            handler: confirmNewCampaign
-          }
-        ]);
-      } else {
-        $("storyText").innerHTML = formatParagraphs([
-          "漢室未亡，天下已處處腐壞。",
-          "你會生於幽州涿郡一戶尋常人家。你並非天命英雄，所有能力、關係、傷勢與後果都要由往後人生親自承擔。"
-        ]);
-
-        setActions([{
-          label: "展開新命書",
-          className: "history-action",
+        {
+          label: "建立新人物",
+          className: "danger",
           handler: startCreation
-        }]);
-      }
-    }
-
-    function boot() {
-      $("ledgerButton").addEventListener("click", openLedger);
-      $("menuButton").addEventListener("click", openMenu);
-
-      $("modalBackdrop").addEventListener("click", (event) => {
-        if (event.target === $("modalBackdrop")) closeModal();
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && !$("modalBackdrop").hidden) {
-          closeModal();
         }
-      });
-
-      const saved = loadStored(SAVE_KEY);
-      showBootScreen(saved);
+      ];
     }
 
-    boot();
+    startCreation();
   </script>
 </body>
 </html>
