@@ -1,228 +1,33 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0c0f"><title>三國・逆命錄 V3</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#08090c;color:#eeeae0;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif}#app{max-width:860px;margin:auto;padding:12px}.top{position:sticky;top:0;z-index:3;background:#0b0c0feF;backdrop-filter:blur(12px);border:1px solid #282c34;border-radius:14px;padding:10px;margin-bottom:10px}.toprow{display:flex;justify-content:space-between;align-items:center;gap:8px}.name{font-weight:700}.age{color:#cba75d;font-size:12px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}.stat{background:#111318;border:1px solid #282c34;border-radius:9px;padding:7px}.stat b{display:block;font-size:15px}.stat small{color:#9297a0}.main{background:#111318;border:1px solid #282c34;border-radius:16px;padding:19px;min-height:430px}.ey{color:#cba75d;font-size:10px;letter-spacing:.16em;margin-bottom:7px}h1{font-size:25px;margin:3px 0 14px}.story{white-space:pre-line;line-height:1.9;font-size:16px}.divider{height:1px;background:#282c34;margin:17px 0}.btn{display:block;width:100%;padding:13px 14px;margin:8px 0;border:1px solid #30343d;border-radius:11px;background:#17191f;color:#eeeae0;text-align:left;font:inherit;cursor:pointer}.btn:hover{border-color:#777}.btn strong{display:block}.btn small{display:block;color:#999da5;margin-top:4px}.primary{background:#58451f;border-color:#876b39}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.panel{background:#0d0f13;border:1px solid #282c34;border-radius:11px;padding:11px}.panel h3{margin:0 0 7px;font-size:13px}.tags span,.equip span{display:inline-block;border:1px solid #4c4536;color:#d1b56e;border-radius:20px;padding:4px 7px;font-size:11px;margin:2px}.event{background:#0c0e12;border-left:3px solid #8b6d38;border-radius:8px;padding:11px;line-height:1.7}.fighters{display:grid;grid-template-columns:1fr 1fr;gap:9px}.fighter{background:#0c0e12;border:1px solid #292d36;border-radius:10px;padding:10px}.fighter h3{margin:0 0 8px}.bar{height:7px;background:#252832;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:#bd5955}.you .bar i{background:#709d76}.fighter p{font-size:11px;color:#999;margin:7px 0}.log{background:#0b0d10;border:1px solid #292d36;border-radius:11px;padding:11px;min-height:145px;margin-top:10px;line-height:1.6}.log div{margin:5px 0}.state{display:inline-block;border:1px solid #3b3f48;border-radius:20px;padding:4px 8px;font-size:11px;color:#aaa;margin:0 4px 5px 0}.warn{color:#d88b83;border-color:#633d39}.good{color:#9ab791;border-color:#3d563a}.danger{color:#d88b83}.damage{color:#d5b36a;font-weight:700}.muted{color:#8e939c;font-size:12px}.disabled{opacity:.42;pointer-events:none}.loot{border:1px solid #5b4b2f;background:#16130d;border-radius:10px;padding:11px;margin:9px 0}.portrait{font-size:38px}.notice{color:#cba75d}.hide{display:none}@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.fighters{grid-template-columns:1fr 1fr}.main{padding:15px}}
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090a0d"><title>三國・逆命錄 V3</title><style>
+:root{--bg:#090a0d;--p:#111319;--p2:#0d0f13;--l:#292d36;--t:#eee9de;--m:#9297a0;--g:#c9a45b;--r:#c96760;--ok:#8cae88}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17130d 0,#090a0d 38%);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif}#app{max-width:900px;margin:auto;padding:10px 10px 28px}.hud{position:sticky;top:0;z-index:5;background:#0a0b0ef2;backdrop-filter:blur(14px);border:1px solid var(--l);border-radius:15px;padding:10px;margin-bottom:10px}.row{display:flex;justify-content:space-between;align-items:center}.name{font-weight:800}.age{color:var(--g);font-size:12px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}.stat{background:#15171d;border:1px solid #272b33;border-radius:9px;padding:6px 8px}.stat small{display:block;color:var(--m);font-size:10px}.stat b{font-size:16px}.main{background:#111319f5;border:1px solid var(--l);border-radius:17px;padding:17px;min-height:500px}.ey{color:var(--g);font-size:10px;letter-spacing:.17em}.title{font-size:25px;margin:4px 0 13px}.story{white-space:pre-line;line-height:1.9;font-size:15.5px}.divider{height:1px;background:var(--l);margin:16px 0}.btn{display:block;width:100%;border:1px solid #323640;background:#171a20;color:var(--t);border-radius:11px;padding:12px 13px;margin:7px 0;text-align:left;font:inherit;cursor:pointer}.btn:hover{border-color:#777}.btn strong{display:block}.btn small{display:block;color:var(--m);font-size:11px;margin-top:3px}.primary{background:#5a4723;border-color:#8a6d3a}.danger{background:#351817;border-color:#713d38}.input{width:100%;background:#0c0e12;color:var(--t);border:1px solid #343842;border-radius:10px;padding:13px;font:inherit}.grid2,.battle{display:grid;grid-template-columns:1fr 1fr;gap:8px}.panel,.fighter{background:var(--p2);border:1px solid var(--l);border-radius:11px;padding:11px}.panel h3{font-size:12px;margin:0 0 7px}.tag,.state{display:inline-block;border:1px solid #4b4537;color:#d0b46b;border-radius:99px;padding:4px 7px;font-size:10px;margin:2px}.state{border-color:#3b3f48;color:#aaa}.ok{color:#a6bf9f;border-color:#40573c}.warn{color:#df9990;border-color:#633c38}.notice{border-left:3px solid var(--g);background:#15130e;border-radius:8px;padding:11px;line-height:1.65;margin:10px 0}.notice.warn{border-left-color:var(--r);background:#17100f}.notice.ok{border-left-color:var(--ok);background:#101510}.bar{height:7px;background:#252832;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--r)}.you .bar i{background:#729b75}.meta,.muted{font-size:10px;color:var(--m)}.log{background:#0b0d10;border:1px solid var(--l);border-radius:11px;padding:10px;min-height:130px;margin-top:9px;line-height:1.65;font-size:13px}.log div{margin:5px 0}.dmg{color:#d7b66d;font-weight:800}.death{font-size:48px;text-align:center;margin-top:15px}@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.grid2,.battle{grid-template-columns:1fr 1fr}.main{padding:14px}}
 </style></head><body><div id="app"></div><script>
-const S={name:"",age:0,stats:{str:25,int:25,agi:25,cha:25},pot:{martial:50,scholar:50},traits:[],equip:["粗布衣"],weapon:null,level:1,points:0,history:[],scene:null};
-const $=id=>document.getElementById(id),pick=a=>a[Math.floor(Math.random()*a.length)],r=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,cl=(x,a,b)=>Math.max(a,Math.min(b,x));
-function hud(){return `<div class=top><div class=toprow><div class=name>${S.name||"未命名"} <span class=age>· ${S.age}歲</span></div><div class=muted>Lv.${S.level}</div></div><div class=stats><div class=stat><small>武力</small><b>${S.stats.str}</b></div><div class=stat><small>智略</small><b>${S.stats.int}</b></div><div class=stat><small>身法</small><b>${S.stats.agi}</b></div><div class=stat><small>魅力</small><b>${S.stats.cha}</b></div></div></div>`}
-function render(body){$("app").innerHTML=hud()+`<main class=main>${body}</main>`}
-function start(){S.age=0;render(`<div class=ey>天下將亂</div><div class=portrait>🗡️</div><h1>三國・逆命錄</h1><div class=story>你來到了亂世。
-你不知道自己會成為英雄、謀士、武人，還是籍籍無名之人。
-
-但你知道一件事：
-你的人生，會由你自己的選擇塑造。</div><div class=divider></div><input id=name class=btn style="cursor:text" maxlength=10 placeholder="請輸入你的名字"><button class="btn primary" id=go><strong>開始新人生</strong><small>從出生開始，直到你的第一場戰鬥。</small></button>`);$("go").onclick=()=>{if(!$("name").value.trim())return alert("請先輸入你的名字。");S.name=$("name").value.trim();birth()}}
-function scene(title,text,choices){render(`<div class=ey>${S.age}歲 · 人生事件</div><h1>${title}</h1><div class=story>${text}</div><div class=divider></div>${choices.map((c,i)=>`<button class=btn data-i=${i}><strong>${c[0]}</strong></button>`).join("")}`);document.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>choices[+b.dataset.i][1]())}
-function result(title,text,next,delta={}){Object.entries(delta).forEach(([k,v])=>S.stats[k]+=v);let changes=Object.entries(delta).filter(([,v])=>v).map(([k,v])=>`${{str:"武力",int:"智略",agi:"身法",cha:"魅力"}[k]} ${v>0?"+":""}${v}`).join(" · ");render(`<div class=ey>${S.age}歲 · 你的選擇</div><h1>${title}</h1><div class=story>${text}</div>${changes?`<div class=event style="margin-top:13px"><b>你留下了痕跡</b><br>${changes}</div>`:""}<button class="btn primary" id=next><strong>繼續</strong></button>`);$("next").onclick=next}
-function birth(){S.age=0;scene("一聲啼哭",`黃巾之亂的餘波尚未散去。
-你出生於一個不起眼的小村。
-
-沒有人知道，這個孩子將來會走到哪裡。`,[["握住父親伸來的手",()=>{S.traits.push("膽識初萌");result("出生",`你小小的手，竟沒有縮回去。
-
-父親愣了一下，笑了。`,()=>at6(),{str:2})}],["安靜地望著他們",()=>{S.traits.push("沉靜");result("出生","你沒有哭得太久，只是安靜地望著兩張陌生又溫暖的臉。",()=>at6(),{int:2})}],["放聲大哭",()=>{S.traits.push("存在感");result("出生",`你的哭聲穿過屋瓦。
-
-隔壁的人都聽見了。`,()=>at6(),{cha:2})}]]);}
-function at6(){S.age=6;scene("村口的孩子",`幾個年長孩子正在欺負一個更小的孩子。
-
-大人就在不遠處，但沒有人出手。`,[["站出去",()=>{S.traits.push("不屈");result("不屈",`你明知自己可能會挨打，仍然走了過去。
-
-「夠了。」`,()=>at9(),{str:5})}],["去找大人",()=>{S.traits.push("審慎");result("審慎",`你轉身跑去找大人。
-
-事情很快被制止。父親卻問你：「如果沒有人來呢？」`,()=>at9(),{int:5})}],["站在旁邊看",()=>{S.traits.push("旁觀");result("旁觀",`你沒有出聲。
-
-那個孩子最後哭著跑走。
-你記住了他的眼神。`,()=>at9(),{cha:4})}]])}
-function at9(){S.age=9;scene("九歲 · 你想成為怎樣的人",`村裡來了一名遊方先生。
-他說可以教孩子一件事，但只能選一樣。`,[["跟他讀書",()=>{S.pot.scholar+=8;S.traits.push("好學");result("紙上的世界",`你開始喜歡那些能把混亂說清楚的文字。
-
-有些東西，刀劍做不到。`,()=>at12(),{int:8})}],["跟鄉勇練身手",()=>{S.pot.martial+=10;S.traits.push("苦練");result("木刀與汗水",`木刀很重，手掌很快磨出水泡。
-
-第二天，你又去了。`,()=>at12(),{str:7,agi:4})}],["學怎樣說服人",()=>{S.traits.push("口才");result("一句話的重量","你發現一句話，有時比拳頭更快讓人改變主意。",()=>at12(),{cha:8})}]])}
-function at12(){S.age=12;scene("雨夜的陌生人",`暴雨淹過村路。
-一名陌生旅人倒在屋外，身上有血。
-
-父親看著你。`,[["開門救他",()=>{S.traits.push("仁心");result("雨夜",`你把陌生人拖進屋。
-
-第二天，他只留下了一句話：
-「亂世裡，記住你今天的選擇。」`,()=>at14(),{cha:5})}],["先搜他的東西",()=>{S.traits.push("多疑");result("令牌",`你先確認他是不是帶著麻煩。
-
-你在他身上找到一枚陌生令牌。`,()=>at14(),{int:6})}],["不靠近",()=>{S.traits.push("警覺");result("活下來",`你沒有冒險。
-
-那一夜，你第一次知道，活下來本身也是本事。`,()=>at14(),{agi:4})}]])}
-function at14(){S.age=14;scene("真刀",`父親把一把舊刀放到桌上。
-
-「木刀可以讓你練習。」
-「這把，會讓你受傷。」`,[["拿起來",()=>{S.weapon="舊環首刀";S.equip.push("舊環首刀");S.traits.push("敢於見血");result("第一次握刀",`刀比你想像中重。
-
-你沒有放下。
-
-從這天開始，你知道自己的手終有一天會碰上真正的刀。`,()=>at15(),{str:7,agi:3})}],["先研究它",()=>{S.weapon="舊環首刀";S.equip.push("舊環首刀");S.traits.push("觀刀");result("看刀",`你沒有急著拔刀。
-
-你看見刀刃磨損的位置，也看見護手留下的舊痕。`,()=>at15(),{int:7,str:3})}],["拒絕",()=>{S.traits.push("自持");result("自持",`「我不需要。」
-
-父親看了你很久。
-「希望有一天，你仍然可以這樣說。」`,()=>at15(),{cha:5})}]])}
-function at15(){S.age=15;render(`<div class=ey>15歲 · 命運轉折</div><h1>山道</h1><div class=story>天色漸暗。
-
-馬突然停下。
-
-林間沒有風。
-
-卻有一片葉子，慢慢落在你的肩上。
-
-你會……</div><div class=divider></div><button class=btn id=a><strong>繼續前進</strong></button><button class=btn id=b><strong>停下來</strong></button><button class=btn id=c><strong>觀察四周</strong></button>`);a.onclick=()=>ambush("continue");b.onclick=()=>ambush("stop");c.onclick=()=>ambush("observe")}
-function ambush(choice){let score=S.stats.agi*.42+S.stats.int*.34+S.pot.martial*.08+S.pot.scholar*.06+(S.traits.includes("警覺")?13:0)+(choice==="observe"?13:choice==="stop"?7:-4);let noticed=Math.random()*100<cl(score,20,88);let text=noticed?{observe:`你沒有抬頭。
-
-你只是看著泥地。
-
-新鮮的腳印。
-一、二、三……
-
-不。
-還有一個。
-
-就在你身後。`,stop:`你抬起手。
-商隊停住。
-
-風穿過樹梢。
-你忽然看見樹影中那一抹不自然的黑。`,continue:`你走了兩步，忽然停下。
-
-不是因為害怕。
-而是因為太安靜了。
-
-你回頭，看見泥地上新鮮的腳印。`}[choice]:{continue:`你繼續向前。
-
-一步。
-兩步。
-
-轟——！
-
-巨石從山坡滾落。
-
-「敵襲！」`,stop:`你停了下來。
-
-但已經遲了。
-
-林中突然響起弓弦聲。
-
-嗖——！
-
-箭矢擦過你的肩。`,observe:`你仔細看著四周。
-
-什麼也沒有。
-
-你正準備轉身——
-
-嗖！
-
-一支箭釘進身旁的木箱。`}[choice];result("山道",text,()=>leader(noticed))}
-function leader(noticed){let text=noticed?`山林深處傳來一聲大笑。
-
-「好眼力！」
-
-一名披著獸皮的男人從樹後走出，手中提著長刀。
-
-「小小年紀，竟能看穿我的埋伏。」
-
-他把刀指向你。
-
-「報上名來。」`:`山林中傳來一聲大笑。
-
-「哈哈哈哈！」
-
-一名男人騎馬走出，身後的山賊已將商隊圍住。
-
-「小子。」
-
-「你連刀都未拔出來，也敢走這條山路？」`;result("山賊頭目",text,()=>offerDuel(noticed))}
-function offerDuel(noticed){let text=noticed?`你報上姓名。
-
-他聽完，嘴角揚起。
-
-「好！」
-
-「今日便讓我看看，你這名字值不值得留在世上！」`:`他看著你，長刀一橫。
-
-「可敢與我一戰？」
-
-林中的山賊發出笑聲。
-
-你知道，這一戰若退下去，商隊的人都會看見。`;scene("山賊頭目",text,[["接下單挑",()=>startDuel(noticed)],["拒絕單挑",()=>refuseDuel(noticed)]])}
-function startDuel(noticed){S.scene={type:"duel",noticed,turn:1,enemy:{hp:100,m:100},you:{hp:100,m:100},log:[],execute:false,ambushUsed:false};duelUI()}
-function duelChance(a){let c=S.scene,x=25;if(a==="clash")x+=S.stats.str*.42;if(a==="evade")x+=S.stats.agi*.45;if(a==="bait")x+=S.stats.int*.35+S.stats.agi*.12;return cl(Math.round(x),18,88)}
-function duelAction(a){let c=S.scene,ok=Math.random()*100<duelChance(a);if(ok){let dmg=Math.round((a==="clash"?r(14,21)+S.stats.str/18:a==="evade"?r(9,16)+S.stats.agi/22:r(11,19)+S.stats.int/25));let crit=Math.random()<.10+(S.stats.str>=70?.08:0);if(crit)dmg=Math.round(dmg*1.5);c.enemy.hp=Math.max(0,c.enemy.hp-dmg);c.enemy.m=Math.max(0,c.enemy.m-Math.round(dmg*.65));c.log.unshift(`<b>${crit?"🔥 ":""}${pick(["你踏前一刀，逼得他退了半步。","刀鋒撞上長刀，火星四濺。","你抓住他的重心，猛然切入。","他以為你會退，你卻反而向前。"])}</b> <span class=damage>${dmg}</span>`)}else{let dmg=r(6,13);c.you.hp-=dmg;c.you.m-=8;c.log.unshift(`<span class=danger>${pick(["他的長刀擦著你胸前掠過。","你避開第一刀，卻被第二刀逼退。","他看穿了你的意圖，反手一擊。"])}</span> <span class=damage>-${dmg}</span>`)}c.turn++;if(c.enemy.hp<=25||c.enemy.m<=25)c.execute=S.stats.str>70;if(c.enemy.hp<=0||c.enemy.m<=0)return duelWin();if(c.you.hp<=0)return duelLose();duelUI()}
-function duelWin(){S.scene.result="win";result("單挑 · 勝",`你的刀架在他的頸側。
-
-他沒有再向前一步。
-
-身後的山賊開始互相張望。
-
-剛才還不可一世的聲勢，像被人一刀斬斷。`,()=>battlefield("win"),{str:2})}
-function duelLose(){S.scene.result="lose";result("單挑 · 敗",`你擋下第一刀。
-
-第二刀卻慢了一瞬。
-
-砰！
-
-你被震退數步。
-
-山賊頭目大笑。
-
-「就這點本事？」
-
-山賊們爆發出笑聲。
-
-你感覺到身後的人，正在失去膽氣。`,()=>battlefield("lose"))}
-function execute(){let c=S.scene;c.enemy.hp=0;c.enemy.m=0;c.result="win";result("終結",`你沒有再退。
-
-你抬刀。
-
-他剛轉身——
-
-寒光已經越過他的視線。
-
-山道突然安靜。`,()=>battlefield("win"),{str:3})}
-function duelUI(){let c=S.scene;let ex=c.execute&&c.enemy.hp<=25?`<button class="btn primary" id=ex><strong>⚔️ 終結</strong><small>你看見了他的破綻。一次性機會。</small></button>`:"";render(`<div class=ey>15歲 · 個人戰場</div><h1>單挑</h1>${c.noticed?`<span class="state good">你先看穿了局勢</span>`:`<span class="state warn">敵方掌握主動</span>`}<div class=fighters><div class="fighter you"><h3>${S.name}</h3><div class=bar><i style="width:${cl(c.you.hp,0,100)}%"></i></div><p>狀態 ${cl(c.you.hp,0,100)} · 士氣 ${cl(c.you.m,0,100)}</p></div><div class=fighter><h3>山賊頭目</h3><div class=bar><i style="width:${c.enemy.hp}%"></i></div><p>狀態 ${c.enemy.hp} · 士氣 ${c.enemy.m}</p></div></div><div class=log>${c.log.slice(0,6).map(x=>`<div>${x}</div>`).join("")}</div><div class=grid><button class=btn data-d=clash><strong>⚔️ 正面迎擊</strong><small>以力破力</small></button><button class=btn data-d=evade><strong>🌪️ 避其鋒芒</strong><small>等待破綻</small></button><button class=btn data-d=bait><strong>🪤 誘敵</strong><small>引他先出手</small></button>${ex}</div>`);document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>duelAction(b.dataset.d));if($("ex"))$("ex").onclick=execute}
-function refuseDuel(noticed){S.scene={type:"field",stage:noticed?"ready":"crisis",noticed,ally:noticed?"穩住":"動搖",enemy:noticed?"動搖":"得勢",log:[]};result("拒絕單挑",noticed?`你沒有出刀。
-
-山賊頭目冷笑一聲。
-
-「小心翼翼，倒也算聰明。」
-
-你退回商隊一側。
-
-雙方沒有決出勝負，但主動權仍握在你們手中。`:`你沒有回答。
-
-你退後一步。
-
-山賊頭目放聲大笑。
-
-「原來如此。」
-
-「這便是他們所謂的英雄？」
-
-鬨笑聲在山谷間回盪。
-
-你感覺到身後的氣息，正在變弱。`,()=>battlefield(noticed?"refused":"ambushed"))}
-function battlefield(outcome){let noticed=S.scene.noticed;S.scene={type:"field",stage:outcome==="win"?"advantage":outcome==="lose"||outcome==="ambushed"?"crisis":noticed?"ready":"crisis",noticed,ally:outcome==="win"?"振奮":outcome==="lose"||outcome==="ambushed"?"動搖":"穩住",enemy:outcome==="win"?"動搖":outcome==="lose"||outcome==="ambushed"?"得勢":"得勢",log:[]};fieldUI()}
-function fieldAction(a){let c=S.scene;
-if(c.stage==="crisis"){if(a==="protect"){c.log.unshift("你擋在馬車前，先把最危險的缺口封住。");c.stage="stabilizing";c.ally="勉強穩住";}else if(a==="retreat"){c.log.unshift("你帶人退向較窄的山路，避免被完全包圍。");c.stage="stabilizing";c.ally="勉強穩住";}else if(a==="observe"){c.log.unshift("你重新尋找敵人的位置。你終於看見第二支弓隊。");c.stage="stabilizing";c.enemy="仍然得勢";}else return;
-}else if(c.stage==="stabilizing"){if(a==="rally"){c.log.unshift("你沒有讓所有人立刻反攻。你只是讓他們重新站好。");c.ally="穩住";c.stage="ready";}else if(a==="observe"){c.log.unshift("你抓到敵陣的一個空隙。還不夠，但至少你知道下一步。");c.stage="ready";}else if(a==="protect"){c.log.unshift("你守住退路。敵人的攻勢沒有再擴大。");c.stage="ready";}else return;
-}else if(c.stage==="ready"){if(a==="counter"){c.log.unshift("你等到山賊隊形拉長，終於可以反擊。");c.stage="advantage";c.enemy="動搖";}else if(a==="rally"){c.log.unshift("商隊重新站穩。有人開始跟著你的腳步。");c.ally="振奮";c.stage="advantage";}else if(a==="protect"){c.log.unshift("你守住核心，敵人找不到突破口。");}else return;
-}else if(c.stage==="advantage"){if(a==="pursue"){c.log.unshift("你帶頭壓上。山賊的隊形開始真正崩散。");c.stage="end";}else if(a==="counter"){c.log.unshift("你逼退最後一批山賊。");c.stage="end";}else return}
-if(c.stage==="end")return ending();fieldUI()}
-function fieldUI(){let c=S.scene,buttons=[];if(c.stage==="crisis")buttons=[["🛡️ 護住商隊","先封住最危險的缺口","protect"],["🏃 尋找退路","避免被完全包圍","retreat"],["👁 重新觀察","找出敵人的位置","observe"]];else if(c.stage==="stabilizing")buttons=[["📯 穩住陣腳","令所有人重新站好，而不是立刻反攻","rally"],["👁 尋找空隙","等待真正可以反擊的時機","observe"],["🛡️ 守住退路","不讓局勢再次惡化","protect"]];else if(c.stage==="ready")buttons=[["⚔️ 準備反擊","你終於有條件奪回主動","counter"],["📯 重振士氣","把勉強站穩變成真正的勇氣","rally"],["🛡️ 穩守","不急於冒險","protect"]];else buttons=[["⚔️ 帶頭追擊","敵陣已經開始崩散","pursue"],["⚔️ 最後反擊","把剩餘敵人逼退","counter"]];render(`<div class=ey>15歲 · 整體戰場</div><h1>山道戰局</h1><span class="state ${c.ally==="動搖"?"warn":"good"}">我方：${c.ally}</span><span class="state ${c.enemy==="得勢"?"warn":"good"}">敵方：${c.enemy}</span>${!c.noticed?`<div class="event"><b>你未能在伏擊前取得情報。</b><br>現在的目標不是追擊，而是先活著把商隊帶出危險。</div>`:`<div class="event"><b>你早已看穿伏擊。</b><br>你們沒有被第一波攻勢打亂。</div>`}<div class=log>${c.log.slice(0,6).map(x=>`<div>${x}</div>`).join("")}</div>${buttons.map(b=>`<button class=btn data-f=${b[2]}><strong>${b[0]}</strong><small>${b[1]}</small></button>`).join("")}`);document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>fieldAction(b.dataset.f))}
-function ending(){S.level=2;S.points=3;S.equip.push(S.scene.noticed?"山賊頭目的短刀":"山賊留下的佩刀");result("第一場戰鬥 · 結束",`山賊終於撤退。
-
-你站在山道中央，手中的刀還在滴血。
-
-身後的人看著你。
-
-沒有人知道，你將來會成為誰。
-
-但今日之後，他們會記住你的名字。`,()=>profile())}
-function profile(){let tags=S.traits.map(x=>`<span>${x}</span>`).join("");let eq=S.equip.map(x=>`<span>⚔️ ${x}</span>`).join("");render(`<div class=ey>V3 · 第一章完</div><h1>${S.name}</h1><div class=grid><div class=panel><h3>角色</h3><div>年齡：${S.age}</div><div>等級：Lv.${S.level}</div><div>可用成長點：${S.points}</div></div><div class=panel><h3>潛質</h3><div>武藝潛質：${cl(Math.round(S.pot.martial),0,100)}</div><div>學識潛質：${cl(Math.round(S.pot.scholar),0,100)}</div></div></div><div class=panel style="margin-top:8px"><h3>天賦與人生痕跡</h3><div class=tags>${tags}</div></div><div class=panel style="margin-top:8px"><h3>裝備</h3><div class=equip>${eq}</div></div><div class=divider></div><div class=story>第一場戰鬥結束。
-
-V3 到此為止。
-你的下一段人生，留待下一章。</div><button class=btn primary onclick="location.reload()"><strong>重新開始</strong><small>每一次人生選擇，都可能把你帶向另一條路。</small></button>`)}
+"use strict";
+const N={str:"武力",int:"智略",agi:"身法",cha:"魅力"},pick=a=>a[Math.floor(Math.random()*a.length)],rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,cl=(x,a,b)=>Math.max(a,Math.min(b,x)),S={name:"",age:0,level:1,points:0,stats:{str:25,int:25,agi:25,cha:25},potential:{martial:50,scholar:50},traits:[],equipment:["粗布衣"],weapon:"",hp:100,maxHp:100,morale:70,injury:0,battle:null};
+const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+function hud(){return `<div class="hud"><div class="row"><div class="name">${esc(S.name||"未命名")} <span class="age">· ${S.age}歲</span></div><div class="muted">Lv.${S.level}　成長點 ${S.points}</div></div><div class="stats">${Object.entries(N).map(([k,n])=>`<div class="stat"><small>${n}</small><b>${S.stats[k]}</b></div>`).join("")}</div></div>`}function render(x){$("#app").innerHTML=hud()+`<main class="main">${x}</main>`}function change(d){Object.entries(d||{}).forEach(([k,v])=>S.stats[k]=cl(S.stats[k]+v,1,100))}
+function result(t,txt,next,d={}){change(d);let c=Object.entries(d).filter(([,v])=>v).map(([k,v])=>`${N[k]} ${v>0?"+":""}${v}`).join("　");render(`<div class="ey">${S.age}歲 · 你的選擇</div><h1 class="title">${t}</h1><div class="story">${txt}</div>${c?`<div class="notice"><b>這段經歷留下了痕跡</b><br>${c}</div>`:""}<button class="btn primary" id="go"><strong>繼續</strong></button>`);$("#go").onclick=next}
+function scene(t,txt,cs){render(`<div class="ey">${S.age}歲 · 人生事件</div><h1 class="title">${t}</h1><div class="story">${txt}</div><div class="divider"></div>${cs.map((c,i)=>`<button class="btn" data-i="${i}"><strong>${c[0]}</strong></button>`).join("")}`);document.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>cs[+b.dataset.i][1]())}
+function start(){render(`<div class="ey">天下將亂 · V3</div><h1 class="title">三國・逆命錄</h1><div class="story">你來到了亂世。\n你不知道自己會成為英雄、謀士、武人，還是無名之人。\n\n但有一件事是真的：\n\n這個世界不會因為你是玩家而對你仁慈。</div><div class="divider"></div><input id="nm" class="input" maxlength="12" placeholder="請輸入你的名字"><button class="btn primary" id="st"><strong>開始新人生</strong><small>由出生開始，直到第一場真正的戰鬥。</small></button>`);$("#st").onclick=()=>{let n=$("#nm").value.trim();if(!n)return alert("請先輸入你的名字。");S.name=n;birth()}}
+function birth(){S.age=0;scene("一聲啼哭","黃巾之亂的餘波尚未散去。\n你出生在一個不起眼的小村。\n\n沒有人知道，這個孩子將來會走到哪裡。",[["握住父親伸來的手",()=>{S.traits.push("膽識初萌");result("出生","你的手很小，卻沒有縮回去。\n\n父親愣了一下，最後笑了。",age6,{str:2})}],["安靜地望著他們",()=>{S.traits.push("沉靜");result("出生","你沒有哭很久，只是安靜地看著兩張陌生又溫暖的臉。",age6,{int:2})}],["放聲大哭",()=>{S.traits.push("存在感");result("出生","你的哭聲穿過屋瓦。\n\n隔壁的人都聽見了。",age6,{cha:2})}]])}
+function age6(){S.age=6;scene("村口的孩子","幾個年長孩子正在欺負一個更小的孩子。\n\n大人就在不遠處，但沒有人出手。",[["站出去",()=>{S.traits.push("不屈");result("站出去","你明知道自己可能挨打，仍然走了過去。\n\n「夠了。」",age9,{str:5})}],["去找大人",()=>{S.traits.push("審慎");result("找人","事情很快被制止。\n父親卻問你：「如果沒有人來呢？」",age9,{int:5})}],["站在旁邊看",()=>{S.traits.push("旁觀");result("旁觀","那孩子最後哭著跑走。\n\n你記住了他的眼神，也記住了自己的沉默。",age9,{cha:4})}]])}
+function age9(){S.age=9;scene("你想成為怎樣的人","村裡來了一名遊方先生。\n\n他說可以教孩子一件事，但只能選一樣。",[["跟他讀書",()=>{S.potential.scholar+=8;S.traits.push("好學");result("紙上的世界","你開始喜歡那些能把混亂說清楚的文字。\n\n你慢慢發現，有些東西，刀劍做不到。",age12,{int:8})}],["跟鄉勇練身手",()=>{S.potential.martial+=10;S.traits.push("苦練");result("木刀與汗水","木刀很重，手掌很快磨出水泡。\n\n第二天，你又去了。",age12,{str:7,agi:4})}],["學怎樣說服人",()=>{S.traits.push("口才");result("一句話的重量","你發現一句話，有時比拳頭更快讓人改變主意。",age12,{cha:8})}]])}
+function age12(){S.age=12;scene("雨夜的陌生人","暴雨淹過村路。\n\n一名陌生旅人倒在屋外，身上有血。\n\n父親看著你。",[["開門救他",()=>{S.traits.push("仁心");result("雨夜","你把陌生人拖進屋。\n\n第二天，他只留下了一句話：\n\n「亂世裡，記住你今天的選擇。」",age14,{cha:5})}],["先搜他的東西",()=>{S.traits.push("多疑");result("陌生令牌","你在他身上找到一枚陌生令牌。\n\n你沒有交出去。",age14,{int:6})}],["不靠近",()=>{S.traits.push("警覺");result("活下來","你沒有冒險。\n\n那一夜，你第一次知道，活下來本身也是本事。",age14,{agi:4})}]])}
+function age14(){S.age=14;scene("真刀","父親把一把舊刀放到桌上。\n\n「木刀可以讓你練習。」\n「這把，會讓你受傷。」",[["拿起來",()=>{S.weapon="舊環首刀";S.equipment.push("舊環首刀");S.traits.push("敢於見血");result("第一次握刀","刀比你想像中重。\n\n你沒有放下。",age15,{str:7,agi:3})}],["先研究它",()=>{S.weapon="舊環首刀";S.equipment.push("舊環首刀");S.traits.push("觀刀");result("看刀","你看見刀刃磨損的位置，也看見護手留下的舊痕。\n\n一把刀，也有它的故事。",age15,{int:7,str:3})}],["拒絕",()=>{S.traits.push("自持");result("自持","「我不需要。」\n\n父親看了你很久。\n\n「希望有一天，你仍然可以這樣說。」",age15,{cha:5})}]])}
+function age15(){S.age=15;render(`<div class="ey">15歲 · 命運轉折</div><h1 class="title">山道</h1><div class="story">天色漸暗。\n\n馬突然停下。\n\n林間沒有風。\n\n卻有一片葉子，慢慢落在你的肩上。\n\n你會……</div><div class="divider"></div><button class="btn" id="a"><strong>繼續前進</strong></button><button class="btn" id="b"><strong>停下來</strong></button><button class="btn" id="c"><strong>觀察四周</strong></button>`);$("#a").onclick=()=>detect("continue");$("#b").onclick=()=>detect("stop");$("#c").onclick=()=>detect("observe")}
+function detect(choice){let c=25+S.stats.agi*.3+S.stats.int*.25+(choice==="observe"?18:choice==="stop"?7:-6)+(S.traits.includes("警覺")?15:0)+(S.traits.includes("沉靜")?5:0);let noticed=Math.random()*100<cl(c,18,92);S.battle={noticed,choice,phase:"ambush",turn:0,logs:[]};let txt=noticed?(choice==="observe"?"你沒有抬頭。\n\n你只是看著泥地。\n\n新鮮的腳印。\n一、二、三……\n\n不。\n還有一個。\n\n就在你身後。":choice==="stop"?"你抬起手。\n\n商隊停下。\n\n風穿過樹梢。\n你看見樹影中那一抹不自然的黑。":"你走了兩步，忽然停下。\n\n不是因為害怕。\n而是因為太安靜了。\n\n你回頭，看見泥地上新鮮的腳印。"):(choice==="continue"?"你繼續向前。\n\n一步。\n兩步。\n\n轟——！\n\n巨石從山坡滾落。\n\n「敵襲！」":choice==="stop"?"你停了下來。\n\n但已經遲了。\n\n林中突然響起弓弦聲。\n\n嗖——！":"你仔細看著四周。\n\n什麼也沒有。\n\n你正準備轉身——\n\n嗖！\n\n一支箭釘進身旁的木箱。");result("山道",txt,()=>noticed?duelOffer():fieldStart(false))}
+function duelOffer(){render(`<div class="ey">15歲 · 伏擊被識破</div><h1 class="title">「好眼力。」</h1><div class="story">山林深處傳來一聲大笑。\n\n一名披著獸皮的男人從樹後走出，手中提著長刀。\n\n「小小年紀，竟能看穿我的埋伏。」\n\n他把刀指向你。\n\n「報上名來。」</div><div class="notice ok"><b>主動權仍在你手上。</b><br>敵方人數較多，但伏擊沒有完全成功。</div><button class="btn primary" id="d"><strong>報上姓名，接下單挑</strong></button><button class="btn" id="r"><strong>拒絕單挑</strong><small>保住商隊陣形。</small></button></div>`);$("#d").onclick=()=>startDuel();$("#r").onclick=()=>fieldStart(true)}
+function startDuel(){S.battle.phase="duel";S.battle.turn=1;S.battle.enemy={hp:100,morale:72,str:rnd(55,68),agi:rnd(38,55)};S.battle.player={hp:cl(S.hp,1,100),morale:78};S.battle.logs=[];duelUI()}
+const P={clash:["你沒有退。你踏進他的刀勢，兩柄兵器在雨幕裡撞出一聲脆響。","你以肩帶腰，猛然撞開他的長刀。","他一刀劈下，你竟迎著刀鋒上前。"],evade:["你沒有接那一刀。身體一側，刀鋒貼著衣襟落空。","長刀掠過面前，你已經退到他的死角。","你踩住濕滑的泥地，硬是把身形拉開半步。"],bait:["你故意露出一個破綻。他果然上鉤。","你向後退了一步，眼神卻沒有離開他的肩膀。","你沒有急著出刀，只讓他以為你已經慌了."]};
+function dChance(a){let c=25;if(a==="clash")c+=S.stats.str*.45+(S.stats.agi-50)*.12;if(a==="evade")c+=S.stats.agi*.48+(S.stats.int-50)*.1;if(a==="bait")c+=S.stats.int*.38+S.stats.agi*.18;c+=(S.battle.noticed?6:-8)+(S.battle.player.morale-50)*.18-(S.battle.enemy.morale-50)*.1;if(S.injury>=2)c-=12;return cl(c,12,90)}
+function duel(a){let b=S.battle,e=b.enemy,p=b.player,ok=Math.random()*100<dChance(a),text,dmg;if(ok){dmg=(a==="clash"?rnd(12,22)+Math.round(S.stats.str/18):a==="evade"?rnd(9,17)+Math.round(S.stats.agi/25):rnd(10,19)+Math.round(S.stats.int/25));let crit=Math.random()<(.08+(S.stats.str>=70?.08:0));if(crit)dmg=Math.round(dmg*1.55);e.hp=cl(e.hp-dmg,0,100);e.morale=cl(e.morale-Math.round(dmg*.55),0,100);text=(crit?"<b>寒光一閃。</b> ":"")+pick(P[a])+` <span class="dmg">${dmg}</span>`}else{dmg=rnd(7,15)+(e.str>62?2:0);if(a==="evade")dmg=Math.max(4,dmg-3);p.hp=cl(p.hp-dmg,0,100);p.morale=cl(p.morale-9,0,100);text=pick(["你的判斷慢了半拍。","他看穿了你的意圖。","你避開了刀鋒，卻沒避開刀柄。"])+" "+pick(["痛楚從肋側炸開。","長刀擦過肩頭，熱血混進雨水。","你踉蹌退後，耳邊只剩下山賊的吶喊。"])+` <span class="dmg">-${dmg}</span>`}b.logs.unshift(text);b.turn++;if(e.hp<=25&&e.morale<=32&&S.stats.str>70)b.exec=true;if(e.hp<=0)return duelWin();if(p.hp<=0)return die("你在單挑中陣亡");if(p.hp<=25&&Math.random()<.18)return die("你在重傷後倒下");if(e.hp<=18||e.morale<=15)return duelWin();if(b.turn>10&&e.hp>p.hp+20&&p.morale<35)return duelLose();duelUI()}
+function duelWin(){S.battle.phase="field";S.battle.stage="advantage";S.battle.enemy.morale=20;result("單挑 · 勝",S.battle.enemy.hp<=0?"你最後一刀沒有給他留下退路。\n\n長刀落地。\n\n山道忽然安靜了一瞬。":"他退了。\n\n不是戰術撤步。\n\n是本能地往後退。\n\n身後的山賊看見自己的頭目開始退縮。",fieldUI,{str:2})}
+function duelLose(){S.battle.phase="field";S.battle.stage="collapse";S.injury=2;S.hp=Math.min(S.hp,55);result("單挑 · 敗","你擋下第一刀。\n\n第二刀卻慢了一瞬。\n\n長刀撞在你的肩上，你被震退數步。\n\n山賊頭目大笑。\n\n「就這點本事？」\n\n你仍然站得住，但左臂已經開始發麻。",fieldUI)}
+function die(reason){render(`<div class="ey">15歲 · 亂世</div><div class="death">☠</div><h1 class="title" style="text-align:center">你死了</h1><div class="story">${reason}。\n\n沒有傳奇會在每一個人身上發生。\n\n你的名字只留在這條山路的記憶裡。</div><div class="notice warn"><b>死亡是真正的模擬結果。</b><br>世界不會因為你是玩家而仁慈。</div><button class="btn primary" id="new"><strong>重新開始人生</strong></button>`);$("#new").onclick=()=>location.reload()}
+function duelUI(){let b=S.battle,e=b.enemy,p=b.player,ex=b.exec&&e.hp<=25&&S.stats.str>70?`<button class="btn danger" id="ex"><strong>⚔️ 終結</strong><small>斬殺線出現，一次性機會。</small></button>`:"";render(`<div class="ey">15歲 · 個人戰場 · 第${b.turn}回合</div><h1 class="title">單挑</h1><span class="state ok">你先看穿伏擊</span><div class="battle"><div class="fighter you"><h3>${esc(S.name)}</h3><div class="bar"><i style="width:${p.hp}%"></i></div><div class="meta">生命 ${p.hp}　士氣 ${p.morale}</div></div><div class="fighter"><h3>山賊頭目</h3><div class="bar"><i style="width:${e.hp}%"></i></div><div class="meta">狀態 ${e.hp}　氣勢 ${e.morale}</div></div></div><div class="log">${b.logs.slice(0,6).map(x=>`<div>${x}</div>`).join("")||"<div class=muted>兩人都在等對方先動。</div>"}</div><div class="grid2"><button class="btn" data-a="clash"><strong>⚔️ 正面迎擊</strong><small>用力量與膽氣壓過他。</small></button><button class="btn" data-a="evade"><strong>🌪️ 避其鋒芒</strong><small>避開最危險的一擊。</small></button><button class="btn" data-a="bait"><strong>🪤 誘敵</strong><small>讓他先犯錯。</small></button>${ex}</div>`);document.querySelectorAll("[data-a]").forEach(x=>x.onclick=()=>duel(x.dataset.a));if($("#ex"))$("#ex").onclick=()=>{S.battle.enemy.hp=0;S.battle.exec=false;duelWin()}}
+function fieldStart(noticed){S.battle.phase="field";S.battle.noticed=noticed;S.battle.stage=noticed?"ready":"collapse";S.battle.player={hp:S.hp,morale:noticed?70:30};S.battle.enemy={count:noticed?8:14,morale:noticed?62:88};S.battle.logs=[];fieldUI()}
+function field(a){let b=S.battle;if(b.stage==="collapse"){if(a==="protect"){b.logs.unshift("你把最後一名夥計拉到車後。敵人的第一輪衝勢沒有把你們完全撕開。");b.stage="unstable";b.player.morale=42}else if(a==="retreat"){b.logs.unshift("你沒有反攻。你只帶著人退。這讓更多人活了下來，但山賊仍緊咬不放。",);b.stage="unstable";b.player.morale=38}else{b.logs.unshift("你終於看見兩名弓手的位置，但你也因此慢了一步。箭矢再次落下。",);b.stage="unstable";b.player.morale=34}}else if(b.stage==="unstable"){if(a==="rally"){b.logs.unshift("你沒有叫人衝。你只是把最亂的三個人重新排回一起。",);b.player.morale=58;b.stage="desperate"}else if(a==="break"){b.logs.unshift("你找到一條窄路。不是勝利，只是一條還可能活著離開的路。",);b.stage="escape"}else{b.logs.unshift("你守住馬車。敵人沒有立刻突破，但你的體力正在下降。",);b.player.morale=45;b.stage="desperate"}}else if(b.stage==="desperate"){if(a==="counter"){b.logs.unshift("敵人的隊形出現縫隙。你終於有資格談反擊，而不是幻想反敗為勝。",);b.stage="advantage";b.enemy.morale=54}else{b.logs.unshift("你放棄追擊，帶著剩下的人衝向狹路。",);b.stage="escape"}}else if(b.stage==="advantage"){if(a==="pursue")return endBattle("win");return endBattle("small") }else if(b.stage==="escape"){if(a==="escape")return endBattle("retreat");return endBattle("lose")}fieldUI()}
+function fieldUI(){let b=S.battle,bs;if(b.stage==="collapse")bs=[["🛡️ 護住商隊","先阻止傷亡擴大。","protect"],["🏃 尋找退路","接受暫時撤退，而不是假裝有主動權。","retreat"],["👁 重新觀察","找出敵方弓手與薄弱位置。","observe"]];else if(b.stage==="unstable")bs=[["📯 穩住陣腳","讓人重新站好，但不能立刻扭轉戰局。","rally"],["🏔️ 找狹路撤離","利用地形縮小人數差。","break"],["🛡️ 死守馬車","保住核心，代價是消耗自己。","hold"]];else if(b.stage==="desperate")bs=[["⚔️ 抓住縫隙反擊","只有現在，才真正有機會奪回主動。","counter"],["🏃 撤入狹路","承認這一仗不能贏，先活下來。","escape"]];else if(b.stage==="advantage")bs=[["⚔️ 帶頭追擊","敵方士氣已經動搖。","pursue"],["🛡️ 見好就收","不冒險，把勝勢變成安全撤退。","hold"]];else bs=[["🏃 繼續撤退","把活著帶出去放在第一位。","escape"],["⚔️ 回頭反打","高風險，可能把僅有的優勢送掉。","pursue"]];render(`<div class="ey">15歲 · 整體戰場</div><h1 class="title">山道戰局</h1><span class="state ${b.player.morale<45?"warn":"ok"}">我方：${b.player.morale<45?"動搖":"尚穩"}</span><span class="state ${b.enemy.morale>70?"warn":"ok"}">敵方：${b.enemy.morale>70?"得勢":"開始動搖"}</span><span class="state warn">敵方 ${b.enemy.count} 人 · 我方人數較少</span>${b.stage==="collapse"||b.stage==="unstable"?`<div class="notice warn"><b>這不是可以隨便按幾下就翻盤的戰鬥。</b><br>現在要做的是活下來、保住人，或者等待真正的機會。</div>`:`<div class="notice ok"><b>局勢已經改變。</b><br>你的行動現在有機會產生戰術效果，但仍然不是必勝。</div>`}<div class="log">${b.logs.slice(0,7).map(x=>`<div>${x}</div>`).join("")}</div>${bs.map(x=>`<button class="btn" data-f="${x[2]}"><strong>${x[0]}</strong><small>${x[1]}</small></button>`).join("")}`);document.querySelectorAll("[data-f]").forEach(x=>x.onclick=()=>field(x.dataset.f))}
+function endBattle(type){if(type==="lose")return die("你在敗退途中被追上");S.level=2;S.points=3;if(type==="win")result("第一場戰鬥 · 大勝","山賊終於潰散。\n\n你站在山道中央，手中的刀還在滴血。\n\n身後的人看著你。\n\n沒有人知道你將來會成為誰，但今日之後，他們會記住你的名字。",profile,{str:2});else if(type==="small")result("第一場戰鬥 · 勝而不追","山賊退了。\n\n你沒有追。\n\n亂世裡，活著回去，有時比多殺三個人更重要。",profile);else{S.injury=Math.max(S.injury,1);result("第一場戰鬥 · 敗退","你沒有贏。\n\n但你把大部分人帶出了山道。\n\n肩頭仍在流血。\n\n今天沒有英雄的喝采，只有一個事實：你活下來了。",profile)}}
+function profile(){render(`<div class="ey">V3 · 第一章完</div><h1 class="title">${esc(S.name)}</h1><div class="grid2"><div class="panel"><h3>角色</h3>年齡：${S.age}<br>等級：Lv.${S.level}<br>成長點：${S.points}<br>生命：${S.hp}/${S.maxHp}<br>傷勢：${S.injury===0?"無":S.injury===1?"輕傷":"重傷"}</div><div class="panel"><h3>潛質</h3>武藝潛質：${Math.round(S.potential.martial)}<br>學識潛質：${Math.round(S.potential.scholar)}</div></div><div class="panel" style="margin-top:8px"><h3>天賦與人生痕跡</h3>${S.traits.map(x=>`<span class="tag">${esc(x)}</span>`).join("")}</div><div class="panel" style="margin-top:8px"><h3>裝備</h3>${S.equipment.map(x=>`<span class="tag">⚔️ ${esc(x)}</span>`).join("")}</div><div class="divider"></div><div class="story">第一場戰鬥結束。\n\n你的人生沒有結束。\n\n但 V3 到此為止。\n\n下一章，世界才會開始真正記住你的名字。</div><button class="btn primary" id="again"><strong>重新開始</strong><small>另一個選擇，另一個人生。</small></button>`);$("#again").onclick=()=>location.reload()}
 start();
 </script></body></html>
